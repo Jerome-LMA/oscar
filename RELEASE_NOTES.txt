@@ -1,0 +1,143 @@
+OSCAR release notes 
+
+--------------------------- Version 3.20 --------------------------- 
+
+New kind of cavity implemented: several mirror linear cavity 
+
+Possibility to create synthetic map from a 1D PSD 
+
+The input beam can now be defined as Laguerre Gauss sinusoidal or 
+helicoidal 
+
+FSR scan with sidebands is now possible 
+
+Numerous small improvements and some bug fixes also. 
+
+--------------------------- Version 3.16 --------------------------- 
+
+Main reason: update to be compatible with the latest Matlab versions. 
+
+Possibility to add some higher order modes to a Gaussian beam. 
+
+Can now load a Zygo .dat map directly, the surfaces and the relevant 
+grid is automatically calculated. 
+
+More robust functions to calculate the resonance condition and the 
+steady state laser fields. 
+
+Possibility to add finite size optics and maps in a telescope. 
+
+--------------------------- Version 3.15 --------------------------- 
+
+Implementation of Zernike polynomials. 
+
+Derive now the stability condition for linear cavity with an arbitrary 
+number of mirrors. 
+
+Can fit astigmatic fundamental Gaussian beam. 
+
+Numerous small improvements and bug fixes under the hood. 
+
+--------------------------- Version 3.14 --------------------------- 
+
+New functions to calculate the radius of curvature of an interface 
+weighted by an arbitrary beam. Also the RMS can be calculated in such a 
+way (or within an arperture). 
+
+The accelerated convergence scheme also works now in presence of 
+sidebands. The transmission through an instance of the class 'Mirror' 
+works also for the sidebands now. A bug on the round trip phase 
+calculation of the eigen modes was found and corrected. 
+
+Previously when using add_map() with a large scaling factor (>1000), the 
+curvature could be badly removed. That has been fixed now. 
+
+--------------------------- Version 3.13 --------------------------- 
+
+ReadZygoBinary(): can read .dat file saved by the Zygo Metropro 
+software. It is the common file format for mirror maps of second 
+generation interferometers since they are usually measured with a ZYGO 
+interferometer. 
+
+Plot_PSD(): plot the 1D PSD of a 2D map. To pass to 1D, one can sum over 
+one direction or over a constant radius. Weighting with a Gaussian beam 
+is possible. 
+
+Cut_frequency_Interface(): can remove certain spatial frequency from a 
+map (low pass, high pass or band pass). This is done in a crude way (no 
+windowing). 
+
+Add_tilt(), used to tilt the wavefront of an electrical field, now also 
+tilt the sidebands if they are present. 
+
+Focus_beam_with_telescope() also works now for beam with sidebands. 
+Expand_HOM() Expand a beam into higher order modes, useful to quanitfy 
+the mode content. 
+
+Check_stability(): new calculation to determine the input beam 
+parameters for perfect mode matching. Small bugs fixing here and there. 
+
+--------------------------- Version 3.12 --------------------------- 
+
+New accelerated convergence scheme has been implemented to find the 
+steady state field inside a cavity. The computational time could be 
+reduced by a factor ~5. This scheme has only been implemented for the 
+carrier. 
+
+Possibility to simulate telescope with strong magnification. The grid 
+size is automatically adjusted in order to match the size of the beam. 
+
+Possibility now to lock the cavity using a real PDH locking error 
+signal. 
+
+Additional options for some functions: for 'Interface()' RoC can now be 
+set to 'Inf' for flat mirrors, surface can be plotted within a certain 
+diameter, while adding a map, one can subtract tilt and curvature 
+measured from a certain diameter and additional other little stuff. 
+
+--------------------------- Version 3.11 --------------------------- 
+
+Bug fixes and light improvement 
+
+--------------------------- Version 3.10 --------------------------- 
+
+New Mirror class: used to simulate thick substrates and etalon effect. 
+Mirrors are constituted of 2 Interfaces, separated by a space with a 
+certain refractive index. 
+
+Digital integration: new method to propagate the beam. This method 
+albeit slower eliminates the light falling outside the grid. This method 
+can only be used over long distances (the meaning of 'long' depends on 
+the size of the grid) 
+
+Eigen mode: new function to calculate and display the eigen modes and 
+eigen values of a stable cavity. Useful to design cavities since one can 
+check the resonance frequencies of all the higher order modes. 
+
+--------------------------- Version 3.05 --------------------------- 
+
+New cavity class: CavityN, one can know defined a linear cavity with an 
+arbitrary number of mirrors (like a 4 mirrors OMC cavity). 
+
+New syntax to define the laser beam (class E_beam). The beam parameters 
+can be entered as beam radius and curvature of the wavefront, beam waist 
+and distance from the waist or with complex Gaussian beam parameter q. 
+
+New syntax to define the interface (Class Interface). It now uses the 
+input parser of Matlab to be more flexible. Can now input the angle of 
+incidence of the beam for small angle as the parameter 'AoI', in that 
+case the surface will generate astigmatism upon reflection/transmission. 
+
+New syntax also to include maps as text files. Possible options are now 
+scaling factor, normalise for a certain RMS, rotate the map. For 
+cylindrical symmetric maps, a 2D column file can now be entered (radius 
+sagitta change). Can now plot the amplitude of the beam in log scale or 
+also the propagation of the beam ( E_plot(E1,'space','log') or 
+E_plot(E1,'angle') ). 
+
+--------------------------- Version 3.0 --------------------------- 
+
+Major upgrade of OSCAR. Use of the oriented object programming 
+capability of Matlab. See the example to have a look of the new 
+possibility. 
+
