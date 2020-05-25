@@ -59,81 +59,98 @@ Power_scan = zeros(1,num_point_scan,'double');
 % Create the length vector to scan the cavity
 Length_scan = (1:num_point_scan) * Cin.Laser_in.Wavelength/num_point_scan;
 
-fprintf(' Scanning the cavity ...       ')
+fprintf('Scanning the cavity ...       \n')
 
-if license('test','distrib_computing_toolbox') && p.Results.use_parallel          % check if the Parallel Computing Toolbox exists
-    
-    pool_obj = gcp('nocreate');    
-    if (isempty(pool_obj))
-        disp('Parallel pool not initialized. Starting now...')
-        is_par_pool_init = false;
-        pool_obj = gcp();
+if license('test','distrib_computing_toolbox') && p.Results.use_parallel          % check if the Parallel Computing Toolbox exists    
+        
+    if gpuDeviceCount > 0 && parallel.gpu.GPUDevice.isAvailable(1)                
+        
+        disp('Found suitable GPU. Starting GPU-based scan.')
+        gq = 1:num_point_scan;
+        ii = 1:num_iter;
+        gCavity_scan_all_field_arr = gpuArray(Cin.Cavity_scan_all_field(:,:,ii));
+        gCavity_scan_all_field_arr_perm = permute(gCavity_scan_all_field_arr, [3,1,2]);
+        gPhase_shifts = gpuArray(exp(1i*Cin.Laser_in.k_prop* Length_scan(gq)'*ii));
+        gFields_reconstructed = pagefun(@mtimes,gPhase_shifts, gCavity_scan_all_field_arr_perm);
+        Fields_reconstructed = gather(gFields_reconstructed);
+        
+        for qqq = 1:num_point_scan
+            Dummy_E = Cin.Laser_in;
+            Dummy_E.Field = squeeze(Fields_reconstructed(qqq,:,:));   
+            Power_scan(qqq) = Calculate_power(Dummy_E);
+        end
+        
     else        
-        is_par_pool_init = true;        
-    end
-    
-    parfor qq = 1:num_point_scan
-        Field_reconstructed = complex(zeros(Grid_num_point,Grid_num_point,'double'));
-        Field_reconstructed_SBu = Field_reconstructed; % do it even if no SB
-        Field_reconstructed_SBl = Field_reconstructed;
-        
-        for ii=1:num_iter
-            Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii);
-            Field_reconstructed_SBu = Field_reconstructed_SBu + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(1i*D_phi*ii);
-            Field_reconstructed_SBl = Field_reconstructed_SBl + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(-1i*D_phi*ii);
+        pool_obj = gcp('nocreate');    
+        if (isempty(pool_obj))
+            disp('Parallel pool not initialized. Starting now...')
+            is_par_pool_init = false;
+            pool_obj = gcp();
+        else        
+            is_par_pool_init = true;        
         end
-        
-        % Create a dummy field with the right field inside and normalise
-        % the SB by the input power
-        Dummy_E = Cin.Laser_in;
-        Dummy_E.Field = Field_reconstructed;
-        Dummy_E.Field_SBu = Field_reconstructed_SBu * sqrt(Calculate_power(Cin.Laser_in,'SB')/2);
-        Dummy_E.Field_SBl = Field_reconstructed_SBl * sqrt(Calculate_power(Cin.Laser_in,'SB')/2);
-        
-        if p.Results.With_SB
-            Power_scan(qq) = Calculate_power(Dummy_E,'include','all');
-        else
-            Power_scan(qq) = Calculate_power(Dummy_E);
-        end
-    end
-    
-    if (~is_par_pool_init)
-        disp('Shutting down pool because it was not initialized at startup.')
-        delete(pool_obj);
-    end
 
+        parfor qq = 1:num_point_scan
+            Field_reconstructed = complex(zeros(Grid_num_point,Grid_num_point,'double'));
+            Field_reconstructed_SBu = Field_reconstructed; % do it even if no SB
+            Field_reconstructed_SBl = Field_reconstructed;
+
+            for ii=1:num_iter
+                Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii);
+                Field_reconstructed_SBu = Field_reconstructed_SBu + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(1i*D_phi*ii);
+                Field_reconstructed_SBl = Field_reconstructed_SBl + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(-1i*D_phi*ii);
+            end
+
+            % Create a dummy field with the right field inside and normalise
+            % the SB by the input power
+            Dummy_E = Cin.Laser_in;
+            Dummy_E.Field = Field_reconstructed;
+            Dummy_E.Field_SBu = Field_reconstructed_SBu * sqrt(Calculate_power(Cin.Laser_in,'SB')/2);
+            Dummy_E.Field_SBl = Field_reconstructed_SBl * sqrt(Calculate_power(Cin.Laser_in,'SB')/2);
+
+            if p.Results.With_SB
+                Power_scan(qq) = Calculate_power(Dummy_E,'include','all');
+            else
+                Power_scan(qq) = Calculate_power(Dummy_E);
+            end
+        end
+
+        if (~is_par_pool_init)
+            disp('Shutting down pool because it was not initialized at startup.')
+            delete(pool_obj);
+        end
+    end
 else % if the PCT is not installed or we do not want to use the toolbox
-    
     for qq = 1:num_point_scan
-        
+
         Field_reconstructed = complex(zeros(Grid_num_point,Grid_num_point,'double'));
         Field_reconstructed_SBu = Field_reconstructed; % do it even if no SB
         Field_reconstructed_SBl = Field_reconstructed;
-        
+
         for ii=1:num_iter
             Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii);
             Field_reconstructed_SBu = Field_reconstructed_SBu + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(1i*D_phi*ii);
             Field_reconstructed_SBl = Field_reconstructed_SBl + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(-1i*D_phi*ii);
         end
-            
+
         % Create a dummy field with the right field inside and normalise
         % the SB by the input power
         Dummy_E = Cin.Laser_in;
         Dummy_E.Field = Field_reconstructed;
         Dummy_E.Field_SBu = Field_reconstructed_SBu * sqrt(Calculate_power(Cin.Laser_in,'SB')/2);
         Dummy_E.Field_SBl = Field_reconstructed_SBl * sqrt(Calculate_power(Cin.Laser_in,'SB')/2);
-        
+
         if p.Results.With_SB
             Power_scan(qq) = Calculate_power(Dummy_E,'include','all');
         else
             Power_scan(qq) = Calculate_power(Dummy_E);
         end
-        
+
         if (rem(qq,num_point_scan/100) == 0)
             fprintf('\b\b\b\b\b\b\b\b\b   %-3.0i %% ',100*qq/num_point_scan)
         end
     end
-    
+
 end
 
 
