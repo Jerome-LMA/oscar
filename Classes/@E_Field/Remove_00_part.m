@@ -30,8 +30,9 @@ else
     E00 = Normalise_E(Esub,1);
 end
 
-diff_phase =angle(Calculate_Overlap(Ein,E00));
+diff_phase = angle(Calculate_Overlap(Ein,E00));
 
+% To minimize the output, be sure the 2 beams interfer destructively
 Eout = Ein - E00 * exp(1i*diff_phase);
 
 E_plot(Eout)

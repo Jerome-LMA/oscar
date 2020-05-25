@@ -10,18 +10,20 @@ switch nargin
     case 1
         E = varargin{1};
         Eout = E;
-        Eout.Field = Eout.Field / sqrt(Calculate_power(varargin{1}));
+        Eout.Field = Eout.Field / sqrt(Calculate_Power(varargin{1}));
     case 2
         E = varargin{1};
         Eout = E;
-        Eout.Field = Eout.Field / sqrt(Calculate_power(varargin{1}));
+        Eout.Field = Eout.Field / sqrt(Calculate_Power(varargin{1}));
         Eout.Field = Eout.Field * sqrt(varargin{2});
         
         if varargin{2} == 0
             Eout.Field = complex(zeros(E.Grid.Num_point,E.Grid.Num_point));
-            if  ~isempty(E.Field_SBl)
-                Eout.Field_SBl = Eout.Field;
-                Eout.Field_SBu =  Eout.Field;
+            if  E.Nb_Pair_SB             
+                for ii=1:E.Nb_Pair_SB
+                    Eout.SB(ii).Field_lower = Eout.Field;
+                    Eout.SB(ii).Field_uppper = Eout.Field;
+                end               
             end
         end
         

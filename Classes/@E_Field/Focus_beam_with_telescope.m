@@ -1,4 +1,4 @@
-function [Eout,Gout] = Focus_beam_with_telescope(Ein,array_L_D,varargin)
+function [Eout,Gout] = Focus_Beam_With_Telescope(Ein,array_L_D,varargin)
 % Focus_beam_with_lens() use this function for lens with short focal length
 %  This function re-adapt the grid size since the focusing may lead to a
 %  small beam size
@@ -65,14 +65,7 @@ if isempty(p.Results.magnification)
     end
     
     WF_change = exp(1i * Ein.k_prop *  Ein.Grid.D2_square * (1/(2*R_in)) );
-    Ein.Field = Ein.Field .* WF_change;
-    % also do it for the SB
-    
-    if ~isempty(Ein.Field_SBl)
-        Ein.Field_SBl = Ein.Field_SBl .* WF_change;
-        Ein.Field_SBu = Ein.Field_SBu .* WF_change;
-    end
-    
+    Ein = Ein .* WF_change; % will do for SB at the same time
     
     for pp=1:num_iter
         % Add the aperture here
@@ -83,7 +76,7 @@ if isempty(p.Results.magnification)
         if ~isempty(Map_list)
             % First rescale the map on the calculation grid
             I_temp = Resize_interface(Map_list(pp),Ein.Grid);
-            Ein = Ein * (exp(1i * Ein.k_prop * I_temp.surface) .* I_temp.mask);
+            Ein = Ein .* (exp(1i * Ein.k_prop * I_temp.surface) .* I_temp.mask);
         end
         
         
@@ -120,29 +113,29 @@ if isempty(p.Results.magnification)
         
         Eout = Ein;
         Eout.Grid = Gout;
-        Eout.Field = E_prop.Field / Scaling_factor;
+        Eout.Field = E_prop.Field * (1/Scaling_factor);
         
-        if ~isempty(Eout.Field_SBl)
-            Eout.Field_SBl = Eout.Field_SBl / Scaling_factor;
-            Eout.Field_SBu = Eout.Field_SBu / Scaling_factor;
-        end
+        %         if ~isempty(Eout.Field_SBl)
+        %             Eout.Field_SBl = Eout.Field_SBl / Scaling_factor;
+        %             Eout.Field_SBu = Eout.Field_SBu / Scaling_factor;
+        %         end
         
-        E_plot(Eout)
+        %E_Plot(Eout)
         
         % Check if no power fall outside the grid
         Check_Grid_size(E_prop,0.10)
         New_wavefront = -(Distance(pp)  - f_new);
         
         % Remove the wavefront curvature from the beam
-        E_plot(Eout)
+        %E_Plot(Eout)
         [~,R_in2] = Fit_TEM00(Eout);
         WF_change = exp(1i * Ein.k_prop *  Eout.Grid.D2_square * (1/(2*R_in2)) );
-        Eout.Field = Eout.Field .* WF_change;
+        Eout = Eout .* WF_change;
         
-        if ~isempty(Eout.Field_SBl)
-            Eout.Field_SBl = Eout.Field_SBl .* WF_change;
-            Eout.Field_SBu = Eout.Field_SBu .* WF_change;
-        end
+        %         if ~isempty(Eout.Field_SBl)
+        %             Eout.Field_SBl = Eout.Field_SBl .* WF_change;
+        %             Eout.Field_SBu = Eout.Field_SBu .* WF_change;
+        %         end
         
         % Calculate the new wavefront
         R_in = 1/(1/R_in2 - 1/New_wavefront);
@@ -152,12 +145,12 @@ if isempty(p.Results.magnification)
     
     % At the end, add the final wavefront
     WF_final = exp(1i * Eout.k_prop *  Eout.Grid.D2_square * (-1/(2*R_in)) );
-    Eout.Field = Eout.Field .* WF_final;
+    Eout = Eout.* WF_final;
     
-    if ~isempty(Eout.Field_SBl)
-        Eout.Field_SBl = Eout.Field_SBl .* WF_final;
-        Eout.Field_SBu = Eout.Field_SBu .* WF_final;
-    end
+    %     if ~isempty(Eout.Field_SBl)
+    %         Eout.Field_SBl = Eout.Field_SBl .* WF_final;
+    %         Eout.Field_SBu = Eout.Field_SBu .* WF_final;
+    %     end
     
 else
     % If the user set the magnification for the simulation
@@ -186,7 +179,7 @@ else
         if ~isempty(Map_list)
             % First rescale the map on the calculation grid
             I_temp = Resize_interface(Map_list(pp),Ein.Grid);
-            Ein = Ein * (exp(1i * Ein.k_prop * I_temp.surface) .* I_temp.mask);
+            Ein = Ein .* (exp(1i * Ein.k_prop * I_temp.surface) .* I_temp.mask);
         end
         %figure(1); E_plot(Ein); figure(2); I_plot(I_temp); pause()
         %figure(1); imagesc(I_temp.mask);axis square; figure(2); I_plot(I_temp); pause()
@@ -196,7 +189,7 @@ else
         
         New_RoC_total = 1/ ( 1/New_RoC_lens + 1/New_RoC_mag);
         WF_change = exp(1i * Ein.k_prop *  Ein.Grid.D2_square * (1/(2*New_RoC_total)) );
-        Ein.Field = Ein.Field .* WF_change;
+        Ein = Ein .* WF_change;
         
         dist_prop =   Distance(pp) / Vec_mag(pp);
         
@@ -232,5 +225,6 @@ else
     
     
 end
+
 end
 

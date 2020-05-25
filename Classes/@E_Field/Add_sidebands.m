@@ -1,28 +1,33 @@
-function Eout = Add_sidebands(varargin)
+function Eout = Add_Sidebands(Ein,Mod_freq,Mod_index,varargin)
 % Eout = Add_sidebands(Ein,mod_freq,mod_index)
-% Add a pair of sidebands of frequency: mod_freq with modulating index: mod_index
+% Add a pair of sidebands of frequency: Mod_freq with modulating index: Mod_index
 % This function simulates a phase modulator
 
-switch nargin
-    case {0,1,2}
-        error('Add_sidebands(): Not enough arguments, at least an object E_field, a frequency and a frequency depth must be given must be given')
-        
-    case 3
-        E = varargin{1};
-        mod_freq = varargin{2};
-        mod_index = varargin{3};
-    
-         Eout = E;
-         Eout.Frequency_Offset = mod_freq;
-    
-         % Change the amplitude for the carrier
-         Eout.Field = Eout.Field * besselj(0,mod_index);
-         
-         % add the 2 sidebands field
-         Eout.Field_SBl = - Eout.Field * besselj(1,mod_index);
-         Eout.Field_SBu = Eout.Field * besselj(1,mod_index);
-       
-    otherwise
-        error('Add_sidebands(): invalid number of input arguments, no sidebands have been created')
-        
+p  = inputParser;
+p.FunctionName = 'Add sidebands to a field';
+
+% Check if the first argument is an E_Field
+p.addRequired('Ein', @(x)isa(x, 'E_Field'));
+
+% Check if the first argument is an E_Field
+p.addRequired('Mod_freq', @(x)isnumeric(x) && x>0);
+
+% Check if the first argument is an E_Field
+p.addRequired('Mod_index', @(x)isnumeric(x) && x>0);
+
+p.parse(Ein,Mod_freq,Mod_index)
+
+Eout = Ein;
+Eout.SB(Eout.Nb_Pair_SB+1).Frequency_Offset = Mod_freq;
+
+% Change the amplitude for the carrier
+Eout.Field = Eout.Field * besselj(0,Mod_index);
+
+% add the 2 sidebands field
+Eout.SB(Eout.Nb_Pair_SB+1).Field_lower = - Eout.Field * besselj(1,Mod_index);
+Eout.SB(Eout.Nb_Pair_SB+1).Field_upper = Eout.Field * besselj(1,Mod_index);
+
+% We have added one pair of sidebands
+Eout.Nb_Pair_SB = Eout.Nb_Pair_SB + 1;
+
 end

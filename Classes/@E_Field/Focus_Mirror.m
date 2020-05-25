@@ -1,4 +1,4 @@
-function [Eout Gout] = Focus_beam2(Ein,RofC_mir,dist)
+function [Eout,Gout] = Focus_Mirror(Ein,RofC_mir,dist)
 %  [Eout Gout] = Focus_beam(Ein,RofC_mir,dist)
 % Strongly focus a beam, for that need to resize the grid at the output
 % Ein = Input E_field, define just before the mirror
@@ -20,8 +20,7 @@ WF_change = exp(1i * Ein.k_prop * ((P_alpha - 1)/(2*dist) + 1/RofC_mir ) *  Ein.
 % imagesc(abs(WF_change))
 
 % Field E_0 tilt in the new coordinate system is:
-Eout = Ein;
-Eout.Field = Ein.Field .* WF_change;
+Eout = Ein .* WF_change;
 
 % Propagate the new field over (z1 - Z0) / alpha
 Eout = Propagate_E(Eout,dist/P_alpha);
@@ -31,7 +30,7 @@ Gout = Grid(Ein.Grid.Num_point,Ein.Grid.Length*abs(P_alpha));
 Eout.Grid = Gout; 
 
 % Multiply the results by C tilt
-Eout.Field = Eout.Field .* (1/P_alpha) .* exp(1i * Ein.k_prop * ((1/P_alpha - 1)/(2*dist))  *  Eout.Grid.D2_square );     
+Eout = Eout .* (1/P_alpha) .* exp(1i * Ein.k_prop * ((1/P_alpha - 1)/(2*dist))  .*  Eout.Grid.D2_square );     
 
 end
 

@@ -16,14 +16,13 @@ classdef E_Field
     properties
         Grid
         Field
-        Field_SBl
-        Field_SBu
+        SB
         
         Refractive_index = 1;
         Wavelength = 1064E-9;
-        Frequency_Offset = 0;
         Mode_name
         
+        Nb_Pair_SB = 0;
         k_prop
     end
     

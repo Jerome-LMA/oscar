@@ -1,6 +1,7 @@
 function varargout = Check_pos_tilt(varargin)
 % Check_pos_tilt(): return the centroid of the beam and the tilt angle
 % for both x and y direction
+% Calculation done on the carrier
 
 switch nargin
     case 0
@@ -10,13 +11,13 @@ switch nargin
         
         Propa_length = E.Grid.Length*50;
         
-        Vec_cent(1,1) = sum(E.Grid.D2_X.*abs(E.Field), 'all') / sum(abs(E.Field), 'all');
-        Vec_cent(1,2)= sum(E.Grid.D2_Y.*abs(E.Field), 'all') / sum(abs(E.Field), 'all');
+        Vec_cent(1,1) = sum(sum(E.Grid.D2_X.*abs(E.Field))) / sum(sum(abs(E.Field)));
+        Vec_cent(1,2)= sum(sum(E.Grid.D2_Y.*abs(E.Field))) / sum(sum(abs(E.Field)));
         
         [Eout] = Propagate_E(E,Propa_length);
         
-        Vec_cent(2,1) = sum(Eout.Grid.D2_X.*abs(Eout.Field), 'all') / sum(abs(Eout.Field), 'all');
-        Vec_cent(2,2)= sum(Eout.Grid.D2_Y.*abs(Eout.Field), 'all') / sum(abs(Eout.Field), 'all');
+        Vec_cent(2,1) = sum(sum(Eout.Grid.D2_X.*abs(Eout.Field))) / sum(sum(abs(Eout.Field)));
+        Vec_cent(2,2)= sum(sum(Eout.Grid.D2_Y.*abs(Eout.Field))) / sum(sum(abs(Eout.Field)));
         
         beam_pos(1) =  Vec_cent(1,1);
         beam_pos(2) =  Vec_cent(1,2);

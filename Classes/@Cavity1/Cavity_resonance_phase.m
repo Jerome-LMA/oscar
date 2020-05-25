@@ -36,7 +36,7 @@ for q = 1:num_iter
     Field_Circ = Reflect_mirror(Field_Circ,Cin.I_input);
     
     Phase_adjust = Phase_adjust * exp(-1i*angle(Calculate_Overlap(Field_Circ,Field_total)));
-   %     Calculate_power(Field_total)
+    %     Calculate_power(Field_total)
 end
 
 % Then find the round trip to make the eigen mode on resonnance
@@ -67,17 +67,16 @@ Cout.Field_reso_guess = Normalise_E(Field_Circ,Pcirc);
 
 % Suppose that the SB are in antiresonance
 
-if ~isempty(Cin.Laser_in.Field_SBl)
-    
+if Cout.Field_reso_guess.Nb_Pair_SB
     Cavity_gain_SB = (1-Cin.I_input.r^2)/ (1 + Cin.I_input.r * Cin.I_end.r)^2;
     Pcirc_SB = abs(Coeff_over).^2 * Cavity_gain_SB;
     
     tmp_field_SB = Normalise_E(Field_Circ,Pcirc_SB);
     
-    Cout.Field_reso_guess.Field_SBl = tmp_field_SB.Field;
-    Cout.Field_reso_guess.Field_SBu = tmp_field_SB.Field;
-    
-    Cout.Field_reso_guess.Frequency_Offset = Cin.Laser_in.Frequency_Offset;
-    
+    for ii=1:Cout.Field_reso_guess.Nb_Pair_SB
+        Cout.Field_reso_guess.SB(ii).Field_lower = tmp_field_SB.Field;
+        Cout.Field_reso_guess.SB(ii).Field_upper = tmp_field_SB.Field;
+    end 
 end
+
 end

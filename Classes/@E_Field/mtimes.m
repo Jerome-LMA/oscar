@@ -16,33 +16,28 @@ if isa(E1, 'E_Field') % First E1 is a E_field
             disp('mtimes(): error the 2 inputs fields are taken in different media')
             return
         end
-        
-        if (E1. Frequency_Offset ~= E2. Frequency_Offset)
-            disp('mtimes(): error the 2 inputs fields have different frequency offset')
-            return
-        end
-        
+                
         if (E1.Grid ~= E2. Grid)
             disp('mtimes(): error the 2 inputs fields are defined on different grid')
             return
         end
         
-        Eout = E1;
-        Eout.Field = E1.Field .* E2.Field;
+        %Eout = E1;
+        %Eout.Field = E1.Field .* E2.Field;
+        
+        error('mtimes(): multiplication between 2 fields not supported since too ambiguous')
         
     elseif isscalar(E2)
+        Eout = E1;
+        Eout.Field = E1.Field * E2;
         
-        if isempty(E1.Field_SBl)
-            Eout = E1;
-            Eout.Field = E1.Field * E2;
-            
-        else
-            Eout = E1;
-            Eout.Field = E1.Field * E2;
-            Eout.Field_SBl = E1.Field_SBl * E2;
-            Eout.Field_SBu = E1.Field_SBu * E2;
-            
+        if E1.Nb_Pair_SB % if SB are present
+            for ii=1:E1.Nb_Pair_SB
+                Eout.SB(ii).Field_lower = E1.SB(ii).Field_lower * E2;
+                Eout.SB(ii).Field_upper = E1.SB(ii).Field_upper * E2;
+            end
         end
+        
     else
         error('mtimes(): The second input must be either a E_Field or a scalar')
     end
@@ -50,18 +45,15 @@ if isa(E1, 'E_Field') % First E1 is a E_field
 elseif isscalar(E1)
     
     if isa(E2, 'E_Field')
-        
-        if isempty(E2.Field_SBl)
-            Eout = E2;
-            Eout.Field = E2.Field * E1;
-            
-        else
-            Eout = E2;
-            Eout.Field = E2.Field * E1;
-            Eout.Field_SBl = E2.Field_SBl * E1;
-            Eout.Field_SBu = E2.Field_SBu * E1;
-            
+        Eout = E2;
+        Eout.Field = E2.Field * E1;
+        if E2.Nb_Pair_SB % if SB are present
+            for ii=1:E2.Nb_Pair_SB
+                Eout.SB(ii).Field_lower = E2.SB(ii).Field_lower * E1;
+                Eout.SB(ii).Field_upper = E2.SB(ii).Field_upper * E1;
+            end
         end
+        
     else
         error('mtimes(): The second input must be either a E_Field or a scalar')
     end

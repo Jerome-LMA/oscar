@@ -1,6 +1,8 @@
 function varargout  = Add_HOM(Ein,max_mode_order,varargin)
 % Add_HOM: add some higher order mode to a laser beam
 % the input beam is a TEM00 and we will add the mode in the same base
+% to be done before the sidebands are added
+
 p = inputParser;
 p.FunctionName = 'Add some higher order modes';
 
@@ -15,7 +17,7 @@ Max_HOM = round(p.Results.max_mode_order);
 
 % higher order mode distribution
 % (1 = all the mode with the same amplitude)
-% (2 = lower mode have more amplitude, not implemented)
+% (2 = lower mode have more amplitude)
 HOM_distri = 2;
 
 [Fit_w,Fit_R] = Fit_TEM00(Ein);
@@ -36,7 +38,7 @@ if HOM_distri == 2
 end
 
 for jj_mode_order = 1:Max_HOM
-    for ii = 1:jj_mode_order + 1;
+    for ii = 1:jj_mode_order + 1
         mode_name = ['HG ' num2str(ii-1) ' ' num2str(jj_mode_order - ii+1) ];
         Ein = Ein + Ampli_HOM(jj_mode_order) * E_Field(Ein.Grid,'w',Fit_w,'R',Fit_R,'mode',mode_name);
        % E_plot(E_Field(Ein.Grid,'w',Fit_w,'R',Fit_R,'mode',mode_name)); pause;

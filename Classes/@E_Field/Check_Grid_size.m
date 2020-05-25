@@ -6,14 +6,14 @@ function Check_Grid_size(Ein,tol_out)
 % diameter which 90% of the size of the grid.
 
 if isa(Ein, 'E_Field') && isa(tol_out, 'numeric')
-    total_power = Calculate_power(Ein);
-        
+    total_power = Calculate_Power(Ein);
+    
     mask_index = Ein.Grid.D2_r < (Ein.Grid.Length * 0.45);
     mask = ones(Ein.Grid.Num_point,Ein.Grid.Num_point,'double');
     mask(mask_index) = 0;
     
     Ein.Field = Ein.Field .* mask;
-    power_outside = Calculate_power(Ein);
+    power_outside = Calculate_Power(Ein);
     
     if (power_outside/total_power) > tol_out
         warning('war:Grid_too_small','Grid size likely to be too small, check the results carefully')

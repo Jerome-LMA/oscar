@@ -10,7 +10,7 @@ p  = inputParser;
 p.addRequired('Iin', @(x)isa(x, 'Interface'));
 
 % Check if the second argument is an E_Dield
-p.addRequired('diam', @(x)isa(x, 'E_Field') || (isnumeric(x) && x>0) );
+p.addRequired('diam', @(x) isa(x, 'E_Field') || (isnumeric(x) && x>0) );
 
 p.parse(Iin,diam)
 
@@ -22,9 +22,9 @@ if isa(p.Results.diam, 'E_Field')   % An E_field is entered
     Surface = Iin.surface .* Iin.mask;
     
     Beam_intensity = abs(Ein.Field).^2;
-    Weighted_avg = sum(Surface.*Beam_intensity, 'all') /  sum(Beam_intensity, 'all');
+    Weighted_avg = sum(sum(Surface.*Beam_intensity)) /  sum(sum(Beam_intensity));
     
-    rms_w = sum(Beam_intensity.*(Surface - Weighted_avg).^2, 'all') / sum(Beam_intensity, 'all');
+    rms_w = sum(sum(Beam_intensity.*(Surface - Weighted_avg).^2)) / sum(sum(Beam_intensity));
     rms_w = sqrt(rms_w);
     
 else % A diameter is entered

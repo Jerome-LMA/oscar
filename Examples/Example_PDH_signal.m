@@ -1,8 +1,8 @@
 clearvars; close all;
-addpath(genpath(strcat(pwd, '\..\Classes')));
+addpath(genpath('Classes'));
 
 disp('---------------------------------------------------------------------------')
-disp('                  OSCAR V3.20                                  ')
+disp('                  OSCAR V3.21                                  ')
 disp('  ')
 
 
@@ -30,7 +30,7 @@ C1 = Cavity1(IM,EM,3000,E_input);
 C1.Laser_start_on_input = false ;
 %C1.Propagation_mat.Use_DI = true;
 C1 = Cavity_resonance_phase(C1);
-
+C1 = Calculate_fields_AC(C1);
 
 Nb_point = 200;                                     % Number of points for the scan
 
@@ -51,7 +51,7 @@ for ii=1:Nb_point
     tic
     C1 = Calculate_fields_AC(C1);
     C1.Field_reso_guess = C1.Field_circ;
-    [Sig.p(ii),Sig.q(ii)] = Demodulate_SB(C1.Field_ref);       % Demodule the carrier with the sidebands in reflection
+    [Sig.p(ii),Sig.q(ii)] = Demodulate_SB(C1.Field_ref,'phase',pi/2);       % Demodule the carrier with the sidebands in reflection
     time_need(ii) = toc;
     Power.car(ii) = Calculate_power(C1.Field_circ);           % calculate also the power of the carrier circulating in the cavity
     [Power.SB1(ii),Power.SB2(ii)] = Calculate_power_SB(C1.Field_circ);   % and the sidebands
@@ -59,7 +59,7 @@ for ii=1:Nb_point
     if ii ~= Nb_point
         fprintf(1,'\b\b\b\b\b \b \b \b')
     else
-        fprintf(1,'done' \n)
+        fprintf(1,'done \n')
     end
 end
 
@@ -73,7 +73,6 @@ legend('Signal in phase','Signal in quadrature')
 title('Demodulated PDH signal in reflection')
 xlabel('Cavity round trip phase shift')
 ylabel('Signal [a.u.]')
-
 
 %
 figure(4)

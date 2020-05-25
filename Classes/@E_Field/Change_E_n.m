@@ -16,5 +16,4 @@ Eout = Ein;
 Eout.Refractive_index = new_n;
 Eout.k_prop = Ein.k_prop * (new_n/Ein.Refractive_index);
 
-
 end

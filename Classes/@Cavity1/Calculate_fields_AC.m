@@ -36,7 +36,7 @@ end
 Display_debug = false;
 
 % Define the overlap function:
-Raw_overlap = @(x,y) (sum(conj(x).*y, 'all') );
+Raw_overlap = @(x,y) (sum(sum(conj(x).*y) ) );
 
 % The laser starts outside the input mirror, change n from 1 to mirror
 % substrate refractive index
@@ -57,7 +57,7 @@ else
     E1 = Cin.Field_reso_guess * sqrt(Calculate_power(Cin.Laser_in)); % The 'guess' field was calculated for 1W of input power, so it has to be normalised according to the current incident power
 end
 
-if isempty(E1.Field_SBl) % if there is no SB
+if ~E1.Nb_Pair_SB % if there is no SB
     
     % Find first D1 = E1 - A E1
     E1_circ = Propagate_E(E1,Cin.Propagation_mat);
@@ -74,7 +74,7 @@ if isempty(E1.Field_SBl) % if there is no SB
     count_iter = 0;
     count_iter_LSB = 0;
     
-    while error_P > Accuracy;
+    while error_P > Accuracy
         %  ii = ii +1
         E_SR_2 = E1 - D1 + Field_in;
         
@@ -122,7 +122,7 @@ if isempty(E1.Field_SBl) % if there is no SB
     
 else
     
-    % SB are present, will do three iterations, one for the carrier and one for each sidebands.
+    % SB are present, will do independently sevral iterations, one for the carrier and one for each sidebands.
     
     %---------------------------------------------------------------------------------------------------------------------------------
     % Start with the carrier
@@ -137,15 +137,17 @@ else
     E1_circ = Reflect_mirror(E1_circ,Cin.I_input);
     
     D1 = E1 -  E1_circ;
-    
     % On now we have E1, D1 that all we need
-    error_P_carr = 1;
-    error_P_LSB = 1;
-    error_P_USB = 1;
     
+    % Initiate the figures of merit (must tend toward 0)
+    error_P_carr = 1;
+    error_P_LSB(1:E1.Nb_Pair_SB) = 1;
+    error_P_USB(1:E1.Nb_Pair_SB) = 1;
+    
+    % Initiate the counters for debugging
     count_iter_car = 0;
-    count_iter_LSB = 0;
-    count_iter_USB = 0;
+    count_iter_LSB(1:E1.Nb_Pair_SB) = 0;
+    count_iter_USB(1:E1.Nb_Pair_SB) = 0;
     
     while error_P > Accuracy
         %  ii = ii +1
@@ -191,76 +193,75 @@ else
         end
         
         %-----------------------------------------------------------------------------------------------------------------
-        % Find the best coefficient a and b for the lower SB
+        % Find the best coefficient a and b for the SB, do one by one the
+        % iteration for each SB fields, first lower and then upper
         
-        
-        if error_P_LSB > Accuracy
+        for ii=1:E1.Nb_Pair_SB
+            if error_P_LSB(ii) > Accuracy
+                
+                M(1,1) = Raw_overlap(D1.SB(ii).Field_lower,D1.SB(ii).Field_lower);
+                M(1,2) = Raw_overlap(D1.SB(ii).Field_lower,D_SR_2.SB(ii).Field_lower);
+                M(2,1) = conj( M(1,2) );
+                M(2,2) = Raw_overlap(D_SR_2.SB(ii).Field_lower,D_SR_2.SB(ii).Field_lower);
+                
+                A(1,1) = Raw_overlap(D1.SB(ii).Field_lower,Field_in.SB(ii).Field_lower);
+                A(2,1) = Raw_overlap(D_SR_2.SB(ii).Field_lower,Field_in.SB(ii).Field_lower);
+                
+                %c = M\A;
+                c = pinv(M) * A; % To avoid error message due to singular matrix
+                
+                E2.SB(ii).Field_lower = c(1)*E1.SB(ii).Field_lower + c(2)*E_SR_2.SB(ii).Field_lower;
+                
+                % Calculate D2 now
+                D2.SB(ii).Field_lower = E2.SB(ii).Field_lower - ( c(1)*(E1.SB(ii).Field_lower - D1.SB(ii).Field_lower)...
+                    + c(2)*E_SR_2_circ.SB(ii).Field_lower);
+                
+                [pow_diff,~] = Calculate_power_SB(E2 - E1,'SB_num',ii);
+                [pow_E1,~] = Calculate_power_SB(E1,'SB_num',ii);
+                
+                error_P_LSB(ii) = pow_diff / pow_E1;
+                
+                E1.SB(ii).Field_lower = E2.SB(ii).Field_lower;
+                D1.SB(ii).Field_lower = D2.SB(ii).Field_lower;
+                count_iter_LSB(ii) = count_iter_LSB(ii) + 1;
+            else
+                error_P_LSB(ii) = 0;
+            end
             
-            M(1,1) = Raw_overlap(D1.Field_SBl,D1.Field_SBl);
-            M(1,2) = Raw_overlap(D1.Field_SBl,D_SR_2.Field_SBl);
-            M(2,1) = conj( M(1,2) );
-            M(2,2) = Raw_overlap(D_SR_2.Field_SBl,D_SR_2.Field_SBl);
-            
-            A(1,1) = Raw_overlap(D1.Field_SBl,Field_in.Field_SBl);
-            A(2,1) = Raw_overlap(D_SR_2.Field_SBl,Field_in.Field_SBl);
-            
-            %c = M\A;
-            c = pinv(M) * A; % To avoid error message due to singular matrix
-            
-            E2.Field_SBl = c(1)*E1.Field_SBl + c(2)*E_SR_2.Field_SBl;
-            
-            % Calculate D2 now
-            D2.Field_SBl = E2.Field_SBl - ( c(1)*(E1.Field_SBl - D1.Field_SBl) + c(2)*E_SR_2_circ.Field_SBl );
-            
-            [pow_diff,~] = Calculate_power_SB(E2 - E1);
-            [pow_E1,~] = Calculate_power_SB(E1);
-            
-            error_P_LSB = pow_diff / pow_E1;
-            
-            E1.Field_SBl = E2.Field_SBl;
-            D1.Field_SBl = D2.Field_SBl;
-            count_iter_LSB = count_iter_LSB + 1;
-        else
-            error_P_LSB = 0;
+            if error_P_USB(ii) > Accuracy
+                
+                M(1,1) = Raw_overlap(D1.SB(ii).Field_upper,D1.SB(ii).Field_upper);
+                M(1,2) = Raw_overlap(D1.SB(ii).Field_upper,D_SR_2.SB(ii).Field_upper);
+                M(2,1) = conj( M(1,2) );
+                M(2,2) = Raw_overlap(D_SR_2.SB(ii).Field_upper,D_SR_2.SB(ii).Field_upper);
+                
+                A(1,1) = Raw_overlap(D1.SB(ii).Field_upper,Field_in.SB(ii).Field_upper);
+                A(2,1) = Raw_overlap(D_SR_2.SB(ii).Field_upper,Field_in.SB(ii).Field_upper);
+                
+                %c = M\A;
+                c = pinv(M) * A; % To avoid error message due to singular matrix
+                
+                E2.SB(ii).Field_upper = c(1)*E1.SB(ii).Field_upper + c(2)*E_SR_2.SB(ii).Field_upper;
+                
+                % Calculate D2 now
+                D2.SB(ii).Field_upper = E2.SB(ii).Field_upper - ( c(1)*(E1.SB(ii).Field_upper - D1.SB(ii).Field_upper) + c(2)*E_SR_2_circ.SB(ii).Field_upper);
+                
+                [~,pow_diff] = Calculate_power_SB(E2 - E1,'SB_num',ii);
+                [~,pow_E1] = Calculate_power_SB(E1,'SB_num',ii);
+                
+                error_P_USB(ii) = pow_diff / pow_E1;
+                
+                E1.SB(ii).Field_upper = E2.SB(ii).Field_upper;
+                D1.SB(ii).Field_upper = D2.SB(ii).Field_upper;
+                
+                D1.SB(ii).Field_upper = D2.SB(ii).Field_upper;
+                count_iter_USB(ii) = count_iter_USB(ii) + 1;
+            else
+                error_P_USB(ii) = 0;
+            end      
         end
-        
-        %-----------------------------------------------------------------------------------------------------------------
-        % Find the best coefficient a and b for the upper SB
-        
-        if error_P_USB > Accuracy
-            M(1,1) = Raw_overlap(D1.Field_SBu,D1.Field_SBu);
-            M(1,2) = Raw_overlap(D1.Field_SBu,D_SR_2.Field_SBu);
-            M(2,1) = conj( M(1,2) );
-            M(2,2) = Raw_overlap(D_SR_2.Field_SBu,D_SR_2.Field_SBu);
-            
-            A(1,1) = Raw_overlap(D1.Field_SBu,Field_in.Field_SBu);
-            A(2,1) = Raw_overlap(D_SR_2.Field_SBu,Field_in.Field_SBu);
-            
-            %c = M\A;
-            c = pinv(M) * A; % To avoid error message due to singular matrix
-            
-            E2.Field_SBu = c(1)*E1.Field_SBu + c(2)*E_SR_2.Field_SBu;
-            
-            % Calculate D2 now
-            D2.Field_SBu = E2.Field_SBu - ( c(1)*(E1.Field_SBu - D1.Field_SBu) + c(2)*E_SR_2_circ.Field_SBu );
-            
-            [~,pow_diff] = Calculate_power_SB(E2 - E1);
-            [~,pow_E1] = Calculate_power_SB(E1);
-            
-            error_P_USB = pow_diff / pow_E1;
-            
-            E1.Field_SBu = E2.Field_SBu;
-            D1.Field_SBu = D2.Field_SBu;
-            
-            D1.Field_SBl = D2.Field_SBl;
-            count_iter_USB = count_iter_USB + 1;
-        else
-            error_P_USB = 0;
-        end
-        
+                
         error_P = max([error_P_carr error_P_LSB error_P_USB]);
-        
-        
     end
     
     Cout.Field_circ = E1;
@@ -291,7 +292,7 @@ if isa(Cin.I_input, 'Interface')
 end
 
 if isa(Cin.I_end, 'Interface')
-   Cout.Field_trans =  Change_E_n(Cout.Field_trans,Cin.I_end.n1);
+    Cout.Field_trans =  Change_E_n(Cout.Field_trans,Cin.I_end.n1);
 end
 
 %-------------------------------------------------------------------

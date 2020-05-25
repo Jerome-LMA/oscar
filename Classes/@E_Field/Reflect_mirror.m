@@ -1,4 +1,4 @@
-function [Eout] = Reflect_mirror(E_in,R_or_I,varargin)
+function [Eout] = Reflect_Mirror(E_in,R_or_I,varargin)
 %Reflect_mirror(E_Field,RofC) Reflect an E_Field from a spherical mirror
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %     Reflect_mirror(E_in,Rmir) reflect the field on a spherical mirror of
@@ -41,14 +41,16 @@ if isreal(R_or_I)
     Eout.Field = E_in.Field .* PF_Mirror * Reflectivity;
     Eout.Field = fliplr(Eout.Field);
     
-    if ~isempty(E_in.Field_SBl) % if sidebands are present
-        Eout.Field_SBl = E_in.Field_SBl .* PF_Mirror * Reflectivity;
-        Eout.Field_SBl = fliplr(Eout.Field_SBl);
-        
-        Eout.Field_SBu = E_in.Field_SBu .* PF_Mirror * Reflectivity;
-        Eout.Field_SBu = fliplr(Eout.Field_SBu);
-    end
     
+    if E_in.Nb_Pair_SB
+        for ii=1:E_in.Nb_Pair_SB
+            Eout.SB(ii).Field_lower = Eout.SB(ii).Field_lower  .* PF_Mirror * Reflectivity;
+            Eout.SB(ii).Field_lower = fliplr(Eout.SB(ii).Field_lower);
+            
+            Eout.SB(ii).Field_upper = Eout.SB(ii).Field_upper .* PF_Mirror * Reflectivity;
+            Eout.SB(ii).Field_upper = fliplr(Eout.SB(ii).Field_upper);
+        end
+    end
     
 elseif isa(R_or_I, 'Interface')
     I =R_or_I;
@@ -59,7 +61,7 @@ elseif isa(R_or_I, 'Interface')
     else
         Reflectivity = sqrt(p.Results.Ref);
     end
-     
+    
     if (E_in.Refractive_index==I.n1)
         PF_Mirror_ref = exp(-1i * E_in.k_prop * I.surface *2) .* I.mask .* Reflectivity;
     else
@@ -71,14 +73,16 @@ elseif isa(R_or_I, 'Interface')
     Eout.Field = E_in.Field .* PF_Mirror_ref;
     Eout.Field = fliplr(Eout.Field);
     
-    if ~isempty(E_in.Field_SBl) % if sidebands are present
-        Eout.Field_SBl = E_in.Field_SBl .* PF_Mirror_ref;
-        Eout.Field_SBl = fliplr(Eout.Field_SBl);
-        
-        Eout.Field_SBu = E_in.Field_SBu .* PF_Mirror_ref;
-        Eout.Field_SBu = fliplr(Eout.Field_SBu);
+    if E_in.Nb_Pair_SB
+        for ii=1:E_in.Nb_Pair_SB
+            Eout.SB(ii).Field_lower = Eout.SB(ii).Field_lower  .* PF_Mirror_ref;
+            Eout.SB(ii).Field_lower = fliplr(Eout.SB(ii).Field_lower);
+            
+            Eout.SB(ii).Field_upper = Eout.SB(ii).Field_upper .* PF_Mirror_ref;
+            Eout.SB(ii).Field_upper = fliplr(Eout.SB(ii).Field_upper);
+        end
     end
-   
+    
 elseif isa(R_or_I, 'Mirror')
     
     Mir = R_or_I;
@@ -86,11 +90,11 @@ elseif isa(R_or_I, 'Mirror')
     % reflection is made on the HR side
     
     if  isempty(p.Results.Ref)          % Check if the user has entered a reflectivity
-       [~,Eout] = Transmit_Reflect_Mirror(E_in,Mir,'HR');
+        [~,Eout] = Transmit_Reflect_Mirror(E_in,Mir,'HR');
     else
-       Eout = Reflect_mirror(E_in,Mir.I_HR,'Ref',p.Results.Ref);
+        Eout = Reflect_mirror(E_in,Mir.I_HR,'Ref',p.Results.Ref);
     end
-          
+    
 else
     disp('Reflect_mirror(): The second argument must be a radius of curvature or an interface object')
 end
