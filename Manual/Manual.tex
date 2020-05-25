@@ -1,0 +1,191 @@
+% First try
+\documentclass[11pt,a4]{memoir}
+
+%\usepackage{layouts}[2001/04/29]
+\usepackage{url}
+\usepackage{fixltx2e}
+\usepackage{alltt}
+\usepackage{graphicx}
+\usepackage{chngpage}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage[usenames]{color}
+\usepackage{setspace}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{lscape}
+
+%\usepackage{rotating}
+%\usepackage{setspace}
+
+
+\ifpdf
+  \pdfoutput=1
+  \usepackage[plainpages=false,pdfpagelabels,bookmarksnumbered]{hyperref}
+  \usepackage{memhfixc}
+\fi
+
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=true,      % page fit to window when opened
+    pdftitle={OSCAR guide},    % title
+    pdfauthor={Jerome Degallaix},     % author
+    pdfsubject={A user guide for OSCAR},   % subject of the document
+    pdfnewwindow=true,      % links in new window
+    pdfkeywords={keywords}, % list of keywords
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+\renewcommand{\topfraction}{0.9}
+    \renewcommand{\bottomfraction}{0.8}
+    \setcounter{topnumber}{2}
+    \setcounter{bottomnumber}{2}
+    \setcounter{totalnumber}{4}
+    \setcounter{dbltopnumber}{2}
+    \renewcommand{\dbltopfraction}{0.9}
+    \renewcommand{\textfraction}{0.07}
+    \renewcommand{\floatpagefraction}{0.7}
+    % floatpagefraction MUST be less than topfraction !!
+\renewcommand{\dblfloatpagefraction}{0.7}
+
+
+
+
+
+
+\begin{document}
+\graphicspath{{Pics/pdf/}}
+%\setcounter{lofdepth}{5}
+%\setcounter{secnumdepth}{3}
+\maxsecnumdepth{subsection}
+\settocdepth{subsection}
+\definecolor{OGreen}{rgb}{0,0.5,0}
+
+
+\lstset{language=Matlab,
+        basicstyle=\footnotesize,
+        keywordstyle=\color{black},
+        commentstyle=\color{OGreen},
+        stringstyle=\normalfont,
+        columns= flexible}
+
+
+\begin{titlingpage}
+    \setlength\hoffset{-52pt}
+    \setlength\voffset{-120pt}
+    \begin{figure}[!ht]
+    \includegraphics[width=1.47\textwidth]{title3.pdf}
+    \end{figure}
+\end{titlingpage}
+
+\frontmatter
+
+\pagestyle{empty}
+\vspace*{4cm}
+  \rule{\textwidth}{0.5pt}
+\begin{flushright}
+    \HUGE\textsf{OSCAR}\par
+    \Large\textsf{The Non-Definitive Guide}
+\end{flushright}
+\vspace*{\fill}
+
+\clearpage
+
+\vspace*{2cm}
+
+\begin{tabular}{p{5cm}p{5cm}}
+  First edition & July 2008 \\
+  Second edition & October 2008 \\
+  Third edition & April 2009 \\
+  Fourth edition & January 2010 \\
+  Fifth edition & January 2012 \\
+  Sixth edition & June 2012 \\
+  Seventh edition & January 2013 \\
+  Eight edition & September 2013 \\
+  Ninth edition & December 2013 \\
+  Tenth edition & July 2014 \\
+  Eleventh edition & December 2014 \\
+  Twelfth edition & September 2016 \\
+  Thirteenth edition & August 2019 \\
+\end{tabular}
+
+
+\begingroup
+\footnotesize
+
+\vspace*{\fill}
+\noindent OSCAR, the Matlab code, this documentation as well as the examples were written by:
+\begin{tabular}{l}
+Jerome Degallaix \\
+Laboratoire des Mat\'eriaux Avanc\'es (LMA)\\
+Universit\'e Claude Bernard Lyon I \\
+7, Avenue Pierre de Coubertin \\
+69622 Villeurbanne \\
+France \\
+\end{tabular}
+\vspace*{\baselineskip}
+
+\noindent THE SOFTWARE AND DOCUMENTATION IS PROVIDED AS IS WITHOUT ANY WARRANTY
+OF ANY KIND.\\
+
+\noindent MATLAB is a trademark of MathWorks Inc., MA, USA.
+
+\endgroup
+
+\clearpage
+
+\vspace*{5cm}
+OSCAR is an optical FFT code used to calculate the steady state optical field circulating in Fabry-Perot cavities. The code can integrate non-spherical mirrors and any arbitrary input fields. Typical applications for OSCAR have been: calculation of thermal lensing effect and calculation of diffraction loss and cavity eigenmodes for arbitrary beam shapes. One great advantage of OSCAR is the simplicity and flexibility of the code, everyone with only minimal knowledge of Matlab can easily modified OSCAR code to suit specific purposes.\\
+
+If you find a bug when using OSCAR, please feel free to contact the author. Do not hesitate also to report any unclear part from this manual or from the code itself. Of course, I am also open to suggestions and possible improvements.
+%\vspace*{\fill}
+
+\clearpage
+
+
+\tableofcontents
+
+
+\mainmatter
+
+
+
+\include{Chapter1}
+
+\part{OSCAR V1: the classic version}
+
+\include{Chapter2}
+\include{Chapter3}
+
+\part{OSCAR V3: the Oriented Object version}
+
+\include{Chapter4}
+
+%\addcontentsline{toc}{chapter}{Bibliography}
+%\begin{spacing}{1}
+\bibliographystyle{ieeetr}
+\bibliography{biblio}
+%\end{spacing}
+
+
+
+\appendix
+\part{Appendix}
+\include{Appendix1}
+\include{Appendix2}
+
+\newpage
+\chapter*{Acknowledgements}
+\addcontentsline{toc}{chapter}{Acknowledgements}
+I would like to thank all the users of the code and especially all the people who have helped in the development, in particular: Massimo Galimberti (impressive work for the Zernike implementation and the ZYGO file interpreter), Francois Bondu (for generating maps from a 1D PSD), Luc Di Gallo, Francois Labaye and Richard Day for all the interesting discussions.
+
+
+\end{document} 

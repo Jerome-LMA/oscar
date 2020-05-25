@@ -1,0 +1,10 @@
+% MakeIndex style file  memman.ist
+
+% @ is a valid character in some entries
+actual '?' % ? instead of @
+
+% output main entry <entry> as: \item \idxmark{<entry>}, 
+item_0  "\n\\item \\idxmark{"
+delim_0 "}, "
+
+

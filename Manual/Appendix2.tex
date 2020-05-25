@@ -1,0 +1,272 @@
+\chapter{Finesse script}
+\label{chaB}
+
+The Finesse script \cite{Finesse} used to simulate a Fabry Perot cavity equivalent to the one described in the table \ref{tab2:param} is presented below. It is often extremely useful to create some simple Finesse model to check the exactitude of OSCAR results whenever possible. The script is also included in the OSCAR distribution under the name \textcolor{blue}{P\_circ.kat} in the folder \textcolor{blue}{Calculate\_Pcirc}.
+
+\begin{verbatim}
+
+l i1 1 0 n0                             # laser P=1W
+gauss G1 i1 n0 0.017221 -517.112239     # Parameters for a beam radius 2cm
+                                        # and a wavefront RofC of -2000m
+
+s s0 1n 1 n0 n1
+m1 SITM1 1 0 0 n1 n2
+s sITM2 1n 1.45 n2 nITM
+m1 ITM2 0.005 50E-6 0 nITM ncav1        # IM transmission and loss
+attr ITM2 Rc -2000
+
+s s3 1000 ncav1 ncav2
+
+m1 ETM 50E-6 50E-6 0 ncav2 n4           # EM transmission and loss
+attr ETM Rc 2000
+
+cav cav_mode ITM2 ncav1 ETM ncav2
+
+maxtem 8
+trace 10
+phase 0
+startnode n0
+
+pd0 p_circ ncav1
+pd0 p_trans n4
+pd0 p_ref n1
+
+xaxis ETM phi lin -233 -234 3600
+yaxis abs
+
+gnuterm NO
+retrace off
+
+\end{verbatim}
+
+
+\chapter{Details of OSCAR 3.0 classes}
+The properties (i.e. parameters included in an object of a class) of the different class are described in following sections. Properties are not protected, so they can be accessed and changed using: object\_name.properties (at your own risk).
+
+The name of the properties are usually self-explanatory and derived directly from OSCAR classic.
+
+\section{Class Grid}
+
+\begin{table}
+  \centering
+  \caption{\label{App3:grid} Details of the properties of the class \textsl{Grid} }
+\begin{tabular}{|r r l|}
+\hline
+{\Large\strut} Properties & Type &  Comments \\
+\hline
+{\Large\strut} Num\_point &  scalar, integer & Should be a power of 2 \\
+{\Large\strut} Length &  scalar & Length of one side of the grid (m)\\
+{\Large\strut} Step &  scalar & Step = Length / Num\_point \\
+{\Large\strut} Half\_num\_point &  scalar, integer & Half\_num\_point = Num\_point / 2 \\
+{\Large\strut} Vector &  vector, integer & from 1 to Num\_point \\
+{\Large\strut} Axis &  vector &  The scale for the grid \\
+{\Large\strut} Axis\_FFT &  vector &  The spatial frequency scale\\
+{\Large\strut} D2\_X &  2D matrix &  Horizontal scale in 2D \\
+{\Large\strut} D2\_Y &  2D matrix &  Vertical scale in 2D \\
+{\Large\strut} D2\_square &  2D matrix & Square of the distance to the center \\
+{\Large\strut} D2\_r &  2D matrix & Distance from the center of the grid \\
+{\Large\strut} D2\_FFT\_X &  2D matrix & Horizontal FFT scale in 2D \\
+{\Large\strut} D2\_FFT\_Y &  2D matrix & Vertical FFT scale in 2D \\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+\section{Class E\_Field}
+
+\begin{table}
+  \centering
+  \caption{\label{App3:E_field} Details of the properties of the class \textsl{E\_Field} }
+\begin{tabular}{|r r l|}
+\hline
+{\Large\strut} Properties & Type &  Comments \\
+\hline
+{\Large\strut} Grid &  Grid & Grid where the beam is defined \\
+{\Large\strut} Field &  2D complex matrix & The carrier electric field \\
+{\Large\strut} Field\_SBl &  2D complex matrix & The lower sidebands \\
+{\Large\strut} Field\_SBu &  2D complex matrix & The higher sidebands \\
+{\Large\strut} Refractive\_index &  scalar  & Refractive index of the medium \\
+{\Large\strut} Wavelength &  scalar &  The light wavelength \\
+{\Large\strut} Frequency\_Offset &  scalar &  Frequency of the sidebands \\
+{\Large\strut} Mode\_name &  string &  Family and mode number \\
+{\Large\strut} k\_prop &  scalar & Propagation constant \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Class Prop\_operator}
+
+\begin{table}
+  \centering
+  \caption{\label{App3:Prop_OP} Details of the properties of the class \textsl{Prop\_operator} }
+\begin{tabular}{|r r l|}
+\hline
+{\Large\strut} Properties & Type &  Comments \\
+\hline
+{\Large\strut} n &  scalar & Refractive index of the media \\
+{\Large\strut} mat &  2D complex & Propagation matrix \\
+{\Large\strut} dist &  scalar  & Distance of propagation \\
+{\Large\strut} Use\_DI &  logical & Enable digital integration \\
+{\Large\strut} mat\_DI &  2D complex  & Propagation matrix for digital integration \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\section{Class Interface}
+
+\begin{table}
+  \centering
+  \caption{\label{App3:Inter} Details of the properties of the class \textsl{Interface} }
+\begin{tabular}{|r r l|}
+\hline
+{\Large\strut} Properties & Type &  Comments \\
+\hline
+{\Large\strut} Grid &  Grid & Grid where the beam is defined \\
+{\Large\strut} surface &  2D matrix & The height of the surface \\
+{\Large\strut} mask &  2D matrix of 0 and 1 & The aperture of the optic \\
+{\Large\strut} T &  scalar & Transmission in power \\
+{\Large\strut} L &  scalar  & Loss in power \\
+{\Large\strut} n1 &  scalar &  The first refractive index \\
+{\Large\strut} n2 &  scalar &  The second refractive index \\
+{\Large\strut} t &  scalar &  Amplitude transmission $\sqrt{T}$ \\
+{\Large\strut} r &  scalar & Amplitude reflectivity $\sqrt{1-(T+L)}$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Class Mirror}
+
+\begin{table}
+  \centering
+  \caption{\label{App3:Inter} Details of the properties of the class \textsl{Mirror} }
+\begin{tabular}{|r r l|}
+\hline
+{\Large\strut} Properties & Type &  Comments \\
+\hline
+{\Large\strut} I\_HR &  Interface & First surface \\
+{\Large\strut} I\_AR &  Interface & Second surface \\
+{\Large\strut} length\_substrate & scalar & Length of the substrate \\
+{\Large\strut} RT\_inside &  integer & Number of round trip \\
+{\Large\strut} n\_substrate &  scalar &  refractive index of the substrate\\
+{\Large\strut} r &  scalar & Reflectivity \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Class Cavity1}
+
+\begin{table}
+  \centering
+  \caption{\label{App3:Cavity} Details of the properties of the class \textsl{Cavity1} }
+\begin{tabular}{|r r l|}
+\hline
+{\Large\strut} Properties & Type &  Comments \\
+\hline
+{\Large\strut} I\_input &  Interface & Input mirror surface \\
+{\Large\strut} I\_end &  Interface & End mirror surface \\
+{\Large\strut} Length &  scalar & Length of the cavity \\
+{\Large\strut} Laser\_in &  E\_Field & Input laser beam \\
+{\Large\strut} Laser\_start\_on\_input &  logical  & Define where the input beam is given \\
+{\Large\strut} Resonance\_phase &  complex scalar &  Phase adjustment to bring the cavity on resonance \\
+{\Large\strut} Cavity\_scan\_all\_field & vector of E\_Field  &  Store all the E\_field after each round trip \\
+{\Large\strut} Cavity\_scan\_param &  vector &  3 values to define how to scan the cavity \\
+{\Large\strut} Cavity\_phase\_param &  scalar & Number of round trip used to find the resonance \\
+{\Large\strut} Cavity\_scan\_R &  vector  & Cavity circulating power scan over one FSR \\
+{\Large\strut} Cavity\_scan\_RZ &  vector &  Zoom of the scan around the cavity resonance \\
+{\Large\strut} Cavity\_EM\_mat &  2D complex matrix &  Cavity round trip kernel \\
+{\Large\strut} Propagation\_mat & Prop\_operator & Pre-computed propagation matrix \\
+{\Large\strut} Field\_circ &  E\_Field &  Cavity circulating field \\
+{\Large\strut} Field\_ref &  E\_Field & Cavity reflected field  \\
+{\Large\strut} Field\_trans &  E\_Field & Cavity transmitted field  \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Class CavityN}
+
+\begin{table}
+  \centering
+  \caption{\label{App3:CavityN} Details of the properties of the class \textsl{CavityN} }
+\begin{tabular}{|r r l|}
+\hline
+{\Large\strut} Properties & Type &  Comments \\
+\hline
+{\Large\strut} I\_array &  Vector Interface & Mirror surfaces \\
+{\Large\strut} d\_array &  Vector Prop\_operator & Distance between mirrors \\
+{\Large\strut} Nb\_mirror &  Integer & Number of mirrors \\
+{\Large\strut} Laser\_in &  E\_Field & Input laser beam \\
+{\Large\strut} Laser\_start\_on\_input &  logical  & Define where the input beam is given \\
+{\Large\strut} Resonance\_phase &  complex scalar &  Resonance cavity tuning \\
+{\Large\strut} Cavity\_scan\_all\_field & vector of E\_Field  &  Store all the E\_field after each round trip \\
+{\Large\strut} Cavity\_scan\_param &  vector &  3 values to define how to scan the cavity \\
+{\Large\strut} Cavity\_phase\_param &  scalar & Nb of round trip used to find the resonance \\
+{\Large\strut} Cavity\_scan\_R &  vector  & Store the FSR scan  \\
+{\Large\strut} Cavity\_scan\_RZ &  vector &  Zoom of the scan around the cavity resonance \\
+{\Large\strut} Cavity\_E\_mat &  2D complex matrix &  Cavity round trip kernel \\
+{\Large\strut} Propagation\_mat\_array; & Vector of array & Pre-computed propagation matrices \\
+{\Large\strut} Field\_circ &  E\_Field &  Cavity circulating field \\
+{\Large\strut} Field\_ref &  E\_Field & Cavity reflected field  \\
+{\Large\strut} Field\_trans &  E\_Field & Cavity transmitted field  \\
+\hline
+\end{tabular}
+\end{table}
+
+\chapter{They have found OSCAR useful...}
+... and they mention it. A list of publications where OSCAR is quoted:
+
+\section{Thesis}
+
+\begin{enumerate}
+
+\item Degallaix, J. (2006). Compensation of strong thermal lensing in advanced interferometric gravitational waves detectors, University of Western Australia). \emph{Editor note: Of course, when it all started.}
+
+\item Granata, M. (2011). Optical development for second-and third-generation gravitational-wave detectors: stable recycling cavities for advanced virgo and higher-order Laguerre-Gauss modes, Université Paris Diderot and Università degli Studi di Roma Tor Vergata.
+
+\item Bonnand, R. (2012). The Advanced Virgo gravitational wave detector: Study of the optical design and development of the mirror, Université Claude Bernard Lyon I
+
+\item Fang, Q. (2015). High Optical Power Experiments and Parametric Instability in 80 m Fabry-P erot Cavities, University of Western Australia.
+
+\item Straniero, N. (2015). Étude, développement et caractérisation des miroirs des interféromètres laser de 2ème génération dédiés à la détection des ondes gravitationnelles, Université Claude Bernard-Lyon I
+
+\item Ott, K. (2016). Towards a squeezing-enhanced atomic clock on a chip, Université Pierre et Marie Curie.
+
+\item Favier, P. (2017). Etude et conception d'une cavité Fabry-Perot de haute finesse pour la source compacte de rayons X ThomX, Paris Saclay
+
+\item Blair, C. (2017). Parametric Instability in Gravitational Wave Detectors (Doctoral dissertation, University of Western Australia
+
+\item Metzdorff, R. (2019). Refroidissement de résonateurs mécaniques macroscopiques proche de leur état quantique fondamental, Laboratoire Kastler Brossel
+
+\end{enumerate}
+
+\section{Articles}
+
+\begin{enumerate}
+
+\item Barriga, P., Bhawal, B., Ju, L., \& Blair, D. G. (2007). Numerical calculations of diffraction losses in advanced interferometric gravitational wave detectors. JOSA A, 24(6), 1731-1741. \emph{Editor note: at that time the code has no name.}
+
+\item Crouzil, T., \& Perrin, M. (2013). Dynamics of a chain of optically coupled micro droplets, J. Europ. Opt. Soc. Rap. Public. 8, 13079
+
+\item Gatto, A., Tacca, M., Kéfélian, F., Buy, C., \& Barsuglia, M. (2014). Fabry-Pérot-Michelson interferometer using higher-order Laguerre-Gauss modes. Physical Review D, 90(12), 122011.
+
+\item Zhao, C., Ju, L., Fang, Q., Blair, C., Qin, J., Blair, D., ... \& Yamamoto, H. (2015). Parametric instability in long optical cavities and suppression by dynamic transverse mode frequency modulation. Physical Review D, 91(9), 092001.
+
+\item Straniero, N., Degallaix, J., Flaminio, R., Pinard, L., \& Cagnoli, G. (2015). Realistic loss estimation due to the mirror surfaces in a 10 meters-long high finesse Fabry-Perot filter-cavity. Optics express, 23(16), 21455-21476.
+
+\item Allocca, A., Gatto, A., Tacca, M., Day, R. A., Barsuglia, M., Pillant, G., ... \& Vajente, G. (2015). Higher-order Laguerre-Gauss interferometry for gravitational-wave detectors with in situ mirror defects compensation. Physical Review D, 92(10), 102002.
+
+\item Ott, K., Garcia, S., Kohlhaas, R., Schüppert, K., Rosenbusch, P., Long, R., \& Reichel, J. (2016). Millimeter-long fiber Fabry-Perot cavities. Optics express, 24(9), 9839-9853.
+
+\item Capocasa, E., Barsuglia, M., Degallaix, J., Pinard, L., Straniero, N., Schnabel, R., ... \& Flaminio, R. (2016). Estimation of losses in a 300 m filter cavity and quantum noise reduction in the KAGRA gravitational-wave detector. Physical Review D, 93(8), 082004.
+
+\item Blair, C., Gras, S., Abbott, R., Aston, S., Betzwieser, J., Blair, D., ... \& Grote, H. (2017). First demonstration of electrostatic damping of parametric instability at Advanced LIGO. Physical review letters, 118(15), 151102.
+
+\item Wittmuess, P., Piehler, S., Dietrich, T., Ahmed, M. A., Graf, T., \& Sawodny, O. (2016). Numerical modeling of multimode laser resonators. JOSA B, 33(11), 2278-2287.
+
+\item Ma, Y., Liu, J., Ma, Y. Q., Zhao, C., Ju, L., Blair, D. G., \& Zhu, Z. H. (2017). Thermal modulation for suppression of parametric instability in advanced gravitational wave detectors. Classical and Quantum Gravity, 34(13), 135001.
+
+\item Capocasa, E., Guo, Y., Eisenmann, M., Zhao, Y., Tomura, A., Arai, K., ... \& Somiya, K. (2018). Measurement of optical losses in a high-finesse 300 m filter cavity for broadband quantum noise reduction in gravitational-wave detectors. Physical Review D, 98(2), 022010.
+
+
+\end{enumerate}

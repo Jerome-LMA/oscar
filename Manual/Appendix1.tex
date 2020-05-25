@@ -1,0 +1,100 @@
+\chapter{Analytical formulation of the Gaussian beam propagation using Fourier transform}
+
+In this appendix, we will see how it is possible to rediscover all the formulas related to the laser beam propagation just by using the Fourier technique explained in chapter 1. Basically, we will do by hand the three steps which are numerically done in Matlab to propagate a Gaussian beam: first, 2D Fourier transform of the laser beam, then add the phase shift in the frequency domain and finally, inverse Fourier transform.
+
+To facilitate the mathematical calculation, we will extensively use the following formula:
+
+\begin{equation}
+ \int^{+\infty}_{\infty} \exp \left( -ax^2 +ibx \right) dx = \sqrt{\frac{\pi}{a}} \exp \left( \frac{-b^2}{4a} \right)
+\label{A1:easy}
+\end{equation}
+
+
+Let's consider a Gaussian beam $E(x,y,z)$ of amplitude $A$. For simplification we suppose the waist $w_0$ of the beam to be located at $z = 0$. The beam can be written:
+
+\begin{equation}
+    E(x,y,0) = A \exp\left(-\frac{x^2+y^2}{w_0^2}\right)
+\end{equation}
+
+We will now propagate the Gaussian beam along the $z$ axis over a distance $d$. To not complicate the calculation, we will just consider one transverse dimension at first, for example the dimension along $x$ since all the following equations can be decoupled in the $x/y$ dimension.
+
+So the first step is to calculate the Fourier transform $\widetilde{E}(\nu_x,0)$ of the field $E(x,0)$:
+
+\begin{equation}
+    \widetilde{E}(\nu_x,0) = \int^{+\infty}_{\infty} A \exp\left(-\frac{x^2}{w_0^2}\right) \exp(j2\pi \nu_x x) dx
+\end{equation}
+
+Using the formula \ref{A1:easy}, the above equation becomes:
+
+\begin{equation}
+    \widetilde{E}(\nu_x,0) = A \sqrt{\pi w_0^2} \exp\left(-(\pi \nu_x w_0)^2 \right)
+\end{equation}
+
+To simulate the propagation the electric field over a distance $d$, the proper phase shift is added to Fourrier transform:
+
+\begin{equation}
+    \widetilde{E}(\nu_x,d) = A \sqrt{\pi w_0^2} \exp\left(-(\pi \nu_x w_0)^2 \right) \exp(-jkd +j \lambda \pi \nu_x^2 d)
+\label{A1:4}
+\end{equation}
+
+Finally, we take the inverse Fourier transform of the equation \ref{A1:4} to go back to the familiar x space coordinate system:
+
+\begin{equation}
+\begin{split}
+   E(x,d) & = \int^{+\infty}_{\infty} A \sqrt{\pi w_0^2} \exp\left(-(\pi \nu_x w_0)^2 \right) \exp(-jkd +j \lambda \pi \nu_x^2 d) \exp(-j 2 \pi \nu_x x) d \nu_x  \\
+   & = A \sqrt{\pi w_0^2} \exp(-jkd) \int^{+\infty}_{\infty} \exp \left( -(\pi^2 w_0^2 - j \lambda \pi d)\nu_x^2 -j 2 \pi x  \nu_x  \right) d \nu_x \\
+   & = A  \sqrt{\pi w_0^2} \sqrt{\frac{\pi}{\pi^2 w_0^2 - j \pi \lambda d}}\exp(-jkd) \exp \left(\frac{-4 \pi^2 x^2}{4 (\pi^2 w_0^2 - j \lambda \pi d )} \right)\\
+   & = A \sqrt{\frac{1}{1 - j \frac{\lambda d}{\pi w_0^2}}} \exp(-jkd) \exp\left(-\frac{x^2}{w_0^2 \left(1 -j \frac{\lambda d}{\pi w_0^2}\right)}\right)
+\label{A1:6}
+\end{split}
+\end{equation}
+
+We can now define the usual Raleigh range $z_r$ as:
+
+\begin{equation}
+    z_r = \frac{\pi w_0^2}{\lambda}
+\label{A1:7}
+\end{equation}
+
+By inserting the Raleigh range $z_r$ into \ref{A1:6} and by adding the similar result from the other $y$ transverse dimension, we obtain:
+
+\begin{equation}
+   E(x,y,d) = A \frac{1}{1 - j \frac{d}{z_r}} \exp(-jkd) \exp\left(- \frac{x^2 +  y^2}{w_0^2 \left(\frac{1}{1 - j \frac{d}{z_r}} \right) } \right)\\
+\label{A1:8}
+\end{equation}
+
+Let's analyze now the two main constituent of equation \ref{A1:8}, the exponential and the complex factor in front of it. The complex number in the exponential can be separated between its real and imaginary parts:
+
+\begin{equation}
+\begin{split}
+\exp\left(- \frac{x^2 +  y^2}{w_0^2 \left(\frac{1}{1 - j \frac{d}{z_r}} \right) } \right) & = \exp \left(-\frac{x^2+y^2}{w_0^2\left(1 + \frac{d^2}{z_r^2}\right)}  -j \frac{(x^2+y^2)\frac{d}{z_r}}{w_0^2\left(1 + \frac{d^2}{z_r^2}\right)} \right)  \\
+& = \exp \left(-\frac{x^2+y^2}{w_0^2\left(1 + \frac{d^2}{z_r^2}\right)} -j \frac{(x^2+y^2)}{w_0^2\left(\frac{z_r}{d} + \frac{d}{z_r}\right)}              \right)  \\
+& = \exp \left(-\frac{x^2+y^2}{w_0^2\left(1 + \frac{d^2}{z_r^2}\right)} -j \frac{(x^2+y^2)}{\frac{2 z_r}{k}\left(\frac{z_r}{d} + \frac{d}{z_r}\right)}              \right)  \\
+& = \exp \left(-\frac{x^2+y^2}{w_0^2\left(1 + \frac{d^2}{z_r^2}\right)} -j k\frac{(x^2+y^2)}{2 d\left(1 + \frac{z_r^2}{d^2}\right)}              \right)
+\end{split}
+\label{A1:9}
+\end{equation}
+
+We can now consider the factor in front equation \ref{A1:8}:
+
+\begin{equation}
+A \frac{1}{1 - j \frac{d}{z_r}} = A \left(\frac{1}{1 + \frac{d^2}{z_r^2}}\right)^\frac{1}{2} \exp\left(j \arctan\left(\frac{d}{z_r} \right)\right)
+\label{A1:10}
+\end{equation}
+
+Combining equations \ref{A1:9} and \ref{A1:10}, we can deduce the familiar equations governing the propagation of Gaussian beams:
+
+\begin{equation}
+   E(x,y,d) = A \frac{w_0}{w(d)} \exp\left(- \frac{x^2 +  y^2}{w(d)^2} \right) \exp \left(-j k\left(d + \frac{x^2+y^2}{2 R(d)}\right) + j \arctan\left(\frac{d}{z_r} \right) \right) \\
+\label{A1:11}
+\end{equation}
+With:
+\begin{equation}
+\begin{split}
+w(d) & = w_0 \left( 1 + \frac{d^2}{z_r^2}  \right)\\
+R(d) & = d\left(1 + \frac{z_r^2}{d^2}\right)
+\end{split}
+\label{A1:234}
+\end{equation}
+
+I found remarkable that by using the simple FFT steps to propagate the beam we can rediscover all the usual equations: the normalisation factor, the evolution of the beam radius and the wavefront radius of curvature as well as the Gouy phase shift. The courageous readers can also do the calculations presented here for the higher order modes in the Hermite Gauss base.

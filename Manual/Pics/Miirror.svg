@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="Miirror.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <defs
+     id="defs4">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4876">
+      <stop
+         style="stop-color:#ff0000;stop-opacity:1;"
+         offset="0"
+         id="stop4878" />
+      <stop
+         style="stop-color:#ff0000;stop-opacity:0;"
+         offset="1"
+         id="stop4880" />
+    </linearGradient>
+    <marker
+       inkscape:stockid="TriangleInM"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="TriangleInM"
+       style="overflow:visible">
+      <path
+         id="path3342"
+         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none"
+         transform="scale(-0.4)" />
+    </marker>
+    <marker
+       inkscape:stockid="TriangleOutM"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="TriangleOutM"
+       style="overflow:visible">
+      <path
+         id="path3351"
+         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none"
+         transform="scale(0.4)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Lend"
+       style="overflow:visible;">
+      <path
+         id="path3226"
+         style="font-size:12.0;fill-rule:evenodd;stroke-width:0.62500000;stroke-linejoin:round;"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(1.1) rotate(180) translate(1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lend"
+       style="overflow:visible;">
+      <path
+         id="path3208"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none;"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <inkscape:perspective
+       id="perspective2655"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4876"
+       id="linearGradient4882"
+       x1="289.75"
+       y1="294.36218"
+       x2="289.75"
+       y2="280.36218"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.1799986,0,0,0.68644,-344.52954,139.19002)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4876"
+       id="linearGradient4886"
+       gradientUnits="userSpaceOnUse"
+       x1="289.75"
+       y1="294.36218"
+       x2="289.75"
+       y2="280.36218"
+       gradientTransform="matrix(2.1799986,0,0,0.68644,-918.77934,-542.28427)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4876"
+       id="linearGradient4894"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.1799986,0,0,0.68644,-344.52954,139.19002)"
+       x1="289.75"
+       y1="294.36218"
+       x2="289.75"
+       y2="280.36218" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4876"
+       id="linearGradient4896"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.1799986,0,0,0.68644,-918.77934,-542.28427)"
+       x1="289.75"
+       y1="294.36218"
+       x2="289.75"
+       y2="280.36218" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4876"
+       id="linearGradient2464"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.1799986,0,0,0.68644,-344.52954,139.19002)"
+       x1="289.75"
+       y1="294.36218"
+       x2="289.75"
+       y2="280.36218" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4876"
+       id="linearGradient2466"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.1799986,0,0,0.68644,-918.77934,-542.28427)"
+       x1="289.75"
+       y1="294.36218"
+       x2="289.75"
+       y2="280.36218" />
+    <inkscape:perspective
+       id="perspective2478"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2491"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2504"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2605"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2618"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="4"
+     inkscape:cx="502.61043"
+     inkscape:cy="695.82307"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="744"
+     inkscape:window-x="0"
+     inkscape:window-y="22"
+     showguides="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2405" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:type="arc"
+       style="opacity:1;fill:#42bde6;fill-opacity:0.82272728;stroke:#20a016;stroke-width:0.99921262;stroke-miterlimit:4;stroke-dasharray:1.9984252, 0.9992126;stroke-dashoffset:0;stroke-opacity:1"
+       id="path2389"
+       sodipodi:cx="122.85714"
+       sodipodi:cy="153.79076"
+       sodipodi:rx="27.857143"
+       sodipodi:ry="35"
+       d="M 150.71428,153.79076 A 27.857143,35 0 1 1 94.999996,153.79076 A 27.857143,35 0 1 1 150.71428,153.79076 z"
+       transform="translate(-4,-96)" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:1;fill:#42bde6;fill-opacity:0.82272728;stroke:#20a016;stroke-width:0.99921262;stroke-miterlimit:4;stroke-dasharray:1.9984252, 0.9992126;stroke-dashoffset:0;stroke-opacity:1"
+       id="path2391"
+       sodipodi:cx="195.35715"
+       sodipodi:cy="306.64789"
+       sodipodi:rx="73.928574"
+       sodipodi:ry="0"
+       d="M 195.35715,306.64789 A 73.928574,0 0 0 1 195.35715,306.64789 L 195.35715,306.64789 z"
+       sodipodi:start="4.712389"
+       sodipodi:end="7.8539816" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:1;fill:#42bde6;fill-opacity:0.82272728;stroke:#20a016;stroke-width:0.99921262;stroke-miterlimit:4;stroke-dasharray:1.9984252, 0.9992126;stroke-dashoffset:0;stroke-opacity:1"
+       id="path2393"
+       sodipodi:cx="233.57143"
+       sodipodi:cy="319.86218"
+       sodipodi:rx="43.57143"
+       sodipodi:ry="34.642857"
+       d="M 233.57143,285.21933 A 43.57143,34.642857 0 1 1 233.57141,285.21933 L 233.57143,319.86218 z"
+       sodipodi:start="4.712389"
+       sodipodi:end="10.995574"
+       transform="translate(388,0)" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 156,172.36218 L 296,172.36218 L 296,172.36218"
+       id="path2411"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_scheme1.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <path
+       style="fill:#06b0dc;fill-opacity:0.82272725999999985;stroke:#246c9b;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 240,127.36218 L 280,127.36218 L 280,217.36218 L 240,217.36218 C 260.4477,187.02139 259.95719,157.02956 240,127.36218 z"
+       id="rect2413"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_scheme1.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="185.11044"
+       y="64.18045"
+       id="text3186"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3190">Color substrate 06b0dcd2 210</tspan></text>
+    <path
+       sodipodi:type="arc"
+       style="opacity:1;fill:#06b0dc;fill-opacity:0.82272728;stroke:#246c9b;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path3192"
+       sodipodi:cx="195"
+       sodipodi:cy="172.36218"
+       sodipodi:rx="60"
+       sodipodi:ry="0"
+       d="M 195,172.36218 A 60,0 0 1 1 194.99999,172.36218 A 60,0 0 1 1 194.99998,172.36218 z"
+       sodipodi:start="4.712389"
+       sodipodi:end="4.7123887" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.52613461;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#TriangleOutM);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 183.97081,172.56665 L 248.92447,150.26261"
+       id="path5539"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_scheme1.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:OfficinaSansITC Medium OS;-inkscape-font-specification:OfficinaSansITC Medium OS"
+       x="132.42256"
+       y="223.96252"
+       id="text6064"
+       sodipodi:linespacing="125%"
+       transform="matrix(0.9372735,-0.348595,0.348595,0.9372735,0,0)"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_scheme1.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400"><tspan
+         sodipodi:role="line"
+         id="tspan6066"
+         x="132.42256"
+         y="223.96252">RofC</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 247.38933,142.34364 L 155,142.36218"
+       id="path7651"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_scheme1.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.50000000000000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;marker-start:url(#TriangleInM);marker-end:url(#TriangleOutM)"
+       d="M 164.13847,170.72236 L 164.50871,144.01106"
+       id="path7655"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_scheme1.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:OfficinaSansITC Medium OS;-inkscape-font-specification:OfficinaSansITC Medium OS"
+       x="152.17079"
+       y="160.69371"
+       id="text7657"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_scheme1.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400"><tspan
+         sodipodi:role="line"
+         id="tspan7661"
+         x="152.17079"
+         y="160.69371">Δr</tspan></text>
+    <text
+       sodipodi:linespacing="100%"
+       id="text7663"
+       y="110.36218"
+       x="245.87296"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:OfficinaSansITC Medium OS;-inkscape-font-specification:OfficinaSansITC Medium OS"
+       xml:space="preserve"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_scheme1.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400"><tspan
+         sodipodi:role="line"
+         id="tspan7667"
+         x="245.87296"
+         y="110.36218">Δs</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.50185049;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 247.22247,112.36033 L 247.22247,142.5828"
+       id="path9266"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_scheme1.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.50107646;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 254.40449,172.62065 L 254.40449,112.36202"
+       id="path9268"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_scheme1.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.50000000000000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;marker-start:url(#TriangleInM);marker-end:url(#TriangleOutM)"
+       d="M 248.81461,114.36218 L 252.88764,114.36218"
+       id="path2418"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_scheme1.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <path
+       style="fill:#246c9b;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 599.59375,254.375 C 591.56293,254.48332 583.53135,254.47196 575.5,254.46875 C 572.85449,254.53716 570.20865,254.58924 567.5625,254.625 C 567.65859,255.58368 567.84061,256.59052 568.45967,257.36202 C 570.8007,259.61212 573.30993,261.67727 575.78125,263.78125 C 576.58333,264.61458 577.38542,265.44792 578.1875,266.28125 C 579.32466,266.982 580.57525,267.49016 581.65625,268.28125 C 582.37264,268.98659 582.85027,269.89362 583.15625,270.84375 C 583.82877,272.6737 584.58064,274.48216 585.0625,276.375 C 585.17382,277.54495 584.97849,278.72066 584.65625,279.84375 C 582.66667,282.98958 580.67708,286.13542 578.6875,289.28125 C 578.14968,290.66182 577.33726,292.00564 577.34375,293.53125 C 578.47828,297.54375 579.5826,301.56454 580.65625,305.59375 C 580.81598,306.695 581.02439,307.83835 580.75,308.9375 C 580.23101,312.54875 579.65194,316.17298 578.50741,319.64778 C 578.22524,320.65394 577.87151,321.64405 577.3201,322.53704 C 576.69191,323.73814 575.87771,324.8241 575.15625,325.96875 C 574.50427,326.9529 573.91622,327.97656 573.2687,328.96383 C 572.38927,330.49665 571.7245,332.14077 571,333.75 C 570.07381,336.16305 569.49186,338.68854 568.69561,341.14325 C 568.34236,342.16338 567.88021,343.14415 567.59375,344.1875 C 567.42225,345.26358 568.18559,346.23255 569.22185,346.45937 C 570.28848,346.7275 571.36233,346.35814 572.40625,346.15625 C 573.52575,345.81618 574.62388,345.31954 575.4819,344.50527 C 576.55714,343.58601 577.53514,342.56109 578.46875,341.5 C 579.18561,340.84202 580.05369,340.29334 581.03125,340.15625 C 582.1932,340.09067 583.33621,340.37664 584.4375,340.71875 C 586.53524,341.61132 588.58195,342.61524 590.625,343.625 C 592.3424,344.29965 594.08643,344.96639 595.92437,345.21918 C 597.4312,345.52564 598.96322,345.64891 600.49439,345.75749 C 602.90722,345.97033 605.32749,346.11077 607.75,346.125 C 608.73822,346.1062 609.93986,345.68587 610.17753,344.60615 C 610.57366,343.09781 610.13735,341.55156 610.0625,340.03125 C 609.87409,338.24501 609.84721,336.44724 609.71875,334.65625 C 610.30777,329.27619 610.92568,323.89788 611.38243,318.50484 C 611.48546,315.94298 611.59975,313.38036 611.65043,310.81729 C 611.55344,307.55744 611.40737,304.29793 611.43325,301.03599 C 611.37694,299.19398 611.47599,297.35132 611.51608,295.50974 C 611.70911,291.40599 611.85776,287.29968 611.9353,283.19221 C 611.90608,278.93211 611.71967,274.67494 611.65625,270.41564 C 611.65785,266.02057 611.27459,261.6379 611.04604,257.25141 C 611.08363,256.32342 610.77593,255.3116 609.94399,254.80142 C 609.10475,254.20261 608.00623,254.46498 607.04064,254.375 C 604.9659,254.3983 602.89174,254.33479 600.81724,254.34781 C 600.40941,254.35687 600.00158,254.36594 599.59375,254.375 z M 607.125,256.34375 C 607.91414,256.49575 608.49301,257.17045 608.75,257.90625 C 608.92024,259.04092 608.87493,260.19554 608.94213,261.339 C 609.00736,264.30732 609.10283,267.27606 609.08994,270.24527 C 608.98903,274.42839 608.72631,278.60591 608.59388,282.78816 C 608.47183,284.67721 608.60268,286.56801 608.62826,288.45808 C 608.78143,295.02041 608.96538,301.58305 609.02363,308.14678 C 608.91805,312.11804 609.20185,316.08765 609.20573,320.05734 C 609.09386,321.88568 608.87899,323.70779 608.58647,325.51514 C 608.07012,328.28925 607.18698,330.99758 606.95266,333.82074 C 606.81346,334.755 606.83187,335.70215 607.01539,336.62929 C 607.17442,337.70481 607.31839,338.78311 607.60244,339.83464 C 607.74332,340.82661 608.28438,341.8405 607.9375,342.84375 C 607.70569,343.67256 606.85123,344.09182 606.03594,344 C 605.04858,343.94938 604.06219,343.83232 603.08404,343.69109 C 601.02781,343.36203 598.97365,342.99777 596.97206,342.41402 C 595.93799,342.14784 594.94554,341.72428 594.07161,341.10583 C 592.82837,340.20982 591.67124,339.18801 590.66147,338.0325 C 589.6325,336.94566 588.62126,335.83912 587.53125,334.8125 C 586.63002,334.15595 585.74186,333.45514 584.71149,333.012 C 583.83507,332.6272 582.81955,332.55696 581.88044,332.6728 C 581.00142,332.74313 580.16694,333.07633 579.44399,333.57358 C 578.73191,334.16947 578.06358,334.83197 577.48469,335.56212 C 576.54745,336.83108 575.87737,338.26581 575.21403,339.69009 C 574.6712,340.82455 573.96058,341.90266 573.0135,342.7392 C 572.26351,343.2773 571.62951,344.07287 570.69468,344.28005 C 569.63073,344.45978 569.91611,343.08911 570.16756,342.49356 C 570.46085,341.46976 570.56247,340.39975 570.75244,339.35157 C 571.03235,337.90782 571.32162,336.46274 571.71406,335.04532 C 572.11102,333.79516 572.57879,332.56476 573.11974,331.37129 C 573.67467,330.40049 574.17778,329.397 574.7625,328.44499 C 575.71453,327.0655 576.76717,325.76102 577.71877,324.38122 C 578.68266,323.07189 579.57826,321.70098 580.28536,320.23601 C 580.69869,319.29486 580.93435,318.29466 581.13809,317.2914 C 581.39712,316.31585 581.67439,315.34564 581.92673,314.36783 C 582.44605,312.4567 582.93525,310.5219 583.04341,308.53635 C 583.1618,307.14367 582.97305,305.74735 582.84823,304.36091 C 582.53311,301.49388 582.24843,298.62359 582,295.75 C 582.02133,294.77372 582.38351,293.85649 582.5625,292.90625 C 583.6897,289.49469 584.96994,286.13754 586.25,282.78125 C 586.69706,281.5477 587.16764,280.2761 587.09375,278.94219 C 587.09087,277.7235 586.71641,276.53314 586.26223,275.41395 C 585.50464,273.77252 584.65511,272.16983 583.70557,270.63107 C 582.94325,269.39501 582.0243,268.2627 581.05414,267.18747 C 580.22062,266.38296 579.38613,265.58088 578.48768,264.84808 C 576.36274,262.93897 574.06193,261.23688 571.90199,259.37074 C 571.24947,258.72588 571.1464,257.46615 572,256.9375 C 572.78315,256.36585 573.81973,256.51178 574.73069,256.5281 C 578.58886,256.47442 582.44805,256.533 586.30606,256.44786 C 589.67848,256.44924 593.05093,256.53546 596.42337,256.57022 C 598.51981,256.58726 600.61803,256.65405 602.71339,256.64064 C 604.11888,256.49448 605.53706,256.51141 606.9375,256.3125 L 607.11782,256.34255 L 607.125,256.34375 z"
+       id="path2419"
+       sodipodi:nodetypes="cccccssssscsssscccccccccccsssssssssscc" />
+    <path
+       style="fill:#06b0dc;fill-opacity:0.82272728;stroke:#246c9b;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 572,127.36218 L 612,127.36218 L 612,217.36218 L 572,217.36218 C 592.4477,187.02139 591.95719,157.02956 572,127.36218 z"
+       id="path2421"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 573,259.36218 L 588,259.36218 L 588,269.36218 L 583,269.36218 L 583,274.36218 L 593,274.36218 L 593,254.36218 L 573,254.36218 L 573,259.36218 z"
+       id="path2429" />
+    <path
+       style="opacity:1;fill:#06b0dc;fill-opacity:0.82272728;stroke:#246c9b;stroke-width:0.07415731;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 583.52413,269.80802 L 583.52413,267.87993 L 586.04548,267.87993 L 588.56683,267.87993 L 588.56683,262.31813 L 588.56683,256.75633 L 585.76796,256.75633 L 582.96909,256.75633 L 582.88248,256.05184 C 582.83484,255.66436 582.75088,254.79672 582.6959,254.12375 L 582.59594,252.90015 L 587.50947,252.90015 L 592.42301,252.90015 L 592.42301,262.31813 L 592.42301,271.73611 L 587.97357,271.73611 L 583.52413,271.73611 L 583.52413,269.80802 z"
+       id="path2431" />
+    <path
+       style="opacity:1;fill:#06b0dc;fill-opacity:0.82272728;stroke:#246c9b;stroke-width:0.07415731;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 573.58705,256.82824 L 573.58705,254.90015 L 576.44221,254.90015 L 579.29737,254.90015 L 579.8292,256.82824 L 580.36103,258.75633 L 576.97405,258.75633 L 573.58705,258.75633 L 573.58705,256.82824 z"
+       id="path2433" />
+    <path
+       id="path2449"
+       d="M 346,172.36218 L 486,172.36218 L 486,172.36218"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_scheme2.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 573,127.36218 L 613,127.36218 L 613,217.36218"
+       id="path2453" />
+    <g
+       id="g2459"
+       transform="translate(78,0)">
+      <path
+         id="path2441"
+         d="M 535,217.36218 L 495,217.36218 L 495,212.36218 L 497,212.36218 L 497,209.36218 L 497,207.36218 L 500,207.36218 L 500,202.36218 L 502,202.36218 L 502,197.36218 L 504,197.36218 L 504,192.36218 L 506,192.36218 L 506,187.36218 L 507,187.36218 L 507,182.36218 L 508,182.36218 L 508,177.36218"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         id="path2445"
+         d="M 495,127.36218 L 495,132.36218 L 495,132.36218 L 497,132.36218 L 497,137.36218 L 500,137.36218 L 500,142.36218 L 502,142.36218 L 502,147.36218 L 504,147.36218 L 504,152.36218 L 506,152.36218 L 506,157.36218 L 507,157.36218 L 507,162.36218 L 508,162.36218 L 508,167.36218 L 508,177.36218 L 508,177.36218"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 495,127.36218 L 535,127.36218 L 535,217.36218"
+         id="path2455" />
+    </g>
+    <g
+       id="g3566"
+       transform="translate(4,0)"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_scheme2.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400">
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#246c9b;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 465,217.36218 L 425,217.36218 L 425,212.36218 L 427,212.36218 L 427,209.36218 L 427,207.36218 L 430,207.36218 L 430,202.36218 L 432,202.36218 L 432,197.36218 L 434,197.36218 L 434,192.36218 L 436,192.36218 L 436,187.36218 L 437,187.36218 L 437,182.36218 L 438,182.36218 L 438,177.36218"
+         id="path2466" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#246c9b;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 425,127.36218 L 425,132.36218 L 425,132.36218 L 427,132.36218 L 427,137.36218 L 430,137.36218 L 430,142.36218 L 432,142.36218 L 432,147.36218 L 434,147.36218 L 434,152.36218 L 436,152.36218 L 436,157.36218 L 437,157.36218 L 437,162.36218 L 438,162.36218 L 438,167.36218 L 438,177.36218 L 438,177.36218"
+         id="path2468" />
+      <path
+         id="path2470"
+         d="M 424.01387,127.30236 L 464.64645,127.31799 L 465.03068,217.26918 L 465.02344,218.36096"
+         style="fill:none;fill-rule:evenodd;stroke:#246c9b;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         sodipodi:nodetypes="cccc" />
+    </g>
+    <path
+       style="opacity:1;fill:#06b0dc;fill-opacity:0.82272728;stroke:#06b0dc;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.82352941"
+       d="M 429.9376,128.33629 C 429.99423,129.35103 429.8289,130.45771 430.01494,131.41884 C 431.10808,131.4195 432.56923,131.05216 432.05892,132.65628 C 432.10661,133.87886 431.96264,135.17671 432.13074,136.35201 C 433.01681,136.51028 434.37398,136.20197 434.97947,136.63371 C 435.06506,138.18374 434.94376,139.82147 435.15251,141.31833 C 436.22342,141.27862 437.50557,141.02768 437.00867,142.55577 C 437.0619,143.84076 436.90203,145.21403 437.08601,146.44486 C 438.15821,146.40753 439.45101,146.14961 438.95321,147.68229 C 439.00066,148.90498 438.85722,150.20262 439.02503,151.37803 C 440.10698,151.41277 441.48283,151.17052 441.01222,152.71463 C 441.08891,153.91361 440.96067,155.19929 441.16292,156.34435 C 442.58193,155.95654 441.73204,157.83763 441.95842,158.64245 C 442.21648,159.46122 441.37583,161.23921 442.51084,161.32172 C 443.44405,161.57675 442.6936,163.33388 442.94203,164.19984 C 442.96768,170.60432 442.99338,177.0088 443.01908,183.41328 C 441.46958,182.94558 442.05576,184.66573 441.95842,185.61194 C 441.73896,186.43105 442.41344,188.14409 441.59381,188.36303 C 440.49382,188.39986 441.34018,190.28518 441.07453,191.09202 C 440.92083,192.00451 441.63488,193.78474 440.09674,193.31278 C 438.5017,192.80919 439.0207,194.52301 438.9224,195.51103 C 438.70808,196.3913 439.29658,198.04559 438.51187,198.37693 C 437.11269,198.07154 436.74537,198.85919 437.00867,200.12421 C 437.00867,201.21249 437.00867,202.30077 437.00867,203.38905 C 436.04816,203.41085 434.57371,203.02298 435.06413,204.52705 C 435.06413,205.79763 435.06413,207.06822 435.06413,208.3388 C 434.0755,208.39622 432.99428,208.23012 432.05892,208.41614 C 432.05892,210.04027 432.05892,211.66441 432.05892,213.28855 C 431.07694,213.34848 429.43873,212.85246 429.9376,214.42655 C 429.97,215.40283 429.53701,216.94473 431.0756,216.44843 C 443.40762,216.44843 455.73963,216.44843 468.07165,216.44843 C 468.19203,212.73397 467.9477,208.88111 467.98633,205.11272 C 467.81908,179.52089 467.78538,153.92846 467.696,128.33629 C 463.72737,128.15579 459.61987,128.31055 455.59784,128.25896 C 447.07021,128.25896 438.54257,128.25896 430.01494,128.25896 L 429.9376,128.33629 z"
+       id="path3579"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_scheme2.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <image
+       y="293.43622"
+       x="178.45959"
+       id="image2657"
+       height="102.53215"
+       width="64.435806"
+       sodipodi:absref="D:\GEO_work\Paper\OMC_build\pastedpic_05262008_214440.png"
+       xlink:href="D:\GEO_work\Paper\OMC_build\pastedpic_05262008_214440.png"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_TL.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <image
+       xlink:href="Miirror.svg-image2657-4294966798.png"
+       sodipodi:absref="D:\GEO_work\FFT_code\Manual\Pics\Miirror.svg-image2657-4294966798.png"
+       width="64"
+       height="102"
+       transform="translate(178,293.36218)"
+       id="image2510"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_TL.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <g
+       transform="matrix(0.5990828,0,0,0.5508087,10.105736,153.41103)"
+       id="g2458"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_TL.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400">
+      <rect
+         style="opacity:1;fill:url(#linearGradient2464);fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect2460"
+         width="136.24991"
+         height="10.63982"
+         x="219.00009"
+         y="330.61218" />
+      <rect
+         y="-350.86212"
+         x="-355.24979"
+         height="10.639818"
+         width="136.24988"
+         id="rect2462"
+         style="opacity:1;fill:url(#linearGradient2466);fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         transform="scale(-1,-1)" />
+    </g>
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 219.625,296.86218 L 245.875,296.86218 L 245.875,385.11218 L 219.625,385.11218 C 225.68703,355.34626 225.5572,325.96176 219.625,296.86218 z"
+       id="rect2436"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_TL.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <text
+       inkscape:export-ydpi="400"
+       inkscape:export-xdpi="400"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_TL.png"
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Palatino Linotype;-inkscape-font-specification:Palatino Linotype"
+       x="217.12296"
+       y="279.98718"
+       id="text3233"
+       sodipodi:linespacing="100%"><tspan
+         y="279.98718"
+         x="217.12296"
+         id="tspan3235"
+         sodipodi:role="line">δ<tspan
+   style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Palatino Linotype;-inkscape-font-specification:Palatino Linotype"
+   id="tspan3243">s(r)</tspan></tspan></text>
+    <path
+       inkscape:export-ydpi="400"
+       inkscape:export-xdpi="400"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_TL.png"
+       id="path3237"
+       d="M 220.84747,281.73533 L 220.84747,311.9578"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.50185049;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="400"
+       inkscape:export-xdpi="400"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_TL.png"
+       id="path3239"
+       d="M 223.40449,341.99565 L 223.40449,281.73702"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.50107646;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="400"
+       inkscape:export-xdpi="400"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_TL.png"
+       sodipodi:nodetypes="cc"
+       id="path3241"
+       d="M 215.14273,285.50281 L 219.21576,285.50281"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;marker-start:none;marker-end:url(#TriangleOutM);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;marker-start:url(#TriangleInM);marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 225.04898,285.50281 L 229.12201,285.50281"
+       id="path3245"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_TL.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <image
+       xlink:href="D:\GEO_work\Paper\OMC_build\pastedpic_05262008_214440.png"
+       sodipodi:absref="D:\GEO_work\Paper\OMC_build\pastedpic_05262008_214440.png"
+       width="64.435799"
+       height="102.53214"
+       id="image4846"
+       x="-396.25754"
+       y="-389.96835"
+       transform="scale(-1,-1)"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_TL.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       id="path4848"
+       d="M 355.09209,386.54241 L 328.8421,386.54241 L 328.8421,298.29241 L 355.0921,298.29242 C 349.03007,328.05833 349.1599,357.44283 355.09209,386.54241 z"
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1.99999976;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_TL.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <g
+       id="g4890"
+       transform="matrix(0.9458716,0,0,0.9458716,15.784034,19.048412)"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_TL.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400">
+      <rect
+         y="330.61218"
+         x="219.00009"
+         height="10.63982"
+         width="136.24991"
+         id="rect4874"
+         style="opacity:1;fill:url(#linearGradient4894);fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <rect
+         transform="scale(-1,-1)"
+         style="opacity:1;fill:url(#linearGradient4896);fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect4884"
+         width="136.24988"
+         height="10.639818"
+         x="-355.24979"
+         y="-350.86212" />
+    </g>
+    <text
+       inkscape:export-ydpi="400"
+       inkscape:export-xdpi="400"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_TL.png"
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Palatino Linotype;-inkscape-font-specification:Palatino Linotype"
+       x="191.62296"
+       y="306.86218"
+       id="text4870"
+       sodipodi:linespacing="100%"><tspan
+         y="306.86218"
+         x="191.62296"
+         id="tspan4872"
+         sodipodi:role="line"
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Palatino Linotype;-inkscape-font-specification:Palatino Linotype">T(r,z)</tspan></text>
+    <image
+       y="304.72372"
+       x="390.75"
+       id="image2620"
+       height="76.938461"
+       width="26.183247"
+       sodipodi:absref="D:\GEO_work\Paper\OMC_build\pastedpic_06162008_215618.png"
+       xlink:href="D:\GEO_work\Paper\OMC_build\pastedpic_06162008_215618.png"
+       inkscape:export-filename="D:\GEO_work\FFT_code\Manual\Pics\Mirrors_TL.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+  </g>
+</svg>

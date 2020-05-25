@@ -1,0 +1,2008 @@
+\begin{theindex}
+
+  \item abnormalparskip=\verb
+    \subitem *+\abnormalparskip+, \main{2425}
+  \item abovecaptionskip=\verb
+    \subitem *+\abovecaptionskip+, 704, 3753
+  \item abovedisplayshortskip=\verb
+    \subitem *+\abovedisplayshortskip+, 2149
+  \item abovedisplayskip=\verb
+    \subitem *+\abovedisplayskip+, 2147
+  \item leftindent=\verb
+    \subitem leftindent+, \main{3458}, 3463, 3467
+  \item abscolnamefont=\verb
+    \subitem *+\abscolnamefont+, \main{3453}, 3469
+  \item abscoltextfont=\verb
+    \subitem *+\abscoltextfont+, \main{3453}, 3470
+  \item absleftindent=\verb
+    \subitem *+\absleftindent+, \main{3458}, 3463
+  \item absnamepos=\verb
+    \subitem *+\absnamepos+, 3471
+  \item absrightindent=\verb
+    \subitem *+\absrightindent+, \main{3458}, 3468
+  \item abstitleskip=\verb
+    \subitem *+\abstitleskip+, 3472
+  \item abstractnamefont=\verb
+    \subitem *+\abstractnamefont+, 3469
+  \item abstracttextfont=\verb
+    \subitem *+\abstracttextfont+, 3470
+  \item addappheadtotoc=\verb
+    \subitem *+\addappheadtotoc+, \main{3625}
+  \item addcontentsline=\verb
+    \subitem *+\addcontentsline+, 793, 917, 921, 1225, 1229, 1234, 3088, 
+		3626, 3776
+  \item addtocontents=\verb
+    \subitem *+\addtocontents+, 252, 253, 1088, 1093, 1098, 1103, 1108, 
+		1113, 1118, 1123, 1128, 1133, 3909
+  \item addtocounter=\verb
+    \subitem *+\addtocounter+, 266, 287, 573, 3481
+  \item addtodef=\verb
+    \subitem *+\addtodef+, 648, 651
+  \item addtonotes=\verb
+    \subitem *+\addtonotes+, 1412, 1416, \main{1433}
+  \item afterbookskip=\verb
+    \subitem *+\afterbookskip+, \main{881}, 951
+  \item afterchapskip=\verb
+    \subitem *+\afterchapskip+, 676, 3142, 3143, 3157, 3217, 3228, 3246, 
+		3249, 3290, 3300, 3325, 3342, 3362, 3387
+  \item afterchapternum=\verb
+    \subitem *+\afterchapternum+, 682, 3138, 3159, 3167, 3185, 3212, 
+		3214, 3232, 3252, 3297, 3298, 3317, 3329, 3351, 3372, 
+		3389, 3424
+  \item afterchaptertitle=\verb
+    \subitem *+\afterchaptertitle+, 3106, 3143, 3156, 3170, 3227, 3245, 
+		3299, 3360
+  \item afterpartskip=\verb
+    \subitem *+\afterpartskip+, 843
+  \item afterZtitle=\verb
+    \subitem *+\afterZtitle+, \main{3105}
+  \item aliaspagestyle=\verb
+    \subitem *+\aliaspagestyle+, 862--864, \main{2881}, 2992--2994, 
+		3063, 3199
+  \item allowbreak=\verb
+    \subitem *+\allowbreak+, 2620, 2631
+  \item amname=\verb
+    \subitem *+\amname+, \main{2703}, 2722, 2726
+  \item appendixtocname=\verb
+    \subitem *+\appendixtocname+, 3626
+  \item AtBeginClass=\verb
+    \subitem *+\AtBeginClass+, \main{661}
+  \item AtBeginDocument=\verb
+    \subitem *+\AtBeginDocument+, 10, 87, 102, 104, 126, 627
+  \item AtBeginFile=\verb
+    \subitem *+\AtBeginFile+, \main{646}, 654, 662
+  \item AtBeginPackage=\verb
+    \subitem *+\AtBeginPackage+, \main{653}, 3743, 3746
+  \item AtEndClass=\verb
+    \subitem *+\AtEndClass+, \main{661}
+  \item AtEndDocument=\verb
+    \subitem *+\AtEndDocument+, 3115
+  \item AtEndFile=\verb
+    \subitem *+\AtEndFile+, \main{646}, 656, 659, 664, 667
+  \item AtEndPackage=\verb
+    \subitem *+\AtEndPackage+, \main{653}
+
+  \indexspace
+
+  \item vdocount=\verb
+    \subitem vdocount+, 3520
+  \item vdoinside=\verb
+    \subitem vdoinside+, 3525
+  \item vdooutside=\verb
+    \subitem vdooutside+, 3524
+  \item barlength=\verb
+    \subitem *+\barlength+, 3397--3399, 3401
+  \item baselineskip=\verb
+    \subitem *+\baselineskip+, 1795, 1797, 1802, 1803, 1805, 1811, 1812, 
+		1814, 2050, 2091, 2092, 2095, 2096, 2099, 2103, 2105, 
+		2109, 2111, 2112, 2117, 2120, 2437, 2438, 2510, 3229, 
+		3342, 3346, 3353, 3361, 3548
+  \item baselinestretch=\verb
+    \subitem *+\baselinestretch+, 2040, 2092, 2093, 2098, 2160, 2185, 
+		2201, 2224, 2241, 2256, 2269, 2283, 2297, 2310, 2323, 
+		2337, 2351, 2364, 2379, 2395, 2410
+  \item beforebookskip=\verb
+    \subitem *+\beforebookskip+, \main{881}, 897
+  \item beforechapskip=\verb
+    \subitem *+\beforechapskip+, 674, 675, 3130, 3131, 3180, 3204, 3229, 
+		3234, 3247, 3261, 3281, 3289, 3324, 3343, 3345, 3353, 
+		3400, 3407, 3409, 3416
+  \item begin=\verb
+    \subitem *+\begin+, 41, 43, 46
+  \item begingroup=\verb
+    \subitem *+\begingroup+, 39
+  \item belowcaptionskip=\verb
+    \subitem *+\belowcaptionskip+, 741, 3761
+  \item belowdisplayshortskip=\verb
+    \subitem *+\belowdisplayshortskip+, 2150
+  \item belowdisplayskip=\verb
+    \subitem *+\belowdisplayskip+, 2148
+  \item bibmark=\verb
+    \subitem *+\bibmark+, 2946, 2972, 2986, 3018, 3055
+  \item bibname=\verb
+    \subitem *+\bibname+, 2946, 2972, 3018, 3055
+  \item book*=\verb
+    \subitem *+\book*+, \main{868}
+  \item book=\verb
+    \subitem *+\book+, 311, \main{868}
+  \item bookautorefname=\verb
+    \subitem *+\bookautorefname+, 141, 143, 146, 148, 151, 153, 156, 
+		158, 161, 163, \main{165}
+  \item bookblankpage=\verb
+    \subitem *+\bookblankpage+, \main{945}
+  \item BOOKMARK=\verb
+    \subitem *+\BOOKMARK+, 217
+  \item bookmark=\verb
+    \subitem *+\bookmark+, \main{875}, 924
+  \item bookname=\verb
+    \subitem *+\bookname+, \main{899}, 904
+  \item booknamefont=\verb
+    \subitem *+\booknamefont+, \main{899}, 904
+  \item booknamenum=\verb
+    \subitem *+\booknamenum+, \main{904}, 929
+  \item booknumberline=\verb
+    \subitem *+\booknumberline+, 206, 211, 918, \main{966}
+  \item booknumfont=\verb
+    \subitem *+\booknumfont+, \main{899}, 906
+  \item booktitlefont=\verb
+    \subitem *+\booktitlefont+, \main{899}, 907
+  \item boxedverbatim=\verb
+    \subitem *+\boxedverbatim+, \main{3514}
+  \item boxmaxdepth=\verb
+    \subitem *+\boxmaxdepth+, 3568, 3594
+  \item split=\verb
+    \subitem split+, 3517
+  \item bs=\verb
+    \subitem *+\bs+, \main{3799}
+  \item bvboxsep=\verb
+    \subitem *+\bvboxsep+, 3524, 3532
+  \item bvendofpage=\verb
+    \subitem *+\bvendofpage+, \main{3540}
+  \item bvendrulehook=\verb
+    \subitem *+\bvendrulehook+, \main{3540}
+  \item bvleftsidehook=\verb
+    \subitem *+\bvleftsidehook+, 3521
+  \item bvrightsidehook=\verb
+    \subitem *+\bvrightsidehook+, 3532
+  \item bvtoprulehook=\verb
+    \subitem *+\bvtoprulehook+, \main{3540}
+
+  \indexspace
+
+  \item book=\verb
+    \subitem book+, \main{875}
+  \item bvlinectr=\verb
+    \subitem bvlinectr+, 3691
+  \item chapter=\verb
+    \subitem chapter+, 3176, 3223, 3241
+  \item memfbvline=\verb
+    \subitem memfbvline+, \main{3688}, 3696, 3697, 3706, 3709
+  \item memfvsline=\verb
+    \subitem memfvsline+, \main{3661}, 3670, 3671, 3680, 3683
+  \item memhycontfloat=\verb
+    \subitem memhycontfloat+, \main{259}
+  \item page=\verb
+    \subitem page+, 2585, 2591, 2800, 2996
+  \item pagenote=\verb
+    \subitem pagenote+, \main{1369}
+  \item poemline=\verb
+    \subitem poemline+, 3664
+  \item secnumdepth=\verb
+    \subitem secnumdepth+, 228, 233, 915, 928, 1201, 2937, 2950, 2963, 
+		3008, 3048
+  \item tocdepth=\verb
+    \subitem tocdepth+, 970, 1625
+  \item X=\verb
+    \subitem X+, \main{3484}
+  \item caption=\verb
+    \subitem *+\caption+, \main{256}, 697, \main{3745}
+  \item captionnamefont=\verb
+    \subitem *+\captionnamefont+, 419
+  \item captionstyle=\verb
+    \subitem *+\captionstyle+, 421, 423
+  \item captiontitlefinal=\verb
+    \subitem *+\captiontitlefinal+, \main{696}
+  \item centering=\verb
+    \subitem *+\centering+, 40, 711, 713, 715, 925, 939, 1335, 1342, 
+		2830, 2840, 2850, 2860, 3151, 3155, 3181, 3189, 
+		3196, 3197, 3209, 3213, 3216, 3221, 3238, 3379, 3420, 
+		3423
+  \item centerlastline=\verb
+    \subitem *+\centerlastline+, 3437, \main{3437}
+  \item centerline=\verb
+    \subitem *+\centerline+, 3368, 3373
+  \item cftaddnumtitleline=\verb
+    \subitem *+\cftaddnumtitleline+, \main{251}
+  \item cftaddtitleline=\verb
+    \subitem *+\cftaddtitleline+, \main{251}
+  \item cftbeforebookskip=\verb
+    \subitem *+\cftbeforebookskip+, 968, 973, \main{998}
+  \item cftbeforefigureskip=\verb
+    \subitem *+\cftbeforefigureskip+, 1594
+  \item cftbeforeparagraphskip=\verb
+    \subitem *+\cftbeforeparagraphskip+, 1583
+  \item cftbeforepartskip=\verb
+    \subitem *+\cftbeforepartskip+, 1623, 1628
+  \item cftbeforesectionskip=\verb
+    \subitem *+\cftbeforesectionskip+, 1568
+  \item cftbeforesubparagraphskip=\verb
+    \subitem *+\cftbeforesubparagraphskip+, 1588
+  \item cftbeforesubsectionskip=\verb
+    \subitem *+\cftbeforesubsectionskip+, 1573
+  \item cftbeforesubsubsectionskip=\verb
+    \subitem *+\cftbeforesubsubsectionskip+, 1578
+  \item cftbeforetableskip=\verb
+    \subitem *+\cftbeforetableskip+, 1599
+  \item cftbookafterpnum=\verb
+    \subitem *+\cftbookafterpnum+, \main{998}
+  \item cftbookaftersnum=\verb
+    \subitem *+\cftbookaftersnum+, 984, \main{998}
+  \item cftbookaftersnumb=\verb
+    \subitem *+\cftbookaftersnumb+, 985, \main{998}
+  \item cftbookbreak=\verb
+    \subitem *+\cftbookbreak+, \main{966}
+  \item cftbookdotsep=\verb
+    \subitem *+\cftbookdotsep+, \main{998}
+  \item cftbookfillnum=\verb
+    \subitem *+\cftbookfillnum+, 988, \main{998}
+  \item cftbookfont=\verb
+    \subitem *+\cftbookfont+, 981, 987, \main{998}
+  \item cftbookformatpnum=\verb
+    \subitem *+\cftbookformatpnum+, \main{998}
+  \item cftbookindent=\verb
+    \subitem *+\cftbookindent+, 975, 978, \main{998}
+  \item cftbookleader=\verb
+    \subitem *+\cftbookleader+, \main{998}
+  \item cftbookname=\verb
+    \subitem *+\cftbookname+, \main{966}
+  \item cftbooknumwidth=\verb
+    \subitem *+\cftbooknumwidth+, 982, \main{998}
+  \item cftbookpagefont=\verb
+    \subitem *+\cftbookpagefont+, \main{998}
+  \item cftbookpresnum=\verb
+    \subitem *+\cftbookpresnum+, 983, \main{998}
+  \item cftchapterafterpnum=\verb
+    \subitem *+\cftchapterafterpnum+, 1614
+  \item cftchapterfillnum=\verb
+    \subitem *+\cftchapterfillnum+, \main{1605}
+  \item cftchapterfont=\verb
+    \subitem *+\cftchapterfont+, 3913
+  \item cftchapterformatpnum=\verb
+    \subitem *+\cftchapterformatpnum+, \main{1605}
+  \item cftchapterleader=\verb
+    \subitem *+\cftchapterleader+, 1613
+  \item cftchapterpagefont=\verb
+    \subitem *+\cftchapterpagefont+, 1611
+  \item cftdotfill=\verb
+    \subitem *+\cftdotfill+, 1010, 1556
+  \item cftdotsep=\verb
+    \subitem *+\cftdotsep+, 1555
+  \item cftfigureindent=\verb
+    \subitem *+\cftfigureindent+, 1595
+  \item cftfigurenumwidth=\verb
+    \subitem *+\cftfigurenumwidth+, 1596
+  \item cftinsert=\verb
+    \subitem *+\cftinsert+, \main{3900}
+  \item cftinsertcode=\verb
+    \subitem *+\cftinsertcode+, \main{3900}
+  \item cftinserthook=\verb
+    \subitem *+\cftinserthook+, \main{3900}
+  \item cftnodots=\verb
+    \subitem *+\cftnodots+, 1011
+  \item cftpagenumberson=\verb
+    \subitem *+\cftpagenumberson+, \main{1616}
+  \item cftparagraphindent=\verb
+    \subitem *+\cftparagraphindent+, 1584
+  \item cftparagraphnumwidth=\verb
+    \subitem *+\cftparagraphnumwidth+, 1585
+  \item cftparskip=\verb
+    \subitem *+\cftparskip+, 3076, 3085, 3089, 3096
+  \item cftpartafterpnum=\verb
+    \subitem *+\cftpartafterpnum+, 1609
+  \item cftpartaftersnum=\verb
+    \subitem *+\cftpartaftersnum+, 1639
+  \item cftpartaftersnumb=\verb
+    \subitem *+\cftpartaftersnumb+, 1640
+  \item cftpartbreak=\verb
+    \subitem *+\cftpartbreak+, \main{1622}
+  \item cftpartfillnum=\verb
+    \subitem *+\cftpartfillnum+, \main{1605}, 1643
+  \item cftpartfont=\verb
+    \subitem *+\cftpartfont+, 1636, 1642
+  \item cftpartformatpnum=\verb
+    \subitem *+\cftpartformatpnum+, \main{1605}
+  \item cftpartindent=\verb
+    \subitem *+\cftpartindent+, 1630, 1633
+  \item cftpartleader=\verb
+    \subitem *+\cftpartleader+, 1608
+  \item cftpartname=\verb
+    \subitem *+\cftpartname+, 860, 1636
+  \item cftpartnumwidth=\verb
+    \subitem *+\cftpartnumwidth+, 1637
+  \item cftpartpagefont=\verb
+    \subitem *+\cftpartpagefont+, 1606
+  \item cftpartpresnum=\verb
+    \subitem *+\cftpartpresnum+, 1638
+  \item cftsectionindent=\verb
+    \subitem *+\cftsectionindent+, 1569
+  \item cftsectionnumwidth=\verb
+    \subitem *+\cftsectionnumwidth+, 1570
+  \item cftsetindents=\verb
+    \subitem *+\cftsetindents+, 1572, 1577, 1582, 1587, 1592, 1598, 
+		1603
+  \item cftsubparagraphindent=\verb
+    \subitem *+\cftsubparagraphindent+, 1589
+  \item cftsubparagraphnumwidth=\verb
+    \subitem *+\cftsubparagraphnumwidth+, 1590
+  \item cftsubsectionindent=\verb
+    \subitem *+\cftsubsectionindent+, 1574
+  \item cftsubsectionnumwidth=\verb
+    \subitem *+\cftsubsectionnumwidth+, 1575
+  \item cftsubsubsectionindent=\verb
+    \subitem *+\cftsubsubsectionindent+, 1579
+  \item cftsubsubsectionnumwidth=\verb
+    \subitem *+\cftsubsubsectionnumwidth+, 1580
+  \item cfttableindent=\verb
+    \subitem *+\cfttableindent+, 1600
+  \item cfttablenumwidth=\verb
+    \subitem *+\cfttablenumwidth+, 1601
+  \item changetocdepth=\verb
+    \subitem *+\changetocdepth+, 1088, 1093, 1098, 1103, 1108, 1113, 
+		1118, 1123, 1128, 1133
+  \item chapindent=\verb
+    \subitem *+\chapindent+, 3259, 3262, 3269
+  \item chapnamefont=\verb
+    \subitem *+\chapnamefont+, 3132, 3133, 3148, 3151, 3181, 3292, 3296, 
+		3298, 3306, 3314, 3326, 3390, 3394
+  \item chapnumfont=\verb
+    \subitem *+\chapnumfont+, 680, 681, 3135, 3136, 3149, 3152, 3159, 
+		3175, 3182, 3184, 3196, 3207--3209, 3214, 3222, 3231, 
+		3239, 3240, 3251, 3257, 3259, 3271, 3327, 3335, 3348, 
+		3354, 3368, 3370, 3375, 3391, 3407
+  \item chapter=\verb
+    \subitem *+\chapter+, 685, 782, 1462, 3923, 3928
+  \item chapterheadstart=\verb
+    \subitem *+\chapterheadstart+, 675, 3105, 3131, 3163, 3260, 3281, 
+		3346, 3366, 3388
+  \item chaptermark=\verb
+    \subitem *+\chaptermark+, 1185, 1212, 1214, 1263, 2935, 2961, 2981, 
+		3006, 3046
+  \item chapternamenum=\verb
+    \subitem *+\chapternamenum+, 678, 3134, 3165, 3206, 3267, 3294, 
+		3310, 3332, 3350, 3369, 3395
+  \item chapternumberline=\verb
+    \subitem *+\chapternumberline+, 208, 213, 1226, 1230
+  \item chapterstyle=\verb
+    \subitem *+\chapterstyle+, 688, 3147, 3162, 3174, 3179, 3192, 3193, 
+		3203, 3220, 3237, 3256, 3280, 3288, 3305, 3323, 3341, 
+		3365, 3386, 3415
+  \item chaptitlefont=\verb
+    \subitem *+\chaptitlefont+, 679, 680, 3140, 3141, 3153, 3155, 3187, 
+		3189, 3215, 3216, 3224, 3226, 3242, 3244, 3258, 3276, 
+		3284, 3293, 3308, 3328, 3336, 3347, 3348, 3359, 3377, 
+		3379, 3392
+  \item char=\verb
+    \subitem *+\char+, 3799, 3819, 3821, 3823, 3824, 3826
+  \item checkandfixthelayout=\verb
+    \subitem *+\checkandfixthelayout+, \main{1936}, 2683, 2686
+  \item checkoddpage=\verb
+    \subitem *+\checkoddpage+, 513, 1290
+  \item checkthelayout=\verb
+    \subitem *+\checkthelayout+, \main{1817}, 1937
+  \item bianchi=\verb
+    \subitem bianchi+, \main{3145}
+  \item bringhurst=\verb
+    \subitem bringhurst+, \main{3161}
+  \item brotherton=\verb
+    \subitem brotherton+, \main{3173}
+  \item chappell=\verb
+    \subitem chappell+, \main{3178}
+  \item culver=\verb
+    \subitem culver+, \main{3191}
+  \item dash=\verb
+    \subitem dash+, \main{3202}
+  \item default=\verb
+    \subitem default+, \main{3129}
+  \item demo2=\verb
+    \subitem demo2+, \main{3219}
+  \item demo3=\verb
+    \subitem demo3+, \main{3236}
+  \item ell=\verb
+    \subitem ell+, \main{3255}
+  \item ger=\verb
+    \subitem ger+, \main{3278}
+  \item lyhne=\verb
+    \subitem lyhne+, \main{3287}
+  \item madsen=\verb
+    \subitem madsen+, \main{3302}
+  \item pedersen=\verb
+    \subitem pedersen+, \main{3320}
+  \item southall=\verb
+    \subitem southall+, \main{3339}
+  \item thatcher=\verb
+    \subitem thatcher+, \main{3364}
+  \item veelo=\verb
+    \subitem veelo+, \main{3381}
+  \item verville=\verb
+    \subitem verville+, \main{3414}
+  \item ClassWarning=\verb
+    \subitem *+\ClassWarning+, 1466
+  \item ClassWarningNoLine=\verb
+    \subitem *+\ClassWarningNoLine+, 3747
+  \item cleardoublepage=\verb
+    \subitem *+\cleardoublepage+, 887, 1170, \main{2996}, 3890, 3895
+  \item clearforchapter=\verb
+    \subitem *+\clearforchapter+, 774, 3198
+  \item clearpage=\verb
+    \subitem *+\clearpage+, 889, 1168, 2996, 3892
+  \item closeout=\verb
+    \subitem *+\closeout+, 1472, 1484
+  \item cmd=\verb
+    \subitem *+\cmd+, \main{3825}, 3828
+  \item cmdprint=\verb
+    \subitem *+\cmdprint+, \main{3827}
+  \item cmdpx=\verb
+    \subitem *+\cmdpx+, \main{3827}
+  \item CodelineIndex=\verb
+    \subitem *+\CodelineIndex+, 8
+  \item begingroup=\verb
+    \subitem begingroup+, 2192, 2208, 2231, 2248, 2262, 2276, 2289, 
+		2304, 2316, 2330, 2343, 2358, 2371, 2387, 2402, 2418, 
+		3573, 3597
+  \item endgroup=\verb
+    \subitem endgroup+, 2196, 2212, 2235, 2252, 2264, 2278, 2291, 2306, 
+		2318, 2332, 2345, 2360, 2373, 2389, 2404, 2420, 3577, 
+		3601
+  \item colorchapnum=\verb
+    \subitem *+\colorchapnum+, \main{3320}
+  \item colorchaptitle=\verb
+    \subitem *+\colorchaptitle+, \main{3320}
+  \item columnsep=\verb
+    \subitem *+\columnsep+, 786, 2656
+  \item columnseprule=\verb
+    \subitem *+\columnseprule+, 785, 2656
+  \item columnwidth=\verb
+    \subitem *+\columnwidth+, 1310, 2188, 2203, 2227, 2243, 2271, 2299, 
+		2325, 2353, 2381, 2412, 2526, 2677, 2679
+  \item contcaption=\verb
+    \subitem *+\contcaption+, \main{264}
+  \item contentsline=\verb
+    \subitem *+\contentsline+, 252, 254
+  \item contentsname=\verb
+    \subitem *+\contentsname+, 2943, 2969, 3015, 3052, 3123
+  \item continuousnotenums=\verb
+    \subitem *+\continuousnotenums+, \main{1364}
+  \item copypagestyle=\verb
+    \subitem *+\copypagestyle+, \main{2884}, \main{3831}
+  \item count=\verb
+    \subitem *+\count+, 2696--2700, 2714, 2719--2721, 2729, 2733
+  \item counterwithin=\verb
+    \subitem *+\counterwithin+, 1171, 1172, 3896, 3897
+  \item counterwithout=\verb
+    \subitem *+\counterwithout+, 1366
+  \item cs=\verb
+    \subitem *+\cs+, 869, \main{3824}, 3825
+  \item ctt=\verb
+    \subitem *+\ctt+, 23
+  \item currentgrouptype=\verb
+    \subitem *+\currentgrouptype+, 3729
+
+  \indexspace
+
+  \item DeclareRobustCommand=\verb
+    \subitem *+\DeclareRobustCommand+, 1616, 3803, 3818, 3820, 3822, 
+		3824
+  \item defaultlists=\verb
+    \subitem *+\defaultlists+, \main{1974}, \main{2443}
+  \item DeleteShortVerb=\verb
+    \subitem *+\DeleteShortVerb+, 10
+  \item dimen=\verb
+    \subitem *+\dimen+, 2534--2536, 2558, 2666
+  \item discretionary=\verb
+    \subitem *+\discretionary+, 833
+  \item DisemulatePackage=\verb
+    \subitem *+\DisemulatePackage+, 315, \main{1156}
+  \item DocInput=\verb
+    \subitem *+\DocInput+, 47
+  \item documentclass=\verb
+    \subitem *+\documentclass+, 2
+  \item donemaincaptiontrue=\verb
+    \subitem *+\donemaincaptiontrue+, 257
+  \item DoubleSpace={\ttfamily DoubleSpace} (environment), \main{2133}
+  \item DoubleSpacing=\verb
+    \subitem *+\DoubleSpacing+, \main{2071}, 2133, 2136
+  \item dp=\verb
+    \subitem *+\dp+, 1326, 2619, 2621, 2627, 2632, 3569
+
+  \indexspace
+
+  \item edef=\verb
+    \subitem *+\edef+, 173, 186, 195, 196, 1393, 1506, 3482, 3489, 3808
+  \item edmac=\verb
+    \subitem *+\edmac+, 27
+  \item egend=\verb
+    \subitem *+\egend+, 36, 44
+  \item egmid=\verb
+    \subitem *+\egmid+, 35, 42
+  \item egstart=\verb
+    \subitem *+\egstart+, 34, 37
+  \item emergencystretch=\verb
+    \subitem *+\emergencystretch+, 1944
+  \item EmulatedPackage=\verb
+    \subitem *+\EmulatedPackage+, 315, 1156, 1494, 2037, 2422, 3797
+  \item EnableCrossrefs=\verb
+    \subitem *+\EnableCrossrefs+, 7
+  \item dblfloat=\verb
+    \subitem dblfloat+, 3504
+  \item float=\verb
+    \subitem float+, 3503
+  \item end=\verb
+    \subitem *+\end+, 43, 45, 50
+  \item endgroup=\verb
+    \subitem *+\endgroup+, 45
+  \item endinput=\verb
+    \subitem *+\endinput+, 83, 129
+  \item endminipage=\verb
+    \subitem *+\endminipage+, 2172
+  \item endsidecaption=\verb
+    \subitem *+\endsidecaption+, \main{269}, \main{453}
+  \item endsidecontcaption=\verb
+    \subitem *+\endsidecontcaption+, \main{282}, \main{571}
+  \item endsidelegend=\verb
+    \subitem *+\endsidelegend+, \main{613}
+  \item endsidenamedlegend=\verb
+    \subitem *+\endsidenamedlegend+, \main{597}
+  \item endsubappendices=\verb
+    \subitem *+\endsubappendices+, 249
+  \item ensuremath=\verb
+    \subitem *+\ensuremath+, 3804, 3814
+  \item ensureonecol=\verb
+    \subitem *+\ensureonecol+, 3073, 3082
+  \item environments:>DoubleSpace={\ttfamily DoubleSpace}, \main{2133}
+  \item environments:>midsloppypar={\ttfamily midsloppypar}, 
+		\main{1947}
+  \item environments:>OnehalfSpace={\ttfamily OnehalfSpace}, 
+		\main{2128}
+  \item environments:>SingleSpace*={\ttfamily SingleSpace*}, 
+		\main{2108}
+  \item environments:>SingleSpace={\ttfamily SingleSpace}, \main{2101}
+  \item environments:>Spacing={\ttfamily Spacing}, \main{2122}
+  \item environments:>theindex={\ttfamily theindex}, \main{773}
+  \item environments:>vminipage={\ttfamily vminipage}, \main{2164}
+  \item environments:>vplace={\ttfamily vplace}, \main{1348}
+  \item environments:>X*={\ttfamily X*}, \main{3503}
+  \item environments:>X={\ttfamily X}, \main{3503}
+  \item epigraphrule=\verb
+    \subitem *+\epigraphrule+, 3444
+  \item epigraphwidth=\verb
+    \subitem *+\epigraphwidth+, 3443, 3447
+  \item etexfalse=\verb
+    \subitem *+\etexfalse+, \main{3716}
+  \item etextrue=\verb
+    \subitem *+\etextrue+, \main{3716}
+  \item eTeXversion=\verb
+    \subitem *+\eTeXversion+, 3719--3721
+  \item everydisplay=\verb
+    \subitem *+\everydisplay+, \main{2153}
+  \item everylistparindent=\verb
+    \subitem *+\everylistparindent+, \main{1949}, 1984, 1998, 2009, 
+		2022, 2032
+  \item X=\verb
+    \subitem X+, \main{3494}
+  \item Z=\verb
+    \subitem Z+, \main{3067}
+  \item extendedfontsizes=\verb
+    \subitem *+\extendedfontsizes+, \main{3864}
+
+  \indexspace
+
+  \item rbdy=\verb
+    \subitem rbdy+, \main{1185}, 1245, 1405
+  \item rhdr=\verb
+    \subitem rhdr+, 1191, 1195, 1197, 1212, 1214, 1227, 1231, 1236, 
+		1238, 1241, 1259, 1261, 1267, 1269, 1271
+  \item rtoc=\verb
+    \subitem rtoc+, 1190, 1193, 1226, 1227, 1230, 1231, 1234, 1236, 
+		1238, 1241, 1404
+  \item figureversion=\verb
+    \subitem *+\figureversion+, 3354
+  \item file=\verb
+    \subitem *+\file+, 18
+  \item firmlists*=\verb
+    \subitem *+\firmlists*+, \main{1987}
+  \item firmlists=\verb
+    \subitem *+\firmlists+, \main{1987}
+  \item fixthelayout=\verb
+    \subitem *+\fixthelayout+, 1938
+  \item flegtocX=\verb
+    \subitem *+\flegtocX+, \main{3498}
+  \item flegX=\verb
+    \subitem *+\flegX+, \main{3498}
+  \item flushleftright=\verb
+    \subitem *+\flushleftright+, 3434, \main{3434}
+  \item flushright=\verb
+    \subitem *+\flushright+, 3390, 3392
+  \item X=\verb
+    \subitem X+, \main{3498}
+  \item font=\verb
+    \subitem *+\font+, 3809, 3810
+  \item footins=\verb
+    \subitem *+\footins+, 2098, 2184, 3564, 3572, 3576, 3591, 3596, 
+		3600, 3608
+  \item r=\verb
+    \subitem r+, 2255, 2309, 2363
+  \item footnote=\verb
+    \subitem *+\footnote+, 706, 709, 1428, 1430, 1431
+  \item footnotemark=\verb
+    \subitem *+\footnotemark+, 707, 710
+  \item footnoterule=\verb
+    \subitem *+\footnoterule+, 2670, 2673, 3575, 3599
+  \item footnotesep=\verb
+    \subitem *+\footnotesep+, 2194, 2210, 2233, 2250
+  \item footruleheight=\verb
+    \subitem *+\footruleheight+, 2877
+  \item footruleskip=\verb
+    \subitem *+\footruleskip+, 2877
+  \item footskip=\verb
+    \subitem *+\footskip+, 1840, 1841, 1927, 1930, 2654
+  \item foottextfont=\verb
+    \subitem *+\foottextfont+, 2186, 2194, 2202, 2210, 2257, 2270, 2311, 
+		2324, 2365, 2380
+  \item foottopagenote=\verb
+    \subitem *+\foottopagenote+, \main{1426}
+  \item foremargin=\verb
+    \subitem *+\foremargin+, 1825, 1826, 1879, 1886, 2648
+  \item X=\verb
+    \subitem X+, \main{3498}
+  \item frenchspacing=\verb
+    \subitem *+\frenchspacing+, 2507
+  \item frontmatter=\verb
+    \subitem *+\frontmatter+, 3919
+  \item figure=\verb
+    \subitem figure+, 3508
+  \item table=\verb
+    \subitem table+, 3509
+  \item X=\verb
+    \subitem X+, \main{3480}
+
+  \indexspace
+
+  \item getthebvlinenumber=\verb
+    \subitem *+\getthebvlinenumber+, \main{3699}, 3714
+  \item getthelinenumber=\verb
+    \subitem *+\getthelinenumber+, 814, 817, 3656, 3659, \main{3673}
+
+  \indexspace
+
+  \item refstepcounter=\verb
+    \subitem refstepcounter+, 266, 271, 287
+  \item hangafter=\verb
+    \subitem *+\hangafter+, 727
+  \item hangindent=\verb
+    \subitem *+\hangindent+, 720, 726
+  \item hbadness=\verb
+    \subitem *+\hbadness+, 1943
+  \item headheight=\verb
+    \subitem *+\headheight+, 1836, 1837, 1916, 1920, 2652
+  \item headindent=\verb
+    \subitem *+\headindent+, 3343
+  \item headsep=\verb
+    \subitem *+\headsep+, 1838, 1839, 1917, 1921, 2652
+  \item headwidth=\verb
+    \subitem *+\headwidth+, \main{3035}
+  \item hfill=\verb
+    \subitem *+\hfill+, 43
+  \item hfuzz=\verb
+    \subitem *+\hfuzz+, 1945, 1946
+  \item hmpunct=\verb
+    \subitem *+\hmpunct+, \main{2703}, 2714, 2733
+  \item hrulefill=\verb
+    \subitem *+\hrulefill+, 3263, 3362, 3373
+  \item hsip=\verb
+    \subitem *+\hsip+, 2806
+  \item ht=\verb
+    \subitem *+\ht+, 1327, 2536, 2607, 2618
+  \item HUGE=\verb
+    \subitem *+\HUGE+, 3239, 3257, 3327, 3391, 3392, \main{3864}
+  \item Huge=\verb
+    \subitem *+\Huge+, 902, 3140, 3153, 3224, 3242, 3309, 3420, 3423, 
+		\main{3864}
+  \item huge=\verb
+    \subitem *+\huge+, 900, 901, 3132, 3135, 3149, 3258, 3328, 3347, 
+		\main{3864}
+  \item bookmarkstype=\verb
+    \subitem bookmarkstype+, 172
+  \item captionsafrikaans=\verb
+    \subitem captionsafrikaans+, \main{160}
+  \item captionsenglish=\verb
+    \subitem captionsenglish+, \main{140}
+  \item captionsgerman=\verb
+    \subitem captionsgerman+, \main{145}
+  \item captionsportuges=\verb
+    \subitem captionsportuges+, \main{150}
+  \item captionsspanish=\verb
+    \subitem captionsspanish+, \main{155}
+  \item currentbookmarklevel=\verb
+    \subitem currentbookmarklevel+, 177, 178, 184, 191
+  \item GlobalStepCount=\verb
+    \subitem GlobalStepCount+, 135, 229
+  \item level=\verb
+    \subitem level+, 173, 175, 186, 191--193, 218
+  \item levelcheck=\verb
+    \subitem levelcheck+, 174, 189
+  \item linkcounter=\verb
+    \subitem linkcounter+, 135, 136, 229, 230
+  \item numberline=\verb
+    \subitem numberline+, 205--208
+  \item raisedlink=\verb
+    \subitem raisedlink+, 137, 234
+  \item tempa=\verb
+    \subitem tempa+, 171, 172, 195, 197, 215, 219
+  \item tempb=\verb
+    \subitem tempb+, 196, 197, 219
+  \item Warning=\verb
+    \subitem Warning+, 180, 198
+  \item ParenLeft=\verb
+    \subitem ParenLeft+, 759
+  \item afrikaans=\verb
+    \subitem afrikaans+, \main{160}
+  \item english=\verb
+    \subitem english+, \main{140}
+  \item german=\verb
+    \subitem german+, \main{145}
+  \item portuges=\verb
+    \subitem portuges+, \main{150}
+  \item spanish=\verb
+    \subitem spanish+, \main{155}
+  \item anchorend=\verb
+    \subitem anchorend+, 137, 234
+  \item anchorstart=\verb
+    \subitem anchorstart+, 137, 234
+  \item makecurrent=\verb
+    \subitem makecurrent+, 272, 288
+  \item hyphenchar=\verb
+    \subitem *+\hyphenchar+, 3809, 3810
+
+  \indexspace
+
+  \item idtextinnotes=\verb
+    \subitem *+\idtextinnotes+, \main{1447}, 1451
+  \item bsonecol=\verb
+    \subitem bsonecol+, 3465
+  \item contcw=\verb
+    \subitem contcw+, 712, 737
+  \item conthang=\verb
+    \subitem conthang+, 717
+  \item contindent=\verb
+    \subitem contindent+, 723
+  \item fcolmade=\verb
+    \subitem fcolmade+, 2904
+  \item filesw=\verb
+    \subitem filesw+, 3114
+  \item firstcolumn=\verb
+    \subitem firstcolumn+, 501, 1307, 2571
+  \item mainmatter=\verb
+    \subitem mainmatter+, 1202, 2938, 2964, 3009
+  \item minipage=\verb
+    \subitem minipage+, 3780
+  \item nobreak=\verb
+    \subitem nobreak+, 1396
+  \item openright=\verb
+    \subitem openright+, 847, 886, 955
+  \item restonecol=\verb
+    \subitem restonecol+, 799
+  \item twocolumn=\verb
+    \subitem twocolumn+, 497, 775, 892, 1216, 1249, 1306, 2570, 2998, 
+		3464
+  \item twoside=\verb
+    \subitem twoside+, 512, 846, 954, 2803, 2931, 2996, 3889
+  \item ifanappendix=\verb
+    \subitem *+\ifanappendix+, 1224, 1235, 1266, 3176, 3223, 3241
+  \item ifartopt=\verb
+    \subitem *+\ifartopt+, 686, 1167, 1209, 1246, 3545, 3888
+  \item ifbvperpage=\verb
+    \subitem *+\ifbvperpage+, 3516
+  \item ifetex=\verb
+    \subitem *+\ifetex+, \main{3716}, 3727
+  \item IfFileExists=\verb
+    \subitem *+\IfFileExists+, 631, 1435, 1471, 1483
+  \item ifheadnameref=\verb
+    \subitem *+\ifheadnameref+, 1241, 1271
+  \item bookmarksnumbered=\verb
+    \subitem bookmarksnumbered+, 204
+  \item mnobooknewpage=\verb
+    \subitem mnobooknewpage+, \main{945}
+  \item mnopartnewpage=\verb
+    \subitem mnopartnewpage+, \main{837}
+  \item mnzpskip=\verb
+    \subitem mnzpskip+, \main{2424}, 2454, 2470, 2514
+  \item mpncontopt=\verb
+    \subitem mpncontopt+, \main{1360}, 1369
+  \item mpnpageopt=\verb
+    \subitem mpnpageopt+, \main{1360}, 1398, 1453
+  \item mxindy=\verb
+    \subitem mxindy+, \main{743}
+  \item ifmempagenotes=\verb
+    \subitem *+\ifmempagenotes+, \main{1376}, 1434, 1469, 1481
+  \item ifmmode=\verb
+    \subitem *+\ifmmode+, 3805
+  \item ifnoindexintoc=\verb
+    \subitem *+\ifnoindexintoc+, 791
+  \item ifodd=\verb
+    \subitem *+\ifodd+, 2585, 2591, 2800, 2996
+  \item ifoddpage=\verb
+    \subitem *+\ifoddpage+, 522, 527, 1293, 1313, 1322
+  \item ifonecolindex=\verb
+    \subitem *+\ifonecolindex+, 780
+  \item ifonlyfloats=\verb
+    \subitem *+\ifonlyfloats+, \main{2904}, 2909, 2911, 2913, 2915
+  \item ifreversesidepar=\verb
+    \subitem *+\ifreversesidepar+, 1292, 1301
+  \item ifsamename=\verb
+    \subitem *+\ifsamename+, 1025, 1030, 1035, 1040, 1045, 1050, 1055, 
+		1060, 1065, 1070, 1087, 1092, 1097, 1102, 1107, 1112, 
+		1117, 1122, 1127, 1132, 1652, 1654, 1662, 1672, 1674, 
+		1690, 1692, 1694, 1703, 1719, 1721, 1744, 1746, 1748, 
+		1776, 1843, 1847, 1851, 1855, 2541, 2544, 2547, 2550, 
+		2553, 2556
+  \item ifscapmargleft=\verb
+    \subitem *+\ifscapmargleft+, \main{407}, 420, 467
+  \item ifshowindexmark=\verb
+    \subitem *+\ifshowindexmark+, 751
+  \item ifshowtrims=\verb
+    \subitem *+\ifshowtrims+, 1281
+  \item ifsidebaroneside=\verb
+    \subitem *+\ifsidebaroneside+, 2577
+  \item ifsideparswitch=\verb
+    \subitem *+\ifsideparswitch+, 1291
+  \item bs=\verb
+    \subitem bs+, 3526
+  \item ifvbox=\verb
+    \subitem *+\ifvbox+, 3610
+  \item ifvoid=\verb
+    \subitem *+\ifvoid+, 1278, 3556, 3564, 3591, 3608, 3611
+  \item ifxetex=\verb
+    \subitem *+\ifxetex+, \main{3788}, 3792
+  \item ignorespaces=\verb
+    \subitem *+\ignorespaces+, 801, 803, 1972, 2194, 2210, 2233, 2250, 
+		3777, 3784
+  \item immediate=\verb
+    \subitem *+\immediate+, 1381, 1393, 1472, 1474, 1484, 3117
+  \item vsline=\verb
+    \subitem vsline+, 822
+  \item index=\verb
+    \subitem *+\index+, 3829
+  \item indexcolsep=\verb
+    \subitem *+\indexcolsep+, 786
+  \item indexmark=\verb
+    \subitem *+\indexmark+, 790, 2947, 2973, 2987, 3019, 3056
+  \item indexname=\verb
+    \subitem *+\indexname+, 782, 787, 793, 2947, 2973, 3019, 3056
+  \item indexrule=\verb
+    \subitem *+\indexrule+, 785
+  \item InputIfFileExists=\verb
+    \subitem *+\InputIfFileExists+, \main{630}
+  \item insert=\verb
+    \subitem *+\insert+, 2184, 2223, 2255, 2282, 2309, 2336, 2363, 2394, 
+		2614, 3608, 3610, 3611
+  \item insertchapterspace=\verb
+    \subitem *+\insertchapterspace+, 1215
+  \item interlinepenalty=\verb
+    \subitem *+\interlinepenalty+, 926, 940, 979, 1517, 1634, 3097
+  \item item=\verb
+    \subitem *+\item+, 798
+  \item itemindent=\verb
+    \subitem *+\itemindent+, 1959
+  \item itemsep=\verb
+    \subitem *+\itemsep+, 2494, 2501
+  \item itemsepi=\verb
+    \subitem *+\itemsepi+, 1978, 1993, 2004, 2017, 2027, 2458, 2474
+  \item itemsepii=\verb
+    \subitem *+\itemsepii+, 2444, 2451, 2461, 2477, 2494
+  \item itemsepiii=\verb
+    \subitem *+\itemsepiii+, 2445, 2452, 2464, 2480, 2501
+  \item itshape=\verb
+    \subitem *+\itshape+, 30, 3148, 3187, 3239, 3326--3328, 3550, 3816
+
+  \indexspace
+
+  \item matf=\verb
+    \subitem matf+, 635, \main{642}, 3728
+
+  \indexspace
+
+  \item =\verb
+    \subitem +, 1529
+  \item book=\verb
+    \subitem book+, \main{966}
+  \item nohyphenation=\verb
+    \subitem nohyphenation+, \main{3800}
+  \item part=\verb
+    \subitem part+, \main{1622}
+  \item subsection=\verb
+    \subitem subsection+, 14
+  \item label=\verb
+    \subitem *+\label+, \main{104}, 440, 567
+  \item labelsep=\verb
+    \subitem *+\labelsep+, 2491, 2498
+  \item labelwidth=\verb
+    \subitem *+\labelwidth+, 2490, 2491, 2497, 2498
+  \item langle=\verb
+    \subitem *+\langle+, 3804
+  \item language=\verb
+    \subitem *+\language+, 3811
+  \item LARGE=\verb
+    \subitem *+\LARGE+, 3326, 3390, \main{3864}
+  \item Large=\verb
+    \subitem *+\Large+, 679, 3148, 3169, 3187, 3215, 3307, 3455
+  \item large=\verb
+    \subitem *+\large+, 689, 1005, 1010, 1012, 3181, 3182, 3207, 3377
+  \item Lclass=\verb
+    \subitem *+\Lclass+, 24
+  \item Lcount=\verb
+    \subitem *+\Lcount+, 19
+  \item Ledmac=\verb
+    \subitem *+\Ledmac+, 26
+  \item ledmac=\verb
+    \subitem *+\ledmac+, 25, 26
+  \item leftmargin=\verb
+    \subitem *+\leftmargin+, 1969, 1970, 2489, 2496, 3458--3460
+  \item leftmarginii=\verb
+    \subitem *+\leftmarginii+, 2489, 2490
+  \item leftmarginiii=\verb
+    \subitem *+\leftmarginiii+, 2496, 2497
+  \item leftmark=\verb
+    \subitem *+\leftmark+, 2955, 2989, 3022, 3032, 3059
+  \item leftskip=\verb
+    \subitem *+\leftskip+, 830, 975, 986, 1513, 1525, 1630, 1641, 3435, 
+		3440
+  \item legend=\verb
+    \subitem *+\legend+, 618
+  \item Lenv=\verb
+    \subitem *+\Lenv+, 21
+  \item line=\verb
+    \subitem *+\line+, 2744, 2745, 2752, 2753, 2759, 2760, 2765, 2766, 
+		2772, 2773, 2778, 2779, 2785, 2786, 2791, 2792
+  \item linemodnum=\verb
+    \subitem *+\linemodnum+, 3666, 3668, 3669, 3674, 3676, 3681, 3682, 
+		3692, 3694, 3695, 3700, 3702, 3707, 3708
+  \item linewidth=\verb
+    \subitem *+\linewidth+, 409, 711, 731, 1335, 1342, 1968, 1969, 1971, 
+		3512, 3521, 3522, 3540--3542
+  \item list=\verb
+    \subitem *+\list+, \main{1949}
+  \item listfigurename=\verb
+    \subitem *+\listfigurename+, 2944, 2970, 3016, 3053, 3124
+  \item listoffigures=\verb
+    \subitem *+\listoffigures+, 3922
+  \item listparindent=\verb
+    \subitem *+\listparindent+, 1958, 1967, 1984, 1998, 2009
+  \item listtablename=\verb
+    \subitem *+\listtablename+, 2945, 2971, 3017, 3054, 3125
+  \item lofmark=\verb
+    \subitem *+\lofmark+, 2944, 2970, 2984, 3016, 3053
+  \item Lopt=\verb
+    \subitem *+\Lopt+, 17
+  \item lotmark=\verb
+    \subitem *+\lotmark+, 2945, 2971, 2985, 3017, 3054
+  \item lowermargin=\verb
+    \subitem *+\lowermargin+, 1834, 1835, 1905, 1910, 1926, 1931, 2650
+  \item Lpack=\verb
+    \subitem *+\Lpack+, 22, 26
+
+  \indexspace
+
+  \item currentTitle=\verb
+    \subitem currentTitle+, 111
+  \item gettitle=\verb
+    \subitem gettitle+, 118, 341, 913, 936, 1241, 1271
+  \item hfixcfinish=\verb
+    \subitem hfixcfinish+, \main{81}, 129, 130
+  \item sect=\verb
+    \subitem sect+, \main{87}, \main{225}
+  \item TitleReference=\verb
+    \subitem TitleReference+, 110
+  \item mabparskip=\verb
+    \subitem mabparskip+, \main{2425}, 2514
+  \item makeparafootnotetext=\verb
+    \subitem makeparafootnotetext+, \main{2392}
+  \item makethreecolfootnotetext=\verb
+    \subitem makethreecolfootnotetext+, \main{2334}
+  \item maketwocolfootnotetext=\verb
+    \subitem maketwocolfootnotetext+, \main{2280}
+  \item matbeginf=\verb
+    \subitem matbeginf+, 632, \main{637}
+  \item matendf=\verb
+    \subitem matendf+, 634, \main{637}
+  \item mcalchm=\verb
+    \subitem mcalchm+, \main{2694}, 2713, 2717
+  \item mcalcscapraise=\verb
+    \subitem mcalcscapraise+, 465, \main{476}
+  \item mclassicht=\verb
+    \subitem mclassicht+, \main{1793}, 1844
+  \item mdodoreinextrafeet=\verb
+    \subitem mdodoreinextrafeet+, 3609
+  \item mdoextrafeet=\verb
+    \subitem mdoextrafeet+, 3580
+  \item mdoextrafeetmini=\verb
+    \subitem mdoextrafeetmini+, 2513
+  \item mfirmlists=\verb
+    \subitem mfirmlists+, \main{1987}
+  \item mlinesht=\verb
+    \subitem mlinesht+, \main{1800}, 1848
+  \item mnearestht=\verb
+    \subitem mnearestht+, \main{1808}, 1852
+  \item mnobooknewpagefalse=\verb
+    \subitem mnobooknewpagefalse+, \main{945}
+  \item mnobooknewpagetrue=\verb
+    \subitem mnobooknewpagetrue+, \main{945}
+  \item mnopartnewpagefalse=\verb
+    \subitem mnopartnewpagefalse+, \main{837}
+  \item mnopartnewpagetrue=\verb
+    \subitem mnopartnewpagetrue+, \main{837}
+  \item mnzpskipfalse=\verb
+    \subitem mnzpskipfalse+, \main{2424}, 2428
+  \item mnzpskiptrue=\verb
+    \subitem mnzpskiptrue+, \main{2424}, 2433
+  \item moldhypcaption=\verb
+    \subitem moldhypcaption+, 256, 257
+  \item mopsidebar=\verb
+    \subitem mopsidebar+, \main{3555}, 3582, 3590
+  \item mpncontoptfalse=\verb
+    \subitem mpncontoptfalse+, 1363
+  \item mpnpageoptfalse=\verb
+    \subitem mpnpageoptfalse+, 1361
+  \item mpnpageopttrue=\verb
+    \subitem mpnpageopttrue+, 1364
+  \item mprtime=\verb
+    \subitem mprtime+, 2711, \main{2712}
+  \item mscapcheckregside=\verb
+    \subitem mscapcheckregside+, 499, 508, \main{511}
+  \item mscapcheckside=\verb
+    \subitem mscapcheckside+, 466, \main{496}
+  \item mscaplabel=\verb
+    \subitem mscaplabel+, 273, 289, \main{430}, 456, 565, 567, 574, 594
+  \item mscaplkern=\verb
+    \subitem mscaplkern+, \main{412}, 468
+  \item mscapmainwidth=\verb
+    \subitem mscapmainwidth+, \main{409}, 416, 445, 448
+  \item mscapmarg=\verb
+    \subitem mscapmarg+, \main{381}, 514, 517, 520, 535, 536
+  \item mscapopboxes=\verb
+    \subitem mscapopboxes+, 280, 296, 463, \main{464}, 581, 605, 621
+  \item mscappos=\verb
+    \subitem mscappos+, \main{363}, 478, 485
+  \item mscapraise=\verb
+    \subitem mscapraise+, \main{357}, 469, 472, 480--482, 487, 488, 
+		490, 491, 494
+  \item mscapthisside=\verb
+    \subitem mscapthisside+, 474, 510, \main{542}
+  \item msfirmlists=\verb
+    \subitem msfirmlists+, \main{1987}
+  \item msprtime=\verb
+    \subitem msprtime+, 2711, \main{2712}
+  \item mstightlists=\verb
+    \subitem mstightlists+, \main{2011}
+  \item mtightlists=\verb
+    \subitem mtightlists+, \main{2011}
+  \item mungebox=\verb
+    \subitem mungebox+, 2373, 2389, 2404, 2420
+  \item mxindyfalse=\verb
+    \subitem mxindyfalse+, \main{743}
+  \item mxindytrue=\verb
+    \subitem mxindytrue+, \main{743}
+  \item mainmatter=\verb
+    \subitem *+\mainmatter+, 3925
+  \item makeatletter=\verb
+    \subitem *+\makeatletter+, 4, 13, 3112
+  \item makeatother=\verb
+    \subitem *+\makeatother+, 6
+  \item makebox=\verb
+    \subitem *+\makebox+, 3295, 3312, 3334, 3405
+  \item makechapterstyle=\verb
+    \subitem *+\makechapterstyle+, 673, 3129, 3146, 3161, 3173, 3178, 
+		3191, 3202, 3219, 3236, 3255, 3279, 3287, 3304, 3322, 
+		3340, 3364, 3385, 3414
+  \item makeevenfoot=\verb
+    \subitem *+\makeevenfoot+, 2872, 2890, 2922, 3001, 3028, 3837
+  \item makeevenhead=\verb
+    \subitem *+\makeevenhead+, 2870, 2886, 2955, 2989, 3022, 3032, 3058, 
+		3833
+  \item makefootrule=\verb
+    \subitem *+\makefootrule+, 2877
+  \item makeheadposition=\verb
+    \subitem *+\makeheadposition+, 2875, 3027, 3043
+  \item makeheadrule=\verb
+    \subitem *+\makeheadrule+, 2876, 3003, 3030, 3042
+  \item makelabel=\verb
+    \subitem *+\makelabel+, 1962
+  \item MakeLowercase=\verb
+    \subitem *+\MakeLowercase+, 3169, 3370
+  \item makeoddfoot=\verb
+    \subitem *+\makeoddfoot+, 2873, 2892, 2923, 3002, 3029, 3412, 3839
+  \item makeoddhead=\verb
+    \subitem *+\makeoddhead+, 2871, 2888, 2956, 2975, 2990, 3023, 3033, 
+		3060, 3835
+  \item makepagenote=\verb
+    \subitem *+\makepagenote+, \main{1379}
+  \item makepagestyle=\verb
+    \subitem *+\makepagestyle+, \main{2820}, 2885, 2919, 2921, 2932, 
+		2958, 2978, 3000, 3025, 3037, 3832
+  \item makepsmarks=\verb
+    \subitem *+\makepsmarks+, 2878, 2901, 2933, 2959, 2979, 3021, 3031, 
+		3044, 3855
+  \item makerunningwidth=\verb
+    \subitem *+\makerunningwidth+, 2874, 2894, 3026, 3041, 3841
+  \item MakeUppercase=\verb
+    \subitem *+\MakeUppercase+, 11, 2928, 3379, 3394
+  \item marg=\verb
+    \subitem *+\marg+, \main{3818}
+  \item marginparsep=\verb
+    \subitem *+\marginparsep+, 353, 1308, 1310, 1314, 1316, 1827, 2562, 
+		2658, 3039
+  \item marginparwidth=\verb
+    \subitem *+\marginparwidth+, 355, 1308, 1316, 1320, 1828, 2563, 
+		2658, 3040
+  \item markboth=\verb
+    \subitem *+\markboth+, 2934, 2936, 2943--2947, 2960, 3005, 3007, 
+		3015--3019, 3045, 3046, 3052--3056, 3070
+  \item markright=\verb
+    \subitem *+\markright+, 2949, 2962, 2969--2973, 3014, 3047
+  \item maxdepth=\verb
+    \subitem *+\maxdepth+, 3584, 3605
+  \item maxdimen=\verb
+    \subitem *+\maxdimen+, 2370, 2386, 2401, 2417
+  \item mbox=\verb
+    \subitem *+\mbox+, 3282, 3285
+  \item makecol=\verb
+    \subitem makecol+, \main{3562}
+  \item makecolbf=\verb
+    \subitem makecolbf+, \main{3586}
+  \item oldshipout=\verb
+    \subitem oldshipout+, 1279, 1282, 1284
+  \item shipii=\verb
+    \subitem shipii+, \main{1273}
+  \item memappchapinfo=\verb
+    \subitem *+\memappchapinfo+, 1227, 1236, \main{3635}
+  \item memappchapstarinfo=\verb
+    \subitem *+\memappchapstarinfo+, 1267, \main{3635}
+  \item memapppageinfo=\verb
+    \subitem *+\memapppageinfo+, \main{3649}
+  \item memapppagestarinfo=\verb
+    \subitem *+\memapppagestarinfo+, \main{3649}
+  \item membicaptioninfo=\verb
+    \subitem *+\membicaptioninfo+, \main{3628}
+  \item membionecaptioninfo=\verb
+    \subitem *+\membionecaptioninfo+, \main{3628}
+  \item membionenumcaptioninfo=\verb
+    \subitem *+\membionenumcaptioninfo+, 3632
+  \item membitwocaptioninfo=\verb
+    \subitem *+\membitwocaptioninfo+, \main{3628}
+  \item membitwonumcaptioninfo=\verb
+    \subitem *+\membitwonumcaptioninfo+, 3631
+  \item membookinfo=\verb
+    \subitem *+\membookinfo+, \main{909}, 919, 922
+  \item membookstarinfo=\verb
+    \subitem *+\membookstarinfo+, \main{909}, 938
+  \item memcaptioninfo=\verb
+    \subitem *+\memcaptioninfo+, \main{3628}
+  \item memchapinfo=\verb
+    \subitem *+\memchapinfo+, 1231, 1238, \main{3635}
+  \item memchapstarinfo=\verb
+    \subitem *+\memchapstarinfo+, 1269, \main{3635}
+  \item memdskips=\verb
+    \subitem *+\memdskips+, \main{2146}, 2155
+  \item memdskipstretch=\verb
+    \subitem *+\memdskipstretch+, \main{2138}, 2147--2150
+  \item memleadpageinfo=\verb
+    \subitem *+\memleadpageinfo+, \main{3649}
+  \item memleadpagestarinfo=\verb
+    \subitem *+\memleadpagestarinfo+, \main{3649}
+  \item memlegendinfo=\verb
+    \subitem *+\memlegendinfo+, \main{3628}
+  \item memnamedlegendinfo=\verb
+    \subitem *+\memnamedlegendinfo+, \main{3628}
+  \item mempagenotesfalse=\verb
+    \subitem *+\mempagenotesfalse+, 1377
+  \item mempagenotestrue=\verb
+    \subitem *+\mempagenotestrue+, 1382
+  \item mempartinfo=\verb
+    \subitem *+\mempartinfo+, \main{3635}
+  \item mempartstarinfo=\verb
+    \subitem *+\mempartstarinfo+, \main{3635}
+  \item memPD=\verb
+    \subitem *+\memPD+, \main{2163}, 2171, 2174, 2175
+  \item mempnofilewarn=\verb
+    \subitem *+\mempnofilewarn+, 1435, \main{1465}, 1476, 1487
+  \item mempoeminfo=\verb
+    \subitem *+\mempoeminfo+, \main{3644}
+  \item mempoemstarinfo=\verb
+    \subitem *+\mempoemstarinfo+, \main{3644}
+  \item memPoemTitleinfo=\verb
+    \subitem *+\memPoemTitleinfo+, \main{3644}
+  \item memPoemTitlestarinfo=\verb
+    \subitem *+\memPoemTitlestarinfo+, \main{3644}
+  \item memsavefootnote=\verb
+    \subitem *+\memsavefootnote+, \main{1426}
+  \item memsavepagenote=\verb
+    \subitem *+\memsavepagenote+, \main{1426}
+  \item memsecinfo=\verb
+    \subitem *+\memsecinfo+, \main{3635}
+  \item memsecstarinfo=\verb
+    \subitem *+\memsecstarinfo+, 339, 342, \main{3635}
+  \item memUChead=\verb
+    \subitem *+\memUChead+, \main{2925}, 2936, 2943--2947, 2949, 2962, 
+		2969--2973
+  \item mergepagefloatstyle=\verb
+    \subitem *+\mergepagefloatstyle+, \main{2906}
+  \item MessageBreak=\verb
+    \subitem *+\MessageBreak+, 182, 200, 374, 1079, 1656, 1696, 1784, 
+		1857, 1858, 3748, 3749, 3794
+  \item meta=\verb
+    \subitem *+\meta+, \main{3800}, 3819, 3821, 3823
+  \item midbookskip=\verb
+    \subitem *+\midbookskip+, \main{881}, 930
+  \item midchapskip=\verb
+    \subitem *+\midchapskip+, 3137, 3138, 3208, 3210, 3211, 3248, 3283, 
+		3291, 3318, 3331, 3335, 3344, 3345, 3358, 3401--3403, 
+		3409, 3425
+  \item midpartskip=\verb
+    \subitem *+\midpartskip+, \main{866}
+  \item midsloppy=\verb
+    \subitem *+\midsloppy+, \main{1941}, 1947
+  \item midsloppypar={\ttfamily midsloppypar} (environment), 
+		\main{1947}
+  \item miniscule=\verb
+    \subitem *+\miniscule+, \main{3864}
+  \item label=\verb
+    \subitem label+, \main{104}
+  \item multiply=\verb
+    \subitem *+\multiply+, 2698, 3669, 3682, 3695, 3708
+
+  \indexspace
+
+  \item nametest=\verb
+    \subitem *+\nametest+, 1024, 1029, 1034, 1039, 1044, 1049, 1054, 
+		1059, 1064, 1069, 1086, 1091, 1096, 1101, 1106, 1111, 
+		1116, 1121, 1126, 1131, 1651, 1653, 1661, 1671, 1673, 
+		1689, 1691, 1693, 1702, 1718, 1720, 1743, 1745, 1747, 
+		1775, 1842, 1846, 1850, 1854, 2541, 2544, 2547, 2550, 
+		2553, 2556
+  \item newcommand=\verb
+    \subitem *+\newcommand+, 17--29, 32--36
+  \item newenvironment=\verb
+    \subitem *+\newenvironment+, 30
+  \item newfloat=\verb
+    \subitem *+\newfloat+, \main{3479}, \main{3742}
+  \item newif=\verb
+    \subitem *+\newif+, 407, 747, 839, 947, 1180, 1182, 1360, 1362, 
+		1376, 2424, 3717, 3789
+  \item newlanguage=\verb
+    \subitem *+\newlanguage+, 3801
+  \item newline=\verb
+    \subitem *+\newline+, 803
+  \item newlistentry=\verb
+    \subitem *+\newlistentry+, \main{1500}, 1571, 1576, 1581, 1586, 
+		1591, 1597, 1602
+  \item newlistof=\verb
+    \subitem *+\newlistof+, \main{3065}, 3123--3125
+  \item newsavebox=\verb
+    \subitem *+\newsavebox+, 349, 350
+  \item newskip=\verb
+    \subitem *+\newskip+, 2429, 2447
+  \item newwrite=\verb
+    \subitem *+\newwrite+, 1380, 3116
+  \item text=\verb
+    \subitem text+, 3805
+  \item noalign=\verb
+    \subitem *+\noalign+, 3732
+  \item nobookblankpage=\verb
+    \subitem *+\nobookblankpage+, \main{945}
+  \item noDisplayskipStretch=\verb
+    \subitem *+\noDisplayskipStretch+, \main{2138}
+  \item noexpand=\verb
+    \subitem *+\noexpand+, 1507, 3490, 3765
+  \item nonzeroparskip=\verb
+    \subitem *+\nonzeroparskip+, \main{2425}
+  \item nopartblankpage=\verb
+    \subitem *+\nopartblankpage+, \main{837}
+  \item normalbaselineskip=\verb
+    \subitem *+\normalbaselineskip+, 2099
+  \item normalcolor=\verb
+    \subitem *+\normalcolor+, 3574, 3598
+  \item normalfont=\verb
+    \subitem *+\normalfont+, 679, 900--902, 927, 941, 1321, 1441, 1550, 
+		1556, 1557, 2566, 2606, 2617, 3058--3061, 3132, 3135, 
+		3140, 3148, 3149, 3153, 3207, 3215, 3224, 3239, 3242, 
+		3257, 3258, 3292, 3293, 3307, 3309, 3326--3328, 3370, 
+		3377, 3390--3392, 3455, 3456, 3550, 3913
+  \item normalrulethickness=\verb
+    \subitem *+\normalrulethickness+, 2677, 2679, 3003, 3030, 3042
+  \item normalsize=\verb
+    \subitem *+\normalsize+, 690, 1321, 2161, 2566, 2606, 2617, 
+		3292, 3293, 3783
+  \item notedivision=\verb
+    \subitem *+\notedivision+, \main{1461}, 1470, 1482
+  \item noteentry=\verb
+    \subitem *+\noteentry+, 1419, \main{1442}
+  \item noteidinnotes=\verb
+    \subitem *+\noteidinnotes+, 1444, \main{1449}
+  \item noteinnotes=\verb
+    \subitem *+\noteinnotes+, 1444, \main{1456}
+  \item notenuminnotes=\verb
+    \subitem *+\notenuminnotes+, \main{1438}, 1451
+  \item notenumintext=\verb
+    \subitem *+\notenumintext+, 1409, \main{1438}
+  \item notepageref=\verb
+    \subitem *+\notepageref+, \main{1364}
+  \item notesname=\verb
+    \subitem *+\notesname+, \main{1461}
+  \item nouppercaseheads=\verb
+    \subitem *+\nouppercaseheads+, \main{2925}
+  \item numberheight=\verb
+    \subitem *+\numberheight+, 3331, 3396, 3400
+  \item numberline=\verb
+    \subitem *+\numberline+, \main{1496}
+  \item numtoName=\verb
+    \subitem *+\numtoName+, 3176, 3223, 3241
+
+  \indexspace
+
+  \item o=\verb
+    \subitem *+\o+, 1503
+  \item oarg=\verb
+    \subitem *+\oarg+, \main{3818}
+  \item oddpagefalse=\verb
+    \subitem *+\oddpagefalse+, 1294, 1302
+  \item oddpagetrue=\verb
+    \subitem *+\oddpagetrue+, 1296, 1300
+  \item onecolumn=\verb
+    \subitem *+\onecolumn+, 781, 799
+  \item OnehalfSpace={\ttfamily OnehalfSpace} (environment), 
+		\main{2128}
+  \item OnehalfSpacing=\verb
+    \subitem *+\OnehalfSpacing+, \main{2054}, 2128, 2131
+  \item onelineskip=\verb
+    \subitem *+\onelineskip+, 866, 882, 1975--1977, 1979--1981, 1992, 
+		1995, 2001--2003, 2006, 2025, 2564, 2600, 3155, 3156, 
+		3171, 3186, 3189, 3204, 3212, 3217, 3226, 3228, 3234, 
+		3244, 3246, 3248, 3249, 3273, 3275, 3419, 3422, 3428
+  \item openout=\verb
+    \subitem *+\openout+, 1381, 1474, 3117
+  \item output=\verb
+    \subitem *+\output+, 3517
+  \item oval=\verb
+    \subitem *+\oval+, 2754, 2767, 2780, 2793
+  \item overridescapmargin=\verb
+    \subitem *+\overridescapmargin+, \main{542}
+
+  \indexspace
+
+  \item pageinnotes=\verb
+    \subitem *+\pageinnotes+, 1444, \main{1452}
+  \item pagenote=\verb
+    \subitem *+\pagenote+, \main{1383}, \main{1423}, 1427, 1428, 1431
+  \item pagenotesubhead=\verb
+    \subitem *+\pagenotesubhead+, 1412, 1416, \main{1491}
+  \item pagerefname=\verb
+    \subitem *+\pagerefname+, 1455
+  \item pagestyle=\verb
+    \subitem *+\pagestyle+, 12
+  \item pagetofootnote=\verb
+    \subitem *+\pagetofootnote+, \main{1426}
+  \item paperheight=\verb
+    \subitem *+\paperheight+, 1830, 1893, 1896, 1902, 1911, 2644, 2809
+  \item paperwidth=\verb
+    \subitem *+\paperwidth+, 1821, 1869, 1872, 1878, 1887, 2644, 2801, 
+		2806, 2811, 2813, 2815, 3397, 3401
+  \item par=\verb
+    \subitem *+\par+, 38, 45
+  \item parbox=\verb
+    \subitem *+\parbox+, 714, 1335, 1342, 2827, 2829, 2831, 2837, 2839, 
+		2841, 2847, 2849, 2851, 2857, 2859, 2861, 3373, 3376
+  \item parg=\verb
+    \subitem *+\parg+, \main{3818}
+  \item parindent=\verb
+    \subitem *+\parindent+, 795, 796, 831, 978, 1305, 1516, 1633, 1967, 
+		2022, 2032, 3076, 3085, 3095
+  \item parsep=\verb
+    \subitem *+\parsep+, 1966, 2493, 2500
+  \item parsepi=\verb
+    \subitem *+\parsepi+, 1977, 1978, 1982, 1992--1994, 1996, 
+		2003--2005, 2007, 2016, 2017, 2020, 2026, 2027, 2030, 
+		2457, 2473
+  \item parsepii=\verb
+    \subitem *+\parsepii+, 1981, 1983, 1995, 1997, 2006, 2008, 2019, 
+		2021, 2029, 2031, 2451, 2460, 2476, 2493
+  \item parsepiii=\verb
+    \subitem *+\parsepiii+, 2447, 2463, 2479
+  \item parshape=\verb
+    \subitem *+\parshape+, 1971
+  \item parskip=\verb
+    \subitem *+\parskip+, 797, 1966, 2093, 2116, 2119, 2425, 2427, 2430, 
+		2432, 2434, 2435, 2443, 2457, 2460, 2463, 2473, 2476, 
+		2479, 2505, 2510, 2514, 2622, 3076, 3085, 3089, 3096
+  \item part=\verb
+    \subitem *+\part+, 870
+  \item partblankpage=\verb
+    \subitem *+\partblankpage+, \main{837}
+  \item partnumberline=\verb
+    \subitem *+\partnumberline+, 207, 212, \main{858}
+  \item partopsep=\verb
+    \subitem *+\partopsep+, 1975, 1991, 2001, 2015, 2025, 2455, 2471, 
+		2481, 2502
+  \item partopsepiii=\verb
+    \subitem *+\partopsepiii+, 2446, 2453, 2481, 2502
+  \item pdfstringdef=\verb
+    \subitem *+\pdfstringdef+, 215
+  \item phantomsection=\verb
+    \subitem *+\phantomsection+, 202, 792, 914, 937, 3087, 3626
+  \item plainfootnotes=\verb
+    \subitem *+\plainfootnotes+, \main{2217}
+  \item pmname=\verb
+    \subitem *+\pmname+, \main{2703}, 2718
+  \item pnchap=\verb
+    \subitem *+\pnchap+, \main{1404}, 1412
+  \item pnschap=\verb
+    \subitem *+\pnschap+, \main{1404}, 1416
+  \item postnoteinnotes=\verb
+    \subitem *+\postnoteinnotes+, 1445, \main{1458}
+  \item prechapterprecis=\verb
+    \subitem *+\prechapterprecis+, \main{3551}
+  \item prechapterprecisshift=\verb
+    \subitem *+\prechapterprecisshift+, \main{3544}, 3552
+  \item precisfont=\verb
+    \subitem *+\precisfont+, \main{3550}, 3553
+  \item preindexhook=\verb
+    \subitem *+\preindexhook+, 783, 788
+  \item prenoteinnotes=\verb
+    \subitem *+\prenoteinnotes+, 1443, \main{1458}
+  \item prevdepth=\verb
+    \subitem *+\prevdepth+, 704, 2171, 2621, 2627, 2628, 2630
+  \item printbookname=\verb
+    \subitem *+\printbookname+, \main{904}, 929
+  \item printbooknum=\verb
+    \subitem *+\printbooknum+, \main{904}, 929
+  \item printbooktitle=\verb
+    \subitem *+\printbooktitle+, \main{904}, 932, 942
+  \item PrintChanges=\verb
+    \subitem *+\PrintChanges+, 49
+  \item printchaptername=\verb
+    \subitem *+\printchaptername+, 677, 3133, 3150, 3164, 3184, 3205, 
+		3221, 3238, 3266, 3330, 3349, 3367, 3393, 3417
+  \item printchapternonum=\verb
+    \subitem *+\printchapternonum+, 3107, 3139, 3158, 3183, 3197, 3213, 
+		3230, 3250, 3298, 3374, 3421
+  \item printchapternum=\verb
+    \subitem *+\printchapternum+, 681, 3136, 3152, 3166, 3175, 3195, 
+		3209, 3222, 3240, 3268, 3295, 3311, 3333, 3352, 3371, 
+		3404, 3418
+  \item printchaptertitle=\verb
+    \subitem *+\printchaptertitle+, 3108, 3141, 3154, 3168, 3188, 3216, 
+		3225, 3243, 3274, 3284, 3336, 3357, 3378, 3426
+  \item PrintIndex=\verb
+    \subitem *+\PrintIndex+, 48
+  \item printnotes=\verb
+    \subitem *+\printnotes+, \main{1464}
+  \item printpageinnotes=\verb
+    \subitem *+\printpageinnotes+, \main{1452}
+  \item printpagenotes*=\verb
+    \subitem *+\printpagenotes*+, \main{1464}
+  \item printpagenotes=\verb
+    \subitem *+\printpagenotes+, 1464
+  \item printtime*=\verb
+    \subitem *+\printtime*+, \main{2708}
+  \item printtime=\verb
+    \subitem *+\printtime+, 2703, \main{2708}, 2747
+  \item printZnonum=\verb
+    \subitem *+\printZnonum+, \main{3107}
+  \item printZtitle=\verb
+    \subitem *+\printZtitle+, \main{3108}
+  \item edef=\verb
+    \subitem edef+, 110, 1162, 2189, 2205, 2228, 2245, 2259, 2273, 2286, 
+		2301, 2313, 2327, 2340, 2355, 2367, 2383, 2398, 2414
+  \item write=\verb
+    \subitem write+, 216, 753, 760, 765, 1399
+  \item providecommand=\verb
+    \subitem *+\providecommand+, 165, 1158, 1461, 2504, 2509, 3825
+  \item ProvidesFile=\verb
+    \subitem *+\ProvidesFile+, 300
+  \item ProvidesPackage=\verb
+    \subitem *+\ProvidesPackage+, 80
+  \item afterbook=\verb
+    \subitem afterbook+, \main{862}
+  \item afterpart=\verb
+    \subitem afterpart+, \main{862}
+  \item book=\verb
+    \subitem book+, \main{862}
+  \item chapter=\verb
+    \subitem chapter+, \main{2992}
+  \item cleared=\verb
+    \subitem cleared+, \main{2992}
+  \item companion=\verb
+    \subitem companion+, \main{3035}
+  \item empty=\verb
+    \subitem empty+, \main{2919}
+  \item headings=\verb
+    \subitem headings+, \main{2931}
+  \item indextitlepagestyle=\verb
+    \subitem indextitlepagestyle+, \main{3063}
+  \item myheadings=\verb
+    \subitem myheadings+, \main{2978}
+  \item part=\verb
+    \subitem part+, \main{2992}
+  \item plain=\verb
+    \subitem plain+, \main{2921}
+  \item Ruled=\verb
+    \subitem Ruled+, \main{3025}
+  \item ruled=\verb
+    \subitem ruled+, \main{3000}
+  \item pstyle=\verb
+    \subitem *+\pstyle+, 20
+  \item put=\verb
+    \subitem *+\put+, 2744--2746, 2752--2754, 2759, 2760, 2765--2767, 
+		2772, 2773, 2778--2780, 2785, 2786, 2791--2793
+  \item PWcomment=\verb
+    \subitem *+\PWcomment+, 29
+
+  \indexspace
+
+  \item quad=\verb
+    \subitem *+\quad+, 681
+  \item quarkmarks=\verb
+    \subitem *+\quarkmarks+, \main{2736}
+
+  \indexspace
+
+  \item raggedbottom=\verb
+    \subitem *+\raggedbottom+, 2678
+  \item raggedleft=\verb
+    \subitem *+\raggedleft+, 421, 2832, 2842, 2852, 2862, 3226, 3244, 
+		3276, 3292, 3293, 3307, 3309
+  \item raggedright=\verb
+    \subitem *+\raggedright+, 423, 689, 690, 2828, 2838, 2848, 2858, 
+		3169, 3347
+  \item raggedwrap=\verb
+    \subitem *+\raggedwrap+, \main{826}
+  \item ragrparindent=\verb
+    \subitem *+\ragrparindent+, 831
+  \item raisebox=\verb
+    \subitem *+\raisebox+, 469, 472, 3271, 3334
+  \item rangle=\verb
+    \subitem *+\rangle+, 3814
+  \item RecordChanges=\verb
+    \subitem *+\RecordChanges+, 9
+  \item registrationColour=\verb
+    \subitem *+\registrationColour+, \main{2736}
+  \item renewcommand=\verb
+    \subitem *+\renewcommand+, 11, 14, 37, 42, 44
+  \item renewenvironment=\verb
+    \subitem *+\renewenvironment+, 31, 773
+  \item reparticle=\verb
+    \subitem *+\reparticle+, 307, \main{684}
+  \item RequireAtEndClass=\verb
+    \subitem *+\RequireAtEndClass+, \main{661}
+  \item RequireAtEndPackage=\verb
+    \subitem *+\RequireAtEndPackage+, \main{653}
+  \item RequireXeTeX=\verb
+    \subitem *+\RequireXeTeX+, \main{3791}
+  \item a=\verb
+    \subitem a+, 1393, 1394
+  \item resizebox=\verb
+    \subitem *+\resizebox+, 3296, 3313, 3335, 3407
+  \item restorefromonecol=\verb
+    \subitem *+\restorefromonecol+, 3080, 3092
+  \item rightblock=\verb
+    \subitem *+\rightblock+, 3344
+  \item rightmargin=\verb
+    \subitem *+\rightmargin+, 813, 1957, 1968, 3655
+  \item rightmark=\verb
+    \subitem *+\rightmark+, 2956, 2975, 2990, 3023, 3033, 3060
+  \item Roman=\verb
+    \subitem *+\Roman+, 877, 3194
+  \item romannumeral=\verb
+    \subitem *+\romannumeral+, 1960
+  \item rule=\verb
+    \subitem *+\rule+, 2194, 2210, 2233, 2250, 3210, 3211, 3264, 3282, 
+		3285, 3409
+
+  \indexspace
+
+  \item sbox=\verb
+    \subitem *+\sbox+, 708, 718, 3754
+  \item scapmargleftfalse=\verb
+    \subitem *+\scapmargleftfalse+, \main{407}, 504, 518, 523, 526, 537, 
+		549
+  \item scapmarglefttrue=\verb
+    \subitem *+\scapmarglefttrue+, \main{407}, 502, 515, 521, 528, 534, 
+		545
+  \item scshape=\verb
+    \subitem *+\scshape+, 3022, 3032, 3169, 3292, 3307, 3370, 3913
+  \item section=\verb
+    \subitem *+\section+, 672, 1492
+  \item Sectionformat=\verb
+    \subitem *+\Sectionformat+, 95
+  \item sectionmark=\verb
+    \subitem *+\sectionmark+, 2948, 2982, 3014, 3047
+  \item setbvlinenums=\verb
+    \subitem *+\setbvlinenums+, \main{3690}
+  \item setcounter=\verb
+    \subitem *+\setcounter+, 16
+  \item setDisplayskipStretch=\verb
+    \subitem *+\setDisplayskipStretch+, \main{2138}
+  \item setfillsize=\verb
+    \subitem *+\setfillsize+, \main{1688}
+  \item setfloatlocations=\verb
+    \subitem *+\setfloatlocations+, \main{3614}
+  \item setfootnoterule=\verb
+    \subitem *+\setfootnoterule+, \main{2670}
+  \item mscaplkern=\verb
+    \subitem mscaplkern+, \main{412}, 446
+  \item setrectanglesize=\verb
+    \subitem *+\setrectanglesize+, \main{1650}
+  \item setsecheadstyle=\verb
+    \subitem *+\setsecheadstyle+, 689
+  \item setsecnumdepth=\verb
+    \subitem *+\setsecnumdepth+, \main{3616}
+  \item setsidebarheight=\verb
+    \subitem *+\setsidebarheight+, \main{2533}, 2557
+  \item setsidebars=\verb
+    \subitem *+\setsidebars+, \main{2538}
+  \item setsidecappos=\verb
+    \subitem *+\setsidecappos+, \main{363}
+  \item setsidecaps=\verb
+    \subitem *+\setsidecaps+, \main{2516}
+  \item setSingleSpace=\verb
+    \subitem *+\setSingleSpace+, \main{2043}
+  \item setSpacing=\verb
+    \subitem *+\setSpacing+, \main{2039}, 2049, 2056, 2058, 2060, 2062, 
+		2064, 2066, 2068, 2073, 2075, 2077, 2079, 2081, 2083, 
+		2085, 2104, 2110, 2126
+  \item setsubsecheadstyle=\verb
+    \subitem *+\setsubsecheadstyle+, 690
+  \item settocdepth=\verb
+    \subitem *+\settocdepth+, \main{1084}
+  \item settodepth=\verb
+    \subitem *+\settodepth+, 486, 487
+  \item settoheight=\verb
+    \subitem *+\settoheight+, 479, 480, 3208
+  \item setulmargins=\verb
+    \subitem *+\setulmargins+, 1865
+  \item bstract=\verb
+    \subitem bstract+, \main{3462}
+  \item verb=\verb
+    \subitem verb+, 3537
+  \item line=\verb
+    \subitem line+, \main{3514}
+  \item setverselinenums=\verb
+    \subitem *+\setverselinenums+, \main{3663}
+  \item sffamily=\verb
+    \subitem *+\sffamily+, 31, 3148, 3153, 3224, 3242, 3257, 3258, 3293, 
+		3296, 3309, 3314
+  \item showtrimsfalse=\verb
+    \subitem *+\showtrimsfalse+, 1275
+  \item showtrimsoff=\verb
+    \subitem *+\showtrimsoff+, \main{1273}
+  \item showtrimson=\verb
+    \subitem *+\showtrimson+, \main{1273}
+  \item showtrimstrue=\verb
+    \subitem *+\showtrimstrue+, 1276
+  \item sidebar=\verb
+    \subitem *+\sidebar+, \main{2613}, 3334
+  \item sidebarfont=\verb
+    \subitem *+\sidebarfont+, \main{2532}, 2554, 2606, 2617
+  \item sidebarform=\verb
+    \subitem *+\sidebarform+, 2617
+  \item sidebarheight=\verb
+    \subitem *+\sidebarheight+, 2559
+  \item sidebarhsep=\verb
+    \subitem *+\sidebarhsep+, 2523, 2527, 2542, 2662
+  \item sidebartopsep=\verb
+    \subitem *+\sidebartopsep+, \main{2530}, 2551, 2601, 2608, 2664
+  \item sidebarvsep=\verb
+    \subitem *+\sidebarvsep+, 2548, 2634, 2664
+  \item sidebarwidth=\verb
+    \subitem *+\sidebarwidth+, 2522, 2545, 2615, 2662
+  \item sidecapfloatwidth=\verb
+    \subitem *+\sidecapfloatwidth+, \main{409}, 445
+  \item sidecapmargin=\verb
+    \subitem *+\sidecapmargin+, \main{381}
+  \item sidecapraise=\verb
+    \subitem *+\sidecapraise+, \main{360}, 494
+  \item sidecapsep=\verb
+    \subitem *+\sidecapsep+, \main{352}, 415, 471, 2518, 2660
+  \item sidecapstyle=\verb
+    \subitem *+\sidecapstyle+, 276, 292, \main{418}, 459, 577, 601, 617
+  \item sidecaption=\verb
+    \subitem *+\sidecaption+, \main{426}
+  \item sidecapwidth=\verb
+    \subitem *+\sidecapwidth+, 275, 291, \main{352}, 414, 458, 576, 600, 
+		616, 2519, 2660
+  \item sidecontcaption=\verb
+    \subitem *+\sidecontcaption+, \main{282}, \main{558}
+  \item sidecontents=\verb
+    \subitem *+\sidecontents+, \main{2569}, 3558
+  \item sideins=\verb
+    \subitem *+\sideins+, 2534--2536, 2558, 2602, 2609, 2614, 2666, 
+		3556, 3611
+  \item sidelegend=\verb
+    \subitem *+\sidelegend+, \main{607}
+  \item sidenamedlegend=\verb
+    \subitem *+\sidenamedlegend+, \main{583}
+  \item sidepars=\verb
+    \subitem *+\sidepars+, 1288
+  \item sideparvshift=\verb
+    \subitem *+\sideparvshift+, 1325, 1330
+  \item SingleSpace*={\ttfamily SingleSpace*} (environment), 
+		\main{2108}
+  \item SingleSpace={\ttfamily SingleSpace} (environment), \main{2101}
+  \item SingleSpacing=\verb
+    \subitem *+\SingleSpacing+, \main{2047}, 2101
+  \item sloppybottom=\verb
+    \subitem *+\sloppybottom+, \main{2681}
+  \item small=\verb
+    \subitem *+\small+, 19
+  \item smash=\verb
+    \subitem *+\smash+, 3264
+  \item sourceflush=\verb
+    \subitem *+\sourceflush+, 3447, 3448
+  \item Spacing={\ttfamily Spacing} (environment), \main{2122}
+  \item special=\verb
+    \subitem *+\special+, 2796
+  \item spinemargin=\verb
+    \subitem *+\spinemargin+, 1823, 1824, 1881, 1884, 2648, 3399, 3403
+  \item splitmaxdepth=\verb
+    \subitem *+\splitmaxdepth+, 2619
+  \item splittopskip=\verb
+    \subitem *+\splittopskip+, 2618
+  \item stockheight=\verb
+    \subitem *+\stockheight+, 1829, 1891, 1898, 2640, 2796
+  \item stockwidth=\verb
+    \subitem *+\stockwidth+, 1820, 1867, 1874, 2640, 2796, 2801, 2806
+  \item stretch=\verb
+    \subitem *+\stretch+, 1351, 1353
+  \item string=\verb
+    \subitem *+\string+, 373, 398, 551, 754, 761, 766, 1412, 1416, 1419, 
+		3825, 3827, 3829
+  \item strut=\verb
+    \subitem *+\strut+, 479, 487, 1289, 2828, 2830, 2832, 2838, 2840, 
+		2842, 2848, 2850, 2852, 2858, 2860, 2862, 3524
+  \item strutbox=\verb
+    \subitem *+\strutbox+, 1326, 2094, 2195, 2211, 2234, 2251, 2536, 
+		2607, 2618, 2619, 2621, 2625, 2627, 2632
+
+  \indexspace
+
+  \item tableofcontents=\verb
+    \subitem *+\tableofcontents+, 3920
+  \item tabmac=\verb
+    \subitem *+\tabmac+, 28
+  \item processline=\verb
+    \subitem processline+, 3527
+  \item texbook=\verb
+    \subitem *+\texbook+, 32
+  \item textbf=\verb
+    \subitem *+\textbf+, 3155
+  \item textflush=\verb
+    \subitem *+\textflush+, 3443, 3445
+  \item textheight=\verb
+    \subitem *+\textheight+, 1794, 1797, 1798, 1801, 1805, 1806, 1809, 
+		1814, 1815, 1831, 1904, 1909, 2567, 2646
+  \item textit=\verb
+    \subitem *+\textit+, 32, 33, 3152, 3159
+  \item textsc=\verb
+    \subitem *+\textsc+, 23
+  \item textsf=\verb
+    \subitem *+\textsf+, 17, 22, 24
+  \item textsl=\verb
+    \subitem *+\textsl+, 19, 20
+  \item textsuperscript=\verb
+    \subitem *+\textsuperscript+, 1439
+  \item texttt=\verb
+    \subitem *+\texttt+, 18, 21, 27, 28, 3799, 3824, 3827
+  \item textwidth=\verb
+    \subitem *+\textwidth+, 41, 43, 498, 816, 1314, 1822, 1880, 1885, 
+		2646, 2874, 2876, 2877, 3003, 3026, 3030, 3038, 3282, 
+		3285, 3344, 3398, 3402, 3658
+  \item vlinenumber=\verb
+    \subitem vlinenumber+, \main{3714}
+  \item thebook=\verb
+    \subitem *+\thebook+, \main{875}, 906, 918, 919
+  \item thechapter=\verb
+    \subitem *+\thechapter+, 681, 1226, 1227, 1230, 1231, 1412, 2939, 
+		2965, 3010, 3136, 3152, 3176, 3194, 3196, 3210, 3223, 
+		3241, 3271, 3296, 3314, 3335, 3355, 3368, 3407, 3420
+  \item theHbook=\verb
+    \subitem *+\theHbook+, \main{875}
+  \item theHchapter=\verb
+    \subitem *+\theHchapter+, 243, 248, 249
+  \item theHmemhycontfloat=\verb
+    \subitem *+\theHmemhycontfloat+, \main{259}
+  \item theHsection=\verb
+    \subitem *+\theHsection+, 248, 249
+  \item theindex={\ttfamily theindex} (environment), \main{773}
+  \item thememhycontfloat=\verb
+    \subitem *+\thememhycontfloat+, \main{259}
+  \item thepage=\verb
+    \subitem *+\thepage+, 755, 762, 1419, 2747, 2922, 2923, 2955, 2956, 
+		2975, 2989, 2990, 3001, 3002, 3028, 3029, 3058, 3061, 
+		3412
+  \item thepagenote=\verb
+    \subitem *+\thepagenote+, 1367, \main{1369}, 1409, 1419
+  \item thesection=\verb
+    \subitem *+\thesection+, 2951, 3049
+  \item thetexbook=\verb
+    \subitem *+\thetexbook+, 33
+  \item thicklines=\verb
+    \subitem *+\thicklines+, 2743, 2751, 2758, 2764, 2771, 2777, 2784, 
+		2790
+  \item thispagestyle=\verb
+    \subitem *+\thispagestyle+, 795, 796, 849, 891, 957, 2997, 3101
+  \item tightlists*=\verb
+    \subitem *+\tightlists*+, \main{2011}
+  \item tightlists=\verb
+    \subitem *+\tightlists+, \main{2011}, \main{2443}
+  \item time=\verb
+    \subitem *+\time+, 2696, 2698, 2725, 2728
+  \item tmarkbl=\verb
+    \subitem *+\tmarkbl+, 2782, 2815
+  \item tmarkbm=\verb
+    \subitem *+\tmarkbm+, 2775, 2815
+  \item tmarkbr=\verb
+    \subitem *+\tmarkbr+, 2769, 2815
+  \item tmarkml=\verb
+    \subitem *+\tmarkml+, 2788, 2813
+  \item tmarkmr=\verb
+    \subitem *+\tmarkmr+, 2762, 2813
+  \item tmarktl=\verb
+    \subitem *+\tmarktl+, 2741, 2811
+  \item tmarktm=\verb
+    \subitem *+\tmarktm+, 2749, 2811
+  \item tmarktr=\verb
+    \subitem *+\tmarktr+, 2756, 2811
+  \item all=\verb
+    \subitem all+, \main{1150}
+  \item book=\verb
+    \subitem book+, \main{875}
+  \item chapter=\verb
+    \subitem chapter+, \main{3931}
+  \item none=\verb
+    \subitem none+, \main{1150}
+  \item part=\verb
+    \subitem part+, \main{3931}
+  \item tocmark=\verb
+    \subitem *+\tocmark+, 2943, 2969, 2983, 3015, 3052
+  \item today=\verb
+    \subitem *+\today+, 2747
+  \item toks=\verb
+    \subitem *+\toks+, 2700, 2701, 2714, 2733
+  \item tolerance=\verb
+    \subitem *+\tolerance+, 1942
+  \item topsep=\verb
+    \subitem *+\topsep+, 2492, 2499, 2505
+  \item topsepi=\verb
+    \subitem *+\topsepi+, 1979, 1994, 2005, 2018, 2028, 2456, 2472
+  \item topsepii=\verb
+    \subitem *+\topsepii+, 1982, 1996, 2007, 2020, 2030, 2459, 2475, 
+		2492
+  \item topsepiii=\verb
+    \subitem *+\topsepiii+, 1983, 1997, 2008, 2021, 2031, 2452, 2462, 
+		2478, 2499
+  \item topskip=\verb
+    \subitem *+\topskip+, 705, 1798, 1806, 1810, 1815, 2535, 2600, 2607, 
+		2682, 2685, 2690--2692, 3186, 3233, 3253
+  \item traditionalparskip=\verb
+    \subitem *+\traditionalparskip+, \main{2425}
+  \item trimedge=\verb
+    \subitem *+\trimedge+, 1818, 1868, 1873, 2642, 2801, 2804, 2806
+  \item trimmarks=\verb
+    \subitem *+\trimmarks+, 1282, 2795
+  \item trimtop=\verb
+    \subitem *+\trimtop+, 1819, 1892, 1897, 2642, 2798
+  \item ttfamily=\verb
+    \subitem *+\ttfamily+, 2746, 3819, 3821, 3823
+  \item twocolumn=\verb
+    \subitem *+\twocolumn+, 787, 799, 855, 963
+  \item typeoutlayout=\verb
+    \subitem *+\typeoutlayout+, 1939, \main{2636}
+
+  \indexspace
+
+  \item unitlength=\verb
+    \subitem *+\unitlength+, 2743, 2751, 2758, 2764, 2771, 2777, 2784, 
+		2790
+  \item unskip=\verb
+    \subitem *+\unskip+, 819, 2625
+  \item unvbox=\verb
+    \subitem *+\unvbox+, 1282, 2200, 2240, 2268, 2296, 2322, 2350, 2378, 
+		2409, 2602, 2609, 3559, 3570, 3576, 3595, 3600, 3608, 
+		3610, 3611
+  \item uppercaseheads=\verb
+    \subitem *+\uppercaseheads+, \main{2925}
+  \item uppermargin=\verb
+    \subitem *+\uppermargin+, 1832, 1833, 1865, 1903, 1908, 1915, 1922, 
+		2650
+  \item usebox=\verb
+    \subitem *+\usebox+, 466, 469, 472, 479, 480, 486, 487
+  \item usepackage=\verb
+    \subitem *+\usepackage+, 3
+
+  \indexspace
+
+  \item vadjust=\verb
+    \subitem *+\vadjust+, 1289
+  \item value=\verb
+    \subitem *+\value+, 1175, 1264, 3480, 3481, 3887
+  \item vbox=\verb
+    \subitem *+\vbox+, 705, 1282, 2199, 2239, 2267, 2295, 2321, 2349, 
+		2370, 2377, 2386, 2401, 2408, 2417, 2599, 2798, 2809, 
+		2826, 2836, 2846, 2856, 3521, 3557, 3567, 3593
+  \item line=\verb
+    \subitem line+, 3529
+  \item processline=\verb
+    \subitem processline+, 3519
+  \item start=\verb
+    \subitem start+, 3538
+  \item verbatim=\verb
+    \subitem *+\verbatim+, \main{2504}
+  \item verbatimbreakchar=\verb
+    \subitem *+\verbatimbreakchar+, 833
+  \item verbatimindent=\verb
+    \subitem *+\verbatimindent+, 834
+  \item verbfootnotein=\verb
+    \subitem *+\verbfootnotein+, 2512
+  \item verselinebreak=\verb
+    \subitem *+\verselinebreak+, \main{801}, 821
+  \item verselinenumbersleft=\verb
+    \subitem *+\verselinenumbersleft+, \main{805}
+  \item verselinenumbersright=\verb
+    \subitem *+\verselinenumbersright+, \main{805}
+  \item vfuzz=\verb
+    \subitem *+\vfuzz+, 1946
+  \item vlvnumfont=\verb
+    \subitem *+\vlvnumfont+, 814, 817, 3656, 3659
+  \item vminipage={\ttfamily vminipage} (environment), \main{2164}
+  \item vphantom=\verb
+    \subitem *+\vphantom+, 3159, 3184, 3214, 3231, 3251, 3298, 3375
+  \item vplace={\ttfamily vplace} (environment), \main{1348}
+  \item vrightskip=\verb
+    \subitem *+\vrightskip+, 3655, 3658
+  \item vrule=\verb
+    \subitem *+\vrule+, 2095, 2175
+  \item vss=\verb
+    \subitem *+\vss+, 1324, 1328, 2602, 2609, 2817
+  \item vtop=\verb
+    \subitem *+\vtop+, 1319, 1325, 2605
+
+  \indexspace
+
+  \item wrappingon=\verb
+    \subitem *+\wrappingon+, \main{826}
+  \item wrapright=\verb
+    \subitem *+\wrapright+, 835
+  \item write=\verb
+    \subitem *+\write+, 1393
+
+  \indexspace
+
+  \item X*={\ttfamily X*} (environment), \main{3503}
+  \item X={\ttfamily X} (environment), \main{3503}
+  \item xdef=\verb
+    \subitem *+\xdef+, 136, 193, 230
+  \item xetexfalse=\verb
+    \subitem *+\xetexfalse+, 3790
+  \item xetextrue=\verb
+    \subitem *+\xetextrue+, 3790
+  \item xindyindex=\verb
+    \subitem *+\xindyindex+, \main{743}
+
+  \indexspace
+
+  \item Zdepth=\verb
+    \subitem *+\Zdepth+, \main{3067}, \main{3494}
+  \item Zheadstart=\verb
+    \subitem *+\Zheadstart+, \main{3105}
+  \item Zmark=\verb
+    \subitem *+\Zmark+, \main{3070}
+
+\end{theindex}
