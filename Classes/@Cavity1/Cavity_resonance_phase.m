@@ -31,9 +31,9 @@ for q = 1:num_iter
     
     % Do a round trip
     Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat);
-    Field_Circ = Reflect_mirror(Field_Circ,Cin.I_end);
+    Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_end);
     Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat)*Phase_adjust;
-    Field_Circ = Reflect_mirror(Field_Circ,Cin.I_input);
+    Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_input);
     
     Phase_adjust = Phase_adjust * exp(-1i*angle(Calculate_Overlap(Field_Circ,Field_total)));
     %     Calculate_power(Field_total)
@@ -45,10 +45,10 @@ Field_before = Field_total;
 Field_Circ = Field_total;
 
 Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat);
-Field_Circ = Reflect_mirror(Field_Circ,Cin.I_end);
+Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_end);
 %angle(Calculate_Overlap(Field_Circ,Field_before))
 Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat);
-Field_Circ = Reflect_mirror(Field_Circ,Cin.I_input);
+Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_input);
 
 % Field_before.Fit_TEM00;
 % Field_Circ.Fit_TEM00;

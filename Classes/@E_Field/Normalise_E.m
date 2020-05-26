@@ -19,11 +19,12 @@ switch nargin
         
         if varargin{2} == 0
             Eout.Field = complex(zeros(E.Grid.Num_point,E.Grid.Num_point));
-            if  E.Nb_Pair_SB             
+            if  E.Nb_Pair_SB
                 for ii=1:E.Nb_Pair_SB
                     Eout.SB(ii).Field_lower = Eout.Field;
-                    Eout.SB(ii).Field_uppper = Eout.Field;
-                end               
+                    Eout.SB(ii).Field_upper = Eout.Field;
+                end
+             
             end
         end
         

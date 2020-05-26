@@ -8,10 +8,10 @@ end
 
 disp('---------- For the carrier ---------------')
 
-fprintf('  Power in the input beam: \t %6.6g \t [W] \n',Calculate_power(Cin.Laser_in))
-fprintf('  Circulating power: \t\t %6.6g \t [W] \n',Calculate_power(Cin.Field_circ))
-fprintf('  Transmitted power: \t\t %6.6g \t [W] \n',Calculate_power(Cin.Field_trans))
-fprintf('  Reflected power: \t\t\t %6.6g \t [W] \n',Calculate_power(Cin.Field_ref))
+fprintf('  Power in the input beam: \t %6.6g \t [W] \n',Calculate_Power(Cin.Laser_in))
+fprintf('  Circulating power: \t\t %6.6g \t [W] \n',Calculate_Power(Cin.Field_circ))
+fprintf('  Transmitted power: \t\t %6.6g \t [W] \n',Calculate_Power(Cin.Field_trans))
+fprintf('  Reflected power: \t\t\t %6.6g \t [W] \n',Calculate_Power(Cin.Field_ref))
 fprintf('  Round trip losses [ppm]: \t %6.6g \n\n',Cin.Loss_RTL *1E6)
 
 % Round trip losses calculation, using the energy conservation
@@ -20,10 +20,10 @@ fprintf('  Round trip losses [ppm]: \t %6.6g \n\n',Cin.Loss_RTL *1E6)
 
 for ii=1:Cin.Laser_in.Nb_Pair_SB
     
-    [Pin1, Pin2] = Calculate_power_SB(Cin.Laser_in,'SB_num',ii);
-    [Pcirc1, Pcirc2] = Calculate_power_SB(Cin.Field_circ,'SB_num',ii);
-    [Ptrans1, Ptrans2] = Calculate_power_SB(Cin.Field_trans,'SB_num',ii);
-    [Pref1, Pref2] = Calculate_power_SB(Cin.Field_ref,'SB_num',ii);
+    [Pin1, Pin2] = Calculate_Power(Cin.Laser_in,'include','SB','SB_num',ii);
+    [Pcirc1, Pcirc2] = Calculate_Power(Cin.Field_circ,'include','SB','SB_num',ii);
+    [Ptrans1, Ptrans2] = Calculate_Power(Cin.Field_trans,'include','SB','SB_num',ii);
+    [Pref1, Pref2] = Calculate_Power(Cin.Field_ref,'include','SB','SB_num',ii);
     
     fprintf('---------- For the sidebands %i ---------------\n',ii)
     fprintf(' for the lower and upper sidebands respectively \n')

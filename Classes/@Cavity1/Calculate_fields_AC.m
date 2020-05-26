@@ -54,18 +54,18 @@ error_P = 1;
 if isempty(Cin.Field_reso_guess) % If the cavity resonance phase has not been calculate beforehand, so no guess for the resonant field
     E1 = Field_in;
 else
-    E1 = Cin.Field_reso_guess * sqrt(Calculate_power(Cin.Laser_in)); % The 'guess' field was calculated for 1W of input power, so it has to be normalised according to the current incident power
+    E1 = Cin.Field_reso_guess * sqrt(Calculate_Power(Cin.Laser_in)); % The 'guess' field was calculated for 1W of input power, so it has to be normalised according to the current incident power
 end
 
 if ~E1.Nb_Pair_SB % if there is no SB
     
     % Find first D1 = E1 - A E1
     E1_circ = Propagate_E(E1,Cin.Propagation_mat);
-    E1_circ = Reflect_mirror(E1_circ,Cin.I_end);
+    E1_circ = Reflect_Mirror(E1_circ,Cin.I_end);
     E1_circ = Propagate_E(E1_circ,Cin.Propagation_mat);
     
     E1_circ = E1_circ * Cin.Resonance_phase;
-    E1_circ = Reflect_mirror(E1_circ,Cin.I_input);
+    E1_circ = Reflect_Mirror(E1_circ,Cin.I_input);
     
     D1 = E1 -  E1_circ;
     
@@ -80,11 +80,11 @@ if ~E1.Nb_Pair_SB % if there is no SB
         
         % Do a round trip for E_SR_2
         E_SR_2_circ = Propagate_E(E_SR_2,Cin.Propagation_mat);
-        E_SR_2_circ = Reflect_mirror(E_SR_2_circ,Cin.I_end);
+        E_SR_2_circ = Reflect_Mirror(E_SR_2_circ,Cin.I_end);
         E_SR_2_circ = Propagate_E(E_SR_2_circ,Cin.Propagation_mat);
         
         E_SR_2_circ = E_SR_2_circ * Cin.Resonance_phase;
-        E_SR_2_circ = Reflect_mirror(E_SR_2_circ,Cin.I_input);
+        E_SR_2_circ = Reflect_Mirror(E_SR_2_circ,Cin.I_input);
         
         D_SR_2 = E_SR_2 - E_SR_2_circ;
         
@@ -105,7 +105,7 @@ if ~E1.Nb_Pair_SB % if there is no SB
         % Calculate D2 now
         D2 = E2 - ( c(1)*(E1 - D1) + c(2)*E_SR_2_circ );
         
-        error_P = Calculate_power(E2 - E1) / Calculate_power(E1);
+        error_P = Calculate_Power(E2 - E1) / Calculate_Power(E1);
         
         E1 = E2;
         D1 = D2;
@@ -130,11 +130,11 @@ else
     
     % Find first D1 = E1 - A E1
     E1_circ = Propagate_E(E1,Cin.Propagation_mat);
-    E1_circ = Reflect_mirror(E1_circ,Cin.I_end);
+    E1_circ = Reflect_Mirror(E1_circ,Cin.I_end);
     E1_circ = Propagate_E(E1_circ,Cin.Propagation_mat);
     
     E1_circ = E1_circ * Cin.Resonance_phase;
-    E1_circ = Reflect_mirror(E1_circ,Cin.I_input);
+    E1_circ = Reflect_Mirror(E1_circ,Cin.I_input);
     
     D1 = E1 -  E1_circ;
     % On now we have E1, D1 that all we need
@@ -155,11 +155,11 @@ else
         
         % Do a round trip for E_SR_2
         E_SR_2_circ = Propagate_E(E_SR_2,Cin.Propagation_mat);
-        E_SR_2_circ = Reflect_mirror(E_SR_2_circ,Cin.I_end);
+        E_SR_2_circ = Reflect_Mirror(E_SR_2_circ,Cin.I_end);
         E_SR_2_circ = Propagate_E(E_SR_2_circ,Cin.Propagation_mat);
         
         E_SR_2_circ = E_SR_2_circ * Cin.Resonance_phase;
-        E_SR_2_circ = Reflect_mirror(E_SR_2_circ,Cin.I_input);
+        E_SR_2_circ = Reflect_Mirror(E_SR_2_circ,Cin.I_input);
         
         D_SR_2 = E_SR_2 - E_SR_2_circ;
         
@@ -183,7 +183,7 @@ else
             % Calculate D2 now
             D2 = E2 - ( c(1)*(E1 - D1) + c(2)*E_SR_2_circ );
             
-            error_P_carr = Calculate_power(E2 - E1) / Calculate_power(E1);
+            error_P_carr = Calculate_Power(E2 - E1) / Calculate_Power(E1);
             
             E1 = E2;
             D1 = D2;
@@ -216,8 +216,8 @@ else
                 D2.SB(ii).Field_lower = E2.SB(ii).Field_lower - ( c(1)*(E1.SB(ii).Field_lower - D1.SB(ii).Field_lower)...
                     + c(2)*E_SR_2_circ.SB(ii).Field_lower);
                 
-                [pow_diff,~] = Calculate_power_SB(E2 - E1,'SB_num',ii);
-                [pow_E1,~] = Calculate_power_SB(E1,'SB_num',ii);
+                [pow_diff,~] = Calculate_Power(E2 - E1,'include','SB','SB_num',ii);
+                [pow_E1,~] = Calculate_Power(E1,'include','SB','SB_num',ii);
                 
                 error_P_LSB(ii) = pow_diff / pow_E1;
                 
@@ -246,8 +246,8 @@ else
                 % Calculate D2 now
                 D2.SB(ii).Field_upper = E2.SB(ii).Field_upper - ( c(1)*(E1.SB(ii).Field_upper - D1.SB(ii).Field_upper) + c(2)*E_SR_2_circ.SB(ii).Field_upper);
                 
-                [~,pow_diff] = Calculate_power_SB(E2 - E1,'SB_num',ii);
-                [~,pow_E1] = Calculate_power_SB(E1,'SB_num',ii);
+                [~,pow_diff] = Calculate_Power(E2 - E1,'include','SB','SB_num',ii);
+                [~,pow_E1] = Calculate_Power(E1,'include','SB','SB_num',ii);
                 
                 error_P_USB(ii) = pow_diff / pow_E1;
                 
@@ -263,6 +263,8 @@ else
                 
         error_P = max([error_P_carr error_P_LSB error_P_USB]);
     end
+%      count_iter_LSB(1)
+%      count_iter_USB(1)
     
     Cout.Field_circ = E1;
     
@@ -279,7 +281,7 @@ Field_temp = Propagate_E(Cout.Field_circ,Cin.Propagation_mat);
 Cout.Field_trans = Transmit_Reflect_Optic(Field_temp,Cin.I_end);
 
 Field_temp = Propagate_E(Cout.Field_circ,Cin.Propagation_mat);
-Field_temp = Reflect_mirror(Field_temp,Cin.I_end);
+Field_temp = Reflect_Mirror(Field_temp,Cin.I_end);
 Field_temp = Propagate_E(Field_temp,Cin.Propagation_mat);
 Field_temp = Field_temp * Cin.Resonance_phase;
 
@@ -309,10 +311,10 @@ end
 field_tmp = Cout.Field_circ;
 field_tmp = Normalise_E(field_tmp);
 field_tmp = Propagate_E(field_tmp,Cin.Propagation_mat);
-field_tmp = Reflect_mirror(field_tmp,Cin.I_end,'Ref',1);
+field_tmp = Reflect_Mirror(field_tmp,Cin.I_end,'Ref',1);
 field_tmp = Propagate_E(field_tmp,Cin.Propagation_mat);
-field_tmp = Reflect_mirror(field_tmp,Cin.I_input,'Ref',1);
+field_tmp = Reflect_Mirror(field_tmp,Cin.I_input,'Ref',1);
 
-Cout.Loss_RTL =  (1 - Calculate_power(field_tmp));
+Cout.Loss_RTL =  (1 - Calculate_Power(field_tmp));
 
 end

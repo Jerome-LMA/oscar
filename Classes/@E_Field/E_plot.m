@@ -109,7 +109,7 @@ elseif strcmp(p.Results.Field,'SB') % Display the 2 sidebands
     axis square
     axis xy
     view([0 90])
-    title(['Lower sideband - ' title1  title_str])
+    title(['Lower sideband - ' title1 ' ' title_str])
     
     if strcmp(p.Results.display,'amplitude')
         if strcmp(p.Results.domain,'space')
@@ -135,7 +135,7 @@ elseif strcmp(p.Results.Field,'SB') % Display the 2 sidebands
     axis square
     axis xy
     view([0 90])
-    title(['Upper sideband - ' title1  title_str])
+    title(['Upper sideband - ' title1 ' ' title_str])
     
 else  % Display All the fields, only valid to display intensity as in for a CCD camera
     todisplay = abs(Ein.Field).^2;

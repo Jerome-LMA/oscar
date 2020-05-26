@@ -59,12 +59,11 @@ Field_total = Normalise_E(Field_transient,0);
 for q = 1:num_iter
     Field_total = Field_total + Field_transient;
     Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat);
-    Field_transient = Reflect_mirror(Field_transient,Cin.I_end);
+    Field_transient = Reflect_Mirror(Field_transient,Cin.I_end);
     Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat);
     
     Field_transient = Field_transient * Cin.Resonance_phase;
-    Field_transient = Reflect_mirror(Field_transient,Cin.I_input);
-    
+    Field_transient = Reflect_Mirror(Field_transient,Cin.I_input);
 end
 
 Cout.Field_circ = Field_total;
@@ -76,7 +75,7 @@ Field_temp = Propagate_E(Field_total,Cin.Propagation_mat);
 Cout.Field_trans = Transmit_Reflect_Optic(Field_temp,Cin.I_end);
 
 Field_temp = Propagate_E(Field_total,Cin.Propagation_mat);
-Field_temp = Reflect_mirror(Field_temp,Cin.I_end);
+Field_temp = Reflect_Mirror(Field_temp,Cin.I_end);
 Field_temp = Propagate_E(Field_temp,Cin.Propagation_mat);
 Field_temp = Field_temp * Cin.Resonance_phase;
 
@@ -111,10 +110,10 @@ end
 field_tmp = Field_total;
 field_tmp = Normalise_E(field_tmp);
 field_tmp = Propagate_E(field_tmp,Cin.Propagation_mat);
-field_tmp = Reflect_mirror(field_tmp,Cin.I_end,'Ref',1);
+field_tmp = Reflect_Mirror(field_tmp,Cin.I_end,'Ref',1);
 field_tmp = Propagate_E(field_tmp,Cin.Propagation_mat);
-field_tmp = Reflect_mirror(field_tmp,Cin.I_input,'Ref',1);
+field_tmp = Reflect_Mirror(field_tmp,Cin.I_input,'Ref',1);
 
-Cout.Loss_RTL =  (1 - Calculate_power(field_tmp));
+Cout.Loss_RTL =  (1 - Calculate_Power(field_tmp));
 
 end
