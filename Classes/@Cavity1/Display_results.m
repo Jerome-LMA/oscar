@@ -1,6 +1,16 @@
-function Display_results(Cin)
+function Display_Results(Cin,varargin)
 % Display_results(Cin) display the results of the cavity calculations.
 % The function Calculate_fields() must have been run first
+
+p  = inputParser;
+
+% Check if the first argument is an E_Field
+p.addRequired('Cin', @(x)isa(x, 'Cavity1'));
+
+% Display or not the E_field
+p.addParameter('display',true,@(x)isa(x,'logical'));
+
+p.parse(Cin,varargin{:})
 
 if isempty(Cin.Field_ref)
     error('Display_results(): Before displaying the results, the function Calculate_fields() must be run     ')
@@ -31,29 +41,27 @@ for ii=1:Cin.Laser_in.Nb_Pair_SB
     fprintf(' Circulating power: \t\t %6g \t %6g \t [W] \n',Pcirc1,Pcirc2)
     fprintf(' Transmitted power: \t\t %6g \t %6g \t [W] \n',Ptrans1,Ptrans2)
     fprintf(' Reflected power: \t\t\t %6g \t %6g \t [W] \n\n',Pref1,Pref2)
-       
+    
 end
 
 
-%
-%
-% figure(105)
-% clf;
-% subplot(2,2,1)
-% E_plot(Cin.Laser_in)
-% title('Input field')
-% subplot(2,2,2)
-% E_plot(Cin.Field_circ)
-% title('Circulating field')
-% subplot(2,2,3)
-% E_plot(Cin.Field_ref)
-% title('Reflected field')
-% subplot(2,2,4)
-% E_plot(Cin.Field_trans)
-% title('Transmitted field')
-%
-%
-%
+if p.Results.display
+    figure(105)
+    clf;
+    subplot(2,2,1)
+    E_Plot(Cin.Laser_in)
+    title('Input field')
+    subplot(2,2,2)
+    E_Plot(Cin.Field_circ)
+    title('Circulating field')
+    subplot(2,2,3)
+    E_Plot(Cin.Field_ref)
+    title('Reflected field')
+    subplot(2,2,4)
+    E_Plot(Cin.Field_trans)
+    title('Transmitted field')
+end
+
 
 
 

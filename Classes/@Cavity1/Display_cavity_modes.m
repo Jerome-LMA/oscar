@@ -60,9 +60,9 @@ for pp = 1:Nb_eigenvalue
     Field_Circ = mode_brt;
     
     Circ_field = Propagate_E(Field_Circ,Cin.Propagation_mat);
-    Circ_field = Reflect_mirror(Circ_field,Cin.I_end,'Ref',1);
+    Circ_field = Reflect_Mirror(Circ_field,Cin.I_end,'Ref',1);
     Circ_field = Propagate_E(Circ_field,Cin.Propagation_mat);
-    Field_Circ = Reflect_mirror(Circ_field,Cin.I_input,'Ref',1);
+    Field_Circ = Reflect_Mirror(Circ_field,Cin.I_input,'Ref',1);
     
     mode_art = Field_Circ;
     Reso_angle(pp) = angle(Calculate_Overlap(mode_art,mode_brt));

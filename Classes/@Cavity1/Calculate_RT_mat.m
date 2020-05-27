@@ -69,9 +69,9 @@ else % if the PCT is not installed or we do not want to use it
             E_in.Field(mx,py) = 1;
             
             Circ_field = Propagate_E(E_in,Cin.Propagation_mat);
-            Circ_field = Reflect_mirror(Circ_field,Cin.I_end,'Ref',1);
+            Circ_field = Reflect_Mirror(Circ_field,Cin.I_end,'Ref',1);
             Circ_field = Propagate_E(Circ_field,Cin.Propagation_mat);
-            Circ_field = Reflect_mirror(Circ_field,Cin.I_input,'Ref',1);
+            Circ_field = Reflect_Mirror(Circ_field,Cin.I_input,'Ref',1);
             
             tmp_mat_EM(:,(py-1)*Num_point+mx) = Circ_field.Field(:);       
         end

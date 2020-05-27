@@ -55,23 +55,14 @@ Iout = Interface(Gout,'RoC',Inf,'CA',m*dx);
 % Add the loaded map to the flat mirror
 
 if  ~isempty(p.Results.remove_tilt)
-        Iout = Add_map(Iout,Map_loaded,'reso',dx,'remove_tilt',p.Results.remove_tilt,'rotate',p.Results.rotate,...
+        Iout = Add_Map(Iout,Map_loaded,'reso',dx,'remove_tilt',p.Results.remove_tilt,'rotate',p.Results.rotate,...
             'centering',p.Results.centering,'scale',-1);    
 elseif ~isempty(p.Results.remove_tilt_focus)
-        Iout = Add_map(Iout,Map_loaded,'reso',dx,'remove_tilt_focus',p.Results.remove_tilt_focus,'rotate',p.Results.rotate,...
+        Iout = Add_Map(Iout,Map_loaded,'reso',dx,'remove_tilt_focus',p.Results.remove_tilt_focus,'rotate',p.Results.rotate,...
             'centering',p.Results.centering,'scale',-1); 
 else
-        Iout = Add_map(Iout,Map_loaded,'reso',dx,'rotate',p.Results.rotate,p.Results.centering,'scale',-1);
+        Iout = Add_Map(Iout,Map_loaded,'reso',dx,'rotate',p.Results.rotate,p.Results.centering,'scale',-1);
 end
-
-
-
-
-
-
-
-
-
 
 end
 

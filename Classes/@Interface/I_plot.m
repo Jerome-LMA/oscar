@@ -1,4 +1,4 @@
-function I_plot(Iin,varargin)
+function I_Plot(Iin,varargin)
 % I_plot(Interface) Plot the surface of an Interface object in an existing
 % window
 
