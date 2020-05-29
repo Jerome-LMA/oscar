@@ -191,9 +191,8 @@ if p.Results.Define_L_length
         (1:num_point_scan)*span_scan/num_point_scan;
     
     fprintf(' Zooming on the resonance peak ...       ')
-    
-    
-    if exist('matlabpool','builtin')          % check if the Parallel Computing Toolbox exists
+            
+    if license('test','distrib_computing_toolbox') && p.Results.use_parallel
         
         if gpuDeviceCount > 0 && parallel.gpu.GPUDevice.isAvailable(1)                        
             disp('Found suitable GPU. Starting GPU-based scan.')
