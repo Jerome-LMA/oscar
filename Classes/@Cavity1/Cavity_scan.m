@@ -120,6 +120,7 @@ if license('test','distrib_computing_toolbox') && p.Results.use_parallel        
             delete(pool_obj);
         end
     end
+    
 else % if the PCT is not installed or we do not want to use the toolbox
     for qq = 1:num_point_scan
 
@@ -127,7 +128,7 @@ else % if the PCT is not installed or we do not want to use the toolbox
         Field_reconstructed_SBu = Field_reconstructed; % do it even if no SB
         Field_reconstructed_SBl = Field_reconstructed;
 
-        for ii=1:num_iter
+        for ii=1:num_iter            
             Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii);
             Field_reconstructed_SBu = Field_reconstructed_SBu + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(1i*D_phi*ii);
             Field_reconstructed_SBl = Field_reconstructed_SBl + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(-1i*D_phi*ii);
@@ -194,21 +195,47 @@ if p.Results.Define_L_length
     
     if exist('matlabpool','builtin')          % check if the Parallel Computing Toolbox exists
         
-        pool_obj = parpool;
+        if gpuDeviceCount > 0 && parallel.gpu.GPUDevice.isAvailable(1)                        
+            disp('Found suitable GPU. Starting GPU-based scan.')
+            gq = 1:num_point_scan;
+            ii = 1:num_iter;
+            gCavity_scan_all_field_arr = gpuArray(Cin.Cavity_scan_all_field(:,:,ii));
+            gCavity_scan_all_field_arr_perm = permute(gCavity_scan_all_field_arr, [3,1,2]);
+            gPhase_shifts = gpuArray(exp(1i*Cin.Laser_in.k_prop* Length_scan(gq)'*ii));
+            gFields_reconstructed = pagefun(@mtimes,gPhase_shifts, gCavity_scan_all_field_arr_perm);
+            Fields_reconstructed = gather(gFields_reconstructed);
+
+            for qqq = 1:num_point_scan
+                Dummy_E = Cin.Laser_in;
+                Dummy_E.Field = squeeze(Fields_reconstructed(qqq,:,:));   
+                Power_scan(qqq) = Calculate_power(Dummy_E);
+            end        
+        else        
         
-        parfor qq = 1:num_point_scan
-            Field_reconstructed = complex(zeros(Grid_num_point,Grid_num_point,'double'));
-            for ii=1:num_iter
-                Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii);
+            pool_obj = gcp('nocreate');    
+            if (isempty(pool_obj))
+                disp('Parallel pool not initialized. Starting now...')
+                is_par_pool_init = false;
+                pool_obj = gcp();
+            else        
+                is_par_pool_init = true;        
             end
-            Dummy_E = Cin.Laser_in;
-            Dummy_E.Field = Field_reconstructed;
-            Power_scan(qq) = Calculate_power(Dummy_E);
-        end
-        
-        delete(pool_obj);
-        
-        
+
+            parfor qq = 1:num_point_scan
+                Field_reconstructed = complex(zeros(Grid_num_point,Grid_num_point,'double'));
+                for ii=1:num_iter
+                    Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii);
+                end
+                Dummy_E = Cin.Laser_in;
+                Dummy_E.Field = Field_reconstructed;
+                Power_scan(qq) = Calculate_power(Dummy_E);
+            end
+
+            if (~is_par_pool_init)
+                disp('Shutting down pool because it was not initialized at startup.')
+                delete(pool_obj);
+            end
+        end        
     else % The PCT is not installed
         
         for qq = 1:num_point_scan
