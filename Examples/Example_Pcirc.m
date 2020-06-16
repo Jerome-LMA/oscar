@@ -2,7 +2,7 @@ clearvars; close all;
 addpath(genpath(strcat(pwd, '\..\Classes')));
 
 disp('---------------------------------------------------------------------------')
-disp('                  OSCAR V3.20                                      ')
+disp('                  OSCAR V3.21                                      ')
 disp('  ')
 
 
@@ -15,6 +15,7 @@ E_input = E_Field(G1,'w',0.02,'R',-2000);
 % The beam is defined outside the cavity, must take into account
 % !! the transmission of the input mirror acting as a lens !!
 % possibility to define the input beam directly inside the cavity if needed
+% (but not recommended as not realistic)
 
 % Define the 2 mirrors, RofC = 2500m, 10 cm in diameter, transmission 2%,
 % no loss
