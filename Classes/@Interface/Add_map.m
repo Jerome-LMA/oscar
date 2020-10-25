@@ -1,4 +1,4 @@
-function Iout = Add_Map(Iin,map_loaded,varargin)
+function Iout = Add_map(Iin,map_loaded,varargin)
 %     Add_map() Load a map and add it to a surface
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    Iout = Add_map(Iin,filename,'reso',1E-3) add the map found in the file
@@ -119,7 +119,7 @@ if (m==n)     % The matrix is square
     map.offset_X = round(p.Results.centering(1)/map.res);
     map.offset_Y = round(p.Results.centering(2)/map.res);
     
-     map.loaded = circshift(map.loaded,[-map.offset_Y -map.offset_X ]);
+     map.loaded = circshift(map.loaded,[map.offset_Y -map.offset_X]);
     
     %figure(1); imagesc(map.Grid_axis,map.Grid_axis,map.loaded); axis square
     
@@ -218,14 +218,7 @@ end
 
 % Fix the RMS
 if  ~isempty(p.Results.RMS)
-    if ~exist('diam','var')
-        diam = Iout.Grid.Length/2;
-    end
-    if p.Results.RMS == 0
-        map.resampled = zeros(Iout.Grid.Num_point);
-    else
-        map.resampled = map.resampled/std(map.resampled(Iout.Grid.D2_r < diam)) * p.Results.RMS;
-    end
+    map.resampled = map.resampled/std(map.resampled(map.central_ind)) * p.Results.RMS;
 end
 
 map.resampled = rot90(map.resampled,round(p.Results.rotate));

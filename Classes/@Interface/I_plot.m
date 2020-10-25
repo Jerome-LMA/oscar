@@ -1,4 +1,4 @@
-function I_Plot(Iin,varargin)
+function I_plot(Iin,varargin)
 % I_plot(Interface) Plot the surface of an Interface object in an existing
 % window
 
@@ -14,12 +14,19 @@ p.addParameter('diam',[],@(x)isnumeric(x) && x>0);
 % Check if the resolution of the grid if given
 p.addParameter('zoom',[],@(x)isnumeric(x) && x>0);
 
+% Check if the resolution of the grid if given
+p.addParameter('scale',[],@(x)isnumeric(x) && x>0);
+
 p.parse(Iin,varargin{:})
 
 Title_fig = ['Surface profile: ' strrep(inputname(1),'_','\_')];
 
+if ~isempty(p.Results.scale)
+    Iin.surface = Iin.surface * p.Results.scale;
+end
+
 if isempty(p.Results.diam)
-       
+    
     imagesc(Iin.Grid.Axis,Iin.Grid.Axis(end:-1:1),Iin.surface)
     shading interp
     title(Title_fig)
