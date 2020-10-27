@@ -61,7 +61,7 @@ elseif ~isempty(p.Results.remove_tilt_focus)
         Iout = Add_Map(Iout,Map_loaded,'reso',dx,'remove_tilt_focus',p.Results.remove_tilt_focus,'rotate',p.Results.rotate,...
             'centering',p.Results.centering,'scale',-1); 
 else
-        Iout = Add_Map(Iout,Map_loaded,'reso',dx,'rotate',p.Results.rotate,p.Results.centering,'scale',-1);
+        Iout = Add_Map(Iout,Map_loaded,'reso',dx,'rotate',p.Results.rotate,'scale',-1);
 end
 
 end
