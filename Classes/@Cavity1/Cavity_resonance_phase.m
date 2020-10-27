@@ -1,7 +1,17 @@
-function Cout = Cavity_resonance_phase(Cin)
+function Cout = Cavity_Resonance_Phase(Cin,varargin)
 %  Cout = Cavity_resonance_phase(Cin) find the resonance of a cavity
 % This procedure can find the resonance of the cavity by finding the
 % suitable round trip phase shift to bring the circulating field on resonance.
+
+p  = inputParser;
+
+% Check if the first argument is an interface
+p.addRequired('Cin', @(x)isa(x, 'Cavity1'));
+
+% Display or not the end
+p.addParameter('verbose',true,@(x)isa(x,'logical'));
+
+p.parse(Cin,varargin{:})
 
 Cout = Cin;
 
@@ -55,7 +65,9 @@ Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_input);
 % angle(Calculate_Overlap(Field_Circ,Field_before))
 Cout.Resonance_phase = exp(-1i* angle(Calculate_Overlap(Field_Circ,Field_before)));
 
-disp(['Found the phase for resonance in cavity ' inputname(1)])
+if p.Results.verbose
+    disp(['Found the phase for resonance in cavity ' inputname(1)])
+end
 
 % Found an approximation for the resonanting field in the cavity
 
@@ -76,7 +88,7 @@ if Cout.Field_reso_guess.Nb_Pair_SB
     for ii=1:Cout.Field_reso_guess.Nb_Pair_SB
         Cout.Field_reso_guess.SB(ii).Field_lower = tmp_field_SB.Field;
         Cout.Field_reso_guess.SB(ii).Field_upper = tmp_field_SB.Field;
-    end 
+    end
 end
 
 end

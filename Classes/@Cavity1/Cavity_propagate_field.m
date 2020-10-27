@@ -18,8 +18,8 @@ num_iter = round(num_iter);
 
 if (num_iter > Cin.Cavity_scan_param(4))
     fprintf(' Ideal number of iteration to scan the cavity; %i \n',num_iter)
-    fprintf(' This is too much, number of iteration brings down to; %i \n',C1.Cavity_scan_param(4))
-    num_iter = C1.Cavity_scan_param(4);
+    fprintf(' This is too much, number of iteration brings down to; %i \n',Cin.Cavity_scan_param(4))
+    num_iter = Cin.Cavity_scan_param(4);
 end
 
 Cout = Cin;
@@ -45,9 +45,9 @@ Total_Field(:,:,1) = Field_Circ.Field;
 
 for q = 2:num_iter
     Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat);
-    Field_Circ = Reflect_mirror(Field_Circ,Cin.I_end);
+    Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_end);
     Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat);
-    Field_Circ = Reflect_mirror(Field_Circ,Cin.I_input);
+    Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_input);
     Total_Field(:,:,q) = Field_Circ.Field;
 end
 

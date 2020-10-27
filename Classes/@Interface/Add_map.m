@@ -1,4 +1,4 @@
-function Iout = Add_map(Iin,map_loaded,varargin)
+function Iout = Add_Map(Iin,map_loaded,varargin)
 %     Add_map() Load a map and add it to a surface
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    Iout = Add_map(Iin,filename,'reso',1E-3) add the map found in the file

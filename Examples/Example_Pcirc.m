@@ -2,7 +2,7 @@ clearvars; close all;
 addpath(genpath(strcat(pwd, '\..\Classes')));
 
 disp('---------------------------------------------------------------------------')
-disp('                  OSCAR V3.21                                      ')
+disp('                  OSCAR V3.30                                   ')
 disp('  ')
 
 
@@ -28,8 +28,17 @@ EM = Interface(G1,'RoC',2500,'CA',0.10,'T',0.02);
 C1 = Cavity1(IM,EM,1000,E_input);
 
 % Calculate the resonance length
-C1 = Cavity_resonance_phase(C1);
+C1 = Cavity_Resonance_Phase(C1);
 
- % Display information about the cavity
-Get_info(C1)
+% Display information about the cavity
+[C1,Power_Buildup] = Calculate_Fields(C1);
 
+C1.Display_Results
+
+figure(2)
+plot(Power_Buildup,'LineWidth',3);
+grid on; box on
+title('Power buildup')
+xlabel('Number of iteration')
+ylabel('Power [W]')
+set(gca,'FontSize',14);

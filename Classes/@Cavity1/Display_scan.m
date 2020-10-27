@@ -1,4 +1,4 @@
-function Display_scan(Cin)
+function Display_Scan(Cin)
 % Display_scan() Display the scan of the cavity. Can show the different
 % mode excited in the cavity
 
@@ -68,16 +68,21 @@ set(f,'Visible','on')
             Field_reconstructed_SBu = Field_reconstructed_car; % do it even if no SB
             Field_reconstructed_SBl = Field_reconstructed_car;
             
-            D_phi = (2*pi*Cin.Laser_in.Frequency_Offset/2.99792E8) * Cin.Length;
+            
+            if Cin.Laser_in.Nb_Pair_SB
+                D_phi = (2*pi*Cin.Laser_in.SB(1).Frequency_Offset/2.99792E8) * Cin.Length;
+            end
             
             for ii=1:num_iter
                 Field_reconstructed_car = Field_reconstructed_car + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* length_reso*ii);
+                if Cin.Laser_in.Nb_Pair_SB
                 Field_reconstructed_SBu = Field_reconstructed_SBu + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* length_reso*ii) * exp(1i*D_phi*ii);
                 Field_reconstructed_SBl = Field_reconstructed_SBl + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* length_reso*ii) * exp(-1i*D_phi*ii);
+                end
             end
-            power_norm_SB =  Calculate_power(Cin.Laser_in,'SB')/2;
+            power_norm_SB =  Calculate_Power(Cin.Laser_in,'SB')/2;
             Field_reconstructed = abs(Field_reconstructed_car).^2 + (abs(Field_reconstructed_SBu).^2)*power_norm_SB +...
-                (abs(Field_reconstructed_SBl).^2)*power_norm_SB;   
+                (abs(Field_reconstructed_SBl).^2)*power_norm_SB;
             
         else
             Field_reconstructed = complex(zeros(Grid_num_point,Grid_num_point,'double'));

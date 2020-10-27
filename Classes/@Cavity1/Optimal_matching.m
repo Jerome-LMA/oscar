@@ -1,4 +1,4 @@
-function Cout = Optimal_matching(Cin,varargin)
+function Cout = Optimal_Matching(Cin,varargin)
 % Optimal_matching()  set the optimal mode matching for a cavity, so change
 % the input beam
 

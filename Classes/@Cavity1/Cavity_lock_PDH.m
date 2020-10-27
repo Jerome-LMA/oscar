@@ -25,7 +25,7 @@ disp('PDF locking:       ')
 for jj = 1:Scan.Nb_points
     Cin.Resonance_phase = Scan_reso2(jj);
     Cout_tmp = Calculate_fields(Cin,'accuracy',0.01);    
-    Sig.p(jj)  = Demodulate_SB(Cout_tmp.Field_ref);
+    Sig.p(jj) = Demodulate_SB(Cout_tmp.Field_ref);
     fprintf('\b\b\b\b\b\b %3.0d %%',round(jj /Scan.Nb_points * 100))
 end
 

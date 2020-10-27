@@ -2,7 +2,7 @@ clear variables; close all; clear classes
 addpath(genpath(strcat(pwd, '\..\Classes')));
 
 disp('---------------------------------------------------------------------------')
-disp('                  OSCAR V3.21                                      ')
+disp('                  OSCAR V3.30                                      ')
 disp('  ')
 
 %Define the grid for the simulation: 800 X 800, 40 cm X 40 cm
@@ -39,7 +39,7 @@ I_Plot(Dummy,'diam',0.25)
 % Sign flip in OSCAR 3.20 compared to previous version for the function Load_dat_map 
 % (change after I noticed how people are using OSCAR)
 
-[Iout,Gout] = Load_dat_map('Example_ZYGO_data.dat','remove_tilt_focus',0.1);
+[Iout,Gout] = Load_dat_Map('Example_ZYGO_data.dat','remove_tilt_focus',0.1);
 figure(3);I_Plot(Iout,'diam',0.1)
 
 %% Create a synthetic map based on a parametrised PSD
@@ -59,13 +59,13 @@ G2 = Grid(532,0.4);
 % It is there for illustrative purpose!
 % Do not forget to add which the flatness you are are looking for
 
-param_PSD_ZYGO_IBF = [0.06 2.4 0.004 -4.3 -0.08 -3.2 16 420]; % parameters for ZYGOo polishing with IBF (Richmond site), derived from all the AdV IM and EM wavefront measurements
-param_PSD_ZYGO_F = [0.08 -2.5]; % parameters for ZYGO polishing (Middlefield site), flat surface, derived from the AdV BS, CP wavefront measurements
-param_PSD_ZYGO_C = [3E-4 10 -1 -4 150]; % parameters for ZYGO polishing (Richmond site), curved surface, derived from AdV PR, SR wavefront measurements
-param_PSD_Coastline = [0.02 -1.4]; % parameters for Coastline Optics 
-param_PSD_General_Optics = [0.03 -2]; % parameters for General_Optics polishing (Gooch & Housego now)
+param_PSD_ZYGO_IBF = [0.06 2.4 0.004 -4.3 -0.08 -3.2 16 420]; % approximated parameters for ZYGOo polishing with IBF (Richmond site), derived from all the AdV IM and EM wavefront measurements
+param_PSD_ZYGO_F = [0.08 -2.5]; % approximated parameters for ZYGO polishing (Middlefield site), flat surface, derived from the AdV BS, CP wavefront measurements
+param_PSD_ZYGO_C = [3E-4 10 -1 -4 150]; % approximated parameters for ZYGO polishing (Richmond site), curved surface, derived from AdV PR, SR wavefront measurements
+param_PSD_Coastline = [0.02 -1.4]; % approximated parameters for Coastline Optics 
+param_PSD_General_Optics = [0.03 -2]; % approximated arameters for General_Optics polishing (Gooch & Housego now)
 
-fake_map = Do_Virtual_map(G2,param_PSD_ZYGO_IBF);
+fake_map = Do_Virtual_Map(G2,param_PSD_ZYGO_IBF);
 
 % Added for a flat interface
 I1 = Interface(G2,'RoC',Inf);

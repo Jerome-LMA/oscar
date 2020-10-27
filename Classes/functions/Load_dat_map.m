@@ -1,4 +1,4 @@
-function [Iout,Gout] = Load_dat_map(file_name,varargin)
+function [Iout,Gout] = Load_dat_Map(file_name,varargin)
 % Load_dat_map() read directly a *.dat file and return an Interface object
 % with only little interpolation (the pixel size is given by the measurement)
 

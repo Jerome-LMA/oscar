@@ -1,4 +1,4 @@
-function I1 = Do_Virtual_map(G,Power_law)
+function I1 = Do_Virtual_Map(G,Power_law)
 %Do_Virtual_map() Create a synthetic map according to a parametrised PSD
 %   Grid is the Grid object for the calculations
 %   Power_law is a vector of length 8 with the power law, see the function

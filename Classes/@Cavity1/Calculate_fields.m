@@ -1,4 +1,4 @@
-function Cout = Calculate_fields(Cin,varargin)
+function varargout = Calculate_Fields(Cin,varargin)
 % Cout = Calculate_fields(Cin) calculate the circulating, reflected and transmitted fields
 % Function used to calculated the fields inside the cavity. The laser beam must be defined outside the cavity in order to calculate the reflected field.
 
@@ -56,7 +56,10 @@ end
 [Field_transient,Field_reflec] = Transmit_Reflect_Optic(Field_in,Cin.I_input,'AR');
 Field_total = Normalise_E(Field_transient,0);
 
+Power_buildup = zeros(1,num_iter);
+
 for q = 1:num_iter
+    Power_buildup(q) = Calculate_Power(Field_total);
     Field_total = Field_total + Field_transient;
     Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat);
     Field_transient = Reflect_Mirror(Field_transient,Cin.I_end);
@@ -90,11 +93,8 @@ if isa(Cin.I_input, 'Interface')
 end
 
 if isa(Cin.I_end, 'Interface')
-   Cout.Field_trans =  Change_E_n(Cout.Field_trans,Cin.I_end.n1);
+    Cout.Field_trans =  Change_E_n(Cout.Field_trans,Cin.I_end.n1);
 end
-
-
-
 
 %-------------------------------------------------------------------
 % Calculate the round trip loss
@@ -115,5 +115,17 @@ field_tmp = Propagate_E(field_tmp,Cin.Propagation_mat);
 field_tmp = Reflect_Mirror(field_tmp,Cin.I_input,'Ref',1);
 
 Cout.Loss_RTL =  (1 - Calculate_Power(field_tmp));
+
+
+switch nargout
+    case 0
+    case 1
+        varargout{1} = Cout;
+    case 2
+        varargout{1} = Cout;
+        varargout{2} = Power_buildup;
+    otherwise
+        error('Get_info(): Too many output argument')
+end
 
 end

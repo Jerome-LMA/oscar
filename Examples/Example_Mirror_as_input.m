@@ -8,7 +8,7 @@ clearvars; close all;
 addpath(genpath(strcat(pwd, '\..\Classes')));
 
 disp('---------------------------------------------------------------------------')
-disp('                  OSCAR V3.20  - The cavities with thick mirror       ')
+disp('                  OSCAR V3.30  - The cavities with thick mirror       ')
 disp('  ')
 
 G1 = Grid(128,0.5);
@@ -34,17 +34,17 @@ C_NA = Cavity1(IM,EM_HR,3000,E_input);
 % Check the cavity parameters
 %C_NA.Check_stability()
 
-C_NA = Cavity_resonance_phase(C_NA);
+C_NA = Cavity_Resonance_Phase(C_NA);
 
-C_NA = Calculate_fields_AC(C_NA);
-C_NA.Display_results
+C_NA = Calculate_Fields_AC(C_NA);
+C_NA.Display_Results
 
  %C_NA.Get_info
 
 %% Now, scan the thickness of the input mirror over one wavelength
 
 disp('---------------------------------------------------------------------------')
-disp('              OSCAR V3.20     Simulate the etalon effect    ')
+disp('              OSCAR V3.30     Simulate the etalon effect    ')
 disp('  ')
 
 
@@ -55,19 +55,22 @@ Scan_length = 1064E-9;
 Vec_length = linspace(0,Scan_length,Nb_points);
 Vec_ref_power = zeros(Nb_points,1);
 
+f = waitbar(0,'Initialising...');
+
 for ii = 1:Nb_points
     IM = Mirror(IM_HR,IM_AR,0.2+Vec_length(ii));   % Change the length of the substrate
     IM.RT_inside = 3;                              % Do several round trip inside the mirror
     
     C_NA = Cavity1(IM,EM_HR,3000,E_input);
-    C_NA = Cavity_resonance_phase(C_NA);
+    C_NA = Cavity_Resonance_Phase(C_NA,'verbose',false);
     
-    C_NA = Calculate_fields_AC(C_NA);   
-    Vec_ref_power(ii) = Calculate_power(C_NA.Field_ref);
+    C_NA = Calculate_Fields_AC(C_NA);   
+    Vec_ref_power(ii) = Calculate_Power(C_NA.Field_ref);
     
-    fprintf(' %-3.0i %% \n ',round(100 * ii / Nb_points))
+    waitbar(ii/Nb_points,f,'Scanning the IM thickness');
     
 end
+close(f)
 
 figure(4)
 plot(Vec_length*1E6,Vec_ref_power)

@@ -1,4 +1,4 @@
-function  varargout = Check_stability(Cin,varargin)
+function  varargout = Check_Stability(Cin,varargin)
 %% Check_stability(C1) calculate RofC of the mirrors and the cavity stability
 % Can do the RoC over a smaller area if a diameter is specified ( for example with Check_stability(C1,0.150) )
 % First calculate the RofC of the mirrors, do a fit for the curvature of

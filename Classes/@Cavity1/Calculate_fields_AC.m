@@ -1,4 +1,4 @@
-function Cout = Calculate_fields_AC(Cin,varargin)
+function Cout = Calculate_Fields_AC(Cin,varargin)
 % Cout = Calculate_fields_AC(Cin) calculate the circulating, reflected and transmitted fields
 % Function used to calculated the fields inside the cavity. The laser beam must be defined outside the cavity in order to calculate the reflected field.
 % Use the accelerated convergence scheme
