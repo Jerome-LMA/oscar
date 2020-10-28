@@ -56,7 +56,7 @@ Mat_propa = [1 200;0 1]*[1 0;((1-1.45)/1)*1/2000 1.45]*[1 0.04;0 1]*[1 0;-((1.45
 
  q_propa = (Mat_propa(1,1)*q_start + Mat_propa(1,2))/(Mat_propa(2,1)*q_start + Mat_propa(2,2));
  
-  q_circ_inv = 1/(q_propa);
+ q_circ_inv = 1/(q_propa);
  RofC = 1/real(q_circ_inv);
  Beam_rad = sqrt( 1/(-imag(q_circ_inv)*pi/(Lambda)));
  
