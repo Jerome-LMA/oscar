@@ -67,11 +67,11 @@ Cross_sec_index_x = intersect(find (Ein.Grid.Axis < Beam_rad_x),find (Ein.Grid.A
 Cross_sec_index_y = intersect(find (Ein.Grid.Axis < Beam_rad_y),find (Ein.Grid.Axis > -Beam_rad_y));
 
 [polyscale,~, mu]  = polyfit(Ein.Grid.Axis(Cross_sec_index_x),Cross_sec_phase_x(Cross_sec_index_x),2);
-beam_radius_fit_x = -E.k_prop/(2*polyscale(1)/mu(2)^2); % first approximation in 1D
+beam_radius_fit_x = -Ein.k_prop/(2*polyscale(1)/mu(2)^2); % first approximation in 1D
 
 Cross_sec_phase_y = Cross_sec_phase_y';
 [polyscale,~, mu]  = polyfit(Ein.Grid.Axis(Cross_sec_index_y),Cross_sec_phase_y(Cross_sec_index_y),2);
-beam_radius_fit_y = -E.k_prop/(2*polyscale(1)/mu(2)^2); % first approximation in 1D
+beam_radius_fit_y = -Ein.k_prop/(2*polyscale(1)/mu(2)^2); % first approximation in 1D
 
 % Then fit the phase in 2D
 func_gauss = @(c,xdata) c(1)*exp(-(xdata(:,1)/Beam_rad_x^2 + xdata(:,2)/Beam_rad_y^2)).*...
