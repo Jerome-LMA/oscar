@@ -62,8 +62,8 @@ Cross_sec_index = intersect(find (E.Grid.Axis < Beam_rad),find (E.Grid.Axis > -B
 % figure(2)
 % plot(E.Grid.Axis(Cross_sec_index),Cross_sec_phase_x(Cross_sec_index))
 
-poly = polyfit(E.Grid.Axis(Cross_sec_index),Cross_sec_phase_x(Cross_sec_index),2);
-beam_radius_fit = -E.k_prop/(2*poly(1)); % first approximation in 1D
+[polyscale,~, mu]  = polyfit(E.Grid.Axis(Cross_sec_index),Cross_sec_phase_x(Cross_sec_index),2);
+beam_radius_fit = -E.k_prop/(2*polyscale(1)/mu(2)^2); % first approximation in 1D
 
 
 % Then fit the phase
