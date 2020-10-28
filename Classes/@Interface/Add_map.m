@@ -119,7 +119,7 @@ if (m==n)     % The matrix is square
     map.offset_X = round(p.Results.centering(1)/map.res);
     map.offset_Y = round(p.Results.centering(2)/map.res);
     
-     map.loaded = circshift(map.loaded,[map.offset_Y -map.offset_X]);
+    map.loaded = circshift(map.loaded,[-map.offset_Y map.offset_X]);
     
     %figure(1); imagesc(map.Grid_axis,map.Grid_axis,map.loaded); axis square
     
