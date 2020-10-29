@@ -67,8 +67,8 @@ p.addParameter('remove_tilt',[],@(x)isnumeric(x) && x>0);
 % Check if we should remove the tilt and curvarture over a certain diameter (in meter)
 p.addParameter('remove_tilt_focus',[],@(x)isnumeric(x) && x>0);
 
-% Check if we should offset the center of the map (in meter)
-p.addParameter('centering',[0 0],@(x)isnumeric(x));
+% Check if we should shift the center of the map (in meter)
+p.addParameter('shift',[0 0],@(x)isnumeric(x));
 
 % Display or not the results of the fit in the command line
 p.addParameter('verbose',true,@(x)isa(x,'logical'));
@@ -112,14 +112,14 @@ if (m==n)     % The matrix is square
     map.Grid_r = sqrt(map.Grid_X.^2 + map.Grid_Y.^2);
     
     % recentering the map by a round number of pixel
-    if  length(p.Results.centering) ~= 2
-        error('Add_map(): for the centering option, a vector of 2 values must be given, for example[0.005 -0.02]')
-    end
-      
-    map.offset_X = round(p.Results.centering(1)/map.res);
-    map.offset_Y = round(p.Results.centering(2)/map.res);
-    
-    map.loaded = circshift(map.loaded,[-map.offset_Y map.offset_X]);
+%     if  length(p.Results.centering) ~= 2
+%         error('Add_map(): for the centering option, a vector of 2 values must be given, for example[0.005 -0.02]')
+%     end
+%       
+%     map.offset_X = round(p.Results.centering(1)/map.res);
+%     map.offset_Y = round(p.Results.centering(2)/map.res);
+%     
+%     map.loaded = circshift(map.loaded,[-map.offset_Y map.offset_X]);
     
     %figure(1); imagesc(map.Grid_axis,map.Grid_axis,map.loaded); axis square
     
@@ -198,7 +198,7 @@ if (m==n)     % The matrix is square
     edge_value = find_edge_value(map.loaded);
     %edge_value = -1.81E-8;
     % Resample the loaded map to the grid of the interface
-    map.resampled = interp2(map.Grid_X,map.Grid_Y,map.loaded,Iin.Grid.D2_X,Iin.Grid.D2_Y,'linear',edge_value);
+    map.resampled = interp2(map.Grid_X+p.Results.shift(1),map.Grid_Y-p.Results.shift(2),map.loaded,Iin.Grid.D2_X,Iin.Grid.D2_Y,'linear',edge_value);
     
 elseif (n==2)    % The matrix is a 2 vector column, first column radius, second column sagitta change
     map.resampled = interp1(map.loaded(:,1),map.loaded(:,2),sqrt(Iin.Grid.D2_X.^2 + Iin.Grid.D2_Y.^2),'linear',0);

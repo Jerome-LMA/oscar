@@ -28,8 +28,8 @@ E_north = Propagate_E(E_north,0.25);
 E_east = Propagate_E(E_east,0.25);
 
 % Reflect, let's say the north arm has a flat reference mirror
-E_north  = Reflect_mirror(E_north,1E99);
-E_east  = Reflect_mirror(E_east,600);
+E_north  = Reflect_Mirror(E_north,1E99);
+E_east  = Reflect_Mirror(E_east,600);
 
 E_north = 1i*sqrt(1-Ref_BS) * Propagate_E(E_north,0.25);
 E_east = sqrt(Ref_BS) * Propagate_E(E_east,0.25);
@@ -40,7 +40,7 @@ for ii = 1:length(Vec_phase)
     % Propagate back and then interfere   
     Eout = E_north*exp(1i*Vec_phase(ii)) + E_east;
     
-    E_plot(Eout,'display','intensity');caxis([0 300]);colormap(hot);pause(0.05);
+    E_Plot(Eout,'display','intensity');caxis([0 300]);colormap(hot);pause(0.05);
 end
 
 
