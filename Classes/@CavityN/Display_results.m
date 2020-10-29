@@ -15,34 +15,34 @@ tmp_power = 0;
 
 if Cin.type == 'ring'
     for pp=2:Cin.Nb_mirror
-        tmp_power = tmp_power + Calculate_power(Cin.Field_trans(pp));
+        tmp_power = tmp_power + Calculate_Power(Cin.Field_trans(pp));
     end
 elseif Cin.type == 'folded'
-    tmp_power = Calculate_power(Cin.Field_trans(end));
+    tmp_power = Calculate_Power(Cin.Field_trans(end));
 end
 
-fprintf(' Power in the input beam %g [W] \n',Calculate_power(Cin.Laser_in))
-fprintf(' Circulating power %g [W] \n',Calculate_power(Cin.Field_circ))
+fprintf(' Power in the input beam %g [W] \n',Calculate_Power(Cin.Laser_in))
+fprintf(' Circulating power %g [W] \n',Calculate_Power(Cin.Field_circ))
 if Cin.type == 'ring'
     fprintf(' Total transmitted power %g [W] \n',tmp_power)
 elseif Cin.type == 'folded'
     fprintf(' End transmitted power %g [W] \n',tmp_power)    
 end
-fprintf(' Reflected power %g [W] \n\n',Calculate_power(Cin.Field_ref))
+fprintf(' Reflected power %g [W] \n\n',Calculate_Power(Cin.Field_ref))
 
 if ~isempty(Cin.Laser_in.Field_SBl)
     
-    [Pin1,Pin2] = Calculate_power_SB(Cin.Laser_in);
-    [Pcirc1,Pcirc2] = Calculate_power_SB(Cin.Field_circ);
+    [Pin1,Pin2] = Calculate_Power_SB(Cin.Laser_in);
+    [Pcirc1,Pcirc2] = Calculate_Power_SB(Cin.Field_circ);
     
     Ptrans1 = 0; Ptrans2 = 0;
     for pp=2:Cin.Nb_mirror
-        [tmp_power_lsb,tmp_power_usb] = Calculate_power_SB(Cin.Field_trans(pp));
+        [tmp_power_lsb,tmp_power_usb] = Calculate_Power_SB(Cin.Field_trans(pp));
         Ptrans1 = tmp_power_lsb + Ptrans1;
         Ptrans2 = tmp_power_usb + Ptrans2;
     end
     
-    [Pref1 Pref2] = Calculate_power_SB(Cin.Field_ref);
+    [Pref1 Pref2] = Calculate_Power_SB(Cin.Field_ref);
     
     disp('---------- For the lower sideband ---------------')
     

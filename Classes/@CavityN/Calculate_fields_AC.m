@@ -48,7 +48,7 @@ Field_in =  Change_E_n(Cin.Laser_in,Cin.I_array(1).n2);
 
 %ii = 0;
 error_P = 1;
-E1 = Cin.Field_reso_guess * sqrt(Calculate_power(Cin.Laser_in));  % The 'guess' field was calculated for 1W of input power, so it has to be normalised according to the current incident power
+E1 = Cin.Field_reso_guess * sqrt(Calculate_Power(Cin.Laser_in));  % The 'guess' field was calculated for 1W of input power, so it has to be normalised according to the current incident power
 
 if isempty(E1.Field_SBl) % if there is no SB
     
@@ -60,10 +60,10 @@ if isempty(E1.Field_SBl) % if there is no SB
             
             if pp ~= Cin.Nb_mirror % check we are not at the last iteration
                 Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat_array(pp));
-                Field_transient = Reflect_mirror(Field_transient,Cin.I_array(pp+1));
+                Field_transient = Reflect_Mirror(Field_transient,Cin.I_array(pp+1));
             else % we are at the last iteration
                 Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat_array(pp))* Cin.Resonance_phase;
-                Field_transient = Reflect_mirror(Field_transient,Cin.I_array(1));
+                Field_transient = Reflect_Mirror(Field_transient,Cin.I_array(1));
             end
             
         end
@@ -71,14 +71,14 @@ if isempty(E1.Field_SBl) % if there is no SB
     elseif Cin.type == 'folded'
         for pp = 1:Cin.Nb_mirror-1 % do one way
             Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat_array(pp));
-            Field_transient = Reflect_mirror(Field_transient,Cin.I_array(pp+1));
+            Field_transient = Reflect_Mirror(Field_transient,Cin.I_array(pp+1));
         end
         for pp=Cin.Nb_mirror-1:-1:1 % and do the round trip
             Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat_array(pp));
             if pp == 1 % last propagation
                 Field_transient = Field_transient*Cin.Resonance_phase;
             end
-            Field_transient = Reflect_mirror(Field_transient,Cin.I_array(pp));
+            Field_transient = Reflect_Mirror(Field_transient,Cin.I_array(pp));
         end
     end
     
@@ -99,10 +99,10 @@ if isempty(E1.Field_SBl) % if there is no SB
                 
                 if pp ~= Cin.Nb_mirror % check we are not at the last iteration
                     Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat_array(pp));
-                    Field_transient = Reflect_mirror(Field_transient,Cin.I_array(pp+1));
+                    Field_transient = Reflect_Mirror(Field_transient,Cin.I_array(pp+1));
                 else % we are at the last iteration
                     Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat_array(pp))* Cin.Resonance_phase;
-                    Field_transient = Reflect_mirror(Field_transient,Cin.I_array(1));
+                    Field_transient = Reflect_Mirror(Field_transient,Cin.I_array(1));
                 end
                 
             end
@@ -110,14 +110,14 @@ if isempty(E1.Field_SBl) % if there is no SB
         elseif Cin.type == 'folded'
             for pp = 1:Cin.Nb_mirror-1 % do one way
                 Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat_array(pp));
-                Field_transient = Reflect_mirror(Field_transient,Cin.I_array(pp+1));
+                Field_transient = Reflect_Mirror(Field_transient,Cin.I_array(pp+1));
             end
             for pp=Cin.Nb_mirror-1:-1:1 % and do the round trip
                 Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat_array(pp));
                 if pp == 1 % last propagation
                     Field_transient = Field_transient*Cin.Resonance_phase;
                 end
-                Field_transient = Reflect_mirror(Field_transient,Cin.I_array(pp));
+                Field_transient = Reflect_Mirror(Field_transient,Cin.I_array(pp));
             end
         end
         
@@ -141,7 +141,7 @@ if isempty(E1.Field_SBl) % if there is no SB
         % Calculate D2 now
         D2 = E2 - ( c(1)*(E1 - D1) + c(2)*E_SR_2_circ );
         
-        error_P = Calculate_power(E2 - E1) / Calculate_power(E1);
+        error_P = Calculate_Power(E2 - E1) / Calculate_Power(E1);
         
         E1 = E2;
         D1 = D2;
@@ -176,7 +176,7 @@ if Cin.type == 'ring'
 elseif Cin.type == 'folded'
     
     for pp = 1:Cin.Nb_mirror-1 % do one way
-        %Calculate_power(Field_transient)
+        %Calculate_Power(Field_transient)
         Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat_array(pp));
         [tmp_trans , Field_transient] = Transmit_Reflect_Interface(Field_transient,Cin.I_array(pp+1));
         Cout.Field_trans(pp+1) = tmp_trans;
@@ -187,7 +187,7 @@ elseif Cin.type == 'folded'
     Field_transient = Field_transient*Cin.Resonance_phase;
     
     for pp=Cin.Nb_mirror-1:-1:1 % and do the round trip
-        %Calculate_power(Field_transient)
+        %Calculate_Power(Field_transient)
         Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat_array(pp));
         [tmp_trans,Field_transient] = Transmit_Reflect_Interface(Field_transient,Cin.I_array(pp));
         tmp_trans = Change_E_n(tmp_trans,Cin.I_array(pp).n1);

@@ -40,7 +40,7 @@ Field_in =  Change_E_n(Cin.Laser_in,Cin.I_array(1).n2);
 for q = 1:num_iter
     
     Field_total = Field_total + Field_transient;
-    Buildup_power(q) = Calculate_power(Field_total);
+    Buildup_power(q) = Calculate_Power(Field_total);
     
     if Cin.type == 'ring'
         
@@ -48,10 +48,10 @@ for q = 1:num_iter
             
             if pp ~= Cin.Nb_mirror % check we are not at the last iteration
                 Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat_array(pp));
-                Field_transient = Reflect_mirror(Field_transient,Cin.I_array(pp+1));
+                Field_transient = Reflect_Mirror(Field_transient,Cin.I_array(pp+1));
             else % we are at the last iteration
                 Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat_array(pp))* Cin.Resonance_phase;
-                Field_transient = Reflect_mirror(Field_transient,Cin.I_array(1));
+                Field_transient = Reflect_Mirror(Field_transient,Cin.I_array(1));
             end
             
         end
@@ -60,7 +60,7 @@ for q = 1:num_iter
         
         for pp = 1:Cin.Nb_mirror-1 % do one way
             Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat_array(pp));
-            Field_transient = Reflect_mirror(Field_transient,Cin.I_array(pp+1));
+            Field_transient = Reflect_Mirror(Field_transient,Cin.I_array(pp+1));
         end
         
         for pp=Cin.Nb_mirror-1:-1:1 % and do the round trip
@@ -68,7 +68,7 @@ for q = 1:num_iter
             if pp == 1 % last propagation
                 Field_transient = Field_transient*Cin.Resonance_phase;
             end
-            Field_transient = Reflect_mirror(Field_transient,Cin.I_array(pp));
+            Field_transient = Reflect_Mirror(Field_transient,Cin.I_array(pp));
         end
     end
     

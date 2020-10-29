@@ -35,10 +35,10 @@ for q = 1:num_iter
             
             if pp ~= Cin.Nb_mirror % check we are not at the last iteration
                 Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-                Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(pp+1));
+                Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(pp+1));
             else % we are at the last iteration
                 Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp))*Phase_adjust;
-                Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(1));
+                Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(1));
             end
             
         end
@@ -46,14 +46,14 @@ for q = 1:num_iter
     elseif Cin.type == 'folded'
         for pp = 1:Cin.Nb_mirror-1 % do one way
             Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-            Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(pp+1));
+            Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(pp+1));
         end
         for pp=Cin.Nb_mirror-1:-1:1 % and do the round trip
             Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
             if pp == 1 % last propagation
                 Field_Circ = Field_Circ*Phase_adjust;
             end
-            Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(pp));
+            Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(pp));
         end
     else
         error('Cavity_resonance_phase(): wrong cavity type!')
@@ -77,10 +77,10 @@ if Cin.type == 'ring'
         
         if pp ~= Cin.Nb_mirror % check we are not at the last iteration
             Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-            Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(pp+1));
+            Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(pp+1));
         else % we are at the last iteration
             Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-            Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(1));
+            Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(1));
         end
         
     end
@@ -88,11 +88,11 @@ if Cin.type == 'ring'
 elseif Cin.type == 'folded'
     for pp = 1:Cin.Nb_mirror-1 % do one way
         Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-        Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(pp+1));
+        Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(pp+1));
     end
     for pp=Cin.Nb_mirror-1:-1:1 % and do the round trip
         Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-        Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(pp));
+        Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(pp));
     end
 else
     error('Cavity_resonance_phase(): wrong cavity type!')
@@ -114,7 +114,7 @@ end
 Cavity_gain = (1-Cin.I_array(1).r^2)/ (1 - RT_loss)^2;
 % do the overlap
 Coeff_over = Calculate_Overlap(Field_Circ,Field_in2);
-Pcirc = abs(Coeff_over).^2 * Cavity_gain * Calculate_power(Cin.Laser_in);
+Pcirc = abs(Coeff_over).^2 * Cavity_gain * Calculate_Power(Cin.Laser_in);
 Cout.Field_reso_guess = Normalise_E(Field_Circ,Pcirc);
 
 disp(['Found the phase for resonance in cavity ' inputname(1)])

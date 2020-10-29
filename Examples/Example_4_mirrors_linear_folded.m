@@ -29,5 +29,5 @@ OMC = CavityN(I,d,E_input);
 %OMC.Check_stability
 %OMC = Cavity_scan(OMC);
 OMC = Cavity_resonance_phase(OMC);
-OMC = Calculate_fields_AC(OMC);
+OMC = Calculate_fields(OMC);
 Display_results(OMC)
