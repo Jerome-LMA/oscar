@@ -5,7 +5,7 @@
 % We will check the etalon effect
 
 clearvars; close all;
-addpath(genpath(strcat(pwd, '\..\Classes')));
+addpath(genpath('Classes'));
 
 disp('---------------------------------------------------------------------------')
 disp('                  OSCAR V3.30  - The cavities with thick mirror       ')

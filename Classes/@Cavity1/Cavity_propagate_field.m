@@ -17,8 +17,8 @@ num_iter = log(0.5*0.01)/(log(RT_loss));
 num_iter = round(num_iter);
 
 if (num_iter > Cin.Cavity_scan_param(4))
-    fprintf(' Ideal number of iteration to scan the cavity; %i \n',num_iter)
-    fprintf(' This is too much, number of iteration brings down to; %i \n',Cin.Cavity_scan_param(4))
+    fprintf(' Ideal number of iteration to scan the cavity: %i \n',num_iter)
+    fprintf(' This is too much, number of iteration brings down to: %i \n',Cin.Cavity_scan_param(4))
     num_iter = Cin.Cavity_scan_param(4);
 end
 

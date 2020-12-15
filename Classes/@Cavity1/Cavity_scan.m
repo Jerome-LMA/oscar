@@ -1,4 +1,4 @@
-function Cout = Cavity_scan(Cin,varargin)
+function Cout = Cavity_Scan(Cin,varargin)
 % Cout = Cavity_scan(Cin) scan the cavity to find the position of the
 % maximum power
 % Scan the cavity over one FSR and then find the suitable resonance length
@@ -54,7 +54,7 @@ num_point_scan = Cin.Cavity_scan_param(1);
 if Cin.Laser_in.Nb_Pair_SB
     D_phi = (2*pi*Cin.Laser_in.SB(1).Frequency_Offset/2.99792E8) * Cin.Length;
 else
-    %D_phi = 0;
+    D_phi = 0;
 end
 
 % Define where we store the results of the scan
@@ -84,6 +84,7 @@ if license('test','distrib_computing_toolbox') && p.Results.use_parallel        
         for ii=1:num_iter
             Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii);
             if Cin.Laser_in.Nb_Pair_SB
+                disp('SB')
                 Field_reconstructed_SBu = Field_reconstructed_SBu + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(1i*D_phi*ii);
                 Field_reconstructed_SBl = Field_reconstructed_SBl + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(-1i*D_phi*ii);
             end
@@ -99,9 +100,9 @@ if license('test','distrib_computing_toolbox') && p.Results.use_parallel        
         end
         
         if p.Results.With_SB
-            Power_scan(qq) = Calculate_power(Dummy_E,'include','all');
+            Power_scan(qq) = Calculate_Power(Dummy_E,'include','all');
         else
-            Power_scan(qq) = Calculate_power(Dummy_E);
+            Power_scan(qq) = Calculate_Power(Dummy_E);
         end
     end
     

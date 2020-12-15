@@ -19,7 +19,7 @@ p.addParameter('remove_tilt_focus', [] , @(x)isnumeric(x) && x>0);
 p.addParameter('rotate', 0 , @(x)isnumeric(x));
 
 % Check if we should offset the map, 2D vector in X and Y in m
-p.addParameter('centering',[0 0], @(x)isnumeric(x));
+p.addParameter('shift',[0 0], @(x)isnumeric(x));
 
 % Check if there is a scaling factor for the map
 p.addParameter('scale',[],@(x)isnumeric(x));
@@ -56,10 +56,10 @@ Iout = Interface(Gout,'RoC',Inf,'CA',m*dx);
 
 if  ~isempty(p.Results.remove_tilt)
         Iout = Add_Map(Iout,Map_loaded,'reso',dx,'remove_tilt',p.Results.remove_tilt,'rotate',p.Results.rotate,...
-            'centering',p.Results.centering,'scale',-1);    
+            'shift',p.Results.shift,'scale',-1);    
 elseif ~isempty(p.Results.remove_tilt_focus)
         Iout = Add_Map(Iout,Map_loaded,'reso',dx,'remove_tilt_focus',p.Results.remove_tilt_focus,'rotate',p.Results.rotate,...
-            'centering',p.Results.centering,'scale',-1); 
+            'shift',p.Results.shift,'scale',-1); 
 else
         Iout = Add_Map(Iout,Map_loaded,'reso',dx,'rotate',p.Results.rotate,'scale',-1);
 end
