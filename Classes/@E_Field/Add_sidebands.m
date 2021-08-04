@@ -19,6 +19,7 @@ p.parse(Ein,Mod_freq,Mod_index)
 
 Eout = Ein;
 Eout.SB(Eout.Nb_Pair_SB+1).Frequency_Offset = Mod_freq;
+Eout.SB(Eout.Nb_Pair_SB+1).Input_Mod_index = Mod_index;
 
 % Change the amplitude for the carrier
 Eout.Field = Eout.Field * besselj(0,Mod_index);

@@ -21,6 +21,7 @@ classdef E_Field
         Refractive_index = 1;
         Wavelength = 1064E-9;
         Mode_name
+        Optimal_mode_matching = false;
         
         Nb_Pair_SB = 0;
         k_prop
@@ -57,6 +58,10 @@ classdef E_Field
             % Check if the power of the beam is given
             p.addParameter('P',1, @(x)isnumeric(x) && x>0);
             
+            % Check if we want the best mode matching, once the cavity is
+            % defined
+            p.addParameter('Optimal_MM',false,@(x)islogical(x));
+            
             % Mode
             p.addParameter('mode','HG 0 0', @(x)ischar(x));
             
@@ -67,7 +72,7 @@ classdef E_Field
             
             % check of what is entered
             
-            if ( isempty(p.Results.q) && isempty(p.Results.w) && isempty(p.Results.w0))
+            if ( isempty(p.Results.q) && isempty(p.Results.w) && isempty(p.Results.w0) && ~p.Results.Optimal_MM )
                 error('E_Field(): at least the parameter w,w0 or q must be given to define the laser beam')
             end
             
@@ -77,9 +82,13 @@ classdef E_Field
             elseif ~isempty(p.Results.w0)
                 q_start = p.Results.z + 1i*pi*p.Results.w0^2/E.Wavelength;
                 beam_radius = sqrt( 1/(-imag(1/q_start)*pi/(E.Wavelength)) );
-            else
+            elseif ~isempty(p.Results.q)
                 q_start =  p.Results.q;
                 beam_radius = sqrt( 1/(-imag(1/q_start)*pi/(E.Wavelength)) );
+            elseif p.Results.Optimal_MM 
+                q_start = 1/(- 1i*(E.Wavelength)/((pi*Grid_in.Length/10)^2));% put a dummy value there 
+                beam_radius = sqrt( 1/(-imag(1/q_start)*pi/(E.Wavelength)) );
+                E.Optimal_mode_matching = true;
             end
             
             [family,m,n] = Read_mode_name(p.Results.mode);

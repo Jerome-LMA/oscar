@@ -60,6 +60,17 @@ classdef Cavity1
                     C.Laser_in = varargin{4};
                     
                     C.Propagation_mat = Prop_operator(C.Laser_in,C.Length);
+                 
+                % Check if the input laser is optimally mode matched    
+                if  C.Laser_in.Optimal_mode_matching
+                    Beam_paramater = Check_Stability(C,'Display',false);
+                    New_input_field =  E_Field(Grid(C),'w',Beam_paramater(1),'R',Beam_paramater(2),'mode',C.Laser_in.Mode_name);
+                    % add the sidebands as it used to be
+                    for ii = 1:C.Laser_in.Nb_Pair_SB
+                        New_input_field = Add_Sidebands(New_input_field,C.Laser_in.SB(ii).Frequency_Offset,C.Laser_in.SB(ii).Input_Mod_index);
+                    end
+                    C.Laser_in = New_input_field;
+                end    
                     
                 otherwise
                     disp('Cavity1(): invalid number of input arguments, cavity not created')

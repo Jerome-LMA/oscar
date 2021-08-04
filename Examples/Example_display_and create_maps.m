@@ -55,11 +55,12 @@ G2 = Grid(532,0.4);
 % The maps are the ones of large optics (> 300 mm diameter) with nm
 % flatness over the central part, so pretty good polishing
 % Do not overanalysed the PSD or draw conclusions from them as they
-% dependent on a lot of conditions and are not engraved in marble. 
-% It is there for illustrative purpose!
+% dependent on a lot of conditions and could change over time. 
+% It is there for only illustrative purpose, absolute no warranty that
+% you wll have in your optics!
 % Do not forget to add which the flatness you are are looking for
 
-param_PSD_ZYGO_IBF = [0.06 2.4 0.004 -4.3 -0.08 -3.2 16 420]; % approximated parameters for ZYGOo polishing with IBF (Richmond site), derived from all the AdV IM and EM wavefront measurements
+param_PSD_ZYGO_IBF = [0.06 2.4 0.004 -4.3 -0.08 -3.2 16 420]; % approximated parameters for ZYGO polishing with IBF (Richmond site), derived from all the AdV IM and EM wavefront measurements
 param_PSD_ZYGO_F = [0.08 -2.5]; % approximated parameters for ZYGO polishing (Middlefield site), flat surface, derived from the AdV BS, CP wavefront measurements
 param_PSD_ZYGO_C = [3E-4 10 -1 -4 150]; % approximated parameters for ZYGO polishing (Richmond site), curved surface, derived from AdV PR, SR wavefront measurements
 param_PSD_Coastline = [0.02 -1.4]; % approximated parameters for Coastline Optics 

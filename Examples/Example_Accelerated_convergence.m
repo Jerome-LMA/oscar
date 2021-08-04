@@ -30,19 +30,19 @@ EM = Interface(G1,'RoC',2400,'CA',0.1,'T',0.001);
 C1 = Cavity1(IM,EM,1000,E_input);
 
 % Calculate the resonance length
-C1 = Cavity_resonance_phase(C1);
+C1 = Cavity_Resonance_Phase(C1);
 
 % Display the circulating power, reflected and transmitted powers
 
 tic
-C2 = Calculate_fields_AC(C1);
+C2 = Calculate_Fields_AC(C1);
 disp('Accelerated convergence results:')
 AC_time = toc;
 C2.Display_Results('display',false);
 
 
 tic
-C3 = Calculate_fields(C1,'accuracy',0.00001);
+C3 = Calculate_Fields(C1,'accuracy',0.00001);
 disp('Normal convergence results:')
 NC_time = toc;
 C3.Display_Results('display',false);
