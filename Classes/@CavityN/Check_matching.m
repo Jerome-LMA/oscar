@@ -1,4 +1,4 @@
-function Check_matching(varargin)
+function Check_Matching(varargin)
 % Check_matching(C1) Do 2 round trip of the input field in the cavity and
 % check the size and wavefront curvature of the beam on the mirrors to see
 % if the matching is correct.

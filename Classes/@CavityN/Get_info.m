@@ -1,4 +1,4 @@
-function Get_info(Cin)
+function Get_Info(Cin)
 
 % Get_info(C1) calculate some informations about the cavity
 % Get_info(C1) calculate fields in the cavity, power buildup, diffraction loss

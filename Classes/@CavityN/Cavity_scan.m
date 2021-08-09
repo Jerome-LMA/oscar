@@ -1,4 +1,4 @@
-function Cout = Cavity_scan(Cin)
+function Cout = Cavity_Scan(Cin)
 % Cout = Cavity_scan(Cin) scan the cavity to find the position of the
 % maximum power
 % Scan the cavity over one FSR and then find the suitable resonance length

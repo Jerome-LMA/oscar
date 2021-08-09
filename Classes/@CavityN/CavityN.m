@@ -44,12 +44,12 @@ classdef CavityN
                     end
                     
                     if  (~isreal(varargin{2})) && (varargin{2} <= 0)
-                        disp('Cavity1(): the third argument, length of the cavity must be a real positive number')
+                        disp('Cavity1(): the second argument, length of the cavity must be a real positive number')
                         return
                     end
                     
                     if  ~isa(varargin{3}, 'E_Field')
-                        disp('Cavity1(): the fourth argument, the input laser beam must be an instance of the class E_field')
+                        disp('Cavity1(): the third argument, the input laser beam must be an instance of the class E_field')
                         return
                     end
                     
@@ -62,7 +62,7 @@ classdef CavityN
                         C.type = "ring";
                     elseif length(C.I_array) == (length(C.d_array)+1)
                         C.type = "folded";
-                    else                        
+                    else
                         error('CavityN(): number of interfaces and length are different')
                     end
                     
@@ -72,16 +72,30 @@ classdef CavityN
                     
                     C.Propagation_mat_array = Prop_operator.empty(0,C.Nb_mirror);
                     for pp = 1:length(C.d_array)
-                       C.Propagation_mat_array(pp) = Prop_operator(C.Laser_in,C.d_array(pp));                                                       
+                        C.Propagation_mat_array(pp) = Prop_operator(C.Laser_in,C.d_array(pp));
                     end
                     
                     fprintf('You have created a %s cavity with %i mirrors \n',C.type,C.Nb_mirror)
                     
+                    % Check if the input laser is optimally mode matched
+                    if  C.Laser_in.Optimal_mode_matching
+                        Beam_paramater = Check_Stability(C,'Display',false);
+                        New_input_field =  E_Field(Grid(C),'w',Beam_paramater(1),'R',Beam_paramater(2),'mode',C.Laser_in.Mode_name);
+                        % add the sidebands as it used to be
+                        for ii = 1:C.Laser_in.Nb_Pair_SB
+                            New_input_field = Add_Sidebands(New_input_field,C.Laser_in.SB(ii).Frequency_Offset,C.Laser_in.SB(ii).Input_Mod_index);
+                        end
+                        C.Laser_in = New_input_field;
+                    end
                     
                 otherwise
                     disp('Cavity1(): invalid number of input arguments, cavity not created')
                     
             end
+        end
+        
+        function G = Grid(obj)
+            G = obj.Laser_in.Grid;
         end
     end
     

@@ -16,7 +16,9 @@ if isempty(Cin.Field_ref)
     error('Display_results(): Before displaying the results, the function Calculate_fields() must be run     ')
 end
 
-disp('---------- For the carrier ---------------')
+if Cin.Laser_in.Nb_Pair_SB % if there is no SB no need to mention for the carrier
+    disp('---------- For the carrier ---------------')
+end
 
 fprintf('  Power in the input beam: \t %6.6g \t [W] \n',Calculate_Power(Cin.Laser_in))
 fprintf('  Circulating power: \t\t %6.6g \t [W] \n',Calculate_Power(Cin.Field_circ))

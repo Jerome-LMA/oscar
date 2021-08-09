@@ -1,4 +1,4 @@
-function Display_results(Cin)
+function Display_Results(Cin)
 % Display_results(Cin) display the results of the cavity calculations.
 % The function Calculate_fields() must have been run first
 
@@ -6,9 +6,10 @@ if isempty(Cin.Field_ref)
     error('Display_results(): Before displaying the results, the function Calculate_fields() must be run     ')
 end
 
-if ~isempty(Cin.Laser_in.Field_SBl)
+if Cin.Laser_in.Nb_Pair_SB % if there is no SB no need to mention for the carrier
     disp('---------- For the carrier ---------------')
 end
+
 
 % Calculate the total transmitted power
 tmp_power = 0;
@@ -26,37 +27,30 @@ fprintf(' Circulating power %g [W] \n',Calculate_Power(Cin.Field_circ))
 if Cin.type == 'ring'
     fprintf(' Total transmitted power %g [W] \n',tmp_power)
 elseif Cin.type == 'folded'
-    fprintf(' End transmitted power %g [W] \n',tmp_power)    
+    fprintf(' End transmitted power %g [W] \n',tmp_power)
 end
 fprintf(' Reflected power %g [W] \n\n',Calculate_Power(Cin.Field_ref))
 
-if ~isempty(Cin.Laser_in.Field_SBl)
+for ii=1:Cin.Laser_in.Nb_Pair_SB
     
-    [Pin1,Pin2] = Calculate_Power_SB(Cin.Laser_in);
-    [Pcirc1,Pcirc2] = Calculate_Power_SB(Cin.Field_circ);
+    [Pin1, Pin2] = Calculate_Power(Cin.Laser_in,'include','SB','SB_num',ii);
+    [Pcirc1, Pcirc2] = Calculate_Power(Cin.Field_circ,'include','SB','SB_num',ii);
     
     Ptrans1 = 0; Ptrans2 = 0;
     for pp=2:Cin.Nb_mirror
-        [tmp_power_lsb,tmp_power_usb] = Calculate_Power_SB(Cin.Field_trans(pp));
+        [tmp_power_lsb,tmp_power_usb] = Calculate_Power(CCin.Field_trans(pp),'include','SB','SB_num',ii);
         Ptrans1 = tmp_power_lsb + Ptrans1;
         Ptrans2 = tmp_power_usb + Ptrans2;
     end
     
-    [Pref1 Pref2] = Calculate_Power_SB(Cin.Field_ref);
+    [Pref1, Pref2] = Calculate_Power(Cin.Field_ref,'include','SB','SB_num',ii);
     
-    disp('---------- For the lower sideband ---------------')
-    
-    fprintf(' Power in the input beam %g [W] \n',Pin1)
-    fprintf(' Circulating power %g [W] \n',Pcirc1)
-    fprintf(' Transmitted power %g [W] \n',Ptrans1)
-    fprintf(' Reflected power %g [W] \n\n',Pref1)
-    
-    disp('---------- For the upper sideband ---------------')
-    
-    fprintf(' Power in the input beam %g [W] \n',Pin2)
-    fprintf(' Circulating power %g [W] \n',Pcirc2)
-    fprintf(' Transmitted power %g [W] \n',Ptrans2)
-    fprintf(' Reflected power %g [W] \n\n',Pref2)
+    fprintf('---------- For the sidebands %i ---------------\n',ii)
+    fprintf(' for the lower and upper sidebands respectively \n')
+    fprintf(' Power in the input beam: \t %6g \t %6g \t [W] \n',Pin1,Pin2)
+    fprintf(' Circulating power: \t\t %6g \t %6g \t [W] \n',Pcirc1,Pcirc2)
+    fprintf(' Transmitted power: \t\t %6g \t %6g \t [W] \n',Ptrans1,Ptrans2)
+    fprintf(' Reflected power: \t\t\t %6g \t %6g \t [W] \n\n',Pref1,Pref2)
     
 end
 
@@ -64,16 +58,16 @@ end
 figure(105)
 clf;
 subplot(2,2,1)
-E_plot(Cin.Laser_in)
+E_Plot(Cin.Laser_in)
 title('Input field')
 subplot(2,2,2)
-E_plot(Cin.Field_circ)
+E_Plot(Cin.Field_circ)
 title('Circulating field')
 subplot(2,2,3)
-E_plot(Cin.Field_ref)
+E_Plot(Cin.Field_ref)
 title('Reflected field')
 subplot(2,2,4)
-E_plot(Cin.Field_trans(end))
+E_Plot(Cin.Field_trans(end))
 title('Transmitted field')
 
 

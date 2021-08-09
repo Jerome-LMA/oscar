@@ -1,4 +1,4 @@
-function  varargout = Display_cavity_modes(Cin,varargin)
+function  varargout = Display_Cavity_Modes(Cin,varargin)
 % Display interactively the cavity modes
 
 p = inputParser;

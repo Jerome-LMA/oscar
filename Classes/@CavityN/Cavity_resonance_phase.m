@@ -1,4 +1,4 @@
-function Cout = Cavity_resonance_phase(Cin)
+function Cout = Cavity_Resonance_Phase(Cin)
 %  Cout = Cavity_resonance_phase(Cin) find the resonance of a cavity
 % This procedure can find the resonance of the cavity by finding the
 % suitable round trip phase shift to bring the circulating field on resonance.

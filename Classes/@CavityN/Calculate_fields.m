@@ -1,4 +1,4 @@
-function Cout = Calculate_fields(Cin)
+function Cout = Calculate_Fields(Cin)
 % Cout = Calculate_fields(Cin) calculate the circulating, reflected and transmitted fields
 % Function used to calculated the fields inside the cavity. The laser beam must be defined outside the cavity in order to calculate the reflected field.
 % Stored in Cout.Field_trans(n) the transmitted field after the nth mirror.

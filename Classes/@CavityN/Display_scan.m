@@ -1,4 +1,4 @@
-function Display_scan(Cin)
+function Display_Scan(Cin)
 % Display_scan() Display the scan of the cavity. Can show the different
 % mode excited in the cavity
 
