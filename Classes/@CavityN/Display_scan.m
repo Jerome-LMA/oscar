@@ -23,13 +23,13 @@ set(dcm_obj,'UpdateFcn', @myupdatefcn )
 xlabel(hap1,'Cavity detuning [m]')
 
 % Bottom left: the input beam
-imagesc(Cin.Laser_in.Grid.Axis,Cin.Laser_in.Grid.Axis,abs(Cin.Laser_in.Field),'Parent',hai1)
+imagesc(Cin.Laser_in.Grid.Axis,Cin.Laser_in.Grid.Axis,abs(Cin.Laser_in.Field).^2,'Parent',hai1)
 title(hai1,'Cavity input beam')
 
 % Bottom left: the circulating beam
 
 [~,Length_scan_max_in] = max(Cin.Cavity_scan_R(:,2));
-imagesc(Cin.Laser_in.Grid.Axis,Cin.Laser_in.Grid.Axis,abs(SumField(Cin,Cin.Cavity_scan_R(Length_scan_max_in,1))),'Parent',hai2)
+imagesc(Cin.Laser_in.Grid.Axis,Cin.Laser_in.Grid.Axis,abs(SumField(Cin,Cin.Cavity_scan_R(Length_scan_max_in,1))).^2,'Parent',hai2)
 title(hai2,'Cavity circulating beam')
 
 % Change units to normalized so components resize
@@ -50,7 +50,7 @@ set(f,'Visible','on')
 function txt = myupdatefcn(~, event_obj)
   pos = event_obj.Position;
   
-  imagesc(Cin.Laser_in.Grid.Axis,Cin.Laser_in.Grid.Axis,abs(SumField(Cin,pos(1))),'Parent',hai2)
+  imagesc(Cin.Laser_in.Grid.Axis,Cin.Laser_in.Grid.Axis,abs(SumField(Cin,pos(1))).^2,'Parent',hai2)
   title(hai2,'Cavity circulating beam')
   %disp(['You clicked X:',num2str(pos(1)),', Y:',num2str(pos(2))]);
   txt = {['Position: ' num2str(pos(1))],['Power: ' num2str(pos(2))]};

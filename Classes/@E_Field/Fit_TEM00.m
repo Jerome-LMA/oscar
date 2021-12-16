@@ -58,6 +58,12 @@ Cross_sec_phase_x = unwrap(angle(E.Field(E.Grid.Half_num_point,:)));
 % Will do the fit on the beam diameter, find the index
 Cross_sec_index = intersect(find (E.Grid.Axis < Beam_rad),find (E.Grid.Axis > -Beam_rad));
 
+if Cross_sec_index < 2
+    Beam_rad
+    figure(201)
+    plot(E.Grid.Axis,Cross_sec_phase_x)
+    error('Fit_TEM00(): beam radius estimation too small to fit the RoC')
+end
 %
 % figure(2)
 % plot(E.Grid.Axis(Cross_sec_index),Cross_sec_phase_x(Cross_sec_index))

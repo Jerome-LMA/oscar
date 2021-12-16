@@ -13,13 +13,17 @@ p.addRequired('Cin', @(x)isa(x, 'Cavity1'));
 p.addParameter('use_parallel',true,@(x)islogical(x));
 
 % Check if we save the scan in a file
-p.addParameter('save_scan',false,@(x)islogical(x));
+p.addParameter('save_scan',false,@(x) islogical(x) || ischar(x));
 
 % Check if we have to zoom to calculate and save the resonance length
 p.addParameter('Define_L_length',false,@(x)islogical(x));
 
 % Check if we all include the SB in the calculation
 p.addParameter('With_SB',false,@(x)islogical(x));
+
+% Scan over how many FSR
+p.addParameter('Nb_FSR',1,@(x)isscalar(x));
+
 
 p.parse(Cin,varargin{:})
 
@@ -37,7 +41,6 @@ if Grid_num_point > 256
         error('Scan aborted by the user')
     end
 end
-
 
 if isempty(Cin.Cavity_scan_all_field)
     Cin = Cavity_propagate_field(Cin);
@@ -64,7 +67,7 @@ end
 Power_scan = zeros(1,num_point_scan,'double');
 
 % Create the length vector to scan the cavity
-Length_scan = (1:num_point_scan) * Cin.Laser_in.Wavelength/num_point_scan;
+Length_scan = (1:num_point_scan) * Cin.Laser_in.Wavelength/num_point_scan * round(abs(p.Results.Nb_FSR));
 
 fprintf(' Scanning the cavity ...       ')
 
@@ -87,8 +90,8 @@ if license('test','distrib_computing_toolbox') && p.Results.use_parallel        
         for ii=1:num_iter
             Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii);
             if Cin.Laser_in.Nb_Pair_SB
-                Field_reconstructed_SBu = Field_reconstructed_SBu + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(1i*D_phi*ii);
-                Field_reconstructed_SBl = Field_reconstructed_SBl + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(-1i*D_phi*ii);
+                Field_reconstructed_SBu = Field_reconstructed_SBu + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(1i*2*D_phi*ii);
+                Field_reconstructed_SBl = Field_reconstructed_SBl + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(-1i*2*D_phi*ii);
             end
         end
         
@@ -151,14 +154,12 @@ else % if the PCT is not installed or we do not want to use the toolbox
     
 end
 
-
-
 fprintf('Finished ... \n')
 
 if p.Results.save_scan
     tmp_save(:,1) = Length_scan;
     tmp_save(:,2) = Power_scan;
-    save(['Cavity_scan_' inputname(1) '.txt'],'tmp_save','-ASCII');
+    save(['Cavity_scan_' p.Results.save_scan '.txt'],'tmp_save','-ASCII');
 end
 %
 % figure(101)

@@ -73,8 +73,7 @@ I1 = Interface(G2,'RoC',Inf);
 I1 = Add_Map(I1,fake_map,'reso',G2.Step,'remove_tilt_focus',0.250,'RMS',0.5E-9,'verbose',false);
 
 figure(4);I_Plot(I1,'diam',0.25)
-Weighted_RMS(I1,0.250);
-
+Weighted_RMS(I1,'diam',0.25);
 
 
 

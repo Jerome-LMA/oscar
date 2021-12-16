@@ -5,7 +5,8 @@ function Eout = Transmit_Aperture(Ein,Diam,varargin)
 %      Transmit_Aperture(E_in,diam) pass the field E_in through a circular
 %      aperture of diameter diam
 %     Transmit_Aperture(E_in,diam,'Shape','square') pass the field E_in through  a
-%     square aperture of side length diam
+%     square aperture of side length diam.
+%
 %     Transmit_Aperture(E_in,'Shape','batman') pass the field E_in through  a
 %     batman sign, size must be between 0 and 1, 1 being for the sign on
 %     the full grid.
@@ -25,7 +26,7 @@ p  = inputParser;
 p.addRequired('Ein', @(x)isa(x, 'E_Field'));
 
 % Check if the first argument is an E_Field
-p.addRequired('Diam', @(x)isnumeric(x) && x>0);
+p.addRequired('Diam', @(x)isnumeric(x));
 
 % Check if the first argument is an E_Field
 p.addParameter('Shape','round',@(x)strcmpi(x,'round') | ...
@@ -37,15 +38,26 @@ Diam_mask = Diam;
 
 if strcmp(p.Results.Shape,'round')
     Mask = zeros(Ein.Grid.Num_point,Ein.Grid.Num_point,'double');
-    Mask(Ein.Grid.D2_r < (Diam_mask/2)) = 1;
+    
+    if Diam_mask > 0
+        Mask(Ein.Grid.D2_r < (Diam_mask/2)) = 1;
+    else
+        Mask(Ein.Grid.D2_r > (-Diam_mask/2)) = 1;
+    end
     
 elseif strcmp(p.Results.Shape,'square')
     Mask = zeros(Ein.Grid.Num_point,Ein.Grid.Num_point,'double');
     Mask((abs(Ein.Grid.D2_X) < (Diam_mask/2)) & (abs(Ein.Grid.D2_Y) < (Diam_mask/2))) = 1;
     
+    if Diam_mask > 0
+        Mask((abs(Ein.Grid.D2_X) < (Diam_mask/2)) & (abs(Ein.Grid.D2_Y) < (Diam_mask/2))) = 1;
+    else
+        Mask((abs(Ein.Grid.D2_X) > (-Diam_mask/2)) & (abs(Ein.Grid.D2_Y) > (-Diam_mask/2))) = 1;
+    end
+        
 elseif strcmp(p.Results.Shape,'batman')
     %Mask = ones(Ein.Grid.Num_point,Ein.Grid.Num_point);
-    load('sign.mat')   
+    load('sign.mat')
     [nlin,ncol] = size(image_gray);
     
     % Add 0 to render image square, in the original image ncol is

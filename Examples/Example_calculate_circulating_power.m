@@ -42,3 +42,5 @@ title('Power buildup')
 xlabel('Number of iteration')
 ylabel('Power [W]')
 set(gca,'FontSize',14);
+
+Fit_TEM00(E_input)

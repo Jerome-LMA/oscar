@@ -65,70 +65,72 @@ classdef E_Field
             % Mode
             p.addParameter('mode','HG 0 0', @(x)ischar(x));
             
-            p.parse(Grid_in,varargin{:});
-            
-            E.Wavelength = p.Results.Wavelength;
-            E.k_prop = (2*pi/E.Wavelength);
-            
-            % check of what is entered
-            
-            if ( isempty(p.Results.q) && isempty(p.Results.w) && isempty(p.Results.w0) && ~p.Results.Optimal_MM )
-                error('E_Field(): at least the parameter w,w0 or q must be given to define the laser beam')
-            end
-            
-            if  ~isempty(p.Results.w)
-                q_start = 1/(1/p.Results.R - 1i*(E.Wavelength)/(pi*p.Results.w^2));
-                beam_radius = p.Results.w;
-            elseif ~isempty(p.Results.w0)
-                q_start = p.Results.z + 1i*pi*p.Results.w0^2/E.Wavelength;
-                beam_radius = sqrt( 1/(-imag(1/q_start)*pi/(E.Wavelength)) );
-            elseif ~isempty(p.Results.q)
-                q_start =  p.Results.q;
-                beam_radius = sqrt( 1/(-imag(1/q_start)*pi/(E.Wavelength)) );
-            elseif p.Results.Optimal_MM 
-                q_start = 1/(- 1i*(E.Wavelength)/((pi*Grid_in.Length/10)^2));% put a dummy value there 
-                beam_radius = sqrt( 1/(-imag(1/q_start)*pi/(E.Wavelength)) );
-                E.Optimal_mode_matching = true;
-            end
-            
-            [family,m,n] = Read_mode_name(p.Results.mode);
-            
-            E.Grid = Grid_in;
-            
-            if strcmp(family,'LG') % for the backward compatibility with previous version
-                family = 'LG_HELI';
-            end
-            
-            if strcmp(family,'HG')
+            if nargin > 0
+                p.parse(Grid_in,varargin{:});
                 
-                E.Field = exp(-1i*E.k_prop*E.Grid.D2_square/(2*q_start));
+                E.Wavelength = p.Results.Wavelength;
+                E.k_prop = (2*pi/E.Wavelength);
                 
-                E.Field =  E.Field  .* HermitePolynomial(m, sqrt(2)/beam_radius * E.Grid.D2_X) .*...
-                    HermitePolynomial(n, sqrt(2)/beam_radius * E.Grid.D2_Y);
+                % check of what is entered
                 
-            elseif strcmp(family,'LG_HELI') % the one before V3.17
+                if ( isempty(p.Results.q) && isempty(p.Results.w) && isempty(p.Results.w0) && ~p.Results.Optimal_MM )
+                    error('E_Field(): at least the parameter w,w0 or q must be given to define the laser beam')
+                end
                 
-                E.Field = exp(-1i*E.k_prop*E.Grid.D2_square/(2*q_start));
+                if  ~isempty(p.Results.w)
+                    q_start = 1/(1/p.Results.R - 1i*(E.Wavelength)/(pi*p.Results.w^2));
+                    beam_radius = p.Results.w;
+                elseif ~isempty(p.Results.w0)
+                    q_start = p.Results.z + 1i*pi*p.Results.w0^2/E.Wavelength;
+                    beam_radius = sqrt( 1/(-imag(1/q_start)*pi/(E.Wavelength)) );
+                elseif ~isempty(p.Results.q)
+                    q_start =  p.Results.q;
+                    beam_radius = sqrt( 1/(-imag(1/q_start)*pi/(E.Wavelength)) );
+                elseif p.Results.Optimal_MM
+                    q_start = 1/(- 1i*(E.Wavelength)/((pi*Grid_in.Length/10)^2));% put a dummy value there
+                    beam_radius = sqrt( 1/(-imag(1/q_start)*pi/(E.Wavelength)) );
+                    E.Optimal_mode_matching = true;
+                end
                 
-                E.Field =  E.Field  .* (2* E.Grid.D2_square / beam_radius^2) .^ (abs(n)/2);
-                E.Field =  E.Field  .* LaguerrePolynomial(m, abs(n), 2* E.Grid.D2_square / beam_radius^2);
-                E.Field =  E.Field  .* exp(1i * n*atan2(E.Grid.D2_Y,E.Grid.D2_X));
+                [family,m,n] = Read_mode_name(p.Results.mode);
                 
-            elseif strcmp(family,'LG_SIN')
+                E.Grid = Grid_in;
                 
-                E.Field = exp(-1i*E.k_prop*E.Grid.D2_square/(2*q_start));
+                if strcmp(family,'LG') % for the backward compatibility with previous version
+                    family = 'LG_HELI';
+                end
                 
-                E.Field =  E.Field  .* (2* E.Grid.D2_square / beam_radius^2) .^ (abs(n)/2);
-                E.Field =  E.Field  .* LaguerrePolynomial(m, abs(n), 2* E.Grid.D2_square / beam_radius^2);
-                E.Field =  E.Field  .* exp(1i * n*atan2(E.Grid.D2_Y,E.Grid.D2_X)) + E.Field  .* exp(-1i * n*atan2(E.Grid.D2_Y,E.Grid.D2_X));
+                if strcmp(family,'HG')
+                    
+                    E.Field = exp(-1i*E.k_prop*E.Grid.D2_square/(2*q_start));
+                    
+                    E.Field =  E.Field  .* HermitePolynomial(m, sqrt(2)/beam_radius * E.Grid.D2_X) .*...
+                        HermitePolynomial(n, sqrt(2)/beam_radius * E.Grid.D2_Y);
+                    
+                elseif strcmp(family,'LG_HELI') % the one before V3.17
+                    
+                    E.Field = exp(-1i*E.k_prop*E.Grid.D2_square/(2*q_start));
+                    
+                    E.Field =  E.Field  .* (2* E.Grid.D2_square / beam_radius^2) .^ (abs(n)/2);
+                    E.Field =  E.Field  .* LaguerrePolynomial(m, abs(n), 2* E.Grid.D2_square / beam_radius^2);
+                    E.Field =  E.Field  .* exp(1i * n*atan2(E.Grid.D2_Y,E.Grid.D2_X));
+                    
+                elseif strcmp(family,'LG_SIN')
+                    
+                    E.Field = exp(-1i*E.k_prop*E.Grid.D2_square/(2*q_start));
+                    
+                    E.Field =  E.Field  .* (2* E.Grid.D2_square / beam_radius^2) .^ (abs(n)/2);
+                    E.Field =  E.Field  .* LaguerrePolynomial(m, abs(n), 2* E.Grid.D2_square / beam_radius^2);
+                    E.Field =  E.Field  .* exp(1i * n*atan2(E.Grid.D2_Y,E.Grid.D2_X)) + E.Field  .* exp(-1i * n*atan2(E.Grid.D2_Y,E.Grid.D2_X));
+                    
+                else
+                    error('E_Field():the mode name must be HG or LG_HELI or LG_SIN')
+                end
                 
+                E.Mode_name = p.Results.mode;
+                E = Normalise_E(E,p.Results.P);
             else
-                error('E_Field():the mode name must be HG or LG_HELI or LG_SIN')
             end
-            
-            E.Mode_name = p.Results.mode;
-            E = Normalise_E(E,p.Results.P);
-            
         end
         
         function value = get.Field(obj)

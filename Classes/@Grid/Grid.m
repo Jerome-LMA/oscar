@@ -54,6 +54,10 @@ classdef Grid < handle
             
             [G1.D2_FFT_X,G1.D2_FFT_Y] = meshgrid(G1.Axis_FFT);
             
+            if rem(G1.Num_point,2)
+                error('Grid(): the number of points should be an even number or better of a power of 2')
+            end
+            
         end
     end
     

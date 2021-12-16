@@ -25,7 +25,7 @@ set(dcm_obj,'UpdateFcn', @myupdatefcn )
 xlabel(hap1,'Cavity detuning [m]')
 
 % Bottom left: the input beam
-imagesc(Cin.Laser_in.Grid.Axis,Cin.Laser_in.Grid.Axis,abs(Cin.Laser_in.Field),'Parent',hai1)
+imagesc(Cin.Laser_in.Grid.Axis,Cin.Laser_in.Grid.Axis,abs(Cin.Laser_in.Field).^2,'Parent',hai1)
 title(hai1,'Cavity input beam')
 
 % Bottom left: the circulating beam

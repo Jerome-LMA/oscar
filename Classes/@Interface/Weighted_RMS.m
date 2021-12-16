@@ -1,23 +1,37 @@
-function varargout = Weighted_RMS(Iin,diam)
+function varargout = Weighted_RMS(Iin,varargin)
 % Weighted_RMS(Iin,diam) :Calculate the RMS of the Interface Iin weighted by the intensity of the
 % beam Ein (an instance of the class E_Field).
 % The RMS can also be calculated over a diameter with for example:
-% Weighted_RMS(Iin,0.2) calculate the RMS over a diameter of 0.2 m
+% Weighted_RMS(Iin,'diam',0.2) calculate the RMS over a diameter of 0.2 m
+% Weighted_RMS(Iin,'E', E_Field(G1,'w0',0.02))
 
 p  = inputParser;
 
 % Check if the first argument is an interface
 p.addRequired('Iin', @(x)isa(x, 'Interface'));
 
-% Check if the second argument is an E_Dield
-p.addRequired('diam', @(x) isa(x, 'E_Field') || (isnumeric(x) && x>0) );
+% Another parameter could be the diameter
+p.addParameter('diam',[],@(x)isnumeric(x) && x>0);
 
-p.parse(Iin,diam)
+% or weight the fit with the power of a Gaussian beam
+p.addParameter('E',[], @(x)isa(x, 'E_Field'));
+
+
+p.parse(Iin,varargin{:})
 
 Iin = p.Results.Iin;
 
-if isa(p.Results.diam, 'E_Field')   % An E_field is entered
-    Ein = p.Results.diam;
+if ~isempty(p.Results.diam)
+    Diam_RMS = p.Results.diam;
+    
+    map_ind_cent = Iin.Grid.D2_r > Diam_RMS/2;
+    Iin.surface(map_ind_cent) = NaN;
+    
+    rms_w = std(Iin.surface(~isnan(Iin.surface)));
+
+elseif ~isempty(p.Results.E)
+    
+    Ein = p.Results.E;
     
     Surface = Iin.surface .* Iin.mask;
     
@@ -27,13 +41,8 @@ if isa(p.Results.diam, 'E_Field')   % An E_field is entered
     rms_w = sum(sum(Beam_intensity.*(Surface - Weighted_avg).^2)) / sum(sum(Beam_intensity));
     rms_w = sqrt(rms_w);
     
-else % A diameter is entered
-    Diam_RMS = p.Results.diam;
-    
-    map_ind_cent = Iin.Grid.D2_r > Diam_RMS/2;
-    Iin.surface(map_ind_cent) = NaN;
-
-    rms_w = std(Iin.surface(~isnan(Iin.surface)));   
+else
+    error('Weighted_RMS(): something went wrong, check the second argument')
 end
 
 switch nargout
