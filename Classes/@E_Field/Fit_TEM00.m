@@ -8,12 +8,26 @@ if (~exist('lsqcurvefit','file'))
     error('Fit_TEM00() required the Optimisation Toolbox to run')
 end
 
-p = inputParser;
+p  = inputParser;
 p.FunctionName = 'Fit the TEM00 beam parameters';
 
 % Check if the first argument is an E_Field
 p.addRequired('Ein', @(x)isa(x, 'E_Field'));
+
+% Check what what we should fit
+p.addOptional('for','carrier', @(x)strcmpi(x,'carrier') | strcmpi(x,'SB_upper') | strcmpi(x,'SB_lower') );
+
+% Check the number of the sidebands we want to deal with
+p.addParameter('SB_num',1, @(x) isnumeric(x)  && (x>0) && (mod(x,1) == 0)); % check if the number of the SB pair is positive and integer
+
 p.parse(Ein,varargin{:})
+
+if strcmp(p.Results.for,'SB_upper')
+    Ein.Field = Ein.SB(p.Results.SB_num).Field_upper;
+elseif strcmp(p.Results.for,'SB_lower')
+    Ein.Field = Ein.SB(p.Results.SB_num).Field_lower;    
+end
+
 
 if Calculate_Power(Ein)==0
     error('Fit_TEM00(): No power in the field')

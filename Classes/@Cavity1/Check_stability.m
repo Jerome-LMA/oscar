@@ -120,8 +120,9 @@ g1 = 1 -  Cin.Length/I1_RofC;
 g2 = 1 -  Cin.Length/I2_RofC;
 g_factor_cavity = g1 * g2;
 
-fprintf('The g-factor of the cavity is: %g \n',g_factor_cavity)
-
+if Display
+    fprintf('The g-factor of the cavity is: %g \n',g_factor_cavity)
+end
 
 % Calculate various parameters if the cavity is stable
 if (g_factor_cavity > 0) && (g_factor_cavity < 1)
@@ -170,10 +171,11 @@ if (g_factor_cavity > 0) && (g_factor_cavity < 1)
         Field_in =  Change_E_n(Field_in,Cin.I_input.n1);
     end
     
-    disp('Mode matched input beam parameters:')
+    
     [wb, rb] = Fit_TEM00(Field_in);
     
     if Display
+        disp('Mode matched input beam parameters:')
         fprintf('Beam radius [m]: %g  \t \t Wavefront curvature [m]: %g  \n',wb,-rb)
     end
     

@@ -24,10 +24,22 @@ p.addOptional('display',[], @(x)strcmpi(x,'vector') | ...
 % curvature of the basis mode (in meter)
 p.addOptional('basis',[], @(x)isvector(x) && length(x)==2);
 
+% Check what what we should expand
+p.addOptional('for','carrier', @(x)strcmpi(x,'carrier') | strcmpi(x,'SB_upper') | strcmpi(x,'SB_lower') );
+
+% Check the number of the sidebands we want to deal with
+p.addParameter('SB_num',1, @(x) isnumeric(x)  && (x>0) && (mod(x,1) == 0)); % check if the number of the SB pair is positive and integer
 
 p.parse(Ein,max_mode_order,varargin{:})
 
 Max_HOM = round(p.Results.max_mode_order);
+
+if strcmp(p.Results.for,'SB_upper')
+    Ein.Field = Ein.SB(p.Results.SB_num).Field_upper;
+elseif strcmp(p.Results.for,'SB_lower')
+    Ein.Field = Ein.SB(p.Results.SB_num).Field_lower;    
+end
+
 
 % Expand on the basis of the perfect Gaussian beam, so find first the beam
 % parameters:

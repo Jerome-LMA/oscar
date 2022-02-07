@@ -20,7 +20,6 @@ p.addRequired('side', @(x)strcmpi(x,'HR') | strcmpi(x,'AR') );
 
 p.parse(Ein,Min,side,varargin{:})
 
-
 E1 = Ein;
 M = Min;
 Side_str = side;

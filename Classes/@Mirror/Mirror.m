@@ -1,24 +1,19 @@
 classdef Mirror
     %MIRROR Define the class mirrors which have 2 surfaces and a
-    %substrate
+    %substrate.
+    % Input the HR surface, then Ar surface and then the thickness
     
     properties
         I_HR
         I_AR
         length_substrate
         
+        Propagation_mat_sub
+        
         RT_inside = 1;             % Number of round trip when the thick mirror is dealt as a cavity
         n_substrate
-    end
-    
-    properties (Dependent)
+        
         r
-        t
-        R
-        T
-        mask
-        Grid
-        surface
     end
     
     methods
@@ -42,7 +37,7 @@ classdef Mirror
                     end
                     
                     if ( max(varargin{1}.n1,varargin{1}.n2) ~=  max(varargin{1}.n1,varargin{1}.n2) )
-                        error('Mirror(): Inconsistencie inthe refractive index of the 2 surfaces')
+                        error('Mirror(): Inconsistencie index refractive index of the 2 surfaces')
                     end
                     
                     M.I_HR = varargin{1};
@@ -55,6 +50,10 @@ classdef Mirror
                     M.length_substrate =  varargin{3};
                     M.n_substrate = max(varargin{1}.n1,varargin{1}.n2);
                     
+                    M.r = M.I_HR.r;
+                    
+                    M.Propagation_mat_sub = M.length_substrate; % Could be overwrite if the propagation matrix is preallocated (absolutely recommended) 
+                    
                 otherwise
                     disp('Mirror(): invalid number of input arguments, the mirror is not created')
                     return
@@ -62,36 +61,12 @@ classdef Mirror
             end
         end
         
-        function value = get.r(obj)
-            value = obj.I_HR.r;
-        end
-        
-        function value = get.t(obj)
-            value = obj.I_HR.t;
-        end
-        
-        function value = get.R(obj)
-            value = (obj.I_HR.r)^2;
-        end
-        
-        function value = get.T(obj)
-            value = (obj.I_HR.t)^2;
-        end
-        
-        function value = get.mask(obj)
-            value = obj.I_HR.mask;
-        end
-        
-        function value = get.Grid(obj)
-            value = obj.I_HR.Grid;
-        end
-        
-        function value = get.surface(obj)
-            value = obj.I_HR.surface;
-        end
         
         
     end
+    
+    
+    
     
 end
 

@@ -19,24 +19,26 @@ dist = p.Results.dist;
 
 E = Ein;
 Eout = Ein;
+n_media = E.Refractive_index;
 
 if isscalar(dist) && isreal(dist) % the user input a distance
     
     % Create the propagation matrix
     Propa_mat =  exp(1i*(-E.k_prop*dist  + ...
-        pi*(E.Wavelength/E.Refractive_index)*( E.Grid.D2_FFT_X.^2 +E.Grid.D2_FFT_Y.^2)*dist));
+        pi*(E.Wavelength/n_media)*( E.Grid.D2_FFT_X.^2 +E.Grid.D2_FFT_Y.^2)*dist));
     
     Length_propa = dist;
     Use_DI = false;
     
     %imagesc(angle(Propa_mat)); axis square
-     
-else 
+    
+else
     Propa_mat = dist.mat;
     Length_propa = dist.dist;
     Use_DI = dist.Use_DI;
+    n_media = dist.n;
     
-    if E.Refractive_index ~= dist.n
+    if E.Refractive_index ~= n_media
         error('Propagate_E(): the refractive index from the E_Field does not match the one from the propagation operator')
     end
     
@@ -49,16 +51,33 @@ if ~Use_DI
     
     Eout.Field = ifft2(ifftshift(Wave_prop));
 else
-    Mat_U = zeros(2*E.Grid.Num_point - 1);
-    Mat_U(1:E.Grid.Num_point,1:E.Grid.Num_point) = E.Field;
+    if dist.Use_GPU
+        if ~isgpuarray(E.Field)
+            warning('Propagate_E(), try to use the GPU but the input E_field is declared on the CPU')
+        end
+        
+        if ~isgpuarray(dist.mat_DI)
+            warning('Propagate_E(), try to use the GPU but the input dist.mat_DI is declared on the CPU')
+        end
+        
+        
+        Mat_U = zeros(2*E.Grid.Num_point - 1,'gpuArray');
+        Mat_U(1:E.Grid.Num_point,1:E.Grid.Num_point) = E.Field;
+        S = ifft2(arrayfun(@times,fft2(Mat_U),dist.mat_DI));
+        
+    else
+        Mat_U = zeros(2*E.Grid.Num_point - 1);
+        Mat_U(1:E.Grid.Num_point,1:E.Grid.Num_point) = E.Field;       
+        S = ifft2(fft2(Mat_U) .* dist.mat_DI);
+    end
     
-    S = ifft2(fft2(Mat_U) .* dist.mat_DI);
     Eout.Field = S(E.Grid.Num_point:end,E.Grid.Num_point:end);
+
 end
 
 if E.Nb_Pair_SB % if we have also sidebands
     for ii=1:E.Nb_Pair_SB
-        D_phi = (2*pi*E.SB(ii).Frequency_Offset/2.99792E8) * Length_propa;
+        D_phi = (2*pi*E.SB(ii).Frequency_Offset/2.99792E8) * Length_propa * n_media; 
         
         if ~Use_DI
             % for the lower sideband

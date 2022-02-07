@@ -41,7 +41,6 @@ if isreal(R_or_I)
     Eout.Field = E_in.Field .* PF_Mirror * Reflectivity;
     Eout.Field = fliplr(Eout.Field);
     
-    
     if E_in.Nb_Pair_SB
         for ii=1:E_in.Nb_Pair_SB
             Eout.SB(ii).Field_lower = Eout.SB(ii).Field_lower  .* PF_Mirror * Reflectivity;
@@ -62,15 +61,41 @@ elseif isa(R_or_I, 'Interface')
         Reflectivity = sqrt(p.Results.Ref);
     end
     
-    if (E_in.Refractive_index==I.n1)
-        PF_Mirror_ref = exp(-1i * E_in.k_prop * I.surface *2) .* I.mask .* Reflectivity;
+    if isgpuarray(Ein.Field)
+        if (E_in.Refractive_index == I.n1)
+            
+            PF_Mirror_ref = I.WP_n1_GPU;
+            
+            if  ~isempty(p.Results.Ref)
+                PF_Mirror_ref = PF_Mirror_ref * sqrt(p.Results.Ref)/ max(abs(PF_Mirror_ref(:)));
+            end
+            
+        else
+            
+            PF_Mirror_ref = I.WP_n2_GPU;
+            
+            if  ~isempty(p.Results.Ref)
+                PF_Mirror_ref = PF_Mirror_ref * sqrt(p.Results.Ref)/ max(abs(PF_Mirror_ref(:)));
+            end
+        end
     else
-        PF_Mirror_ref = exp(1i * E_in.k_prop * I.surface *2)  .* I.mask .* Reflectivity;
+        if (E_in.Refractive_index==I.n1)
+            PF_Mirror_ref = exp(-1i * E_in.k_prop * I.surface *2)  .* I.mask .* Reflectivity;
+        else
+            PF_Mirror_ref = exp(1i * E_in.k_prop * I.surface *2)  .* I.mask .* Reflectivity;
+        end
     end
     
-    Eout = E_in;
+    %     figure(102)
+    %     imagesc(angle(PF_Mirror_ref))
     
-    Eout.Field = E_in.Field .* PF_Mirror_ref;
+    Eout = E_in;
+    if isgpuarray(Ein.Field)
+        Eout.Field = arrayfun(@times,E_in.Field,PF_Mirror_ref);
+    else
+        Eout.Field = E_in.Field .* PF_Mirror_ref;
+    end
+    
     Eout.Field = fliplr(Eout.Field);
     
     if E_in.Nb_Pair_SB

@@ -35,8 +35,6 @@ end
 
 Display_debug = false;
 
-% Define the overlap function:
-Raw_overlap = @(x,y) (sum(sum(conj(x).*y) ) );
 
 % The laser starts outside the input mirror, change n from 1 to mirror
 % substrate refractive index
@@ -100,10 +98,10 @@ if ~E1.Nb_Pair_SB % if there is no SB
         
         c = M\A;
         
-        E2 = c(1)*E1 + c(2)*E_SR_2;
+        E2 = E1*c(1) + E_SR_2*c(2);
         
         % Calculate D2 now
-        D2 = E2 - ( c(1)*(E1 - D1) + c(2)*E_SR_2_circ );
+        D2 = E2 - ( (E1 - D1)*c(1) + E_SR_2_circ*c(2) );
         
         error_P = Calculate_Power(E2 - E1) / Calculate_Power(E1);
         
@@ -258,13 +256,13 @@ else
                 count_iter_USB(ii) = count_iter_USB(ii) + 1;
             else
                 error_P_USB(ii) = 0;
-            end      
+            end
         end
-                
+        
         error_P = max([error_P_carr error_P_LSB error_P_USB]);
     end
-%      count_iter_LSB(1)
-%      count_iter_USB(1)
+    %      count_iter_LSB(1)
+    %      count_iter_USB(1)
     
     Cout.Field_circ = E1;
     
@@ -316,5 +314,15 @@ field_tmp = Propagate_E(field_tmp,Cin.Propagation_mat);
 field_tmp = Reflect_Mirror(field_tmp,Cin.I_input,'Ref',1);
 
 Cout.Loss_RTL =  (1 - Calculate_Power(field_tmp));
+
+end
+
+% Define the overlap function:
+function overL = Raw_overlap(x,y)
+if isgpuarray(x) && isgpuarray(y)
+    overL =   sum(sum(arrayfun(@times,conj(x),y)));
+else
+    overL =  (sum(sum(conj(x).*y) ) );
+end
 
 end

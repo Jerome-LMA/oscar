@@ -52,7 +52,13 @@ if isempty(E2)
 else
     Ein = Normalise_E(Ein);
     E2 = Normalise_E(E2);
-    over_temp = sum(sum(Ein.Field .* conj(E2.Field))) * (Ein.Grid.Step)^2;
+    
+    if isgpuarray(Ein.Field)
+        over_temp = sum(sum(arrayfun(@times,Ein.Field,conj(E2.Field))));
+    else
+        over_temp = sum(sum(Ein.Field .* conj(E2.Field))) * Ein.Grid.Step_sq;
+    end
+    
     
     switch nargout
         case 0

@@ -12,6 +12,8 @@ classdef Prop_operator
         Use_DI                     % Boolean to use the digital integration or not
         mat_DI                     % Propagation matrix for the digital integration
         
+        Use_GPU                    % Boolean to use the calculation on the GPU, by default not
+        
     end
     
     methods
@@ -49,6 +51,7 @@ classdef Prop_operator
             Prop.dist = dist;
             Prop.Use_DI = p.Results.use_DI;
             Prop.Grid = E_in.Grid;
+            Prop.Use_GPU = false;
             
             Prop.mat = exp(1i*(-E_in.k_prop*dist + ...
                 pi*(E_in.Wavelength/Prop.n)*( E_in.Grid.D2_FFT_X.^2 + E_in.Grid.D2_FFT_Y.^2)*dist));

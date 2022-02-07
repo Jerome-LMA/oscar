@@ -23,9 +23,19 @@ power_temp_Car = 0;
 power_temp_SB_lower = 0;
 power_temp_SB_upper = 0;
 
+% check if Ein is on the GPU, if yes do the calculations in the GPU
+Run_on_GPU = isgpuarray(Ein.Field);
+
 if strcmp(p.Results.include,'carrier')
-    power_temp_Car = sum(sum(abs(Ein.Field).^2)) * (Ein.Grid.Step)^2;
+    if Run_on_GPU
+        power_temp_Car = sum(sum(abs(arrayfun(@times,Ein.Field,Ein.Field) ))); 
+    else
+        power_temp_Car = sum(sum(abs(Ein.Field).^2));   
+    end
+    
+    power_temp_Car = power_temp_Car * Ein.Grid.Step_sq; 
     power_temp_SB = 0;
+    
 elseif strcmp(p.Results.include,'all')
     power_temp_Car = sum(sum(abs(Ein.Field).^2))* (Ein.Grid.Step)^2;
     if Ein.Nb_Pair_SB        
@@ -35,6 +45,7 @@ elseif strcmp(p.Results.include,'all')
         end
         
     end
+    
 elseif strcmp(p.Results.include,'SB')
     if Ein.Nb_Pair_SB
         if SB_number > Ein.Nb_Pair_SB

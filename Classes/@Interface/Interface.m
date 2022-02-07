@@ -34,6 +34,9 @@ classdef Interface
         n1
         n2
         
+        WP_n1_GPU
+        WP_n2_GPU
+        
         t
         r
     end

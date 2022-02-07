@@ -66,7 +66,7 @@ Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_input);
 Cout.Resonance_phase = exp(-1i* angle(Calculate_Overlap(Field_Circ,Field_before)));
 
 if p.Results.verbose
-    disp(['Found the phase for resonance in cavity ' inputname(1)])
+    disp(['Found the phase for resonance in cavity: ' inputname(1)])
 end
 
 % Found an approximation for the resonanting field in the cavity

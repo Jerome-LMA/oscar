@@ -21,10 +21,10 @@ if Cin.Laser_in.Nb_Pair_SB % if there is no SB no need to mention for the carrie
 end
 
 fprintf('  Power in the input beam: \t %6.6g \t [W] \n',Calculate_Power(Cin.Laser_in))
-fprintf('  Circulating power: \t\t %6.6g \t [W] \n',Calculate_Power(Cin.Field_circ))
-fprintf('  Transmitted power: \t\t %6.6g \t [W] \n',Calculate_Power(Cin.Field_trans))
-fprintf('  Reflected power: \t\t\t %6.6g \t [W] \n',Calculate_Power(Cin.Field_ref))
-fprintf('  Round trip losses [ppm]: \t %6.6g \n\n',Cin.Loss_RTL *1E6)
+fprintf('  Circulating power: \t\t %10.6g \t [W] \n',Calculate_Power(Cin.Field_circ))
+fprintf('  Transmitted power: \t\t %10.6g \t [W] \n',Calculate_Power(Cin.Field_trans))
+fprintf('  Reflected power: \t\t\t %10.6g \t [W] \n',Calculate_Power(Cin.Field_ref))
+fprintf('  Round trip losses: \t\t %10.6g \t [ppm] \n\n',Cin.Loss_RTL *1E6)
 
 % Round trip losses calculation, using the energy conservation
 % See virgo note VIR-0706A-10
@@ -37,7 +37,7 @@ for ii=1:Cin.Laser_in.Nb_Pair_SB
     [Ptrans1, Ptrans2] = Calculate_Power(Cin.Field_trans,'include','SB','SB_num',ii);
     [Pref1, Pref2] = Calculate_Power(Cin.Field_ref,'include','SB','SB_num',ii);
     
-    fprintf('---------- For the sidebands %i ---------------\n',ii)
+    fprintf('---------- For the sidebands %i, frequency: %5.4g [MHz] ---------------\n',ii,Cin.Laser_in.SB(ii).Frequency_Offset/1E6)
     fprintf(' for the lower and upper sidebands respectively \n')
     fprintf(' Power in the input beam: \t %6g \t %6g \t [W] \n',Pin1,Pin2)
     fprintf(' Circulating power: \t\t %6g \t %6g \t [W] \n',Pcirc1,Pcirc2)

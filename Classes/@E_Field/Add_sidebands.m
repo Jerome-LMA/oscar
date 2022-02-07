@@ -1,4 +1,4 @@
-function Eout = Add_Sidebands(Ein,Mod_freq,Mod_index,varargin)
+function Eout = Add_Sidebands(Ein,varargin)
 % Eout = Add_sidebands(Ein,mod_freq,mod_index)
 % Add a pair of sidebands of frequency: Mod_freq with modulating index: Mod_index
 % This function simulates a phase modulator
@@ -10,12 +10,15 @@ p.FunctionName = 'Add sidebands to a field';
 p.addRequired('Ein', @(x)isa(x, 'E_Field'));
 
 % Check if the first argument is an E_Field
-p.addRequired('Mod_freq', @(x)isnumeric(x) && x>0);
+p.addParameter('Mod_freq',10E6,@(x)isnumeric(x) && x>0);
 
 % Check if the first argument is an E_Field
-p.addRequired('Mod_index', @(x)isnumeric(x) && x>0);
+p.addParameter('Mod_index',0.1 ,@(x)isnumeric(x) && x>0);
 
-p.parse(Ein,Mod_freq,Mod_index)
+p.parse(Ein,varargin{:})
+
+Mod_freq = p.Results.Mod_freq;
+Mod_index = p.Results.Mod_index;
 
 Eout = Ein;
 Eout.SB(Eout.Nb_Pair_SB+1).Frequency_Offset = Mod_freq;
