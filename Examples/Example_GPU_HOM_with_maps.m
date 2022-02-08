@@ -55,23 +55,11 @@ Display_Results(C1);
 %figure(2)
 %Expand_HOM(C1.Field_circ,12,'basis',[0.04275  -1500],'display','vector');
 
+%% Test cavity scan
 
-%% test
+% C2 = Cavity_Scan(C1);
+% C2 = Calculate_Fields_AC(C2);
+% Display_Results(C2);
 
-% A = rand(256,'gpuArray');
-% B = rand(2,'gpuArray');
 
-% E2 = C1.Laser_in;
-% tic
-% for ii = 1:1000
-% E2 = Propagate_E(C1.Laser_in,C1.Propagation_mat);
-% end
-% toc
-%(0.1+2*1i)*C1.Laser_in
-
-% Fit_TEM00(E_input)
-% E2 = Reflect_Mirror(E_input,C1.I_end);
-% Fit_TEM00(E2)
-% 
-%E2 = Reflect_Mirror(E_input,C1.I_end);
 
