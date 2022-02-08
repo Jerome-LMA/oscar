@@ -61,7 +61,7 @@ elseif isa(R_or_I, 'Interface')
         Reflectivity = sqrt(p.Results.Ref);
     end
     
-    if isgpuarray(Ein.Field)
+    if isgpuarray(E_in.Field)
         if (E_in.Refractive_index == I.n1)
             
             PF_Mirror_ref = I.WP_n1_GPU;
@@ -90,7 +90,7 @@ elseif isa(R_or_I, 'Interface')
     %     imagesc(angle(PF_Mirror_ref))
     
     Eout = E_in;
-    if isgpuarray(Ein.Field)
+    if isgpuarray(E_in.Field)
         Eout.Field = arrayfun(@times,E_in.Field,PF_Mirror_ref);
     else
         Eout.Field = E_in.Field .* PF_Mirror_ref;

@@ -24,7 +24,7 @@ end
 
 Cout = Cin;
 
-% If we do not start the beam on the input beam, let pass through it
+% If we do not start the beam on the input mirror, let pass through it
 % first
 if ~Cin.Laser_start_on_input
     if isa(Cin.I_input, 'Interface')
@@ -38,7 +38,11 @@ end
 
 Grid_num_point = Cin.Laser_in.Grid.Num_point;
 
-Total_Field = complex(zeros(Grid_num_point,Grid_num_point,num_iter,'double'));
+if isgpuarray(Cin.Laser_in.Field)
+    Total_Field = complex(zeros(Grid_num_point,Grid_num_point,num_iter,'gpuArray'));
+else
+    Total_Field = complex(zeros(Grid_num_point,Grid_num_point,num_iter,'double'));
+end
 
 Field_Circ = Cin.Laser_in;
 Total_Field(:,:,1) = Field_Circ.Field;

@@ -13,6 +13,7 @@ classdef Grid < handle
         Length
         
         Step
+        Step_sq
         Half_num_point
         Vector
         Axis
@@ -44,6 +45,7 @@ classdef Grid < handle
             end
             
             G1.Step = G1.Length/G1.Num_point;
+            G1.Step_sq = G1.Step^2;
             G1.Half_num_point = G1.Num_point/2;
             G1.Vector = 1:1:G1.Num_point;
             G1.Axis =  -G1.Length/2 + G1.Step/2 + (G1.Vector-1)*G1.Step;
@@ -53,10 +55,6 @@ classdef Grid < handle
             G1.D2_r   = sqrt(G1.D2_square);
             
             [G1.D2_FFT_X,G1.D2_FFT_Y] = meshgrid(G1.Axis_FFT);
-            
-            if rem(G1.Num_point,2)
-                error('Grid(): the number of points should be an even number or better of a power of 2')
-            end
             
         end
     end
