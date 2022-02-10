@@ -66,19 +66,9 @@ if license('test','distrib_computing_toolbox') && p.Results.use_parallel        
     if gpuDeviceCount > 0 && parallel.gpu.GPUDevice.isAvailable(1)                
         
         disp('Found suitable GPU. Starting GPU-based scan.')
-        gq = 1:num_point_scan;
-        ii = 1:num_iter;
-        gCavity_scan_all_field_arr = gpuArray(Cin.Cavity_scan_all_field(:,:,ii));
-        gCavity_scan_all_field_arr_perm = permute(gCavity_scan_all_field_arr, [3,1,2]);
-        gPhase_shifts = gpuArray(exp(1i*Cin.Laser_in.k_prop* Length_scan(gq)'*ii));
-        gFields_reconstructed = pagefun(@mtimes,gPhase_shifts, gCavity_scan_all_field_arr_perm);
-        Fields_reconstructed = gather(gFields_reconstructed);
         
-        for qqq = 1:num_point_scan
-            Dummy_E = Cin.Laser_in;
-            Dummy_E.Field = squeeze(Fields_reconstructed(qqq,:,:));   
-            Power_scan(qqq) = Calculate_power(Dummy_E);
-        end
+        Power_scan = gather(sum(abs(pagefun(@mtimes,gpuArray(exp(-1i*Cin.Laser_in.k_prop* Length_scan(gq)'*ii)), permute(gpuArray(Cin.Cavity_scan_all_field(:,:,ii)), [3,1,2]))*Cin.I_end.t).^2, [2 3]) * Cin.Laser_in.Grid.Step^2);
+
         
     else        
         pool_obj = gcp('nocreate');    
