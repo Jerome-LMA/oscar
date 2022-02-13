@@ -28,12 +28,12 @@ EM = Interface(G1,'RoC',2500,'CA',0.10,'T',0.02);
 C1 = Cavity1(IM,EM,1000,E_input);
 
 % Calculate the resonance length
-C1 = Cavity_Resonance_Phase(C1);
+C1 = resonance_phase(C1);
 
 % Display information about the cavity
 [C1,Power_Buildup] = Calculate_Fields(C1);
 
-C1.Display_Results
+C1.display_results
 
 figure(2)
 plot(Power_Buildup,'LineWidth',3);

@@ -1,19 +1,19 @@
 function Get_Info(Cin)
 
-% Get_info(C1) calculate some informations about the cavity
-% Get_info(C1) calculate fields in the cavity, power buildup, diffraction loss
+% get_info(C1) calculate some informations about the cavity
+% get_info(C1) calculate fields in the cavity, power buildup, diffraction loss
 % Do not calculate the reflected field use the function 'Calculate_fields' instead.
 
-if isempty(Cin.Resonance_phase)
-    error(['Get_info(' inputname(1) '): The resonance position must be calculated first'])
+if isempty(Cin.resonance_phase)
+    error(['get_info(' inputname(1) '): The resonance position must be calculated first'])
 end
 
-if ~Cin.Laser_start_on_input
-    Field_in =  Change_E_n(Cin.Laser_in,Cin.I_array(1).n2);
+if ~Cin.laser_start_on_input
+    Field_in =  Change_E_n(Cin.laser_in,Cin.I_array(1).n2);
     Field_in = Transmit_Reflect_Interface(Field_in,Cin.I_array(1));
     Field_Circ = Field_in;
 else
-    Field_Circ = Cin.Laser_in * Cin.I_array(1).t;
+    Field_Circ = Cin.laser_in * Cin.I_array(1).t;
 end
 % Cin.I_array(1)
 % 
@@ -35,10 +35,10 @@ num_iter = round(num_iter);
 %num_iter = 2000;
 
 Power_buildup = zeros(1,num_iter,'double');
-%Cin.Laser_in = Normalise_E(Cin.Laser_in);
+%Cin.laser_in = Normalise_E(Cin.laser_in);
 
 Field_transient = Field_Circ;
-Field_total = Normalise_E(Cin.Laser_in,0);
+Field_total = Normalise_E(Cin.laser_in,0);
 
 for q = 1:num_iter
     
@@ -47,11 +47,11 @@ for q = 1:num_iter
     
     for pp=1:Cin.Nb_mirror
         if pp ~= Cin.Nb_mirror % check we are not at the last iteration
-            Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat_array(pp));
-            Field_transient = Reflect_mirror(Field_transient,Cin.I_array(pp+1));
+            Field_transient = Propagate_E(Field_transient,Cin.propagation_mat_array(pp));
+            Field_transient = reflect_mirror(Field_transient,Cin.I_array(pp+1));
         else
-            Field_transient = Propagate_E(Field_transient,Cin.Propagation_mat_array(pp)) * Cin.Resonance_phase;
-            Field_transient = Reflect_mirror(Field_transient,Cin.I_array(1));
+            Field_transient = Propagate_E(Field_transient,Cin.propagation_mat_array(pp)) * Cin.resonance_phase;
+            Field_transient = reflect_mirror(Field_transient,Cin.I_array(1));
         end
     end
     
@@ -64,11 +64,11 @@ field_tmp = Normalise_E(field_tmp);
 
 for pp=1:Cin.Nb_mirror
     if pp ~= Cin.Nb_mirror % check we are not at the last iteration
-        field_tmp = Propagate_E(field_tmp,Cin.Propagation_mat_array(pp));
-        field_tmp = Reflect_mirror(field_tmp,Cin.I_array(pp+1),'Ref',1);
+        field_tmp = Propagate_E(field_tmp,Cin.propagation_mat_array(pp));
+        field_tmp = reflect_mirror(field_tmp,Cin.I_array(pp+1),'Ref',1);
     else
-        field_tmp = Propagate_E(field_tmp,Cin.Propagation_mat_array(pp)) * Cin.Resonance_phase;
-        field_tmp = Reflect_mirror(field_tmp,Cin.I_array(1),'Ref',1);
+        field_tmp = Propagate_E(field_tmp,Cin.propagation_mat_array(pp)) * Cin.resonance_phase;
+        field_tmp = reflect_mirror(field_tmp,Cin.I_array(1),'Ref',1);
     end
 end
 
@@ -81,7 +81,7 @@ fprintf(' Round trip diffraction loss: %g [ppm] \n',Cavity_loss*1E6)
 fprintf(' Circulating power: %g [W] \n',Calculate_power(Field_total))
 
 % Find if the mode is a TEM00 or not
-[~, m n] = Read_mode_name(Cin.Laser_in.Mode_name);
+[~, m n] = Read_mode_name(Cin.laser_in.Mode_name);
 
 if (m==0) && (n==0)
     
@@ -93,7 +93,7 @@ end
 figure(104)
 clf;
 subplot(2,2,1)
-E_plot(Cin.Laser_in)
+E_plot(Cin.laser_in)
 title('Input field')
 subplot(2,2,2)
 E_plot(Field_total)

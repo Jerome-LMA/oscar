@@ -10,7 +10,7 @@ disp('----------   Test Add_Map  -----------')
 
 G1 = Grid(256,0.4);
 Dummy = Interface(G1,'RoC',Inf);
-[Map_loaded, dx] = ReadZygoBinary('Example_ZYGO_data.dat');
+[Map_loaded, dx] = ReadZygoBinary('example_ZYGO_data.dat');
 figure(1)
 imagesc(Map_loaded); axis square % the raw map
 

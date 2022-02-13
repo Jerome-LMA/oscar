@@ -17,7 +17,7 @@ p.parse(Ein)
 
 Ein = p.Results.Ein;
 
-if Calculate_Power(Ein)==0
+if calculate_power(Ein)==0
     error('Fit_TEM00_xy(): No power in the field')
 end
 

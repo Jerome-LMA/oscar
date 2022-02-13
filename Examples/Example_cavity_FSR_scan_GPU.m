@@ -19,15 +19,15 @@ E_input = E_Field(G1,'w',0.02,'R',-2500);
 % Define the 2 mirrors, RofC = 2500m, 10 cm in diameter, transmission 2%,
 % no loss
 
-IM = Interface(G1,'RoC',2500,'CA',0.10,'T',0.02);
-EM = Interface(G1,'RoC',2500,'CA',0.10,'T',0.02);
+Im = Interface(G1,'RoC',2500,'CA',0.10,'T',0.02);
+Em = Interface(G1,'RoC',2500,'CA',0.10,'T',0.02);
 
 % Misaligned the end mirror by 100 microradian
-EM = Add_tilt(EM,1E-6,'y');
+Em = Add_tilt(Em,1E-6,'y');
 
 % Use the 2 previous Interfaces and the input beam to defing a cavity 1000
 % meter long
-C1 = Cavity1(IM,EM,1000,E_input,true);
+C1 = Cavity1(Im,Em,1000,E_input,true);
 % C1 = Declare_on_GPU(C1);
 
 % Calculate the resonance length
@@ -35,4 +35,4 @@ C1 = Cavity1(IM,EM,1000,E_input,true);
 C1.scan('use_parallel',true,'With_SB',false);
 
 % Display information about the cavity
-Display_scan(C1);
+display_scan(C1);

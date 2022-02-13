@@ -36,7 +36,7 @@ Thick_L = Mirror(L1,L2,0.04);
 
 % Does not really matter the direction of the lens, we can start with the
 % HR or AR side.
-E2 = Transmit_Reflect_Mirror(E1,Thick_L,'HR');
+E2 = transmit_reflect_mirror(E1,Thick_L,'HR');
 
 E3 = Propagate_E(E2,200);
 

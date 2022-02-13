@@ -7,28 +7,28 @@ classdef Cavity1 < handle
     % the class E_field)
     
     properties
-        I_input
-        I_end
+        i_input
+        i_end
         
-        Length
-        Laser_in
-        Laser_start_on_input = false;
-        Run_on_GPU = false;
-        Resonance_phase = [];
-        Cavity_scan_all_field = [];
-        Cavity_scan_param = [1000 500 2E-9 1000]; % Number of points for the scan over one FSR, Number of points for the zoom, span of the zoom, max number of iteration (if the cavity is high finesse)
-        Cavity_phase_param = 200;  % Number of iteration to find the resonance phase of the cavity, 100 is usually enough
-        Cavity_scan_R = [];
-        Cavity_scan_RZ = [];
-        Cavity_EM_mat = [];
+        length
+        laser_in
+        laser_start_on_input = false;
+        run_on_gpu = false;
+        resonance_phase = [];
+        cavity_scan_all_field = [];
+        cavity_scan_param = [1000 500 2E-9 1000]; % Number of points for the scan over one FSR, Number of points for the zoom, span of the zoom, max number of iteration (if the cavity is high finesse)
+        cavity_phase_param = 200;  % Number of iteration to find the resonance phase of the cavity, 100 is usually enough
+        cavity_scan_r = [];
+        cavity_scan_rz = [];
+        cavity_em_mat = [];
         
-        Propagation_mat;     % Pre-compute the complex matrix used for the propagation
+        propagation_mat;     % Pre-compute the complex matrix used for the propagation
         
-        Field_circ = [];
-        Field_ref = [];
-        Field_trans = [];
-        Field_reso_guess = [];
-        Loss_RTL = [];                
+        field_circ = [];
+        field_ref = [];
+        field_trans = [];
+        field_reso_guess = [];
+        loss_rtl = [];                
         
     end
     
@@ -40,9 +40,7 @@ classdef Cavity1 < handle
         [length_scan, power_scan] = scan(obj, varargin)        
     end
     
-    methods
-        
-        
+    methods                
         function obj = Cavity1(varargin)
             switch nargin
                 case{0,1,2,3}
@@ -64,22 +62,22 @@ classdef Cavity1 < handle
                         error('Cavity1(): the fourth argument, the input laser beam must be an instance of the class E_field')
                     end                                        
                     
-                    obj.I_input = varargin{1};
-                    obj.I_end = varargin{2};
-                    obj.Length = varargin{3};
-                    obj.Laser_in = varargin{4};
+                    obj.i_input = varargin{1};
+                    obj.i_end = varargin{2};
+                    obj.length = varargin{3};
+                    obj.laser_in = varargin{4};
                     
-                    obj.Propagation_mat = Prop_operator(obj.Laser_in, obj.Length);
+                    obj.propagation_mat = Prop_operator(obj.laser_in, obj.length);
                  
                 % Check if the input laser is optimally mode matched    
-                if  obj.Laser_in.Optimal_mode_matching
-                    Beam_paramater = Check_Stability(obj,'Display',false);
-                    New_input_field =  E_Field(Grid(obj),'w',Beam_paramater(1),'R',Beam_paramater(2),'mode',obj.Laser_in.Mode_name);
+                if  obj.laser_in.Optimal_mode_matching
+                    Beam_paramater = check_stability(obj,'Display',false);
+                    New_input_field =  E_Field(Grid(obj),'w',Beam_paramater(1),'R',Beam_paramater(2),'mode',obj.laser_in.Mode_name);
                     % add the sidebands as it used to be
-                    for ii = 1:obj.Laser_in.Nb_Pair_SB
-                        New_input_field = Add_Sidebands(New_input_field,'Mod_freq',obj.Laser_in.SB(ii).Frequency_Offset,'Mod_index',obj.Laser_in.SB(ii).Input_Mod_index);
+                    for ii = 1:obj.laser_in.Nb_Pair_SB
+                        New_input_field = Add_Sidebands(New_input_field,'Mod_freq',obj.laser_in.SB(ii).Frequency_Offset,'Mod_index',obj.laser_in.SB(ii).Input_Mod_index);
                     end
-                    obj.Laser_in = New_input_field;
+                    obj.laser_in = New_input_field;
                 end    
                 
                 if (nargin == 5)
@@ -94,9 +92,10 @@ classdef Cavity1 < handle
                    
             end
         end
-                    
+                        
+        % TODO: Implement somewhere else
         function G = Grid(obj)
-            G = obj.Laser_in.Grid;
+            G = obj.laser_in.Grid;
         end                
 
         

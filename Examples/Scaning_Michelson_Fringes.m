@@ -28,8 +28,8 @@ E_north = Propagate_E(E_north,0.25);
 E_east = Propagate_E(E_east,0.25);
 
 % Reflect, let's say the north arm has a flat reference mirror
-E_north  = Reflect_Mirror(E_north,1E99);
-E_east  = Reflect_Mirror(E_east,600);
+E_north  = reflect_mirror(E_north,1E99);
+E_east  = reflect_mirror(E_east,600);
 
 E_north = 1i*sqrt(1-Ref_BS) * Propagate_E(E_north,0.25);
 E_east = sqrt(Ref_BS) * Propagate_E(E_east,0.25);

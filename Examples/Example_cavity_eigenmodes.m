@@ -25,14 +25,14 @@ C1 = Cavity1(IM,EM,3000,E_input);
 % C1 = Cavity1(IM,EM,4000,E_input);
 
 % Calculate the kernel of the cavity
-C1 = Calculate_RT_mat(C1);
+C1 = calculate_rt_mat(C1);
 
 % Display the cavity eigen modes
-Display_cavity_modes(C1,'N',30);
+display_cavity_modes(C1,'N',30);
   
 %Display the Airy peak of the first 30 (lowest clipping loss) eigenmodes with the list of the modes:
-%Display_cavity_modes(C1,'N',10,'Airy',true,'List',true)
+%display_cavity_modes(C1,'N',10,'Airy',true,'List',true)
 
 % Display a particular eigen mode:
-% Tab_EM = Display_cavity_modes(C1,'N',20);
+% Tab_EM = display_cavity_modes(C1,'N',20);
 % figure(2); E_plot(Tab_EM(5));

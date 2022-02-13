@@ -8,7 +8,7 @@ classdef Mirror
         I_AR
         length_substrate
         
-        Propagation_mat_sub
+        propagation_mat_sub
         
         RT_inside = 1;             % Number of round trip when the thick mirror is dealt as a cavity
         n_substrate
@@ -52,7 +52,7 @@ classdef Mirror
                     
                     M.r = M.I_HR.r;
                     
-                    M.Propagation_mat_sub = M.length_substrate; % Could be overwrite if the propagation matrix is preallocated (absolutely recommended) 
+                    M.propagation_mat_sub = M.length_substrate; % Could be overwrite if the propagation matrix is preallocated (absolutely recommended) 
                     
                 otherwise
                     disp('Mirror(): invalid number of input arguments, the mirror is not created')

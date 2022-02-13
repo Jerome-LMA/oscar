@@ -29,7 +29,7 @@ elseif strcmp(p.Results.for,'SB_lower')
 end
 
 
-if Calculate_Power(Ein)==0
+if calculate_power(Ein)==0
     error('Fit_TEM00(): No power in the field')
 end
 

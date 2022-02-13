@@ -1,5 +1,5 @@
 clearvars; close all;
-addpath(genpath(strcat(pwd, '\..\Classes')));
+addpath(strcat(pwd, '\..\Classes'));
 
 disp('---------------------------------------------------------------------------')
 disp('                  OSCAR V3.21                                      ')
@@ -24,7 +24,7 @@ IM = Interface(G1,'RoC',2500,'CA',0.10,'T',0.02);
 EM = Interface(G1,'RoC',2500,'CA',0.10,'T',0.02);
 
 % Misaligned the end mirror by 100 microradian
-EM = Add_Tilt(EM,1E-6,'y');
+EM = add_tilt(EM,1E-6,'y');
 
 % Use the 2 previous Interfaces and the input beam to defing a cavity 1000
 % meter long
@@ -35,6 +35,6 @@ C1 = Cavity1(IM,EM,1000,E_input);
 C1 = Cavity_scan(C1,'use_parallel',false,'With_SB',false);
 
 % Display information about the cavity
-Display_scan(C1);
+display_scan(C1);
 
 

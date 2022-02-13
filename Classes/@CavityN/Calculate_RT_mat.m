@@ -1,6 +1,6 @@
-function Cout = Calculate_RT_mat(Cin,varargin)
-%Calculate_RT_mat() Calculate the kernel for one round trip in the cavity
-% C1 = Calculate_RT_mat(C1), this function calculate the kernel for one
+function Cout = calculate_rt_mat(Cin,varargin)
+%calculate_rt_mat() Calculate the kernel for one round trip in the cavity
+% C1 = calculate_rt_mat(C1), this function calculate the kernel for one
 % round trip of the light in the cavity. From this kernel, one can derive
 % the eigen modes and eigen vectors of the cavity.
 % !! only use with small size of grid 64X64  with 4GB RAM, or 128X128 on
@@ -20,13 +20,13 @@ p.addOptional('Use_PC',false, @(x)islogical(x));
 p.parse(Cin,varargin{:})
 
 if ~isempty(Cin.Cavity_EM_mat)
-    disp('Calculate_RT_mat(): Cavity kernel has already been calculated  ')
+    disp('calculate_rt_mat(): Cavity kernel has already been calculated  ')
 end
 
 if isempty(p.Results.Grid)
     % No grid is given no resample is necessary
     resampled_grid = false;
-    Gr = Cin.Laser_in.Grid;
+    Gr = Cin.laser_in.Grid;
 else
     resampled_grid = true;
     Gr = p.Results.Grid;
@@ -35,10 +35,10 @@ end
 Cout = Cin;
 
 if ~resampled_grid
-    Num_point = Cin.Laser_in.Grid.Num_point;
+    Num_point = Cin.laser_in.Grid.Num_point;
 else
-    if Cin.Laser_in.Grid.Length ~= Gr.Length
-        error('Calculate_RT_mat(): The original grid and the new one have different lengths')
+    if Cin.laser_in.Grid.Length ~= Gr.Length
+        error('calculate_rt_mat(): The original grid and the new one have different lengths')
     end
     Num_point = Gr.Num_point;
 end
@@ -46,8 +46,8 @@ end
 tmp_mat_EM =  complex(zeros(Num_point^2));
 
 for pp=1:Cin.Nb_mirror
-    Cin.Propagation_mat_array(pp).Use_DI = true;
-    %Cin.Propagation_mat_array(pp).Use_DI = false;
+    Cin.propagation_mat_array(pp).Use_DI = true;
+    %Cin.propagation_mat_array(pp).Use_DI = false;
 end
 
 
@@ -64,7 +64,7 @@ if license('test','distrib_computing_toolbox')  && p.Results.Use_PC         % ch
         parfor py=1:Num_point
             
             if ~resampled_grid
-                E_in = Cin.Laser_in;
+                E_in = Cin.laser_in;
                 E_in.Field = complex(zeros(Num_point));
                 E_in.Field(mx,py) = 1;
                 Field_Circ = E_in;
@@ -72,16 +72,16 @@ if license('test','distrib_computing_toolbox')  && p.Results.Use_PC         % ch
                 E_in = E_Field(Gr,'w0',450E-6); % dummy value
                 E_in.Field = complex(zeros(Num_point));
                 E_in.Field(mx,py) = 1;
-                Field_Circ = Resample_E(E_in,Cin.Laser_in.Grid);
+                Field_Circ = Resample_E(E_in,Cin.laser_in.Grid);
             end
             
             for pp=1:Cin.Nb_mirror
                 if pp ~= Cin.Nb_mirror % check we are not at the last iteration
-                    Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-                    Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(pp+1),'Ref',1);
+                    Field_Circ = Propagate_E(Field_Circ,Cin.propagation_mat_array(pp));
+                    Field_Circ = reflect_mirror(Field_Circ,Cin.I_array(pp+1),'Ref',1);
                 else
-                    Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-                    Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(1),'Ref',1);
+                    Field_Circ = Propagate_E(Field_Circ,Cin.propagation_mat_array(pp));
+                    Field_Circ = reflect_mirror(Field_Circ,Cin.I_array(1),'Ref',1);
                 end
             end
             
@@ -107,7 +107,7 @@ else % if the PCT is not installed
         for py=1:Num_point
             
             if ~resampled_grid
-                E_in = Cin.Laser_in;
+                E_in = Cin.laser_in;
                 E_in.Field = complex(zeros(Num_point));
                 E_in.Field(mx,py) = 1;
                 Field_Circ = E_in;
@@ -115,16 +115,16 @@ else % if the PCT is not installed
                 E_in = E_Field(Gr,'w0',450E-6); % dummy value
                 E_in.Field = complex(zeros(Num_point));
                 E_in.Field(mx,py) = 1;
-                Field_Circ = Resample_E(E_in,Cin.Laser_in.Grid);
+                Field_Circ = Resample_E(E_in,Cin.laser_in.Grid);
             end
             
             for pp=1:Cin.Nb_mirror
                 if pp ~= Cin.Nb_mirror % check we are not at the last iteration
-                    Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-                    Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(pp+1),'Ref',1);
+                    Field_Circ = Propagate_E(Field_Circ,Cin.propagation_mat_array(pp));
+                    Field_Circ = reflect_mirror(Field_Circ,Cin.I_array(pp+1),'Ref',1);
                 else
-                    Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-                    Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(1),'Ref',1);
+                    Field_Circ = Propagate_E(Field_Circ,Cin.propagation_mat_array(pp));
+                    Field_Circ = reflect_mirror(Field_Circ,Cin.I_array(1),'Ref',1);
                 end
             end
             

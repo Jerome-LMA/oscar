@@ -27,10 +27,10 @@ EM = Interface(G1,'RoC',1700,'CA',0.35,'T',0.005);
 % Use the 2 previous Interfaces and the input beam to defing a cavity 3000
 % meter long
 C1 = Cavity1(IM,EM,3000,E_input);
-C1.Laser_start_on_input = false ;
-%C1.Propagation_mat.Use_DI = true;
-C1 = Cavity_Resonance_Phase(C1);
-C1 = Calculate_Fields_AC(C1);
+C1.laser_start_on_input = false ;
+%C1.propagation_mat.Use_DI = true;
+C1 = resonance_phase(C1);
+C1 = calculate_fields_ac(C1);
 
 Nb_point = 200;                                     % Number of points for the scan
 
@@ -46,15 +46,15 @@ for ii=1:Nb_point
     fprintf(1,'%3i %%',Pct);
     
     Phase_scan(ii) = ii*(2*pi)/Nb_point;          % Scan the round trip phase shift from 0 to 2 pi
-    C1.Resonance_phase = exp(1i*Phase_scan(ii));  % Set the round trip phase shift for the cavity
+    C1.resonance_phase = exp(1i*Phase_scan(ii));  % Set the round trip phase shift for the cavity
     
     tic
-    C1 = Calculate_Fields_AC(C1);
+    C1 = calculate_fields_ac(C1);
     C1.Field_reso_guess = C1.Field_circ;
     [Sig.p(ii),Sig.q(ii)] = Demodulate_SB(C1.Field_ref,'phase',pi/2);       % Demodule the carrier with the sidebands in reflection
     time_need(ii) = toc;
-    Power.car(ii) = Calculate_Power(C1.Field_circ);           % calculate also the power of the carrier circulating in the cavity
-    [Power.SB1(ii),Power.SB2(ii)] = Calculate_Power(C1.Field_circ,'SB');   % and the sidebands
+    Power.car(ii) = calculate_power(C1.Field_circ);           % calculate also the power of the carrier circulating in the cavity
+    [Power.SB1(ii),Power.SB2(ii)] = calculate_power(C1.Field_circ,'SB');   % and the sidebands
     
     if ii ~= Nb_point
         fprintf(1,'\b\b\b\b\b \b \b \b')

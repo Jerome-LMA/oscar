@@ -30,7 +30,7 @@ OMC = CavityN(I,d,E_input);
 OMC = Cavity_resonance_phase(OMC);
 
 % Calculate the steady state fields
-OMC = Calculate_fields_AC(OMC); % Fast convergence scheme (not if presence of sidebands)
+OMC = calculate_fields_ac(OMC); % Fast convergence scheme (not if presence of sidebands)
 %OMC = Calculate_fields(OMC); % The more traditional method (slower but can be used with sidebands)
 Display_results(OMC)
 

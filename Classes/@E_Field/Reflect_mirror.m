@@ -1,11 +1,11 @@
-function [Eout] = Reflect_Mirror(E_in,R_or_I,varargin)
-%Reflect_mirror(E_Field,RofC) Reflect an E_Field from a spherical mirror
+function [Eout] = reflect_mirror(E_in,R_or_I,varargin)
+%reflect_mirror(E_Field,RofC) Reflect an E_Field from a spherical mirror
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%     Reflect_mirror(E_in,Rmir) reflect the field on a spherical mirror of
+%     reflect_mirror(E_in,Rmir) reflect the field on a spherical mirror of
 %     radius Rmir, Rmir > 0 for convergent mirror
-%     Reflect_mirror(E_in,I1) pass the field E_in through an interface
+%     reflect_mirror(E_in,I1) pass the field E_in through an interface
 %     I1 with the wavefront distortion given by k_prop * n * surface
-%     Reflect_mirror(E_in,I1,'Ref',1) same as above but overwrite the
+%     reflect_mirror(E_in,I1,'Ref',1) same as above but overwrite the
 %     reflectivity of the mirror
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -115,13 +115,13 @@ elseif isa(R_or_I, 'Mirror')
     % reflection is made on the HR side
     
     if  isempty(p.Results.Ref)          % Check if the user has entered a reflectivity
-        [~,Eout] = Transmit_Reflect_Mirror(E_in,Mir,'HR');
+        [~,Eout] = transmit_reflect_mirror(E_in,Mir,'HR');
     else
-        Eout = Reflect_mirror(E_in,Mir.I_HR,'Ref',p.Results.Ref);
+        Eout = reflect_mirror(E_in,Mir.I_HR,'Ref',p.Results.Ref);
     end
     
 else
-    disp('Reflect_mirror(): The second argument must be a radius of curvature or an interface object')
+    disp('reflect_mirror(): The second argument must be a radius of curvature or an interface object')
 end
 
 end

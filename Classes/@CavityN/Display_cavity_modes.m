@@ -1,4 +1,4 @@
-function  varargout = Display_Cavity_Modes(Cin,varargin)
+function  varargout = display_cavity_modes(Cin,varargin)
 % Display interactively the cavity modes
 
 p = inputParser;
@@ -18,7 +18,7 @@ p.parse(Cin,varargin{:});
 %p.Results
 
 if isempty(Cin.Cavity_EM_mat)
-    error('Display_cavity_modes(): cavity modes must first be calculated using the function Calculate_RT_mat()   ')
+    error('display_cavity_modes(): cavity modes must first be calculated using the function calculate_rt_mat()   ')
 end
 
 Cin = p.Results.Cin;
@@ -48,16 +48,16 @@ for pp = 1:Nb_eigenvalue
     mode_brt = Normalise_E(E_Field(G_new,'w0',0.02),0);
     mode_brt.Field = Eigen_mode(:,:,pp);
     
-    mode_brt = Resample_E(mode_brt,Cin.Laser_in.Grid);
+    mode_brt = Resample_E(mode_brt,Cin.laser_in.Grid);
     Field_Circ = mode_brt;
     
     for ii=1:Cin.Nb_mirror
         if ii ~= Cin.Nb_mirror % check we are not at the last iteration
-            Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(ii));
-            Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(ii+1),'Ref',1);
+            Field_Circ = Propagate_E(Field_Circ,Cin.propagation_mat_array(ii));
+            Field_Circ = reflect_mirror(Field_Circ,Cin.I_array(ii+1),'Ref',1);
         else
-            Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(ii));
-            Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(1),'Ref',1);
+            Field_Circ = Propagate_E(Field_Circ,Cin.propagation_mat_array(ii));
+            Field_Circ = reflect_mirror(Field_Circ,Cin.I_array(1),'Ref',1);
         end
     end
     
@@ -78,7 +78,7 @@ Vec_res_freq2 = mod(Reso_angle - Reso_angle(Ind_00),Flip_sign*2*pi);
 Vec_res_loss =  abs(Eigen_value).^2;
 
 if sum(Vec_res_loss > 1) >= 1
-    error('Display_cavity_modes(): eigen value(s) superior to 1! likely cause: grid resolution too large to use digital integration.')
+    error('display_cavity_modes(): eigen value(s) superior to 1! likely cause: grid resolution too large to use digital integration.')
 end
 
 

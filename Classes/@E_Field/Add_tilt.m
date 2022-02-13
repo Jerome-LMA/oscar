@@ -1,4 +1,4 @@
-function Eout = Add_Tilt(Ein,tilt_angle,varargin)
+function Eout = add_tilt(Ein,tilt_angle,varargin)
 % Add_tilt: Add a tilted wavefront to an E_field
 % E2 = Add_tilt(E1,tilt_angle)   tilt the wavefront by tilt_angle in the
 % horizontal direction, tilt is given in radian and is a small number

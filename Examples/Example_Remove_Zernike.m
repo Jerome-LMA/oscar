@@ -13,7 +13,7 @@ G1 = Grid(800,0.4);
 % Tips to check the look of the map loaded
 
 % Load the mirror map as a ZYGO.dat file
-[Map_loaded, dx] = ReadZygoBinary('Example_ZYGO_data.dat');
+[Map_loaded, dx] = ReadZygoBinary('example_ZYGO_data.dat');
 % Calculate the diameter of the map
 map_side = size(Map_loaded)*dx;
 
@@ -28,7 +28,7 @@ figure(1)
 I_Plot(I1,'diam',0.25)
 
 % Alternative way, shorter:
-[I2,G2] = Load_dat_Map('Example_ZYGO_data.dat');
+[I2,G2] = Load_dat_Map('example_ZYGO_data.dat');
 figure(2); I_Plot(I2,'diam',0.25)
 
 %-----------------------------------------------------------------------------------------

@@ -6,7 +6,7 @@ function M2 = Add_prop_mat(M1,E1)
 
 M2 = M1;
 
-M2.Propagation_mat_sub = Prop_operator(E1,M1.length_substrate,'n',M1.n_substrate);
+M2.propagation_mat_sub = Prop_operator(E1,M1.length_substrate,'n',M1.n_substrate);
   
 end
 

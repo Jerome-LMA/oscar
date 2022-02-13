@@ -1,11 +1,9 @@
-function  varargout = Display_Cavity_Modes(Cin,varargin)
+function  varargout = display_cavity_modes(obj, varargin)
 % Display interactively the cavity modes
 
 p = inputParser;
 p.FunctionName = 'Display eigen modes';
 
-% Check if the first argument is a cavity
-p.addRequired('Cin', @(x)isa(x, 'Cavity1'));
 
 % Check if there is the number of modes to display
 p.addParameter('N',20,@(x)isnumeric(x) );
@@ -17,20 +15,20 @@ p.addParameter('Airy',false,@(x)islogical(x));
 p.addParameter('List',false,@(x)islogical(x));
 
 
-p.parse(Cin,varargin{:});
+p.parse(obj,varargin{:});
 
 %p.Results
 
-if isempty(Cin.Cavity_EM_mat)
-    error('Display_cavity_modes(): cavity modes must first be calculated using the function Calculate_RT_mat()   ')
+if isempty(obj.Cavity_EM_mat)
+    error('display_cavity_modes(): cavity modes must first be calculated using the function calculate_rt_mat()   ')
 end
 
-Cin = p.Results.Cin;
+obj = p.Results.Cin;
 Nb_eigenvalue = p.Results.N;
 Draw_Airy = p.Results.Airy;
 
 % Calculate the Eigen vectors and eigen values
-[V,D] = eigs(Cin.Cavity_EM_mat,Nb_eigenvalue);
+[V,D] = eigs(obj.Cavity_EM_mat,Nb_eigenvalue);
 Eigen_value = max((D));
 
 % Tidy the eigen modes by diffraction loss
@@ -41,10 +39,10 @@ Eigen_value = max((D));
 
 
 % Check the number of point for the grid
-[m,~] = size(Cin.Cavity_EM_mat);
+[m,~] = size(obj.Cavity_EM_mat);
 Num_point = sqrt(m);
 
-G_new = Grid(Num_point,Cin.I_input.Grid.Length);
+G_new = Grid(Num_point,obj.i_input.Grid.Length);
 
 Eigen_mode = complex(zeros(Num_point,Num_point,Nb_eigenvalue));
 Reso_angle = zeros(Nb_eigenvalue,1);
@@ -56,13 +54,13 @@ for pp = 1:Nb_eigenvalue
     mode_brt = Normalise_E(E_Field(G_new,'w0',0.02),0);
     mode_brt.Field = Eigen_mode(:,:,pp);
     
-    mode_brt = Resample_E(mode_brt,Cin.Laser_in.Grid);
+    mode_brt = Resample_E(mode_brt,obj.laser_in.Grid);
     Field_Circ = mode_brt;
     
-    Circ_field = Propagate_E(Field_Circ,Cin.Propagation_mat);
-    Circ_field = Reflect_Mirror(Circ_field,Cin.I_end,'Ref',1);
-    Circ_field = Propagate_E(Circ_field,Cin.Propagation_mat);
-    Field_Circ = Reflect_Mirror(Circ_field,Cin.I_input,'Ref',1);
+    Circ_field = Propagate_E(Field_Circ,obj.propagation_mat);
+    Circ_field = reflect_mirror(Circ_field,obj.i_end,'Ref',1);
+    Circ_field = Propagate_E(Circ_field,obj.propagation_mat);
+    Field_Circ = reflect_mirror(Circ_field,obj.i_input,'Ref',1);
     
     mode_art = Field_Circ;
     Reso_angle(pp) = angle(Calculate_Overlap(mode_art,mode_brt));
@@ -89,14 +87,13 @@ Vec_res_freq2 = mod(Reso_angle - Reso_angle(Ind_00),Flip_sign*2*pi);
 Vec_res_loss =  abs(Eigen_value).^2;
 
 if sum(Vec_res_loss > 1) >= 1
-    error('Display_cavity_modes(): eigen value(s) superior to 1! likely cause: grid resolution too large to use digital integration.')
+    error('display_cavity_modes(): eigen value(s) superior to 1! likely cause: grid resolution too large to use digital integration.')
 end
 
 if p.Results.List
     tmp(:,1) = Vec_res_freq2;
     tmp(:,2) = (1 - Vec_res_loss);
-    disp('Mode list starting with the fundamental mode:')
-    tmp
+    disp('Mode list starting with the fundamental mode:')    
 end
 
 %  Initialize and hide the GUI as it is being constructed.
@@ -126,8 +123,8 @@ if Draw_Airy
     
     Phase_scan = linspace(-pi,pi,2000);
     
-    T = Cin.I_input.T;
-    r = Cin.I_input.r * Cin.I_end.r * abs(Eigen_value(1));
+    T = obj.i_input.T;
+    r = obj.i_input.r * obj.i_end.r * abs(Eigen_value(1));
         
     figure;
     semilogy(Phase_scan,T./(abs(1 - r*exp(1i*(Phase_scan -Vec_res_freq2(1)) ) )).^2)
@@ -135,8 +132,8 @@ if Draw_Airy
     
     hold all
     for pp=2:Nb_eigenvalue
-        T = Cin.I_input.T;
-        r = Cin.I_input.r * Cin.I_end.r * abs(Eigen_value(pp));
+        T = obj.i_input.T;
+        r = obj.i_input.r * obj.i_end.r * abs(Eigen_value(pp));
         semilogy(Phase_scan,T./(abs(1 - r*exp(1i*(Phase_scan -Vec_res_freq2(pp)) ) )).^2)
     end
     hold off
@@ -151,7 +148,7 @@ if nargout == 1
     %  E_input = E_Field(G1,'w',0.02,'R',-2500);
     
     for pp = 1:Nb_eigenvalue
-        tmp_E_field = E_Field(Cin.I_input.Grid,'w',0.02,'R',-2500); % define a
+        tmp_E_field = E_Field(obj.i_input.Grid,'w',0.02,'R',-2500); % define a
         tmp_E_field.Field = Eigen_mode(:,:,pp);
         E_out(pp) =  tmp_E_field;
     end

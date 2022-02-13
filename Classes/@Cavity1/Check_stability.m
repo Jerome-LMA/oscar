@@ -1,6 +1,6 @@
-function  varargout = Check_Stability(Cin,varargin)
-%% Check_stability(C1) calculate RofC of the mirrors and the cavity stability
-% Can do the RoC over a smaller area if a diameter is specified ( for example with Check_stability(C1,0.150) )
+function  varargout = check_stability(obj, varargin)
+%% check_stability(C1) calculate RofC of the mirrors and the cavity stability
+% Can do the RoC over a smaller area if a diameter is specified ( for example with check_stability(C1,0.150) )
 % First calculate the RofC of the mirrors, do a fit for the curvature of
 % the surface.
 
@@ -15,12 +15,12 @@ p.addParameter('Display',true,@(x)islogical(x));
 % Check if the results have to be displayed
 p.addParameter('diam',0,@(x)isnumeric(x) && x>0);
 
-p.parse(Cin,varargin{:})
+p.parse(obj,varargin{:})
 
 Display = p.Results.Display;
 diam_mir = p.Results.diam;
 
-I1 = Cin.I_input;
+I1 = obj.i_input;
 
 % Check where the mirror is defined
 if diam_mir
@@ -77,7 +77,7 @@ end
 
 % Do the same thing for the second surface
 
-I2 = Cin.I_end;
+I2 = obj.i_end;
 
 if diam_mir
     I2_mask_index = find(I2.Grid.D2_r < diam_mir/2);
@@ -116,8 +116,8 @@ if Display
 end
 % Now check the stability
 
-g1 = 1 -  Cin.Length/I1_RofC;
-g2 = 1 -  Cin.Length/I2_RofC;
+g1 = 1 -  obj.Length/I1_RofC;
+g2 = 1 -  obj.Length/I2_RofC;
 g_factor_cavity = g1 * g2;
 
 if Display
@@ -127,8 +127,8 @@ end
 % Calculate various parameters if the cavity is stable
 if (g_factor_cavity > 0) && (g_factor_cavity < 1)
     
-    Lambda = Cin.Laser_in.Wavelength;
-    Length_Cavity = Cin.Length;
+    Lambda = obj.laser_in.Wavelength;
+    Length_Cavity = obj.Length;
     
     w0 = sqrt((Lambda * Length_Cavity / pi) * sqrt ((g1*g2*(1-g1*g2))/(g1+g2-2*g1*g2)^2));
     distITM_waist = (g2*(1 - g1)*Length_Cavity )/(g1+g2 - 2*g1*g2);
@@ -139,7 +139,7 @@ if (g_factor_cavity > 0) && (g_factor_cavity < 1)
     % Mode separation in unit of the FSR
     Mode_sep = (1/pi)*acos(sqrt(g1*g2));
     
-    cav_finesse = pi * ( (Cin.I_input.r * Cin.I_end.r)^.5 ) / (1 - Cin.I_input.r * Cin.I_end.r);
+    cav_finesse = pi * ( (obj.i_input.r * obj.i_end.r)^.5 ) / (1 - obj.i_input.r * obj.i_end.r);
     if Display
         fprintf('The beam waist size in the cavity: %g \n',w0)
         fprintf('distance with the ITM: %g \n',distITM_waist)
@@ -147,11 +147,11 @@ if (g_factor_cavity > 0) && (g_factor_cavity < 1)
         fprintf('\nBeam radius on ITM: %g \n',W_onITM)
         fprintf('Beam radius on ETM: %g \n',W_onETM)
         fprintf('\n Cavity finesse: %g \n', cav_finesse)
-        fprintf(' Cavity gain: %g \n', abs(Cin.I_input.t)^2  /((1 - Cin.I_input.r * Cin.I_end.r))^2 )
+        fprintf(' Cavity gain: %g \n', abs(obj.i_input.t)^2  /((1 - obj.i_input.r * obj.i_end.r))^2 )
     end
     %     % Calculate the parameters of the beam entering the cavity
     %     % Matrice ABCD of the propagation
-    %     Cavity_q = 1/(-1/I1_RofC - 1i*Cin.Laser_in.Wavelength/(pi*W_onITM^2));
+    %     Cavity_q = 1/(-1/I1_RofC - 1i*Cin.laser_in.Wavelength/(pi*W_onITM^2));
     %
     %     Mat_propa = [1 Cin.Length; 0 1]*[1 0;-2/I2_RofC 1]*[1 Cin.Length; 0 1];
     %
@@ -165,10 +165,10 @@ if (g_factor_cavity > 0) && (g_factor_cavity < 1)
     %     Beam_rad = sqrt( 1/(-imag(q_circ_inv)*pi/(1064E-9/n)));
     
     % Now make it pass the input optics
-    Field_in = Transmit_Reflect_Optic(E_Field(Cin.Laser_in.Grid,'w',W_onITM,'R',I1_RofC),Cin.I_input,'HR');
+    Field_in = Transmit_Reflect_Optic(E_Field(obj.laser_in.Grid,'w',W_onITM,'R',I1_RofC),obj.i_input,'HR');
     
-    if isa(Cin.I_input, 'Interface')
-        Field_in =  Change_E_n(Field_in,Cin.I_input.n1);
+    if isa(obj.i_input, 'Interface')
+        Field_in =  Change_E_n(Field_in,obj.i_input.n1);
     end
     
     

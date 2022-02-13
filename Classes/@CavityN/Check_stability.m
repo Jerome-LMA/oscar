@@ -1,5 +1,5 @@
-function varargout = Check_Stability(Cin,varargin)
-%% Check_stability(Cin) calculate RofC of the mirrors and the cavity stability
+function varargout = check_stability(Cin,varargin)
+%% check_stability(Cin) calculate RofC of the mirrors and the cavity stability
 
 % First calculate the RofC of the mirrors, do a fit for the curvature of
 % the surface.
@@ -31,10 +31,10 @@ for ii=1:Nb_mirrors
     
     if isa(IorM, 'Interface')
         I1 = IorM;
-    elseif isa(Cin.I_input, 'Mirror')
+    elseif isa(Cin.i_input, 'Mirror')
         I1 = Cin.I_array(ii).I_HR;
     else
-        error('Check_stability(): serious problem, contact the administrator!')
+        error('check_stability(): serious problem, contact the administrator!')
     end
     
     % Check whether the mirror mirror is defined
@@ -120,7 +120,7 @@ if abs( 0.5*(Mat_RT(1,1) + Mat_RT(2,2) ) ) > 1
         varargout{1} = {};
     end
 else
-    Lambda = Cin.Laser_in.Wavelength;
+    Lambda = Cin.laser_in.Wavelength;
     
     % Calculate the beam parameter on the first mirror
     Roc_input = (2 * Mat_RT(1,2)) / (Mat_RT(2,2) - Mat_RT(1,1));
@@ -176,7 +176,7 @@ else
     end
     
     % Now make it pass the input optics
-    Field_in = Transmit_Reflect_Optic(E_Field(Cin.Laser_in.Grid,'w',beam_size,'R',-Roc_input),Cin.I_array(1),'HR');
+    Field_in = Transmit_Reflect_Optic(E_Field(Cin.laser_in.Grid,'w',beam_size,'R',-Roc_input),Cin.I_array(1),'HR');
     
     if isa(Cin.I_array(1), 'Interface')
         Field_in =  Change_E_n(Field_in,Cin.I_array(1).n1);

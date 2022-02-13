@@ -16,7 +16,7 @@ p.FunctionName = 'Fit the TEM00 beam parameters';
 p.addRequired('Ein', @(x)isa(x, 'E_Field'));
 p.parse(Ein,varargin{:})
 
-if Calculate_Power(Ein)==0
+if calculate_power(Ein)==0
     error('Fit_TEM00(): No power in the field')
 end
 

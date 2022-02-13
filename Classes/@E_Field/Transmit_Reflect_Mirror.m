@@ -1,10 +1,10 @@
-function [Eout, varargout] = Transmit_Reflect_Mirror(Ein,Min,side,varargin)
-%  Transmit_Reflect_Mirror(varargin) Transmit and reflect a E_field through
+function [Eout, varargout] = transmit_reflect_mirror(Ein,Min,side,varargin)
+%  transmit_reflect_mirror(varargin) Transmit and reflect a E_field through
 %  a thick mirror. Deal the mirror as a low finesse FP cavity
 
-%  Eout =  Transmit_Reflect_Mirror((Ein,M1,'HR'), transmit the E_field Ein
+%  Eout =  transmit_reflect_mirror((Ein,M1,'HR'), transmit the E_field Ein
 %  througth the mirror M1, entering by the HR surface
-%  [Eout Eref] =  Transmit_Reflect_Mirror((Ein,M1,'AR'), transmit the E_field Ein
+%  [Eout Eref] =  transmit_reflect_mirror((Ein,M1,'AR'), transmit the E_field Ein
 %  across the mirror M1. Eout is the transmitted field and Eref is the reflected field
 
 p  = inputParser;
@@ -81,7 +81,7 @@ switch nargout
         return
          
     otherwise
-        error('Transmit_Reflect_Mirror(): Wrong number of output argument')
+        error('transmit_reflect_mirror(): Wrong number of output argument')
 end
 
 end

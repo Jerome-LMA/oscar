@@ -25,11 +25,11 @@ EM = Interface(G1,'RoC',1683,'CA',0.33,'T',5E-6);
 Arm_cavity = Cavity1(IM,EM,3000,E_input);
 
 % Calculate the resonance length to maximise the circulating power
-Arm_cavity = Cavity_Resonance_Phase(Arm_cavity);
+Arm_cavity = resonance_phase(Arm_cavity);
 
 % Display information about the cavity
-Arm_cavity = Calculate_Fields_AC(Arm_cavity);
+Arm_cavity = calculate_fields_ac(Arm_cavity);
 
-Arm_cavity.Display_Results
+Arm_cavity.display_results
 
 

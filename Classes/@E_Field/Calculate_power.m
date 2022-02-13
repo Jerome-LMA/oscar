@@ -1,4 +1,4 @@
-function varargout = Calculate_Power(Ein,varargin)
+function varargout = calculate_power(Ein,varargin)
 % Calculate the power in W of a E_field, it could be carrier and/or
 % sidebands
 % Use: Calculate_power(E_field) or Calculate_power(E_field,'include','all')
@@ -49,7 +49,7 @@ elseif strcmp(p.Results.include,'all')
 elseif strcmp(p.Results.include,'SB')
     if Ein.Nb_Pair_SB
         if SB_number > Ein.Nb_Pair_SB
-            error('Calculate_Power(): SB number invalid')
+            error('calculate_power(): SB number invalid')
         end
         power_temp_SB_lower =  sum(sum(abs(Ein.SB(SB_number).Field_lower).^2))* (Ein.Grid.Step)^2;
         power_temp_SB_upper =  sum(sum(abs(Ein.SB(SB_number).Field_upper).^2))* (Ein.Grid.Step)^2;

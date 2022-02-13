@@ -35,8 +35,8 @@ OMC = CavityN(I,d,E_input);
 % grid to be sure that the calculation of the eigenmode is manageable
 % !! it will be slooooooooow !!
 
-OMC = Calculate_RT_mat(OMC,'Grid',Grid(64,0.0035)); % Notice how a second smaller grid is given, same length as G1
-Display_cavity_modes(OMC,'N',40);
+OMC = calculate_rt_mat(OMC,'Grid',Grid(64,0.0035)); % Notice how a second smaller grid is given, same length as G1
+display_cavity_modes(OMC,'N',40);
 
 % Display the Airy peak of the first 30 (lowest clipping loss) eigenmodes:
-% Display_cavity_modes(C1,'N',30,'Airy',1)
+% display_cavity_modes(C1,'N',30,'Airy',1)

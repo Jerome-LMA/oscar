@@ -1,28 +1,28 @@
-function [Eout, varargout] = Transmit_Reflect_Mirror(varargin)
-%  Transmit_Reflect_Mirror(varargin) Transmit and reflect a E_field through
+function [Eout, varargout] = transmit_reflect_mirror(varargin)
+%  transmit_reflect_mirror(varargin) Transmit and reflect a E_field through
 %  a thick mirror. Deal with the mirror as a low finesse FP cavity
 
-%  Eout =  Transmit_Reflect_Mirror(Ein,M1,'HR'), transmit the E_field Ein
+%  Eout =  transmit_reflect_mirror(Ein,M1,'HR'), transmit the E_field Ein
 %  througth the mirror M1, entering by the HR surface
-%  [Eout Eref] =  Transmit_Reflect_Mirror((Ein,M1,'AR'), transmit the E_field Ein
+%  [Eout Eref] =  transmit_reflect_mirror((Ein,M1,'AR'), transmit the E_field Ein
 %  across the mirror M1. Eout is the transmitted field and Eref is the reflected field
 
 switch nargin
     case {0,1,2}
-        error('Transmit_Reflect_Mirror(): Not enough arguments, at least one object E_field, one Mirror and the first surface meet must be given')
+        error('transmit_reflect_mirror(): Not enough arguments, at least one object E_field, one Mirror and the first surface meet must be given')
         
     case 3
         
         if isa(varargin{1},'E_Field')
-            error('Transmit_Reflect_Mirror(): the first argument must be a E_Field')
+            error('transmit_reflect_mirror(): the first argument must be a E_Field')
         end
         
         if isa(varargin{2},'Mirror')
-            error('Transmit_Reflect_Mirror(): the second argument must be a Mirror')
+            error('transmit_reflect_mirror(): the second argument must be a Mirror')
         end
         
         if strcmp(varargin{3},'HR') || strcmp(varargin{3},'AR')
-            error('Transmit_Reflect_Mirror(): the third argument must either be the string HR or AR')
+            error('transmit_reflect_mirror(): the third argument must either be the string HR or AR')
         end
         
         E1 = varargin{1};
@@ -66,7 +66,7 @@ switch nargin
             end
             
         else
-            error('Transmit_Reflect_Mirror(), the third argument must be the string AR or HR')
+            error('transmit_reflect_mirror(), the third argument must be the string AR or HR')
         end
         
         
@@ -81,9 +81,9 @@ switch nargin
                 
                 
             otherwise
-                error('Transmit_Reflect_Mirror(): Wrong number of output argument')
+                error('transmit_reflect_mirror(): Wrong number of output argument')
         end
     otherwise
-        error('Transmit_Reflect_Mirror(): invalid number of input arguments, no power calculation is made')
+        error('transmit_reflect_mirror(): invalid number of input arguments, no power calculation is made')
 end
 end

@@ -10,7 +10,7 @@ switch nargin
     case 1
         E = varargin{1};
         Eout = E;
-        Power_amp_inv = 1/sqrt(Calculate_Power(E));
+        Power_amp_inv = 1/sqrt(calculate_power(E));
         
         if isgpuarray(E.Field)
             Eout.Field = arrayfun(@times,Eout.Field,Power_amp_inv);
@@ -20,7 +20,7 @@ switch nargin
     case 2
         E = varargin{1};
         Eout = E;
-        Eout.Field = Eout.Field / sqrt(Calculate_Power(varargin{1}));
+        Eout.Field = Eout.Field / sqrt(calculate_power(varargin{1}));
         Eout.Field = Eout.Field * sqrt(varargin{2});
         
         if varargin{2} == 0

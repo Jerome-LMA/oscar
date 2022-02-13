@@ -38,18 +38,18 @@ EM = Add_Map(EM,Virtual_map_EM,'reso',G1.Step,'remove_tilt_focus',0.150,'RMS',1E
 C1 = Cavity1(IM,EM,3000,E_input);
 
 % To use the digital integration technique
-C1.Propagation_mat.Use_DI = true;
+C1.propagation_mat.Use_DI = true;
 C1 = Declare_on_GPU(C1);
 
 % Calculate the resonance length
-C1 = Cavity_Resonance_Phase(C1);
+C1 = resonance_phase(C1);
 
 % Calculate and display the reflected field
 
-C1 = Calculate_Fields_AC(C1); % accelerated convergence scheme
+C1 = calculate_fields_ac(C1); % accelerated convergence scheme
 %C1 = Calculate_fields(C1); % old method
 
-Display_Results(C1);
+display_results(C1);
 
 %% Look at the power content in higher order modes of the circulating field
 %figure(2)
@@ -58,8 +58,8 @@ Display_Results(C1);
 %% Test cavity scan
 
 % C2 = Cavity_Scan(C1);
-% C2 = Calculate_Fields_AC(C2);
-% Display_Results(C2);
+% C2 = calculate_fields_ac(C2);
+% display_results(C2);
 
 
 

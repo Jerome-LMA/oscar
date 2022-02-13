@@ -5,12 +5,12 @@ disp('--------------------------------------------------------------------------
 disp('                  OSCAR V3.21                                  ')
 disp('  ')
 
-%% Test Add_Tilt()
-disp('----------   Test Add_Tilt()  -----------')
+%% Test add_tilt()
+disp('----------   Test add_tilt()  -----------')
 
 G1 = Grid(256,0.4);
 E1 = E_Field(G1,'w',0.043,'R',-1034);
-E2 = Add_Tilt(E1,1E-6,'dir','y');
+E2 = add_tilt(E1,1E-6,'dir','y');
 Check_Position_Tilt(E2)
 
 disp('')
@@ -36,16 +36,16 @@ Calculate_Overlap(E1,E2)
 
 disp('')
 
-%% Test  Calculate_Power()
-disp('----------   Test Calculate_Power  -----------')
+%% Test  calculate_power()
+disp('----------   Test calculate_power  -----------')
 
 
 G1 = Grid(256,0.4);
 E1 = E_Field(G1,'w',0.043,'R',-1034);
 E2 = Add_Sidebands(E1,3.4E6,0.2);
 
-Calculate_Power(E1,'all')
-[a,b] = Calculate_Power(E2,'SB','SB_num',1);
+calculate_power(E1,'all')
+[a,b] = calculate_power(E2,'SB','SB_num',1);
 
 disp('')
 
@@ -133,8 +133,8 @@ E2 = Transmit_Reflect_Interface(E1,I1);
 E2 = Propagate_E(E2,100);
 Fit_TEM00(E2)
 
-%% Transmit_Reflect_Mirror()
-disp('----------   Test  Transmit_Reflect_Mirror()  -----------')
+%% transmit_reflect_mirror()
+disp('----------   Test  transmit_reflect_mirror()  -----------')
 
 G1 = Grid(256,0.4);
 E1 = E_Field(G1,'w',0.043,'R',inf);

@@ -10,11 +10,11 @@ p.addRequired('Cin', @(x)isa(x, 'Cavity1'));
 p.parse(Cin,varargin{:})
 
 Cout = Cin;
-beam_size_temp = Check_stability(Cin,'Display', false);
+beam_size_temp = check_stability(Cin,'Display', false);
 
-New_E_input = E_Field(Cin.Laser_in.Grid,'w',beam_size_temp(1),'R',beam_size_temp(2));
+New_E_input = E_Field(Cin.laser_in.Grid,'w',beam_size_temp(1),'R',beam_size_temp(2));
 
-Cout.Laser_in = New_E_input;
+Cout.laser_in = New_E_input;
 
 
 end
