@@ -34,8 +34,8 @@ else
 end
 
 % Keep some space
-Cout.Field_trans = E_Field.empty(Cin.Nb_mirror,0);
-Cout.Field_trans(1) = Normalise_E(Cin.laser_in,0);% But an empty field here
+Cout.field_trans = E_Field.empty(Cin.Nb_mirror,0);
+Cout.field_trans(1) = Normalise_E(Cin.laser_in,0);% But an empty field here
 
 % Define the overlap function:
 Raw_overlap = @(x,y) (sum(conj(x).*y, 'all') );
@@ -44,46 +44,46 @@ Raw_overlap = @(x,y) (sum(conj(x).*y, 'all') );
 % substrate refractive index
 
 Field_in =  Change_E_n(Cin.laser_in,Cin.I_array(1).n2);
-[Field_in , Field_reflec] = Transmit_Reflect_Interface(Field_in,Cin.I_array(1));
+[Field_in , field_reflec] = Transmit_Reflect_Interface(Field_in,Cin.I_array(1));
 
 %ii = 0;
 error_P = 1;
-E1 = Cin.Field_reso_guess * sqrt(calculate_power(Cin.laser_in));  % The 'guess' field was calculated for 1W of input power, so it has to be normalised according to the current incident power
+E1 = Cin.field_reso_guess * sqrt(calculate_power(Cin.laser_in));  % The 'guess' field was calculated for 1W of input power, so it has to be normalised according to the current incident power
 
 if ~E1.Nb_Pair_SB % if there is no SB
     
     % Find first D1 = E1 - A E1
-    Field_transient = E1;
+    field_transient = E1;
     
     if Cin.type == 'ring'
         for pp=1:Cin.Nb_mirror
             
             if pp ~= Cin.Nb_mirror % check we are not at the last iteration
-                Field_transient = Propagate_E(Field_transient,Cin.propagation_mat_array(pp));
-                Field_transient = reflect_mirror(Field_transient,Cin.I_array(pp+1));
+                field_transient = Propagate_E(field_transient,Cin.propagation_mat_array(pp));
+                field_transient = reflect_mirror(field_transient,Cin.I_array(pp+1));
             else % we are at the last iteration
-                Field_transient = Propagate_E(Field_transient,Cin.propagation_mat_array(pp))* Cin.resonance_phase;
-                Field_transient = reflect_mirror(Field_transient,Cin.I_array(1));
+                field_transient = Propagate_E(field_transient,Cin.propagation_mat_array(pp))* Cin.resonance_phase;
+                field_transient = reflect_mirror(field_transient,Cin.I_array(1));
             end
             
         end
         
     elseif Cin.type == 'folded'
         for pp = 1:Cin.Nb_mirror-1 % do one way
-            Field_transient = Propagate_E(Field_transient,Cin.propagation_mat_array(pp));
-            Field_transient = reflect_mirror(Field_transient,Cin.I_array(pp+1));
+            field_transient = Propagate_E(field_transient,Cin.propagation_mat_array(pp));
+            field_transient = reflect_mirror(field_transient,Cin.I_array(pp+1));
         end
         for pp=Cin.Nb_mirror-1:-1:1 % and do the round trip
-            Field_transient = Propagate_E(Field_transient,Cin.propagation_mat_array(pp));
+            field_transient = Propagate_E(field_transient,Cin.propagation_mat_array(pp));
             if pp == 1 % last propagation
-                Field_transient = Field_transient*Cin.resonance_phase;
+                field_transient = field_transient*Cin.resonance_phase;
             end
-            Field_transient = reflect_mirror(Field_transient,Cin.I_array(pp));
+            field_transient = reflect_mirror(field_transient,Cin.I_array(pp));
         end
     end
     
     
-    D1 = E1 -  Field_transient;
+    D1 = E1 -  field_transient;
     
     % On now we have E1, D1 that all we need
     
@@ -92,36 +92,36 @@ if ~E1.Nb_Pair_SB % if there is no SB
         E_SR_2 = E1 - D1 + Field_in;
         
         % Do a round trip for E_SR_2
-        Field_transient = E_SR_2;
+        field_transient = E_SR_2;
         
         if Cin.type == 'ring'
             for pp=1:Cin.Nb_mirror
                 
                 if pp ~= Cin.Nb_mirror % check we are not at the last iteration
-                    Field_transient = Propagate_E(Field_transient,Cin.propagation_mat_array(pp));
-                    Field_transient = reflect_mirror(Field_transient,Cin.I_array(pp+1));
+                    field_transient = Propagate_E(field_transient,Cin.propagation_mat_array(pp));
+                    field_transient = reflect_mirror(field_transient,Cin.I_array(pp+1));
                 else % we are at the last iteration
-                    Field_transient = Propagate_E(Field_transient,Cin.propagation_mat_array(pp))* Cin.resonance_phase;
-                    Field_transient = reflect_mirror(Field_transient,Cin.I_array(1));
+                    field_transient = Propagate_E(field_transient,Cin.propagation_mat_array(pp))* Cin.resonance_phase;
+                    field_transient = reflect_mirror(field_transient,Cin.I_array(1));
                 end
                 
             end
             
         elseif Cin.type == 'folded'
             for pp = 1:Cin.Nb_mirror-1 % do one way
-                Field_transient = Propagate_E(Field_transient,Cin.propagation_mat_array(pp));
-                Field_transient = reflect_mirror(Field_transient,Cin.I_array(pp+1));
+                field_transient = Propagate_E(field_transient,Cin.propagation_mat_array(pp));
+                field_transient = reflect_mirror(field_transient,Cin.I_array(pp+1));
             end
             for pp=Cin.Nb_mirror-1:-1:1 % and do the round trip
-                Field_transient = Propagate_E(Field_transient,Cin.propagation_mat_array(pp));
+                field_transient = Propagate_E(field_transient,Cin.propagation_mat_array(pp));
                 if pp == 1 % last propagation
-                    Field_transient = Field_transient*Cin.resonance_phase;
+                    field_transient = field_transient*Cin.resonance_phase;
                 end
-                Field_transient = reflect_mirror(Field_transient,Cin.I_array(pp));
+                field_transient = reflect_mirror(field_transient,Cin.I_array(pp));
             end
         end
         
-        E_SR_2_circ = Field_transient;
+        E_SR_2_circ = field_transient;
         D_SR_2 = E_SR_2 - E_SR_2_circ;
         
         % Find the best coefficient a and b
@@ -149,7 +149,7 @@ if ~E1.Nb_Pair_SB % if there is no SB
     end
     
     Field_total = E1;
-    Cout.Field_circ = Field_total; % circulating field found
+    Cout.field_circ = Field_total; % circulating field found
     
 else
     error('calculate_fields_ac(): Calcuations for the sidebands not yet implemented: contact the developers if it is needed')
@@ -157,46 +157,46 @@ end
 
 %---------------------------------------------------------------------------------------------------------------------------------
 % Ok we got now the circulating field
-Field_transient = Field_total;
+field_transient = Field_total;
 
 if Cin.type == 'ring'
     for pp=1:Cin.Nb_mirror
         
         if pp ~= Cin.Nb_mirror % check we are not at the last iteration
-            Field_transient = Propagate_E(Field_transient,Cin.propagation_mat_array(pp));
-            [Cout.Field_trans(pp+1),Field_transient] = Transmit_Reflect_Interface(Field_transient,Cin.I_array(pp+1));
-            Cout.Field_trans(pp+1) = Change_E_n(Cout.Field_trans(pp+1),Cin.I_array(pp+1).n1);
+            field_transient = Propagate_E(field_transient,Cin.propagation_mat_array(pp));
+            [Cout.field_trans(pp+1),field_transient] = Transmit_Reflect_Interface(field_transient,Cin.I_array(pp+1));
+            Cout.field_trans(pp+1) = Change_E_n(Cout.field_trans(pp+1),Cin.I_array(pp+1).n1);
         else % we are at the last iteration
-            Field_transient = Propagate_E(Field_transient,Cin.propagation_mat_array(pp))* Cin.resonance_phase;
-            [Cout.Field_trans(1),Field_transient] = Transmit_Reflect_Interface(Field_transient,Cin.I_array(1));
-            Cout.Field_trans(1) = Change_E_n(Cout.Field_trans(1),Cin.I_array(1).n1);
+            field_transient = Propagate_E(field_transient,Cin.propagation_mat_array(pp))* Cin.resonance_phase;
+            [Cout.field_trans(1),field_transient] = Transmit_Reflect_Interface(field_transient,Cin.I_array(1));
+            Cout.field_trans(1) = Change_E_n(Cout.field_trans(1),Cin.I_array(1).n1);
         end
     end
     
 elseif Cin.type == 'folded'
     
     for pp = 1:Cin.Nb_mirror-1 % do one way
-        %calculate_power(Field_transient)
-        Field_transient = Propagate_E(Field_transient,Cin.propagation_mat_array(pp));
-        [tmp_trans , Field_transient] = Transmit_Reflect_Interface(Field_transient,Cin.I_array(pp+1));
-        Cout.Field_trans(pp+1) = tmp_trans;
-        Cout.Field_trans(pp+1) = Change_E_n(Cout.Field_trans(pp+1),Cin.I_array(pp+1).n1);
+        %calculate_power(field_transient)
+        field_transient = Propagate_E(field_transient,Cin.propagation_mat_array(pp));
+        [tmp_trans , field_transient] = Transmit_Reflect_Interface(field_transient,Cin.I_array(pp+1));
+        Cout.field_trans(pp+1) = tmp_trans;
+        Cout.field_trans(pp+1) = Change_E_n(Cout.field_trans(pp+1),Cin.I_array(pp+1).n1);
     end
     
     % Add the round trip phase adjustement
-    Field_transient = Field_transient*Cin.resonance_phase;
+    field_transient = field_transient*Cin.resonance_phase;
     
     for pp=Cin.Nb_mirror-1:-1:1 % and do the round trip
-        %calculate_power(Field_transient)
-        Field_transient = Propagate_E(Field_transient,Cin.propagation_mat_array(pp));
-        [tmp_trans,Field_transient] = Transmit_Reflect_Interface(Field_transient,Cin.I_array(pp));
+        %calculate_power(field_transient)
+        field_transient = Propagate_E(field_transient,Cin.propagation_mat_array(pp));
+        [tmp_trans,field_transient] = Transmit_Reflect_Interface(field_transient,Cin.I_array(pp));
         tmp_trans = Change_E_n(tmp_trans,Cin.I_array(pp).n1);
-        Cout.Field_trans(pp) = Cout.Field_trans(pp) + tmp_trans;
+        Cout.field_trans(pp) = Cout.field_trans(pp) + tmp_trans;
     end
 end
 
-Field_reflec = Change_E_n(Field_reflec,Cin.I_array(1).n1);
-Cout.Field_ref = Field_reflec + Cout.Field_trans(1);
+field_reflec = Change_E_n(field_reflec,Cin.I_array(1).n1);
+Cout.field_ref = field_reflec + Cout.field_trans(1);
 
 %-------------------------------------------------------------------
 

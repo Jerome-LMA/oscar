@@ -184,7 +184,7 @@ else
     
     
     [wb,rb] = Fit_TEM00(Field_in);
-    %E_plot(Field_in)
+    %plot(Field_in)
     
     if Display
         disp('  Mode matched input beam parameters:')

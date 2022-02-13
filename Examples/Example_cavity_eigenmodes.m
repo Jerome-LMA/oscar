@@ -35,4 +35,4 @@ display_cavity_modes(C1,'N',30);
 
 % Display a particular eigen mode:
 % Tab_EM = display_cavity_modes(C1,'N',20);
-% figure(2); E_plot(Tab_EM(5));
+% figure(2); plot(Tab_EM(5));

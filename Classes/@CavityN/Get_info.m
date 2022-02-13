@@ -17,7 +17,7 @@ else
 end
 % Cin.I_array(1)
 % 
-% E_plot(Field_Circ); pause
+% plot(Field_Circ); pause
 % Fit_TEM00(Field_Circ)
 
 % Calculate the number of iteration to reach the steady state for a given
@@ -37,21 +37,21 @@ num_iter = round(num_iter);
 Power_buildup = zeros(1,num_iter,'double');
 %Cin.laser_in = Normalise_E(Cin.laser_in);
 
-Field_transient = Field_Circ;
+field_transient = Field_Circ;
 Field_total = Normalise_E(Cin.laser_in,0);
 
 for q = 1:num_iter
     
-    Field_total = Field_total + Field_transient;
+    Field_total = Field_total + field_transient;
     Power_buildup(q) = Calculate_power(Field_total);
     
     for pp=1:Cin.Nb_mirror
         if pp ~= Cin.Nb_mirror % check we are not at the last iteration
-            Field_transient = Propagate_E(Field_transient,Cin.propagation_mat_array(pp));
-            Field_transient = reflect_mirror(Field_transient,Cin.I_array(pp+1));
+            field_transient = Propagate_E(field_transient,Cin.propagation_mat_array(pp));
+            field_transient = reflect_mirror(field_transient,Cin.I_array(pp+1));
         else
-            Field_transient = Propagate_E(Field_transient,Cin.propagation_mat_array(pp)) * Cin.resonance_phase;
-            Field_transient = reflect_mirror(Field_transient,Cin.I_array(1));
+            field_transient = Propagate_E(field_transient,Cin.propagation_mat_array(pp)) * Cin.resonance_phase;
+            field_transient = reflect_mirror(field_transient,Cin.I_array(1));
         end
     end
     
@@ -93,10 +93,10 @@ end
 figure(104)
 clf;
 subplot(2,2,1)
-E_plot(Cin.laser_in)
+plot(Cin.laser_in)
 title('Input field')
 subplot(2,2,2)
-E_plot(Field_total)
+plot(Field_total)
 title('Circulating field')
 subplot(2,2,[3 4])
 plot(Power_buildup)

@@ -41,13 +41,13 @@ for jj_mode_order = 1:Max_HOM
     for ii = 1:jj_mode_order + 1
         mode_name = ['HG ' num2str(ii-1) ' ' num2str(jj_mode_order - ii+1) ];
         Ein = Ein + Ampli_HOM(jj_mode_order) * E_Field(Ein.Grid,'w',Fit_w,'R',Fit_R,'mode',mode_name);
-       % E_plot(E_Field(Ein.Grid,'w',Fit_w,'R',Fit_R,'mode',mode_name)); pause;
+       % plot(E_Field(Ein.Grid,'w',Fit_w,'R',Fit_R,'mode',mode_name)); pause;
     end
 end
 
 
 if nargout == 0
-    E_plot(Ein)
+    plot(Ein)
     return
 elseif nargout == 1
     varargout(1) = {Ein};

@@ -53,7 +53,7 @@ display_results(C1);
 
 %% Look at the power content in higher order modes of the circulating field
 figure(2)
-Expand_HOM(C1.Field_circ,12,'basis',[0.04275  -1500],'display','vector');
+Expand_HOM(C1.field_circ,12,'basis',[0.04275  -1500],'display','vector');
 
 
 

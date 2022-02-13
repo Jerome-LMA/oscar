@@ -30,38 +30,38 @@ switch nargin
         Side_str =  varargin{3};
         
         Eout = E1;
-        Field_trans = Normalise_E(E1,0);
+        field_trans = Normalise_E(E1,0);
         
         if strcmp(Side_str,'HR')
             % i phase shift induced only by the transmission on the HR surface
             
-            [Field_tmp,Field_ref] =  Transmit_Reflect_Interface(Eout,M.I_HR);
+            [Field_tmp,field_ref] =  Transmit_Reflect_Interface(Eout,M.I_HR);
             
             for qq =1:M.RT_inside
                 Field_tmp =   Propagate_E(Field_tmp,M.length_substrate); % From HR to AR
                 [Field_tmp_trans, Field_tmp_ref] =  Transmit_Reflect_Interface(Field_tmp,M.I_AR);
-                Field_trans = Field_trans + 3*1i*Field_tmp_trans;
+                field_trans = field_trans + 3*1i*Field_tmp_trans;
                 
                 Field_tmp = Propagate_E(Field_tmp_ref,M.length_substrate);
                 [Field_tmp_trans, Field_tmp_ref] =  Transmit_Reflect_Interface(Field_tmp,M.I_HR);
                 
-                Field_ref = Field_ref + Field_tmp_trans;
+                field_ref = field_ref + Field_tmp_trans;
                 Field_tmp = Field_tmp_ref;
             end
             
         elseif strcmp(Side_str,'AR')
             
-            [Field_tmp Field_ref] =  Transmit_Reflect_Interface(Eout,M.I_AR);
+            [Field_tmp field_ref] =  Transmit_Reflect_Interface(Eout,M.I_AR);
             
             for qq =1:M.RT_inside
                 Field_tmp =   Propagate_E(Field_tmp,M.length_substrate); % From AR to HR
                 [Field_tmp_trans Field_tmp_ref] =  Transmit_Reflect_Interface(Field_tmp,M.I_AR);
-                Field_trans = Field_trans + Field_tmp_trans;
+                field_trans = field_trans + Field_tmp_trans;
                 
                 Field_tmp = Propagate_E(Field_tmp_ref,M.length_substrate);
                 [Field_tmp_trans Field_tmp_ref] =  Transmit_Reflect_Interface(Field_tmp,M.I_HR);
                 
-                Field_ref = Field_ref +1i*3* Field_tmp_trans;
+                field_ref = field_ref +1i*3* Field_tmp_trans;
                 Field_tmp = Field_tmp_ref;
             end
             
@@ -72,11 +72,11 @@ switch nargin
         
         switch nargout
             case 1 % Just compute the transmitted field
-                Eout  = Field_trans;
+                Eout  = field_trans;
                 
             case 2 % Compute the transmitted AND the reflected field from the interface
-                Eout  = Field_trans;
-                varargout = {Field_ref};
+                Eout  = field_trans;
+                varargout = {field_ref};
                 return
                 
                 

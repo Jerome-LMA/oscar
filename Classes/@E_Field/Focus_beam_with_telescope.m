@@ -80,7 +80,7 @@ if isempty(p.Results.magnification)
         end
         
         
-        %figure(1); E_plot(Ein); figure(2); I_plot(I_temp); pause()
+        %figure(1); plot(Ein); figure(2); I_plot(I_temp); pause()
         
         % Change the sign of the lens to be consitent with the following
         f_lens = - Focal_length(pp);
@@ -120,14 +120,14 @@ if isempty(p.Results.magnification)
         %             Eout.Field_SBu = Eout.Field_SBu / Scaling_factor;
         %         end
         
-        %E_Plot(Eout)
+        %plot(Eout)
         
         % Check if no power fall outside the grid
         Check_Grid_size(E_prop,0.10)
         New_wavefront = -(Distance(pp)  - f_new);
         
         % Remove the wavefront curvature from the beam
-        %E_Plot(Eout)
+        %plot(Eout)
         [~,R_in2] = Fit_TEM00(Eout);
         WF_change = exp(1i * Ein.k_prop *  Eout.Grid.D2_square * (1/(2*R_in2)) );
         Eout = Eout .* WF_change;
@@ -181,7 +181,7 @@ else
             I_temp = Resize_interface(Map_list(pp),Ein.Grid);
             Ein = Ein .* (exp(1i * Ein.k_prop * I_temp.surface) .* I_temp.mask);
         end
-        %figure(1); E_plot(Ein); figure(2); I_plot(I_temp); pause()
+        %figure(1); plot(Ein); figure(2); I_plot(I_temp); pause()
         %figure(1); imagesc(I_temp.mask);axis square; figure(2); I_plot(I_temp); pause()
         
         New_RoC_lens = Focal_length(pp);

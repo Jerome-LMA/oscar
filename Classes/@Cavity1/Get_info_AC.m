@@ -30,7 +30,7 @@ Field_in = Cin.laser_in;
 
 ii = 0;
 error_P = 1;
-E1 = Cin.Field_reso_guess;
+E1 = Cin.field_reso_guess;
 
 % Find first D1 = E1 - A E1
 E1_circ = Propagate_E(E1,Cin.propagation_mat);

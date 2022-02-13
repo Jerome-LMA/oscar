@@ -17,7 +17,7 @@ if isa(Ein, 'E_Field') && isa(tol_out, 'numeric')
     
     if (power_outside/total_power) > tol_out
         warning('war:Grid_too_small','Grid size likely to be too small, check the results carefully')
-        %E_plot(Ein)
+        %plot(Ein)
     end
     
 else

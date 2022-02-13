@@ -50,11 +50,11 @@ for ii=1:Nb_point
     
     tic
     C1 = calculate_fields_ac(C1);
-    C1.Field_reso_guess = C1.Field_circ;
-    [Sig.p(ii),Sig.q(ii)] = Demodulate_SB(C1.Field_ref,'phase',pi/2);       % Demodule the carrier with the sidebands in reflection
+    C1.field_reso_guess = C1.field_circ;
+    [Sig.p(ii),Sig.q(ii)] = Demodulate_SB(C1.field_ref,'phase',pi/2);       % Demodule the carrier with the sidebands in reflection
     time_need(ii) = toc;
-    Power.car(ii) = calculate_power(C1.Field_circ);           % calculate also the power of the carrier circulating in the cavity
-    [Power.SB1(ii),Power.SB2(ii)] = calculate_power(C1.Field_circ,'SB');   % and the sidebands
+    Power.car(ii) = calculate_power(C1.field_circ);           % calculate also the power of the carrier circulating in the cavity
+    [Power.SB1(ii),Power.SB2(ii)] = calculate_power(C1.field_circ,'SB');   % and the sidebands
     
     if ii ~= Nb_point
         fprintf(1,'\b\b\b\b\b \b \b \b')

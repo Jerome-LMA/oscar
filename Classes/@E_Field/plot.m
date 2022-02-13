@@ -1,14 +1,11 @@
-function E_Plot(Ein,varargin)
+function plot(obj, varargin)
 % Display the 2D amplitude of a E_Field in a new window
-% E_plot(E_Field) display the amplitude of the field in a new window
-% E_plot(E_Field,zoom) display the amplitude of the field in a new window
+% plot(E_Field) display the amplitude of the field in a new window
+% plot(E_Field,zoom) display the amplitude of the field in a new window
 % with a factor zoom centered in the middle of the grid
 
 p  = inputParser;
 p.FunctionName = 'Display an E_Field object';
-
-% Check if the first argument is an E_Field
-p.addRequired('Ein', @(x)isa(x, 'E_Field'));
 
 p.addOptional('Field','carrier', @(x)strcmpi(x,'carrier') | ...
     strcmpi(x,'all') | strcmpi(x,'SB') );
@@ -31,7 +28,7 @@ p.addParameter('SB_num',1, @(x) isnumeric(x)  && (x>0) && (mod(x,1) == 0)); % ch
 
 p.addParameter('no_axis',false, @(x)islogical(x) );
 
-p.parse(Ein,varargin{:})
+p.parse(varargin{:})
 SB_number = p.Results.SB_num;
 
 title_str = strrep(inputname(1),'_', '\_');
@@ -40,18 +37,18 @@ if strcmp(p.Results.Field,'carrier') % Display the carrier
     
     if strcmp(p.Results.display,'amplitude')
         if strcmp(p.Results.domain,'space')
-            todisplay = abs(Ein.Field); % display the amplitude
-            ax_scale = Ein.Grid.Axis;
+            todisplay = abs(obj.Field); % display the amplitude
+            ax_scale = obj.Grid.Axis;
             title1 = 'Amplitude';
         else
-            todisplay = abs(fftshift(fft2(Ein.Field))); % display the angle
-            ax_scale_tmp = Ein.Grid.Axis_FFT * Ein.Wavelength;
+            todisplay = abs(fftshift(fft2(obj.Field))); % display the angle
+            ax_scale_tmp = obj.Grid.Axis_FFT * obj.Wavelength;
             ax_scale = ax_scale_tmp(end:-1:1);
             title1 = 'Angular direction';
         end
     else
-        todisplay = abs(Ein.Field).^2; % display the intensity
-        ax_scale = Ein.Grid.Axis;
+        todisplay = abs(obj.Field).^2; % display the intensity
+        ax_scale = obj.Grid.Axis;
         title1 = 'Intensity';
     end
     
@@ -86,18 +83,18 @@ elseif strcmp(p.Results.Field,'SB') % Display the 2 sidebands
     
     if strcmp(p.Results.display,'amplitude')
         if strcmp(p.Results.domain,'space')
-            todisplay = abs(Ein.SB(SB_number).Field_lower); % display the amplitude
-            ax_scale = Ein.Grid.Axis;
+            todisplay = abs(obj.SB(SB_number).Field_lower); % display the amplitude
+            ax_scale = obj.Grid.Axis;
             title1 = 'Amplitude';
         else
-            todisplay = abs(fftshift(fft2(Ein.SB(SB_number).Field_lower))); % display the angle
-            ax_scale_tmp = Ein.Grid.Axis_FFT * Ein.Wavelength;
+            todisplay = abs(fftshift(fft2(obj.SB(SB_number).Field_lower))); % display the angle
+            ax_scale_tmp = obj.Grid.Axis_FFT * obj.Wavelength;
             ax_scale = ax_scale_tmp(end:-1:1);
             title1 = 'Angular direction';
         end
     else
-        todisplay = abs(Ein.SB(SB_number).Field_lower).^2; % display the intensity
-        ax_scale = Ein.Grid.Axis;
+        todisplay = abs(obj.SB(SB_number).Field_lower).^2; % display the intensity
+        ax_scale = obj.Grid.Axis;
         title1 = 'Intensity';
     end
     
@@ -113,18 +110,18 @@ elseif strcmp(p.Results.Field,'SB') % Display the 2 sidebands
     
     if strcmp(p.Results.display,'amplitude')
         if strcmp(p.Results.domain,'space')
-            todisplay = abs(Ein.SB(SB_number).Field_upper); % display the amplitude
-            ax_scale = Ein.Grid.Axis;
+            todisplay = abs(obj.SB(SB_number).Field_upper); % display the amplitude
+            ax_scale = obj.Grid.Axis;
             title1 = 'Amplitude';
         else
-            todisplay = abs(fftshift(fft2(Ein.SB(SB_number).Field_upper))); % display the angle
-            ax_scale_tmp = Ein.Grid.Axis_FFT * Ein.Wavelength;
+            todisplay = abs(fftshift(fft2(obj.SB(SB_number).Field_upper))); % display the angle
+            ax_scale_tmp = obj.Grid.Axis_FFT * obj.Wavelength;
             ax_scale = ax_scale_tmp(end:-1:1);
             title1 = 'Angular direction';
         end
     else
-        todisplay = abs(Ein.SB(SB_number).Field_lower).^2; % display the intensity
-        ax_scale = Ein.Grid.Axis;
+        todisplay = abs(obj.SB(SB_number).Field_lower).^2; % display the intensity
+        ax_scale = obj.Grid.Axis;
         title1 = 'Intensity';
     end
     
@@ -138,14 +135,14 @@ elseif strcmp(p.Results.Field,'SB') % Display the 2 sidebands
     title(['Upper sideband - ' title1 ' ' title_str])
     
 else  % Display All the fields, only valid to display intensity as in for a CCD camera
-    todisplay = abs(Ein.Field).^2;
+    todisplay = abs(obj.Field).^2;
     
-    for ii = 1:Ein.Nb_Pair_SB
-        todisplay = todisplay + abs(Ein.SB(SB_number).Field_lower).^2;
-        todisplay = todisplay + abs(Ein.SB(SB_number).Field_upper).^2;
+    for ii = 1:obj.Nb_Pair_SB
+        todisplay = todisplay + abs(obj.SB(SB_number).Field_lower).^2;
+        todisplay = todisplay + abs(obj.SB(SB_number).Field_upper).^2;
     end
     
-    ax_scale = Ein.Grid.Axis;
+    ax_scale = obj.Grid.Axis;
     
     imagesc(ax_scale,ax_scale,todisplay)
     title(['intensity of all the electric fields: ' title_str])

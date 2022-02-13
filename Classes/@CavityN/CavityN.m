@@ -18,17 +18,17 @@ classdef CavityN
         resonance_phase = [];
         cavity_scan_all_field = [];
         cavity_scan_param = [1000 500 2E-9]; % Number of points for the scan over one  FSR, Number of points for the zoom, span of the zoom
-        Cavity_phase_param = 200;  % Number of iteration to find the resonance phase of the cavity, 100 is usually enough
+        cavity_phase_param = 200;  % Number of iteration to find the resonance phase of the cavity, 100 is usually enough
         cavity_scan_r = [];
         cavity_scan_rz = [];
         Cavity_EM_mat = [];
         
         propagation_mat_array;     % Pre-compute the complex matrix used for the propagation
-        Field_reso_guess = [];       % Smart guess for the shape and amplitude of the fields
+        field_reso_guess = [];       % Smart guess for the shape and amplitude of the fields
         
-        Field_circ = [];
-        Field_ref = [];
-        Field_trans = [];
+        field_circ = [];
+        field_ref = [];
+        field_trans = [];
     end
     
     methods

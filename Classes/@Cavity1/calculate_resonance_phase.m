@@ -1,4 +1,4 @@
-function [] = resonance_phase(obj, varargin)
+function [] = calculate_resonance_phase(obj, varargin)
 %  Cout = Cavity_resonance_phase(Cin) find the resonance of a cavity
 % This procedure can find the resonance of the cavity by finding the
 % suitable round trip phase shift to bring the circulating field on resonance.
@@ -26,7 +26,7 @@ else
 end
 
 
-num_iter = obj.Cavity_phase_param;
+num_iter = obj.cavity_phase_param;
 
 Field_total = Normalise_E(Field_Circ1,0);
 Phase_adjust =1;
@@ -71,21 +71,21 @@ end
 
 Cavity_gain = (1-obj.i_input.r^2)/ (1 - obj.i_input.r * obj.i_end.r)^2;
 % do the overlap
-Coeff_over = Calculate_Overlap(Field_Circ,Field_Circ1);
+Coeff_over = Calculate_Overlap(Field_Circ, Field_Circ1);
 Pcirc = abs(Coeff_over).^2 * Cavity_gain; % For 1W input power
-obj.Field_reso_guess = Normalise_E(Field_Circ,Pcirc);
+obj.field_reso_guess = Normalise_E(Field_Circ, Pcirc);
 
 % Suppose that the SB are in antiresonance
 
-if obj.Field_reso_guess.Nb_Pair_SB
+if obj.field_reso_guess.Nb_Pair_SB
     Cavity_gain_SB = (1-obj.i_input.r^2)/ (1 + obj.i_input.r * obj.i_end.r)^2;
     Pcirc_SB = abs(Coeff_over).^2 * Cavity_gain_SB;
     
     tmp_field_SB = Normalise_E(Field_Circ,Pcirc_SB);
     
-    for ii=1:obj.Field_reso_guess.Nb_Pair_SB
-        obj.Field_reso_guess.SB(ii).Field_lower = tmp_field_SB.Field;
-        obj.Field_reso_guess.SB(ii).Field_upper = tmp_field_SB.Field;
+    for ii=1:obj.field_reso_guess.Nb_Pair_SB
+        obj.field_reso_guess.SB(ii).Field_lower = tmp_field_SB.Field;
+        obj.field_reso_guess.SB(ii).Field_upper = tmp_field_SB.Field;
     end
 end
 

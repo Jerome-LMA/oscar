@@ -38,6 +38,7 @@ classdef Cavity1 < handle
         [power_buildup] = calculate_fields(obj, varargin)
         [] = calculate_fields_ac(obj, varargin)
         [length_scan, power_scan] = scan(obj, varargin)        
+        [] = calculate_resonance_phase(obj, varargin)
     end
     
     methods                

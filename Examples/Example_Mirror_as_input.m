@@ -30,14 +30,13 @@ EM_HR = Interface(G1,'Roc',1683,'CA',0.33,'T',75E-6,'L',0);
 
 % Create the cavity
 C_NA = Cavity1(IM,EM_HR,3000,E_input);
-C_NA.resonance_phase()
 % Check the cavity parameters
 %C_NA.check_stability()
 
-C_NA.resonance_phase();
+C_NA.calculate_resonance_phase()
 
 C_NA.calculate_fields_ac();
-C_NA.display_results
+C_NA.display_results()
 
  %C_NA.get_info
 
@@ -62,10 +61,10 @@ for ii = 1:Nb_points
     IM.RT_inside = 3;                              % Do several round trip inside the mirror
     
     C_NA = Cavity1(IM,EM_HR,3000,E_input);
-    C_NA = resonance_phase(C_NA,'verbose',false);
+    C_NA.calculate_resonance_phase('verbose',false);
     
-    C_NA = calculate_fields_ac(C_NA);   
-    Vec_ref_power(ii) = calculate_power(C_NA.Field_ref);
+    C_NA.calculate_fields_ac();   
+    Vec_ref_power(ii) = calculate_power(C_NA.field_ref);
     
     waitbar(ii/Nb_points,f,'Scanning the IM thickness');
     

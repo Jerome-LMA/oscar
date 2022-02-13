@@ -66,10 +66,10 @@ for pp = 1:Nb_eigenvalue
     Reso_angle(pp) = angle(Calculate_Overlap(mode_art,mode_brt));
     
 %     if pp == 2
-%         figure(2);E_plot(Field_Circ)
+%         figure(2);plot(Field_Circ)
 %     end
 %     if pp == 3
-%         figure(3);E_plot(Field_Circ)
+%         figure(3);plot(Field_Circ)
 %     end
 
 end

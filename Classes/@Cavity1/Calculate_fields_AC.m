@@ -40,14 +40,14 @@ else
     Field_in =  obj.laser_in;
 end
 
-[Field_in,Field_reflec] = Transmit_Reflect_Optic(Field_in,obj.i_input,'AR');
+[Field_in,field_reflec] = Transmit_Reflect_Optic(Field_in,obj.i_input,'AR');
 
 error_P = 1;
 
-if isempty(obj.Field_reso_guess) % If the cavity resonance phase has not been calculate beforehand, so no guess for the resonant field
+if isempty(obj.field_reso_guess) % If the cavity resonance phase has not been calculate beforehand, so no guess for the resonant field
     E1 = Field_in;
 else
-    E1 = obj.Field_reso_guess * sqrt(calculate_power(obj.laser_in)); % The 'guess' field was calculated for 1W of input power, so it has to be normalised according to the current incident power
+    E1 = obj.field_reso_guess * sqrt(calculate_power(obj.laser_in)); % The 'guess' field was calculated for 1W of input power, so it has to be normalised according to the current incident power
 end
 
 if ~E1.Nb_Pair_SB % if there is no SB
@@ -111,7 +111,7 @@ if ~E1.Nb_Pair_SB % if there is no SB
     end
     
     Field_total = E1;
-    obj.Field_circ = Field_total; % circulating field found
+    obj.field_circ = Field_total; % circulating field found
     
 else
     
@@ -119,7 +119,7 @@ else
     
     %---------------------------------------------------------------------------------------------------------------------------------
     % Start with the carrier
-    %E1 = Cin.Field_reso_guess * sqrt(Calculate_power(Cin.laser_in));
+    %E1 = Cin.field_reso_guess * sqrt(Calculate_power(Cin.laser_in));
     
     % Find first D1 = E1 - A E1
     E1_circ = Propagate_E(E1,obj.propagation_mat);
@@ -259,7 +259,7 @@ else
     %      count_iter_LSB(1)
     %      count_iter_USB(1)
     
-    obj.Field_circ = E1;
+    obj.field_circ = E1;
     
     if Display_debug
         fprintf('Number of iteration carrier: %i \n',count_iter_car)
@@ -270,24 +270,24 @@ end
 
 %---------------------------------------------------------------------------------------------------------------------------------
 % Ok we got now the 3 circulating fields (carrier + 2 sidebands)
-Field_temp = Propagate_E(obj.Field_circ,obj.propagation_mat);
-obj.Field_trans = Transmit_Reflect_Optic(Field_temp,obj.i_end);
+Field_temp = Propagate_E(obj.field_circ, obj.propagation_mat);
+obj.field_trans = Transmit_Reflect_Optic(Field_temp, obj.i_end);
 
-Field_temp = Propagate_E(obj.Field_circ,obj.propagation_mat);
-Field_temp = reflect_mirror(Field_temp,obj.i_end);
-Field_temp = Propagate_E(Field_temp,obj.propagation_mat);
+Field_temp = Propagate_E(obj.field_circ, obj.propagation_mat);
+Field_temp = reflect_mirror(Field_temp, obj.i_end);
+Field_temp = Propagate_E(Field_temp, obj.propagation_mat);
 Field_temp = Field_temp * obj.resonance_phase;
 
 Field_temp = Transmit_Reflect_Optic(Field_temp,obj.i_input);
-obj.Field_ref = Field_reflec + Field_temp;
+obj.field_ref = field_reflec + Field_temp;
 
 %
 if isa(obj.i_input, 'Interface')
-    obj.Field_ref =  Change_E_n(obj.Field_ref,obj.i_input.n1);
+    obj.field_ref =  Change_E_n(obj.field_ref,obj.i_input.n1);
 end
 
 if isa(obj.i_end, 'Interface')
-    obj.Field_trans =  Change_E_n(obj.Field_trans,obj.i_end.n1);
+    obj.field_trans =  Change_E_n(obj.field_trans,obj.i_end.n1);
 end
 
 %-------------------------------------------------------------------
@@ -301,14 +301,14 @@ if isa(obj.i_end,'Mirror')
     obj.i_end = obj.i_end.I_HR;
 end
 
-field_tmp = obj.Field_circ;
+field_tmp = obj.field_circ;
 field_tmp = Normalise_E(field_tmp);
 field_tmp = Propagate_E(field_tmp,obj.propagation_mat);
 field_tmp = reflect_mirror(field_tmp,obj.i_end,'Ref',1);
 field_tmp = Propagate_E(field_tmp,obj.propagation_mat);
 field_tmp = reflect_mirror(field_tmp,obj.i_input,'Ref',1);
 
-obj.Loss_RTL =  (1 - calculate_power(field_tmp));
+obj.loss_rtl =  (1 - calculate_power(field_tmp));
 
 end
 

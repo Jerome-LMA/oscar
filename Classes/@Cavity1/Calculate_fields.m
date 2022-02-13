@@ -48,29 +48,29 @@ else
     Field_in =  obj.laser_in;
 end
 
-[Field_transient,Field_reflec] = Transmit_Reflect_Optic(Field_in,obj.i_input,'AR');
-Field_total = Normalise_E(Field_transient,0);
+[field_transient,field_reflec] = Transmit_Reflect_Optic(Field_in,obj.i_input,'AR');
+Field_total = Normalise_E(field_transient,0);
 
 power_buildup = zeros(1,num_iter);
 
 for q = 1:num_iter
     power_buildup(q) = calculate_power(Field_total);
-    Field_total = Field_total + Field_transient;
-    Field_transient = Propagate_E(Field_transient,obj.propagation_mat);
-    Field_transient = reflect_mirror(Field_transient,obj.i_end);
-    Field_transient = Propagate_E(Field_transient,obj.propagation_mat);
+    Field_total = Field_total + field_transient;
+    field_transient = Propagate_E(field_transient,obj.propagation_mat);
+    field_transient = reflect_mirror(field_transient,obj.i_end);
+    field_transient = Propagate_E(field_transient,obj.propagation_mat);
     
-    Field_transient = Field_transient * obj.resonance_phase;
-    Field_transient = reflect_mirror(Field_transient,obj.i_input);
+    field_transient = field_transient * obj.resonance_phase;
+    field_transient = reflect_mirror(field_transient,obj.i_input);
 end
 
-obj.Field_circ = Field_total;
+obj.field_circ = Field_total;
 
 %------------------------------------------------------------------
 % Calculate the transmitted and reflected field
 
 Field_temp = Propagate_E(Field_total,obj.propagation_mat);
-obj.Field_trans = Transmit_Reflect_Optic(Field_temp,obj.i_end);
+obj.field_trans = Transmit_Reflect_Optic(Field_temp,obj.i_end);
 
 Field_temp = Propagate_E(Field_total,obj.propagation_mat);
 Field_temp = reflect_mirror(Field_temp,obj.i_end);
@@ -79,16 +79,16 @@ Field_temp = Field_temp * obj.resonance_phase;
 
 Field_temp = Transmit_Reflect_Optic(Field_temp,obj.i_input);
 
-obj.Field_ref = Field_reflec + Field_temp;
+obj.field_ref = field_reflec + Field_temp;
 
 % Go back outside the substrate, usually in vacuum
 
 if isa(obj.i_input, 'Interface')
-    obj.Field_ref =  Change_E_n(obj.Field_ref,obj.i_input.n1);
+    obj.field_ref =  Change_E_n(obj.field_ref,obj.i_input.n1);
 end
 
 if isa(obj.i_end, 'Interface')
-    obj.Field_trans =  Change_E_n(obj.Field_trans,obj.i_end.n1);
+    obj.field_trans =  Change_E_n(obj.field_trans,obj.i_end.n1);
 end
 
 %-------------------------------------------------------------------

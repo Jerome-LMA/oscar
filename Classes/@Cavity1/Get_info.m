@@ -37,19 +37,19 @@ num_iter = round(num_iter);
 Power_buildup = zeros(1,num_iter,'double');
 %Cin.laser_in = Normalise_E(Cin.laser_in);
 
-Field_transient = obj.laser_in;
+field_transient = obj.laser_in;
 Field_total = Normalise_E(obj.laser_in,0);
 
 
 
 for q = 1:num_iter
-    Field_total = Field_total + Field_transient;
+    Field_total = Field_total + field_transient;
     Power_buildup(q) = Calculate_power(Field_total);
-    Field_transient = Propagate_E(Field_transient,obj.propagation_mat);
-    Field_transient = reflect_mirror(Field_transient,obj.i_end);
-    Field_transient = Propagate_E(Field_transient,obj.propagation_mat);
-    Field_transient = reflect_mirror(Field_transient,obj.i_input);
-    Field_transient = Field_transient * obj.resonance_phase;
+    field_transient = Propagate_E(field_transient,obj.propagation_mat);
+    field_transient = reflect_mirror(field_transient,obj.i_end);
+    field_transient = Propagate_E(field_transient,obj.propagation_mat);
+    field_transient = reflect_mirror(field_transient,obj.i_input);
+    field_transient = field_transient * obj.resonance_phase;
 end
 
 
@@ -93,10 +93,10 @@ end
 figure(104)
 clf;
 subplot(2,2,1)
-E_plot(obj.laser_in)
+plot(obj.laser_in)
 title('Input field')
 subplot(2,2,2)
-E_plot(Field_total)
+plot(Field_total)
 title('Circulating field')
 subplot(2,2,[3 4])
 plot(Power_buildup)

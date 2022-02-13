@@ -49,17 +49,17 @@ calculate_power(E1,'all')
 
 disp('')
 
-%% Test E_Plot()
-disp('----------   Test E_Plot()  -----------')
+%% Test plot()
+disp('----------   Test plot()  -----------')
 
 
 G1 = Grid(256,0.4);
 E1 = E_Field(G1,'w',0.043,'R',-1034);
 E2 = Add_Sidebands(E1,3.4E6,0.2);
 
-E_Plot(E1)
-E_Plot(E2,'all')
-E_Plot(E2,'SB','SB_num',1,'display','intensity')
+plot(E1)
+plot(E2,'all')
+plot(E2,'SB','SB_num',1,'display','intensity')
 
 disp('')
 
@@ -86,7 +86,7 @@ E2 = Add_Sidebands(E1,3.4E6,0.2);
 
 [E3,G3] = Focus_Beam_With_Telescope(E2,[100 102]);
 Fit_TEM00(E3)
-E_Plot(E3,'SB','SB_num',1,'display','intensity')
+plot(E3,'SB','SB_num',1,'display','intensity')
 
 [E4,G4] = Focus_Mirror(E1,200,102);
 Fit_TEM00(E4)
@@ -98,13 +98,13 @@ G1 = Grid(256,0.4);
 E1 = E_Field(G1,'w',0.043,'R',inf);
 
 E2 = Transmit_Aperture(E1,0.05);
-figure(1); E_Plot(E2)
+figure(1); plot(E2)
 
 E3 = Transmit_Aperture(E1,0.05,'Shape','square');
-figure(2); E_Plot(E3)
+figure(2); plot(E3)
 
 E4 = Transmit_Aperture(E1,0.2,'Shape','batman');
-figure(3); E_Plot(E4)
+figure(3); plot(E4)
 
 %% Transmit_Lens()
 disp('----------   Test Transmit_Lens()  -----------')
