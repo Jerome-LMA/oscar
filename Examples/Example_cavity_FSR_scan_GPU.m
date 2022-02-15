@@ -34,7 +34,7 @@ C1 = Declare_on_GPU(C1);
 
 % Calculate the resonance length
 
-C1 = Cavity_scan(C1,'use_parallel',true,'With_SB',false);
+C1 = Cavity_Scan(C1,'use_parallel',true,'With_SB',false);
 
 % Display information about the cavity
 Display_scan(C1);

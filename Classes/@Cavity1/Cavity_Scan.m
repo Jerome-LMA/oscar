@@ -94,7 +94,7 @@ if license('test','distrib_computing_toolbox') && p.Results.use_parallel        
         %             Power_scan(qqq) = Calculate_power(Dummy_E);
         %         end        
         %
-        Power_scan = gather(sum(abs(pagefun(@mtimes,gpuArray(exp(1i*Cin.Laser_in.k_prop* Length_scan(gq)'*ii)), permute(gpuArray(Cin.Cavity_scan_all_field(:,:,ii)), [3,1,2]))).^2, [2 3]) * Cin.Laser_in.Grid.Step^2);
+        Power_scan = gather(sum(abs(pagefun(@mtimes,gpuArray(exp(-1i*Cin.Laser_in.k_prop* Length_scan(gq)'*ii)), permute(gpuArray(Cin.Cavity_scan_all_field(:,:,ii)), [3,1,2]))).^2, [2 3]) * Cin.Laser_in.Grid.Step^2);
         
     else
         
@@ -113,10 +113,10 @@ if license('test','distrib_computing_toolbox') && p.Results.use_parallel        
             Field_reconstructed_SBl = Field_reconstructed;
             
             for ii=1:num_iter
-                Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii);
+                Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(-1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii);
                 if Cin.Laser_in.Nb_Pair_SB
-                    Field_reconstructed_SBu = Field_reconstructed_SBu + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(1i*2*D_phi*ii);
-                    Field_reconstructed_SBl = Field_reconstructed_SBl + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(-1i*2*D_phi*ii);
+                    Field_reconstructed_SBu = Field_reconstructed_SBu + Cin.Cavity_scan_all_field(:,:,ii) * exp(-1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(1i*2*D_phi*ii);
+                    Field_reconstructed_SBl = Field_reconstructed_SBl + Cin.Cavity_scan_all_field(:,:,ii) * exp(-1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(-1i*2*D_phi*ii);
                 end
             end
             
@@ -151,10 +151,10 @@ else % if the PCT is not installed or we do not want to use the toolbox
         Field_reconstructed_SBl = Field_reconstructed;
         
         for ii=1:num_iter
-            Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii);
+            Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(-1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii);
             if Cin.Laser_in.Nb_Pair_SB
-                Field_reconstructed_SBu = Field_reconstructed_SBu + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(1i*D_phi*ii);
-                Field_reconstructed_SBl = Field_reconstructed_SBl + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(-1i*D_phi*ii);
+                Field_reconstructed_SBu = Field_reconstructed_SBu + Cin.Cavity_scan_all_field(:,:,ii) * exp(-1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(1i*D_phi*ii);
+                Field_reconstructed_SBl = Field_reconstructed_SBl + Cin.Cavity_scan_all_field(:,:,ii) * exp(-1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii) * exp(-1i*D_phi*ii);
             end
         end
         
@@ -224,17 +224,23 @@ if p.Results.Define_L_length
             disp('Found suitable GPU. Starting GPU-based scan.')
             gq = 1:num_point_scan;
             ii = 1:num_iter;
-            gCavity_scan_all_field_arr = gpuArray(Cin.Cavity_scan_all_field(:,:,ii));
-            gCavity_scan_all_field_arr_perm = permute(gCavity_scan_all_field_arr, [3,1,2]);
-            gPhase_shifts = gpuArray(exp(1i*Cin.Laser_in.k_prop* Length_scan(gq)'*ii));
-            gFields_reconstructed = pagefun(@mtimes,gPhase_shifts, gCavity_scan_all_field_arr_perm);
-            Fields_reconstructed = gather(gFields_reconstructed);
             
-            for qqq = 1:num_point_scan
-                Dummy_E = Cin.Laser_in;
-                Dummy_E.Field = squeeze(Fields_reconstructed(qqq,:,:));
-                Power_scan(qqq) = Calculate_Power(Dummy_E);
-            end
+            % For performance reasons and memory limitations, the GPU-based FSR-scan is written in a
+            % single line. For better understanding, the following code is given as a comment, 
+            % which leads to the same result, but is more clearly structured:
+            %
+            %         gCavity_scan_all_field_arr = gpuArray(Cin.Cavity_scan_all_field(:,:,ii));
+            %         gCavity_scan_all_field_arr_perm = permute(gCavity_scan_all_field_arr, [3,1,2]);
+            %         gPhase_shifts = gpuArray(exp(-1i*Cin.Laser_in.k_prop* Length_scan(gq)'*ii));
+            %         gFields_reconstructed = pagefun(@mtimes,gPhase_shifts, gCavity_scan_all_field_arr_perm);
+            %         Fields_reconstructed = gather(gFields_reconstructed);        
+            %         for qqq = 1:num_point_scan
+            %             Dummy_E = Cin.Laser_in;
+            %             Dummy_E.Field = squeeze(Fields_reconstructed(qqq,:,:));
+            %             Power_scan(qqq) = Calculate_power(Dummy_E);
+            %         end        
+            %
+            Power_scan = gather(sum(abs(pagefun(@mtimes,gpuArray(exp(-1i*Cin.Laser_in.k_prop* Length_scan(gq)'*ii)), permute(gpuArray(Cin.Cavity_scan_all_field(:,:,ii)), [3,1,2]))).^2, [2 3]) * Cin.Laser_in.Grid.Step^2);
             
         else
             
@@ -243,7 +249,7 @@ if p.Results.Define_L_length
             parfor qq = 1:num_point_scan
                 Field_reconstructed = complex(zeros(Grid_num_point,Grid_num_point,'double'));
                 for ii=1:num_iter
-                    Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii);
+                    Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(-1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii);
                 end
                 Dummy_E = Cin.Laser_in;
                 Dummy_E.Field = Field_reconstructed;
@@ -258,7 +264,7 @@ if p.Results.Define_L_length
         for qq = 1:num_point_scan
             Field_reconstructed = complex(zeros(Grid_num_point,Grid_num_point,'double'));
             for ii=1:num_iter
-                Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii);
+                Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(-1i*Cin.Laser_in.k_prop* Length_scan(qq)*ii);
             end
             Dummy_E = Cin.Laser_in;
             Dummy_E.Field = Field_reconstructed;
@@ -290,7 +296,7 @@ if p.Results.Define_L_length
     Cout.Cavity_scan_RZ(:,2) = Power_scan;
     
     % Find the additional round trip phase to put the cavity on resonance
-    Cout.Resonance_phase = exp(1i*Cin.Laser_in.k_prop* max_pos);
+    Cout.Resonance_phase = exp(-1i*Cin.Laser_in.k_prop* max_pos);
     
 end
 
