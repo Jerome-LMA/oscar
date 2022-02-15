@@ -59,8 +59,7 @@ else
         if ~isgpuarray(dist.mat_DI)
             warning('Propagate_E(), try to use the GPU but the input dist.mat_DI is declared on the CPU')
         end
-        
-        
+               
         Mat_U = zeros(2*E.Grid.Num_point - 1,'gpuArray');
         Mat_U(1:E.Grid.Num_point,1:E.Grid.Num_point) = E.Field;
         S = ifft2(arrayfun(@times,fft2(Mat_U),dist.mat_DI));
