@@ -32,7 +32,7 @@ C1 = Cavity1(IM,EM,1000,E_input);
 
 % Calculate the resonance length
 
-C1 = Cavity_scan(C1,'use_parallel',false,'With_SB',false);
+C1 = Cavity_Scan(C1,'use_parallel',false,'With_SB',false);
 
 % Display information about the cavity
 Display_scan(C1);
