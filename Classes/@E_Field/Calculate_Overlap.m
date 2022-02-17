@@ -20,14 +20,17 @@ p.parse(Ein,varargin{:})
 SB_number = p.Results.SB_num;
 E2 = p.Results.E2;
 
-if isempty(E2)
-    %   Ein = Normalise_E(Ein);
+if exist('isgpuarray','file') % to be compatible with version < 2020b
+    Run_on_GPU = isgpuarray(Ein.Field);
+else
+    Run_on_GPU = false;
+end
+
+if isempty(E2) % in that case do the overlap between the carrier and SBs
     
     if ~Ein.Nb_Pair_SB
-        error('Calculate_Overlap(): no sidebands are present')
+        error('Calculate_Overlap(): no sidebands are present, it needs a second argument')
     end
-    
-    
     
     E2_temp = Ein;
     
@@ -41,6 +44,8 @@ if isempty(E2)
         case 0
             fprintf('  Power overlap between carrier and lower sideband: %g  \n',abs(O_lower).^2)
             fprintf('  Power overlap between carrier and upper sideband: %g  \n',abs(O_upper).^2)
+        case 1
+            varargout{1} = 0.5*(O_lower +  O_upper);
         case 2
             varargout{1} = O_lower;
             varargout{2} = O_upper;
@@ -53,10 +58,10 @@ else
     Ein = Normalise_E(Ein);
     E2 = Normalise_E(E2);
     
-    if isgpuarray(Ein.Field)
-        over_temp = sum(sum(arrayfun(@times,Ein.Field,conj(E2.Field))));
+    if Run_on_GPU
+        over_temp = sum(arrayfun(@times,Ein.Field,conj(E2.Field)),'all') * Ein.Grid.Step_sq;
     else
-        over_temp = sum(sum(Ein.Field .* conj(E2.Field))) * Ein.Grid.Step_sq;
+        over_temp = sum(Ein.Field .* conj(E2.Field),'all') * Ein.Grid.Step_sq;
     end
     
     

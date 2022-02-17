@@ -56,14 +56,14 @@ classdef E_Field
             p.addParameter('q',[],  @(x)isnumeric(x));
             
             % Check if the power of the beam is given
-            p.addParameter('P',1, @(x)isnumeric(x) && x>0);
+            p.addParameter('Power',1, @(x)isnumeric(x) && x>0);
             
             % Check if we want the best mode matching, once the cavity is
             % defined
             p.addParameter('Optimal_MM',false,@(x)islogical(x));
             
             % Mode
-            p.addParameter('mode','HG 0 0', @(x)ischar(x));
+            p.addParameter('Mode','HG 0 0', @(x)ischar(x));
             
             if nargin > 0
                 p.parse(Grid_in,varargin{:});
@@ -92,7 +92,7 @@ classdef E_Field
                     E.Optimal_mode_matching = true;
                 end
                 
-                [family,m,n] = Read_mode_name(p.Results.mode);
+                [family,m,n] = Read_mode_name(p.Results.Mode);
                 
                 E.Grid = Grid_in;
                 
@@ -127,8 +127,8 @@ classdef E_Field
                     error('E_Field():the mode name must be HG or LG_HELI or LG_SIN')
                 end
                 
-                E.Mode_name = p.Results.mode;
-                E = Normalise_E(E,p.Results.P);
+                E.Mode_name = p.Results.Mode;
+                E = Normalise_E(E,'Power',p.Results.Power);
             else
             end
         end

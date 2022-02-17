@@ -25,7 +25,7 @@ M = Min;
 Side_str = side;
 
 Eout = E1;
-Field_trans = Normalise_E(E1,0);
+Field_trans = Normalise_E(E1,'Power',0);
 
 
 

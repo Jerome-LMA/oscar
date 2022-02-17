@@ -38,7 +38,7 @@ end
 
 Grid_num_point = Cin.Laser_in.Grid.Num_point;
 
-if isgpuarray(Cin.Laser_in.Field)
+if exist('isgpuarray','file') && isgpuarray(Cin.Laser_in.Field)
     Total_Field = complex(zeros(Grid_num_point,Grid_num_point,num_iter,'gpuArray'));
 else
     Total_Field = complex(zeros(Grid_num_point,Grid_num_point,num_iter,'double'));
