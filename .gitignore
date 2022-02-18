@@ -42,3 +42,4 @@ octave-workspace
 *.out
 *.synctex
 *.toc
+Examples/Test_FSR_scan_order.m
