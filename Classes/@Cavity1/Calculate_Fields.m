@@ -54,7 +54,7 @@ else
 end
 
 [Field_transient,Field_reflec] = Transmit_Reflect_Optic(Field_in,Cin.I_input,'AR');
-Field_total = Normalise_E(Field_transient,0);
+Field_total = Normalise_E(Field_transient,'Power',0);
 
 Power_buildup = zeros(1,num_iter);
 

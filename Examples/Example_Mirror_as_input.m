@@ -32,7 +32,7 @@ EM_HR = Interface(G1,'Roc',1683,'CA',0.33,'T',75E-6,'L',0);
 C_NA = Cavity1(IM,EM_HR,3000,E_input);
 
 % Check the cavity parameters
-%C_NA.Check_stability()
+%C_NA.Check_Stability()
 
 C_NA = Cavity_Resonance_Phase(C_NA);
 

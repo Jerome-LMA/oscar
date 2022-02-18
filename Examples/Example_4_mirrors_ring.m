@@ -3,7 +3,7 @@ clearvars; close all;
 addpath(genpath(strcat(pwd, '\..\Classes')));
 
 disp('---------------------------------------------------------------------------')
-disp('                  OSCAR V3.20                                    ')
+disp('                  OSCAR V3.30                                    ')
 disp('  ')
 
 
@@ -27,10 +27,10 @@ d = [0.07 0.147 0.294 0.147];
 OMC = CavityN(I,d,E_input);
 
 % Calculate the resonance
-OMC = Cavity_resonance_phase(OMC);
+OMC = Cavity_Resonance_Phase(OMC);
 
 % Calculate the steady state fields
-OMC = Calculate_fields_AC(OMC); % Fast convergence scheme (not if presence of sidebands)
+OMC = Calculate_Fields_AC(OMC); % Fast convergence scheme (not if presence of sidebands)
 %OMC = Calculate_fields(OMC); % The more traditional method (slower but can be used with sidebands)
-Display_results(OMC)
+Display_Results(OMC)
 

@@ -91,6 +91,13 @@ end
 % Check if the matrix is square
 [m,n] = size(map.loaded);
 
+if n~=2 % so we do not have 2 columns, but we have a matrix
+    if (m~=n) % the map is not square, extract a cutted
+        map.loaded = Make_square(map.loaded);
+        disp('Add_Map(): the loaded map is made square')
+    end
+end
+
 if (m==n)     % The matrix is square
     
     % Rescale

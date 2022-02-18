@@ -1,4 +1,4 @@
-function I = Add_tilt(varargin)
+function I = Add_Tilt(varargin)
 % Add_tilt: Add a tilted wavefront to an E_field (or interface)
 % The tilt angle in radian
 % E2 = Add_tilt(E1,tilt_angle) tilt the wavefront (or surface) by tilt_angle in the

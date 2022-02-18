@@ -53,7 +53,7 @@ for pp = 1:Nb_eigenvalue
     tmp_mode = reshape(V(:,IX(pp)),[Num_point Num_point]);
     Eigen_mode(:,:,pp) = tmp_mode;
     
-    mode_brt = Normalise_E(E_Field(G_new,'w0',0.02),0);
+    mode_brt = Normalise_E(E_Field(G_new,'w0',0.02),'Power',0);
     mode_brt.Field = Eigen_mode(:,:,pp);
     
     mode_brt = Resample_E(mode_brt,Cin.Laser_in.Grid);

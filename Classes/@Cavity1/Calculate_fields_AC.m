@@ -319,10 +319,12 @@ end
 
 % Define the overlap function:
 function overL = Raw_overlap(x,y)
-if isgpuarray(x) && isgpuarray(y)
-    overL =   sum(sum(arrayfun(@times,conj(x),y)));
+
+
+if exist('isgpuarray','file') && isgpuarray(x) && isgpuarray(y)
+    overL =   sum(arrayfun(@times,conj(x),y),'all');    
 else
-    overL =  (sum(sum(conj(x).*y) ) );
+    overL =  sum(conj(x).*y,'all');
 end
 
 end

@@ -20,7 +20,7 @@ disp('----------   Test Add_Sidebands()  -----------')
 
 G1 = Grid(256,0.4);
 E1 = E_Field(G1,'w',0.043,'R',-1034);
-E2 = Add_Sidebands(E1,3.4E6,0.2);
+E2 = Add_Sidebands(E1,'Mod_freq',3.4E6,'Mod_index',0.2);
 
 disp('')
 
@@ -29,7 +29,7 @@ disp('----------   Test Calculate_Overlap()  -----------')
 
 G1 = Grid(256,0.4);
 E1 = E_Field(G1,'w',0.043,'R',-1034);
-E2 = Add_Sidebands(E1,3.4E6,0.2);
+E2 = Add_Sidebands(E1,'Mod_freq',3.4E6,'Mod_index',0.2);
 
 Calculate_Overlap(E2)
 Calculate_Overlap(E1,E2)
@@ -42,7 +42,7 @@ disp('----------   Test Calculate_Power  -----------')
 
 G1 = Grid(256,0.4);
 E1 = E_Field(G1,'w',0.043,'R',-1034);
-E2 = Add_Sidebands(E1,3.4E6,0.2);
+E2 = Add_Sidebands(E1,'Mod_freq',3.4E6,'Mod_index',0.2);
 
 Calculate_Power(E1,'all')
 [a,b] = Calculate_Power(E2,'SB','SB_num',1);
@@ -55,7 +55,7 @@ disp('----------   Test E_Plot()  -----------')
 
 G1 = Grid(256,0.4);
 E1 = E_Field(G1,'w',0.043,'R',-1034);
-E2 = Add_Sidebands(E1,3.4E6,0.2);
+E2 = Add_Sidebands(E1,'Mod_freq',3.4E6,'Mod_index',0.2);
 
 E_Plot(E1)
 E_Plot(E2,'all')
@@ -82,7 +82,7 @@ disp('----------   Test Focus_Beam_With_Telescope()  -----------')
 
 G1 = Grid(256,0.4);
 E1 = E_Field(G1,'w',0.043,'R',inf);
-E2 = Add_Sidebands(E1,3.4E6,0.2);
+E2 = Add_Sidebands(E1,'Mod_freq',3.4E6,'Mod_index',0.2);
 
 [E3,G3] = Focus_Beam_With_Telescope(E2,[100 102]);
 Fit_TEM00(E3)
@@ -126,7 +126,7 @@ disp('----------   Test Transmit_Reflect_Interface()  -----------')
 
 G1 = Grid(256,0.4);
 E1 = E_Field(G1,'w',0.043,'R',inf);
-E1 = Add_Sidebands(E1,3.4E6,0.2);
+E2 = Add_Sidebands(E1,'Mod_freq',3.4E6,'Mod_index',0.2);
 I1 = Interface(G1,'RoC',-200);
 
 E2 = Transmit_Reflect_Interface(E1,I1);
@@ -138,7 +138,7 @@ disp('----------   Test  Transmit_Reflect_Mirror()  -----------')
 
 G1 = Grid(256,0.4);
 E1 = E_Field(G1,'w',0.043,'R',inf);
-E1 = Add_Sidebands(E1,3.4E6,0.2);
+E2 = Add_Sidebands(E1,'Mod_freq',3.4E6,'Mod_index',0.2);
 
 IM_AR = Interface(G1,'RoC',-1420,'CA',0.33,'T',1-100E-6,'L',0,'n1',1,'n2',1.45);
 IM_HR = Interface(G1,'RoC',1420,'CA',0.33,'T',0.014,'L',0,'n1',1,'n2',1.45);
@@ -154,7 +154,7 @@ disp('----------   Test  Transmit_Reflect_Optic()  -----------')
 
 G1 = Grid(256,0.4);
 E1 = E_Field(G1,'w',0.043,'R',inf);
-E1 = Add_Sidebands(E1,3.4E6,0.2);
+E2 = Add_Sidebands(E1,'Mod_freq',3.4E6,'Mod_index',0.2);
 
 IM_AR = Interface(G1,'RoC',-1420,'CA',0.33,'T',1-100E-6,'L',0,'n1',1,'n2',1.45);
 IM_HR = Interface(G1,'RoC',1420,'CA',0.33,'T',0.014,'L',0,'n1',1,'n2',1.45);

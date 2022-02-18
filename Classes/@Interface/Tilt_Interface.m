@@ -1,4 +1,4 @@
-function Iout = Tilt_interface(Iin,AoI,varargin)
+function Iout = Tilt_Interface(Iin,Tilt,varargin)
 %     Tilt_interface() Project a surface according to the angle of
 %     incidence of the light beam
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -15,16 +15,16 @@ p.FunctionName = 'Tilt a map';
 % Check if the first argument is an interface
 p.addRequired('Iin', @(x)isa(x, 'Interface'));
 
-% Check if the second argument is a file to load or a matrix
-p.addRequired('AoI', @(x)isnumeric(x) && x>=0);
+% Check if the second argument is an angle
+p.addRequired('tilt', @(x)isnumeric(x) && x>=0);
 
-p.parse(Iin,AoI,varargin{:})
+p.parse(Iin,tilt,varargin{:})
 
 %p.Results
 
 Iout = Iin;
 
-Angle_tilt = AoI * pi / 180; % Pass in radian
+Angle_tilt = tilt; % Pass in radian
 
 G1 = Iin.Grid;
 

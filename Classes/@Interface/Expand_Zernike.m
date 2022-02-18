@@ -14,10 +14,10 @@ p.FunctionName = 'Display an interface object';
 p.addRequired('Iin', @(x)isa(x, 'Interface'));
 
 % Check if the resolution of the grid if given
-p.addParamValue('Z_order',2,@(x)isnumeric(x) && x>0);
+p.addParameter('Z_order',2,@(x)isnumeric(x) && x>0);
 
 % Check if the resolution of the grid if given
-p.addParamValue('diam',[],@(x)isnumeric(x) && x>0);
+p.addParameter('diam',[],@(x)isnumeric(x) && x>0);
 
 p.parse(Iin,varargin{:})
 Z_order = p.Results.Z_order;
@@ -37,7 +37,7 @@ end
 Map.inds = find(abs(I_in.Grid.Axis) <= (diam_Zernike/2));
 Map.data = Iin.surface(Map.inds,Map.inds);
 
-[Map.data2 Map.coeff_Z] = ZernikeDecomposition(Map.data, Z_order);
+[Map.data2,Map.coeff_Z] = ZernikeDecomposition(Map.data, Z_order);
 
 % figure(2)
 % imagesc(Map.data2); axis square
@@ -55,7 +55,7 @@ I_out.surface(Map.inds,Map.inds) = Map.data2;
 
 switch nargout
     case 0
-        I_plot(I_out,'diam',diam_Zernike)
+        I_Plot(I_out,'diam',diam_Zernike)
     case 1
         varargout{1} = I_out;   % Surface recreated by the Zernike
     case 2

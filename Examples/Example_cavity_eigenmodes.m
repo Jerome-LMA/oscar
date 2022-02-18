@@ -28,7 +28,7 @@ C1 = Cavity1(IM,EM,3000,E_input);
 C1 = Calculate_RT_mat(C1);
 
 % Display the cavity eigen modes
-Display_cavity_modes(C1,'N',30);
+Display_Cavity_Modes(C1,'N',30);
   
 %Display the Airy peak of the first 30 (lowest clipping loss) eigenmodes with the list of the modes:
 %Display_cavity_modes(C1,'N',10,'Airy',true,'List',true)

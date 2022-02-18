@@ -1,4 +1,4 @@
-function [PSD_1D freq] = Plot_PSD(I_in,varargin)
+function [PSD_1D,freq] = Plot_PSD(I_in,varargin)
 %Plot_PSD Plot the 1D PSD of a surface
 % Function used to plot (and return) the 1D PSD derived from an object
 % Interface
@@ -123,7 +123,7 @@ end
 freq = Vec_f;
 
 if p.Results.display
-    loglog(Vec_f,PSD_1D,'linewidth',2); set(gca,'fontsize',14)
+    loglog(Vec_f,PSD_1D,'linewidth',2); set(gca,'fontsize',14);grid on
     xlabel('Spatial frequency [1/m]','FontSize',14)
     ylabel('Power Spectral Density [m^2/m^-1]','FontSize',14)
     axis tight

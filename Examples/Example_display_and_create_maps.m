@@ -57,7 +57,7 @@ G2 = Grid(532,0.4);
 % Do not overanalysed the PSD or draw conclusions from them as they
 % dependent on a lot of conditions and could change over time. 
 % It is there for only illustrative purpose, absolute no warranty that
-% you wll have in your optics!
+% you wll have it your optics!
 % Do not forget to add which the flatness you are are looking for
 
 param_PSD_ZYGO_IBF = [0.06 2.4 0.004 -4.3 -0.08 -3.2 16 420]; % approximated parameters for ZYGO polishing with IBF (Richmond site), derived from all the AdV IM and EM wavefront measurements

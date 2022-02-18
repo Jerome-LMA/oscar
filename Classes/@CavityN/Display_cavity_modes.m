@@ -45,7 +45,7 @@ for pp = 1:Nb_eigenvalue
     tmp_mode = reshape(V(:,IX(pp)),[Num_point Num_point]);
     Eigen_mode(:,:,pp) = tmp_mode;
     
-    mode_brt = Normalise_E(E_Field(G_new,'w0',0.02),0);
+    mode_brt = Normalise_E(E_Field(G_new,'w0',0.02),'Power',0);
     mode_brt.Field = Eigen_mode(:,:,pp);
     
     mode_brt = Resample_E(mode_brt,Cin.Laser_in.Grid);
@@ -54,10 +54,10 @@ for pp = 1:Nb_eigenvalue
     for ii=1:Cin.Nb_mirror
         if ii ~= Cin.Nb_mirror % check we are not at the last iteration
             Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(ii));
-            Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(ii+1),'Ref',1);
+            Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(ii+1),'Ref',1);
         else
             Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(ii));
-            Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(1),'Ref',1);
+            Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(1),'Ref',1);
         end
     end
     

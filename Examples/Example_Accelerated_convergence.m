@@ -2,7 +2,7 @@ clearvars; close all;
 addpath(genpath(strcat(pwd, '\..\Classes')));
 
 disp('---------------------------------------------------------------------------')
-disp('                  OSCAR V3.21                                     ')
+disp('                  OSCAR V3.30                                     ')
 disp('  ')
 
 

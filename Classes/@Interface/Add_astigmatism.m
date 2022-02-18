@@ -1,4 +1,4 @@
-function Iout = Add_astigmatism(varargin)
+function Iout = Add_Astigmatism(varargin)
 % Iout = Add_astigmatism(Iin,value,diameter)
 % Add astigmatism on a surface Iin. The astigmatism'value' is defined as the
 % amplitude of the Zernike polynomial 2,2 on a unity circle of diameter

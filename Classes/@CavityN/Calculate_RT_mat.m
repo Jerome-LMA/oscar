@@ -78,10 +78,10 @@ if license('test','distrib_computing_toolbox')  && p.Results.Use_PC         % ch
             for pp=1:Cin.Nb_mirror
                 if pp ~= Cin.Nb_mirror % check we are not at the last iteration
                     Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-                    Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(pp+1),'Ref',1);
+                    Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(pp+1),'Ref',1);
                 else
                     Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-                    Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(1),'Ref',1);
+                    Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(1),'Ref',1);
                 end
             end
             
@@ -121,10 +121,10 @@ else % if the PCT is not installed
             for pp=1:Cin.Nb_mirror
                 if pp ~= Cin.Nb_mirror % check we are not at the last iteration
                     Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-                    Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(pp+1),'Ref',1);
+                    Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(pp+1),'Ref',1);
                 else
                     Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-                    Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(1),'Ref',1);
+                    Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(1),'Ref',1);
                 end
             end
             

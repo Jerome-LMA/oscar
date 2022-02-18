@@ -35,7 +35,7 @@ end
 
 % Keep some space
 Cout.Field_trans = E_Field.empty(Cin.Nb_mirror,0);
-Cout.Field_trans(1) = Normalise_E(Cin.Laser_in,0);% But an empty field here
+Cout.Field_trans(1) = Normalise_E(Cin.Laser_in,'Power',0);% But an empty field here
 
 % Define the overlap function:
 Raw_overlap = @(x,y) (sum(conj(x).*y, 'all') );

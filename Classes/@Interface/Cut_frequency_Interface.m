@@ -1,4 +1,4 @@
-function I_out = Cut_frequency_Interface(I_in,option,f_cut)
+function I_out = Cut_Frequency_Interface(I_in,option,f_cut)
 % Cut_frequency_Interface() filter in the spatial frequency domain an
 % interface in a crude way (no windowing)
 % option = 'LP' to low pass filter the data with a corner frequency f_cut

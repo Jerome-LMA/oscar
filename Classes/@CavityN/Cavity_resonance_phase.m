@@ -20,7 +20,7 @@ Field_in2 = Field_Circ;
 
 num_iter = Cin.Cavity_phase_param;
 
-Field_total = Normalise_E(Field_Circ,0);
+Field_total = Normalise_E(Field_Circ,'Power',0);
 Phase_adjust = 1;
 
 
@@ -115,7 +115,7 @@ Cavity_gain = (1-Cin.I_array(1).r^2)/ (1 - RT_loss)^2;
 % do the overlap
 Coeff_over = Calculate_Overlap(Field_Circ,Field_in2);
 Pcirc = abs(Coeff_over).^2 * Cavity_gain * Calculate_Power(Cin.Laser_in);
-Cout.Field_reso_guess = Normalise_E(Field_Circ,Pcirc);
+Cout.Field_reso_guess = Normalise_E(Field_Circ,'Power',Pcirc);
 
 disp(['Found the phase for resonance in cavity ' inputname(1)])
 

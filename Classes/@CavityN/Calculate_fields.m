@@ -15,7 +15,7 @@ end
 Cout = Cin;
 
 Cout.Field_trans = E_Field.empty(Cin.Nb_mirror,0);
-Cout.Field_trans(1) = Normalise_E(Cin.Laser_in,0);% But an empty field here
+Cout.Field_trans(1) = Normalise_E(Cin.Laser_in,'Power',0);% But an empty field here
 Cout.Field_trans(1) = Change_E_n(Cout.Field_trans(1),Cin.I_array(1).n2);
 % Calculate the number of iteration to reach the steady state
 Accuracy = 0.0001;
@@ -28,7 +28,7 @@ end
 num_iter = log(0.5*Accuracy)/(log(RT_loss));
 num_iter = round(num_iter);
 
-Field_total = Normalise_E(Cin.Laser_in,0);
+Field_total = Normalise_E(Cin.Laser_in,'Power',0);
 Buildup_power = zeros(1,num_iter);
 
 % The laser starts outside the input mirror, change n from 1 to mirror

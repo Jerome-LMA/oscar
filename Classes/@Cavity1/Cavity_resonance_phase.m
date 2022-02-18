@@ -30,8 +30,8 @@ end
 
 num_iter = Cin.Cavity_phase_param;
 
-Field_total = Normalise_E(Field_Circ1,0);
-Phase_adjust =1;
+Field_total = Normalise_E(Field_Circ1,'Power',0);
+Phase_adjust = 1;
 Field_Circ = Field_Circ1;
 
 % Calculate the pseudo eigen mode in the cavity
@@ -75,7 +75,7 @@ Cavity_gain = (1-Cin.I_input.r^2)/ (1 - Cin.I_input.r * Cin.I_end.r)^2;
 % do the overlap
 Coeff_over = Calculate_Overlap(Field_Circ,Field_Circ1);
 Pcirc = abs(Coeff_over).^2 * Cavity_gain; % For 1W input power
-Cout.Field_reso_guess = Normalise_E(Field_Circ,Pcirc);
+Cout.Field_reso_guess = Normalise_E(Field_Circ,'Power',Pcirc);
 
 % Suppose that the SB are in antiresonance
 
@@ -83,7 +83,7 @@ if Cout.Field_reso_guess.Nb_Pair_SB
     Cavity_gain_SB = (1-Cin.I_input.r^2)/ (1 + Cin.I_input.r * Cin.I_end.r)^2;
     Pcirc_SB = abs(Coeff_over).^2 * Cavity_gain_SB;
     
-    tmp_field_SB = Normalise_E(Field_Circ,Pcirc_SB);
+    tmp_field_SB = Normalise_E(Field_Circ,'Power',Pcirc_SB);
     
     for ii=1:Cout.Field_reso_guess.Nb_Pair_SB
         Cout.Field_reso_guess.SB(ii).Field_lower = tmp_field_SB.Field;
