@@ -45,10 +45,10 @@ for q = 2:num_iter
         for pp=1:Cin.Nb_mirror
             if pp ~= Cin.Nb_mirror % check we are not at the last iteration
                 Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-                Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(pp+1));
+                Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(pp+1));
             else % we are at the last iteration
                 Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-                Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(1));
+                Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(1));
             end
             
         end
@@ -56,11 +56,11 @@ for q = 2:num_iter
     elseif Cin.type == 'folded'
         for pp = 1:Cin.Nb_mirror-1 % do one way
             Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-            Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(pp+1));
+            Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(pp+1));
         end
         for pp=Cin.Nb_mirror-1:-1:1 % and do the round trip
             Field_Circ = Propagate_E(Field_Circ,Cin.Propagation_mat_array(pp));
-            Field_Circ = Reflect_mirror(Field_Circ,Cin.I_array(pp));
+            Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_array(pp));
         end
     end
     

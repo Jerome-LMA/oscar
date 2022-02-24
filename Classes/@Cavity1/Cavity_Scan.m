@@ -80,19 +80,19 @@ if license('test','distrib_computing_toolbox') && p.Results.use_parallel        
         ii = 1:num_iter;
         
         % For performance reasons and memory limitations, the GPU-based FSR-scan is written in a
-        % single line. For better understanding, the following code is given as a comment, 
+        % single line. For better understanding, the following code is given as a comment,
         % which leads to the same result, but is more clearly structured:
         %
         %         gCavity_scan_all_field_arr = gpuArray(Cin.Cavity_scan_all_field(:,:,ii));
         %         gCavity_scan_all_field_arr_perm = permute(gCavity_scan_all_field_arr, [3,1,2]);
         %         gPhase_shifts = gpuArray(exp(-1i*Cin.Laser_in.k_prop* Length_scan(gq)'*ii));
         %         gFields_reconstructed = pagefun(@mtimes,gPhase_shifts, gCavity_scan_all_field_arr_perm);
-        %         Fields_reconstructed = gather(gFields_reconstructed);        
+        %         Fields_reconstructed = gather(gFields_reconstructed);
         %         for qqq = 1:num_point_scan
         %             Dummy_E = Cin.Laser_in;
         %             Dummy_E.Field = squeeze(Fields_reconstructed(qqq,:,:));
         %             Power_scan(qqq) = Calculate_power(Dummy_E);
-        %         end        
+        %         end
         %
         Power_scan = gather(sum(abs(pagefun(@mtimes,gpuArray(exp(-1i*Cin.Laser_in.k_prop* Length_scan(gq)'*ii)), permute(gpuArray(Cin.Cavity_scan_all_field(:,:,ii)), [3,1,2]))).^2, [2 3]) * Cin.Laser_in.Grid.Step^2);
         
@@ -192,7 +192,6 @@ end
 % semilogy(Length_scan,Power_scan)
 % title('Cavity scan over one FSR')
 
-
 Cout.Cavity_scan_R(:,1) = Length_scan;
 Cout.Cavity_scan_R(:,2) = Power_scan;
 
@@ -226,25 +225,32 @@ if p.Results.Define_L_length
             ii = 1:num_iter;
             
             % For performance reasons and memory limitations, the GPU-based FSR-scan is written in a
-            % single line. For better understanding, the following code is given as a comment, 
+            % single line. For better understanding, the following code is given as a comment,
             % which leads to the same result, but is more clearly structured:
             %
             %         gCavity_scan_all_field_arr = gpuArray(Cin.Cavity_scan_all_field(:,:,ii));
             %         gCavity_scan_all_field_arr_perm = permute(gCavity_scan_all_field_arr, [3,1,2]);
             %         gPhase_shifts = gpuArray(exp(-1i*Cin.Laser_in.k_prop* Length_scan(gq)'*ii));
             %         gFields_reconstructed = pagefun(@mtimes,gPhase_shifts, gCavity_scan_all_field_arr_perm);
-            %         Fields_reconstructed = gather(gFields_reconstructed);        
+            %         Fields_reconstructed = gather(gFields_reconstructed);
             %         for qqq = 1:num_point_scan
             %             Dummy_E = Cin.Laser_in;
             %             Dummy_E.Field = squeeze(Fields_reconstructed(qqq,:,:));
             %             Power_scan(qqq) = Calculate_power(Dummy_E);
-            %         end        
+            %         end
             %
             Power_scan = gather(sum(abs(pagefun(@mtimes,gpuArray(exp(-1i*Cin.Laser_in.k_prop* Length_scan(gq)'*ii)), permute(gpuArray(Cin.Cavity_scan_all_field(:,:,ii)), [3,1,2]))).^2, [2 3]) * Cin.Laser_in.Grid.Step^2);
             
         else
             
-            pool_obj = parpool;
+            pool_obj = gcp('nocreate');
+            if (isempty(pool_obj))
+                disp('Parallel pool not initialized. Starting now...')
+                is_par_pool_init = false;
+                pool_obj = gcp();
+            else
+                is_par_pool_init = true;
+            end
             
             parfor qq = 1:num_point_scan
                 Field_reconstructed = complex(zeros(Grid_num_point,Grid_num_point,'double'));
@@ -256,7 +262,11 @@ if p.Results.Define_L_length
                 Power_scan(qq) = Calculate_Power(Dummy_E);
             end
             
-            delete(pool_obj);
+            if (~is_par_pool_init)
+                disp('Shutting down pool because it was not initialized at startup.')
+                delete(pool_obj);
+            end
+            
         end
         
     else % The PCT is not installed
