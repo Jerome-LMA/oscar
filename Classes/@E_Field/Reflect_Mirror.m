@@ -52,7 +52,10 @@ if isreal(R_or_I)
     end
     
 elseif isa(R_or_I, 'Interface')
-    I =R_or_I;
+    I = R_or_I;
+    
+    Run_on_GPU = ~isempty(I.WP_n1_GPU);
+    
     % consider the surface of the interface as the mirror
     
     if  isempty(p.Results.Ref)          % Check if the user has entered a reflectivity
@@ -61,7 +64,7 @@ elseif isa(R_or_I, 'Interface')
         Reflectivity = sqrt(p.Results.Ref);
     end
     
-    if I.Run_on_GPU
+    if Run_on_GPU
         if (E_in.Refractive_index == I.n1)
             
             PF_Mirror_ref = I.WP_n1_GPU;
@@ -78,6 +81,7 @@ elseif isa(R_or_I, 'Interface')
                 PF_Mirror_ref = PF_Mirror_ref * sqrt(p.Results.Ref)/ max(abs(PF_Mirror_ref(:)));
             end
         end
+        
     else
         if (E_in.Refractive_index==I.n1)
             PF_Mirror_ref = exp(-1i * E_in.k_prop * I.surface *2)  .* I.mask .* Reflectivity;

@@ -33,8 +33,7 @@ classdef Interface
         L
         n1
         n2
-        
-        Run_on_GPU = false; 
+
         WP_n1_GPU
         WP_n2_GPU
         
