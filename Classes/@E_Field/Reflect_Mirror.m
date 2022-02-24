@@ -94,7 +94,7 @@ elseif isa(R_or_I, 'Interface')
     %     imagesc(angle(PF_Mirror_ref))
     
     Eout = E_in;
-    if I.Run_on_GPU
+    if Run_on_GPU
         Eout.Field = arrayfun(@times,E_in.Field,PF_Mirror_ref);
     else
         Eout.Field = E_in.Field .* PF_Mirror_ref;
