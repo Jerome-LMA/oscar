@@ -308,6 +308,16 @@ if p.Results.Define_L_length
     % Find the additional round trip phase to put the cavity on resonance
     Cout.Resonance_phase = exp(-1i*Cin.Laser_in.k_prop* max_pos);
     
+        % Fill the guessed field on resonance
+    Field_reconstructed = complex(zeros(Grid_num_point,Grid_num_point,'double'));
+    for ii=1:num_iter
+        Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(-1i*Cin.Laser_in.k_prop* Length_scan(ind_max)*ii);
+    end
+    
+    Cout.Field_reso_guess = Cout.Laser_in;
+    Cout.Field_reso_guess.Field = Field_reconstructed;
+    Cout.Field_reso_guess = Normalise_E(Cout.Field_reso_guess,'Power',1);
+    
 end
 
 end

@@ -41,7 +41,6 @@ if Grid_num_point > 256
     end
 end
 
-
 if isempty(Cin.Cavity_scan_all_field)
     Cin = Cavity_propagate_field(Cin);
 end
@@ -133,10 +132,10 @@ if p.Results.Define_L_length
     
     num_point_scan = Cin.Cavity_scan_param(2);
     span_scan = Cin.Cavity_scan_param(3);
-        
+    
     %Define the zoom length vector
     Power_scan = zeros(1,num_point_scan,'double');
-       
+    
     % Create the length vector to scan the cavity
     Length_scan = max_pos - span_scan/2 + ...
         (1:num_point_scan)*span_scan/num_point_scan;
@@ -210,7 +209,16 @@ if p.Results.Define_L_length
     % Find the additional round trip phase to put the cavity on resonance
     Cout.Resonance_phase = exp(-1i*Cin.Laser_in.k_prop* max_pos);
     
-    Cout.Cavity_scan_all_field = Cin.Cavity_scan_all_field;
+    % Fill the guessed field on resonance
+    Field_reconstructed = complex(zeros(Grid_num_point,Grid_num_point,'double'));
+    for ii=1:num_iter
+        Field_reconstructed = Field_reconstructed + Cin.Cavity_scan_all_field(:,:,ii) * exp(-1i*Cin.Laser_in.k_prop* Length_scan(ind_max)*ii);
+    end
+    
+    Cout.Field_reso_guess = Cout.Laser_in;
+    Cout.Field_reso_guess.Field = Field_reconstructed;
+    Cout.Field_reso_guess = Normalise_E(Cout.Field_reso_guess,'Power',1);
+    
 end
 
 end

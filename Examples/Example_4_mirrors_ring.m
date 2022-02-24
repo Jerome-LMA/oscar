@@ -26,8 +26,8 @@ d = [0.07 0.147 0.294 0.147];
 % Define the cavity
 OMC = CavityN(I,d,E_input);
 
-% OMC = Cavity_Scan(OMC,'use_parallel',false);
-% Display_Scan(OMC,'scan','RT phase');
+%OMC = Cavity_Scan(OMC,'use_parallel',false,'Define_L_length',true);
+%Display_Scan(OMC,'scan','RT phase');
 
 % Calculate the resonance
 OMC = Cavity_Resonance_Phase(OMC);
