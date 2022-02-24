@@ -1,6 +1,6 @@
 % Example of OSCAR script to define a 4 mirrors cavity
 clearvars; close all;
-addpath(genpath(strcat(pwd, '\..\Classes')));
+addpath(genpath([pwd filesep '..' filesep 'Classes']));
 
 disp('---------------------------------------------------------------------------')
 disp('                  OSCAR V3.30                                    ')

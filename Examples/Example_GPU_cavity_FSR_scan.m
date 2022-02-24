@@ -1,5 +1,5 @@
 clearvars; close all;
-addpath(genpath(strcat(pwd, '\..\Classes')));
+addpath(genpath([pwd filesep '..' filesep 'Classes']));
 
 disp('---------------------------------------------------------------------------')
 disp('                  OSCAR V3.21                                      ')
@@ -34,9 +34,9 @@ C1 = Declare_on_GPU(C1);
 
 % Calculate the resonance length
 
-C1 = Cavity_Scan(C1,'use_parallel',true,'With_SB',false);
+C1 = Cavity_Scan(C1);
 
 % Display information about the cavity
-Display_scan(C1);
+Display_Scan(C1);
 
 

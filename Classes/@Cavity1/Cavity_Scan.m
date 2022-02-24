@@ -13,7 +13,7 @@ p.addRequired('Cin', @(x)isa(x, 'Cavity1'));
 p.addParameter('use_parallel',true,@(x)islogical(x));
 
 % Check if we save the scan in a file
-p.addParameter('save_scan',false,@(x) islogical(x) || ischar(x));
+p.addParameter('save_scan',[],@(x) ischar(x));
 
 % Check if we have to zoom to calculate and save the resonance length
 p.addParameter('Define_L_length',false,@(x)islogical(x));
@@ -182,7 +182,7 @@ end
 
 fprintf('Finished ... \n')
 
-if p.Results.save_scan
+if ~isempty(p.Results.save_scan)
     tmp_save(:,1) = Length_scan;
     tmp_save(:,2) = Power_scan;
     save(['Cavity_scan_' p.Results.save_scan '.txt'],'tmp_save','-ASCII');

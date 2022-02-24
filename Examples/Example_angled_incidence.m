@@ -1,5 +1,5 @@
 clearvars; close all;
-addpath(genpath(strcat(pwd, '\..\Classes')));
+addpath(genpath([pwd filesep '..' filesep 'Classes']));
 
 disp('---------------------------------------------------------------------------')
 disp('                  OSCAR V3.20                                     ')

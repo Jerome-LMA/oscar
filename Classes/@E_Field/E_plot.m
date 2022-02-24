@@ -10,7 +10,7 @@ p.FunctionName = 'Display an E_Field object';
 % Check if the first argument is an E_Field
 p.addRequired('Ein', @(x)isa(x, 'E_Field'));
 
-p.addOptional('Field','carrier', @(x)strcmpi(x,'carrier') | ...
+p.addOptional('field','carrier', @(x)strcmpi(x,'carrier') | ...
     strcmpi(x,'all') | strcmpi(x,'SB') );
 
 % Check if we display the amplitude or intensity
@@ -36,7 +36,7 @@ SB_number = p.Results.SB_num;
 
 title_str = strrep(inputname(1),'_', '\_');
 
-if strcmp(p.Results.Field,'carrier') % Display the carrier
+if strcmp(p.Results.field,'carrier') % Display the carrier
     
     if strcmp(p.Results.display,'amplitude')
         if strcmp(p.Results.domain,'space')
@@ -82,7 +82,7 @@ if strcmp(p.Results.Field,'carrier') % Display the carrier
         ax.Position = [left bottom ax_width ax_height];
     end
     
-elseif strcmp(p.Results.Field,'SB') % Display the 2 sidebands
+elseif strcmp(p.Results.field,'SB') % Display the 2 sidebands
     
     if strcmp(p.Results.display,'amplitude')
         if strcmp(p.Results.domain,'space')
