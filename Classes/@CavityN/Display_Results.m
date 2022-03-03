@@ -38,7 +38,7 @@ for ii=1:Cin.Laser_in.Nb_Pair_SB
     
     Ptrans1 = 0; Ptrans2 = 0;
     for pp=2:Cin.Nb_mirror
-        [tmp_power_lsb,tmp_power_usb] = Calculate_Power(CCin.Field_trans(pp),'include','SB','SB_num',ii);
+        [tmp_power_lsb,tmp_power_usb] = Calculate_Power(Cin.Field_trans(pp),'include','SB','SB_num',ii);
         Ptrans1 = tmp_power_lsb + Ptrans1;
         Ptrans2 = tmp_power_usb + Ptrans2;
     end

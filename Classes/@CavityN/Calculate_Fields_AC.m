@@ -152,7 +152,7 @@ if ~E1.Nb_Pair_SB % if there is no SB
     Cout.Field_circ = Field_total; % circulating field found
     
 else
-    error('Calculate_fields_AC(): Calcuations for the sidebands not yet implemented: contact the developers if it is needed')
+    error('Calculate_Fields_AC(): Calcuations for the sidebands not yet implemented: contact the developers if it is needed. Possibility to use Calculate_Fields() instead.')
 end
 
 %---------------------------------------------------------------------------------------------------------------------------------
