@@ -4,27 +4,27 @@
 
 \chapter{The big changes}
 
-For this new version of OSCAR the code has been totally rewritten using the Oriented Object capability of Matlab. The code is now more user friendly and less prone to errors. Moreover some new functions has been added and the higher order optical modes are supported from the start.
+Since the version 3.0, the code has been totally rewritten using the Oriented Object capability of Matlab. The code is now more user friendly and less prone to errors. Moreover some new functions has been added and the higher order optical modes are supported from the start.
 
-The principle of the FFT code and the method to derive results are still unchanged, so for people not familiar with FFT code, it is strongly recommended to read the first part of this manual.
+The principle of the FFT code and the method to derive the results are still unchanged, so for people not familiar with the inner working of FFT code, it is strongly recommended to read the first part of this manual.
 
-\paragraph{Requirements} The new OSCAR works with Matlab version superior to 2009a and the \textsl{Optimization Toolbox} is necessary if beam fitting functions are used.
+\paragraph{Requirements} The new OSCAR works with Matlab version superior to 2009a and the \textsl{Optimization Toolbox} is necessary if the beam fitting functions are used. To benefit from the GPU speed up, the \textsl{Parallel Computing Toolbox} is also required. 
 
 \section{Motivation and goals}
 
- First, the curious reader may wonder why there is no version 2.0 of OSCAR. Such a version exists, it is OSCAR classic with the implementation of a power recycled Michelson with Fabry Perot arm cavities. This version was developed to simulated LIGO-Virgo type of interferometers but was never officially distributed.
+ First, the curious reader may wonder why there is no version 2.0 of OSCAR. Such a version exists, it is OSCAR classic with the implementation of a power recycled Michelson with Fabry-Perot arm cavities. This version was developed to simulated LIGO-Virgo type of interferometers but was never officially distributed.
 
  The code of version 2.0 was becoming messy since OSCAR was not intended to be so advanced (remember, it was only supposed to simulate the test cavity at Gingin in Australia). To include all the code developed for the version 2.0, it was decided to write a full new version of OSCAR taking also into account all what I learned as a OSCAR user.
 
- Doing a new version allowed some radical changes: no more global variables, add change of refractive index, sidebands field managed automatically at the same time as the carrier, manage higher order modes and much more\dots In the long term OSCAR should be able to simulate Advanced gravitational wave detectors with realistic optics and that in a very simple script.
+ Doing a new version allowed some radical changes: no more global variables, add change of refractive index, sidebands field managed automatically at the same time as the carrier, manage higher order modes and much more\dots In the long term OSCAR should be able to simulate Advanced gravitational wave detectors with realistic optics and that in a very (relatively) simple script.
 
- The new code should also take into account the computing progress made in recent years. For example, the version 3.0 has been written with parallel processing in mind, for example the North and West arms could be computed in parallel on different cores of the CPU (the Parallel Processing Toolbox is then required) or a cavity scan can use up to 8 cores. Calculations on the GPU will also be integrated (when I get suitable computer).
+ The new code should also take into account the computing progress made in recent years. For example, the version 3.0 has been written with parallel processing in mind, for example the North and West arms could be computed in parallel on different cores of the CPU (the Parallel Processing Toolbox is then required) or a cavity scan can take advantage of multicore CPU. Since version 3.30, calculations on the GPU are enabled.
 
  The new code can also use separate grid size in the same simulation. That could be used to simulate non degenerated recycling cavities, where the laser beam has to be strongly focused and could change size by a factor 10.
 
 \section{The new objects and how to use them}
 
-The main change of this version for the user is the use of Oriented Object programming for OSCAR. A laser field or a mirror are no longer complex 2D matrices but are objects with different attributes. Each object is part of a class, for example the laser beam is an instance of the class \textsl{E\_field}, a mirror surface is an object from the class \textsl{Interface}. Functions are defined to work on specific class and not on any random 2D data.
+The main change of this version for the user is the implementation of Oriented Object programming for OSCAR. A laser field or a mirror are no longer complex 2D matrices but are objects with different attributes. Each object is part of a class, for example the laser beam is an instance of the class \textsl{E\_field}, a mirror surface is an object from the class \textsl{Interface}. Functions are defined to work on specific class and not on any random 2D data.
 
 The definition of the classes and their associated functions are presented in the following subsections. In the description of the function call, argument and output variables in \textbf{bold} are mandatory. For more detailed descriptions of the functions and the associated syntax, the help of Matlab can be used (help followed by the name of the function).
 
@@ -40,11 +40,13 @@ G1 = Grid(128,0.40);
 
 Define the object \textsl{G1} of the class \textsl{Grid}, then later all the objects for the simulations will be defined on a grid of $128 \times 128$ with a side length of 40~cm.
 
-Only one function is associated with the class \textsl{Grid}, it is \textcolor{blue}{What\_is\_possible}. \textcolor{blue}{What\_is\_possible}(\textbf{G1}) returns for the grid \textsl{G1} what is the maximum curvature or tilt for a mirror of diameter \textsl{diam}. By default the mirror diameter is 80\% of the size of the grid and the wavelength is set to 1064~nm.
+Only two functions are associated with the class \textsl{Grid}, it is \textcolor{blue}{What\_is\_possible} and \textcolor{blue}{Do\_Virtual\_Map}.
 
-It is is possible to change manually the diameter of the mirror and the wavelength of the laser by using the optional arguments \emph{'diam'} and \emph{'wavelength'}: \verb? What_is_possible(G1,'diam',0.2,'wavelength',633E-9) ?
+ \textcolor{blue}{What\_Is\_Possible}(\textbf{G1}) returns for the grid \textsl{G1} what is the maximum curvature or tilt for a mirror. By default the mirror diameter is 80\% of the size of the grid and the wavelength is set to 1064~nm.
 
-\noindent \textbf{map2D} = \textcolor{blue}{Do\_Virtual\_map}(\textbf{G}, \textbf{Power\_law})
+It is possible to change manually the diameter of the mirror and the wavelength of the laser by using the optional arguments \emph{'Diam'} and \emph{'Wavelength'}: \verb? What_is_possible(G1,'diam',0.2,'wavelength',633E-9) ?
+
+\noindent \textbf{map2D} = \textcolor{blue}{Do\_Virtual\_Map}(\textbf{G}, \textbf{Power\_law})
 \vspace*{-0.2cm}
 \begin{quote}
 Function to create a synthetic map from a given PSD. The PSD is parameterized as a (or several) power law. The function return a 2D height map of the surface which can then after be applied to a Interface object. See the example \textcolor{blue}{Example\_Display\_Create\_maps.m} for a practical implementation.

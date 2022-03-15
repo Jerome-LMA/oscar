@@ -27,8 +27,21 @@ end
 
 if Run_on_GPU
     Eout.Field = arrayfun(@times,Eout.Field,Amplitude_scaling);
+    if Amplitude_scaling == 0 % put all the SBs to zero otherwise do not change them
+        for ii = 1:Ein.Nb_Pair_SB
+            Eout.SB(ii).Field_lower = zeros(Ein.Grid.Num_point,'gpuArray');
+            Eout.SB(ii).Field_upper = zeros(Ein.Grid.Num_point,'gpuArray');
+        end
+    end
 else
     Eout.Field = Eout.Field * Amplitude_scaling;
+    if Amplitude_scaling == 0 % put all the SBs to zero otherwise do not change them
+        
+        for ii = 1:Ein.Nb_Pair_SB
+            Eout.SB(ii).Field_lower = zeros(Ein.Grid.Num_point);
+            Eout.SB(ii).Field_upper = zeros(Ein.Grid.Num_point);
+        end
+    end
 end
 
 end
