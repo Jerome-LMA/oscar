@@ -15,7 +15,7 @@ E_input = E_Field(G1,'w',0.043,'R',-1034);
 
 % Add the sidebands to the field E1, frequency of modulation 6.7 MHz,
 % modulating index 0.3
-E_input = Add_Sidebands(E_input,'Mod_freq',6.7234E6,'Mod_index',0.3);
+E_input = Add_Sidebands(E_input,'Mod_freq',6.7234E6,'Mod_depth',0.3);
 
 % Define the 2 mirrors, RofC_IM = 1500m, RofC_IM = 1700m, 30 cm in
 % diameter, transmission 5% for the input mirror and 0.5% for the end

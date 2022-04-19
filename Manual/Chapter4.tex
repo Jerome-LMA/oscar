@@ -8,7 +8,7 @@ Since the version 3.0, the code has been totally rewritten using the Oriented Ob
 
 The principle of the FFT code and the method to derive the results are still unchanged, so for people not familiar with the inner working of FFT code, it is strongly recommended to read the first part of this manual.
 
-\paragraph{Requirements} The new OSCAR works with Matlab version superior to 2009a and the \textsl{Optimization Toolbox} is necessary if the beam fitting functions are used. To benefit from the GPU speed up, the \textsl{Parallel Computing Toolbox} is also required. 
+\paragraph{Requirements} The new OSCAR works with Matlab version superior to 2009a and the \textsl{Optimization Toolbox} is necessary if the beam fitting functions are used. To benefit from the GPU speed up, the \textsl{Parallel Computing Toolbox} is also required.
 
 \section{Motivation and goals}
 
@@ -29,6 +29,7 @@ The main change of this version for the user is the implementation of Oriented O
 The definition of the classes and their associated functions are presented in the following subsections. In the description of the function call, argument and output variables in \textbf{bold} are mandatory. For more detailed descriptions of the functions and the associated syntax, the help of Matlab can be used (help followed by the name of the function).
 
 \subsection{The class Grid}
+
 \textbf{G1} = \textcolor{blue}{Grid}(Nb\_points\_grid,Size\_grid)
 by default: Nb\_points\_grid~=~256 and Size\_grid~=~1 \\
 
@@ -42,9 +43,9 @@ Define the object \textsl{G1} of the class \textsl{Grid}, then later all the obj
 
 Only two functions are associated with the class \textsl{Grid}, it is \textcolor{blue}{What\_is\_possible} and \textcolor{blue}{Do\_Virtual\_Map}.
 
- \textcolor{blue}{What\_Is\_Possible}(\textbf{G1}) returns for the grid \textsl{G1} what is the maximum curvature or tilt for a mirror. By default the mirror diameter is 80\% of the size of the grid and the wavelength is set to 1064~nm.
+\textcolor{blue}{What\_Is\_Possible}(\textbf{G1}) returns for the grid \textsl{G1} what is the approximative maximum curvature or tilt for a mirror. By default the mirror diameter is 80\% of the size of the grid and the wavelength is set to 1064~nm.
 
-It is possible to change manually the diameter of the mirror and the wavelength of the laser by using the optional arguments \emph{'Diam'} and \emph{'Wavelength'}: \verb? What_is_possible(G1,'diam',0.2,'wavelength',633E-9) ?
+It is possible to change manually the diameter of the mirror and the wavelength of the laser by using the optional arguments \emph{'Diam'} and \emph{'Wavelength'}: \verb? What_is_possible(G1,'Diam',0.2,'Wavelength',633E-9) ?
 
 \noindent \textbf{map2D} = \textcolor{blue}{Do\_Virtual\_Map}(\textbf{G}, \textbf{Power\_law})
 \vspace*{-0.2cm}
@@ -54,7 +55,7 @@ Function to create a synthetic map from a given PSD. The PSD is parameterized as
 
 
 \subsection{The class E\_field}
-\textbf{E1} = \textcolor{blue}{E\_field}( \textbf{Grid\_name} , \emph{options}) by default the laser beam is in the fundamental mode
+\textbf{E1} = \textcolor{blue}{E\_field}( \textbf{Grid\_name} , \emph{options}) by default the laser beam is in the fundamental mode.
 
 Instances of the class \textsl{E\_field} are laser beams, represented as electric field in a complex 2D matrix. The objects \textsl{E\_field} contain a wavelength (1064 nm by default) and also the refractive index of the medium where the laser beam is. If sidebands are present, they are also implemented in the object at the same time as the carrier. All the variables and parameters of objects \textsl{E\_field} are detailed in \ref{App3:E_field}.
 
@@ -71,6 +72,8 @@ Since OSCAR version 3.05, there is now different ways to define a laser beam:
   \item the optical mode can also be specified, for example for a helicoidal mode LG 3 3:
         \verb? E_input = E_Field(G1,'w0',0.02,'mode','LG_HELI 3 3') ?
         To define the mode basis, 3 options are possible: 'HG n m', 'LG\_HELI n m' or 'LG\_SIN n m'
+  \item one can also specified the wavelength (in meter):\\
+        \verb? E_input = E_Field(G1,'w0',0.02,'Wavelength',532E-9) ?
 \end{itemize}
 A non distributed function exist also to create astigmatic beam. Most of OSCAR's functions are applied to objects of this class. The essential functions are described below:\\
 
@@ -80,53 +83,63 @@ A non distributed function exist also to create astigmatic beam. Most of OSCAR's
 Add some higher order optical modes to a fundamental mode. It is possible to choose the power distribution of the higher order modes.
 \end{quote}
 
-\noindent \textbf{E2} = \textcolor{blue}{Add\_sidebands}(\textbf{E1}, \textbf{mod freq}, \textbf{mod index})
+\noindent \textbf{E2} = \textcolor{blue}{Add\_Sidebands}(\textbf{E1},'Mod\_freq',\textbf{mod freq},'Mod\_depth',\textbf{mod index})
 \vspace*{-0.2cm}
 \begin{quote}
-Create two frequency shifted sidebands fields from a carrier E\_Field \textsl{E1} as the phase modulator would do in the optic lab. The separation frequency between the carrier and the sideband is given by \textsl{mod freq}, and the modulation index by \textsl{mod index}. At present in OSCAR, no sidebands of sidebands is allowed.
+Create two frequency shifted sidebands fields from a carrier E\_Field \textsl{E1} as the phase modulator would do in the optic lab. The separation frequency between the carrier and the sideband is given by \textsl{mod freq}, and the modulation index by \textsl{mod index}. At present in OSCAR, no sidebands of sidebands is allowed however an arbitrary number of sidebands could be created since the version 3.30.
+\end{quote}
+
+\noindent \textbf{E2} = \textcolor{blue}{ Add\_Tilt}(\textbf{E1},\textbf{angle\_tilt})
+\vspace*{-0.2cm}
+\begin{quote}
+Tilt the wavefront of the field \textbf{E1} by the angle \textbf{angle\_tilt} given in radian. The maximum tilt allowed depends on the pixel size but it is usually a small number (order of the milliradian or less).
 \end{quote}
 
 \noindent overlap = \textcolor{blue}{Calculate\_Overlap}(\textbf{E1,E2})
 \vspace*{-0.2cm}
 \begin{quote}
 Calculate the overlap integral between 2 E\_field. The function returns the complex normalised overlap between the 2 fields. Without any output argument, the function returns in the command window the power coupling (i.e. square of the absolute value of the overlap integral) between the field E1 and E2.
+If only one E\_field is given, it will calculate the overlap between the carrier and of the sidebands pair. The sideband number is selected with the argument 'SB\_num'.
 \end{quote}
 
-\noindent overlap = \textcolor{blue}{Calculate\_Overlap\_SB\_Car}(\textbf{E1})
+\noindent power = \textcolor{blue}{Calculate\_Power}(\textbf{E1},'include','carrier'|'all'|'SB')
 \vspace*{-0.2cm}
 \begin{quote}
-Calculate the overlap integral between the carrier and the lower and upper sidebands for one E\_field. The function returns two complex normalised numbers which are the overlap between the carrier and the two sidebands. Without any output argument, the function returns in the command window the power coupling (i.e. square of the absolute value of the overlap integral).
-\end{quote}
-
-\noindent power = \textcolor{blue}{Calculate\_power}(\textbf{E1},'include','carrier'|'all'|'SB')
-\vspace*{-0.2cm}
-\begin{quote}
-Calculate the total power of the E\_Field \textsl{E1}. The function can either return a number or display the value in the Matlab command line if no output variable is used. A similar function \textcolor{blue}{Calculate\_power\_SB} exists to calculate the power of the sidebands fields.
-To simulate a DC photodiode, which will sum all the field frequencies, one can use  \textcolor{blue}{Calculate\_power}(E1,'include','all').
+Calculate the total power of the E\_Field \textsl{E1}. The function can either return a number or display the value in the Matlab command line if no output variable is used. With the same function, one can also calculate the power of the sidebands field:  
+\textcolor{blue}{Calculate\_power}(E1,'include','SB','SB\_num',1)
 \end{quote}
 
 \noindent \textbf{E2} = \textcolor{blue}{Change\_E\_n}(\textbf{E1},\textbf{n})
 \vspace*{-0.2cm}
 \begin{quote}
-Change the refractive index where the laser beam is. Could be use to pass through a flat interface from a vacuum to a mirror substrate for example.
+Change the refractive index where the laser beam is. Could be used to pass through a flat interface from a vacuum to a mirror substrate for example.
 \end{quote}
 
-\noindent return\_param = \textcolor{blue}{Check\_pos\_tilt}(\textbf{E1})
+\noindent return\_param = \textcolor{blue}{Check\_Pos\_Tilt}(\textbf{E1})
 \vspace*{-0.2cm}
 \begin{quote}
 Use as a diagnostic tool to check the centroid position of the beam on the grid as well as its tilt, function in both directions at the same time.
 \end{quote}
 
-\noindent [\textbf{sig\_p sig\_q}] = \textcolor{blue}{Demodulate\_SB}(\textbf{E1})
+\noindent [\textbf{sig\_p sig\_q}] = \textcolor{blue}{Demodulate\_SB}(\textbf{E1},'SB\_num',1,'phase',0)
 \vspace*{-0.2cm}
 \begin{quote}
-Demodulate the field \textsl{E1} with the present pair of sidebands. As the result, the in phase \textsl{sig\_p} and in quadrature \textsl{sig\_q} signals are given. This function could be used to derive a Pound Drever Hall error signal as shown in \ref{ch4:ex_PDH}.
+Demodulate the field \textsl{E1} with the choosen pair of sidebands. By default, the in phase \textsl{sig\_p} and in quadrature \textsl{sig\_q} signals are returned. This function could be used to derive a Pound Drever Hall error signal as shown in \ref{ch4:ex_PDH}. As optional, a demodulation phase could be given.
 \end{quote}
+
+\noindent \textcolor{blue}{E\_Plot}(\textbf{E1})
+\vspace*{-0.2cm}
+\begin{quote}
+Display a 2D plot of the field amplitude in a new Matlab figure window. Function can also be used as \textsl{E1}.E\_plot(). We can also display the amplitude in log scale \verb?E_plot(E1,'space','log')? or the propagating angle of the beam \verb?E_plot(E1,'angle')?. To create illustrative picture of the beam without all the axis, one can use the option \verb?'no_axis',true?.
+
+The same function could be used to the display the 2 sidebands with \textcolor{blue}{E\_Plot}(E1,'display','SB','SB\_num',1). The same options as for the carrier are also possible.
+\end{quote}
+
 
 \noindent Mat\_scattered = \textcolor{blue}{Expand\_HOM}(\textbf{E1},\textbf{max\_mode\_order})
 \vspace*{-0.2cm}
 \begin{quote}
-Expand the beam \textsl{E1} into the Hermitte Gauss basis defined by \textsl{E1} (\textsl{E1} must be close to a fundamental mode). The result is given as the normalised power content in the different optical modes. If not output is given a plot is made. Several options are possible:
+Expand the beam \textsl{E1} into the Hermitte Gauss basis defined by \textsl{E1} (\textsl{E1} must be close to a fundamental mode). The result is given as the normalised power content in the different optical modes. If not output is asked a plot is made. Several options are possible:
 \end{quote}
 \begin{itemize}
   \item to output all the power content into the different higher order modes up to the order 10 \\
@@ -135,33 +148,23 @@ Expand the beam \textsl{E1} into the Hermitte Gauss basis defined by \textsl{E1}
         \verb? Expand_HOM(E1,10,'basis',[0.05 -1400]) ?
 \end{itemize}
 
-
-\noindent \textcolor{blue}{E\_plot}(\textbf{E1})
-\vspace*{-0.2cm}
-\begin{quote}
-Display a 2D plot of the field amplitude in a new Matlab figure window. Function can also be used as \textsl{E1}.E\_plot(). We can also display the amplitude in log scale \verb?E_plot(E1,'space','log')? or the propagating angle of the beam \verb?E_plot(E1,'angle')?. To create illustrative picture of the beam without all the axis, one can use the option \verb?'no_axis',true?.
-
-A similar function exist also for the sidebands (but with less options): \noindent \textcolor{blue}{E\_plot\_SB}
-\end{quote}
-
-
 \noindent [beam\_radius wavefront\_RofC] = \textcolor{blue}{Fit\_E\_Field}(\textbf{E1})
 \vspace*{-0.2cm}
 \begin{quote}
-This function is used to find the beam parameter of the field \textsl{E1}, it can also be used for higher order modes. If no output are given the result is written in the Matlab command window. To fit only the fundamental mode, it is faster to use the function \textcolor{blue}{Fit\_TEM00}.
+This function is used to find the beam parameter of the field \textsl{E1}, it can also be used to fit higher order modes. If no output are given the result is written in the Matlab command window. To fit only the fundamental mode, it is faster to use the function \textcolor{blue}{Fit\_TEM00}.
 
 For the fit of an astigmatic fundamental mode, it is recommended to use the function \textcolor{blue}{Fit\_TEM00\_xy}.
 \end{quote}
 
 
-\noindent [\textbf{Eout},\textbf{Gout}] = \textcolor{blue}{Focus\_beam\_with\_telescope}(\textbf{Ein},\textbf{array\_L\_D})
+\noindent [\textbf{Eout},\textbf{Gout}] = \textcolor{blue}{Focus\_Beam\_With\_Telescope}(\textbf{Ein},\textbf{array\_L\_D})
 \vspace*{-0.2cm}
 \begin{quote}
 With this function, one can now simulate mirrors with small radius of curvature to simulate strongly focused beam. The method has been inspired by the work done J.Y. Vinet \cite{Virgo_PB} and H. Yamamoto \cite{Hiro1}.
-The new function can dynamically adapt the size of the grid and as such the focused beam is defined on a new grid. This function is used to simulate the focusing mode matching telescope at the input or output of the interferometer.
-The input argument is the input field and a vector with the focal length of the equivalent mirror/lens and the separation between the optical elements in meters. A telescope with several lenses can be simulated with only one call of the function.
+This function can dynamically adapt the size of the grid and so the focused beam could be defined on a new grid. This function is used to simulate the focusing mode matching telescope at the input or output of the interferometer.
+The input argument is the input field and a vector with the focal length of the equivalent mirror/lens and the separation between the optical elements in meters. A telescope with several lenses can be simulated with only one call to the function.
 See the provided example for more details.
-It has also the possibility to add maps and finite size optics to the telescope.
+It has also the possibility to add maps and finite aperture of the optics of the telescope.
 \end{quote}
 
 \noindent \textbf{E2} = \textcolor{blue}{Normalise\_E}(\textbf{E1},power)
@@ -176,7 +179,7 @@ Normalise the E\_field \textsl{E1} to 1~W if no \textsl{power} argument is speci
 Propagate the field \textsl{E1} over a distance \textsl{dist} in meter. If sidebands are present, the sidebands are automatically propagated at the same time, with of course the adequate phase shift.
 \end{quote}
 
-\noindent \textbf{E2} = \textcolor{blue}{Reflect\_mirror}(\textbf{E1},\textbf{I1})
+\noindent \textbf{E2} = \textcolor{blue}{Reflect\_Mirror}(\textbf{E1},\textbf{I1})
 \vspace*{-0.2cm}
 \begin{quote}
 Returns the field after reflection on a mirror. \textsl{I1} is an Interface object which must have been previously defined. An alternative syntax could be \textcolor{blue}{Reflect\_mirror}(\textbf{E1},\textbf{R1}), with \textsl{R1} the radius of curvature of the mirror to be reflected on. A concave mirror is represented by a positive \textbf{R1}.
@@ -185,7 +188,7 @@ Reflections inside the substrates are allowed since the index of refraction is t
 \end{quote}
 
 
-\noindent E3 = \textcolor{blue}{ Remove\_00\_part}(\textbf{E1},E2)
+\noindent E3 = \textcolor{blue}{ Remove\_00\_Part}(\textbf{E1},E2)
 \vspace*{-0.2cm}
 \begin{quote}
 Remove the fundamental Gaussian part from a field \textbf{E1}. That is useful to see which higher order modes are superposed with the fundamental mode following some cavities simulations. Can also be used to subtract 2 fields E1 and E2 as in the case of destructive interferences.
@@ -198,7 +201,7 @@ Remove the fundamental Gaussian part from a field \textbf{E1}. That is useful to
 Transmit the field \textsl{E1} through an aperture of diameter \textsl{size}. The aperture could be round or square, if not specified it is round. Custom aperture can also be defined see the function help for example.
 \end{quote}
 
-\noindent \textbf{E2} = \textcolor{blue}{Transmit\_lens}(\textbf{E1},\textbf{focal length})
+\noindent \textbf{E2} = \textcolor{blue}{Transmit\_Lens}(\textbf{E1},\textbf{focal length})
 \vspace*{-0.2cm}
 \begin{quote}
 Transmit the field \textsl{E1} through a lens of a given focal length.
@@ -208,6 +211,12 @@ Transmit the field \textsl{E1} through a lens of a given focal length.
 \vspace*{-0.2cm}
 \begin{quote}
 Transmit and reflect the field \textsl{E1} through an interface \textsl{I1}. The orientation of the interface is given by the refractive index of the incoming field \textsl{E1}.
+\end{quote}
+
+\noindent [\textbf{E\_trans} E\_ref]= \textcolor{blue}{Transmit\_Reflect\_Mirror}(\textbf{E1},\textbf{M1},\textbf{HR/AR})
+\vspace*{-0.2cm}
+\begin{quote}
+Transmit and reflect the field \textsl{E1} through a mirror \textsl{M1}. One must select which side of the mirror is first met for the propagation, either we enter by the AR or HR side.
 \end{quote}
 
 For convenience, the operators +,- and * have also been overloaded to work with any object \textsl{E\_field}.
