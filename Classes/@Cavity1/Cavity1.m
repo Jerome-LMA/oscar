@@ -68,7 +68,7 @@ classdef Cavity1
                     New_input_field =  E_Field(Grid(C),'w',Beam_paramater(1),'R',Beam_paramater(2),'mode',C.Laser_in.Mode_name);
                     % add the sidebands as it used to be
                     for ii = 1:C.Laser_in.Nb_Pair_SB
-                        New_input_field = Add_Sidebands(New_input_field,'Mod_freq',C.Laser_in.SB(ii).Frequency_Offset,'Mod_index',C.Laser_in.SB(ii).Input_Mod_index);
+                        New_input_field = Add_Sidebands(New_input_field,'Mod_freq',C.Laser_in.SB(ii).Frequency_Offset,'Mod_depth',C.Laser_in.SB(ii).Input_Mod_index);
                     end
                     C.Laser_in = New_input_field;
                 end    

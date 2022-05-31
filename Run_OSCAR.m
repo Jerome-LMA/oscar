@@ -14,7 +14,7 @@ G1 = Grid(256,0.4);
 % Define the input beam, instead of giving some beam parameters, just
 % assume perfect mode matching wih the cavity
 E_input = E_Field(G1,'Optimal_MM',true);
-E_input = Add_Sidebands(E_input,'Mod_freq',10E6,'Mod_index',0.1);
+E_input = Add_Sidebands(E_input,'Mod_freq',10E6,'Mod_depth',0.1);
 
 % Define the input and end mirrors of the cavity
 IM = Interface(G1,'RoC',1420,'CA',0.33,'T',0.014);

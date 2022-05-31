@@ -1,4 +1,4 @@
-function What_is_possible(Gin,varargin)
+function What_Is_Possible(Gin,varargin)
 %What_is_possible: Check what you can do with the given grid
 
 p  = inputParser;
@@ -8,10 +8,10 @@ p.FunctionName = 'Check what you can do with a certain grid size';
 p.addRequired('Gin', @(x)isa(x, 'Grid'));
 
 % Check if the resolution of the grid if given
-p.addParamValue('diam',[],@(x)isnumeric(x) && x>0);
+p.addParameter('Diam',[],@(x)isnumeric(x) && x>0);
 
 % Check if the resolution of the grid if given
-p.addParamValue('wavelength',[],@(x)isnumeric(x) && x>0);
+p.addParameter('Wavelength',[],@(x)isnumeric(x) && x>0);
 
 p.parse(Gin,varargin{:})
 

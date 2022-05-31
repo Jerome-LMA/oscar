@@ -105,7 +105,7 @@ If only one E\_field is given, it will calculate the overlap between the carrier
 \noindent power = \textcolor{blue}{Calculate\_Power}(\textbf{E1},'include','carrier'|'all'|'SB')
 \vspace*{-0.2cm}
 \begin{quote}
-Calculate the total power of the E\_Field \textsl{E1}. The function can either return a number or display the value in the Matlab command line if no output variable is used. With the same function, one can also calculate the power of the sidebands field:  
+Calculate the total power of the E\_Field \textsl{E1}. The function can either return a number or display the value in the Matlab command line if no output variable is used. With the same function, one can also calculate the power of the sidebands field:
 \textcolor{blue}{Calculate\_power}(E1,'include','SB','SB\_num',1)
 \end{quote}
 
@@ -221,6 +221,9 @@ Transmit and reflect the field \textsl{E1} through a mirror \textsl{M1}. One mus
 
 For convenience, the operators +,- and * have also been overloaded to work with any object \textsl{E\_field}.
 
+
+
+
 \subsection{The class Prop\_operator}
 \label{Sec:DI}
 This is an internal class which must be almost invisible for the user. The objects of this class allows to speed up the propagation of electrical field \textsl{E\_Field} thanks to the pre-calculation of the propagation matrix. A \textsl{Prop\_operator} is automatically created when a cavity is created. It represents the propagation operator over one cavity length.
@@ -264,21 +267,21 @@ Below are some ways to define an interface:
   \item add the transmission of 1\% and loss of 50 ppm\\
         \verb?  Interface(Grid,'RoC',1E3,'CA',0.2.'T',0.01,'L',50E-6) ?
 \end{itemize}
-The options can be defined in any order. To define flat mirrors, a \verb?'RoC'? of \verb?0 or Inf? can be used. Check the file \verb?@Interface/Interface.m? to see the default parameters.
+The optional parameters can be defined in any order. To define flat mirrors, a \verb?'RoC'? of \verb?0 or Inf? can be used. Check the file \verb?@Interface/Interface.m? to see the default parameters such as refractive indexes.
 
 The list of methods associated with the objects of the class \textsl{Interface} is given below:
 
-\noindent \textbf{I2} = \textcolor{blue}{Add\_astigmatism}(\textbf{I1}, \textbf{Zernike amplitude}, \textbf{Diameter})
+\noindent \textbf{I2} = \textcolor{blue}{Add\_Astigmatism}(\textbf{I1}, \textbf{Zernike amplitude}, \textbf{Diameter})
 \vspace*{-0.2cm}
 \begin{quote}
 Add to the surface of the interface \textsl{I1} the Zernike polynomial 2,2 (which represents the astigmatism) with an amplitude of \textsl{Zernike amplitude} and over a diameter \textsl{Diameter}.
 \end{quote}
 
 
-\noindent \textbf{I2} = \textcolor{blue}{Add\_map}(\textbf{I1}, \textbf{filename}, options)
+\noindent \textbf{I2} = \textcolor{blue}{Add\_Map}(\textbf{I1}, \textbf{filename}, options)
 \vspace*{-0.2cm}
 \begin{quote}
-Add to the surface of the interface \textsl{I1} a square map loaded from the file \textsl{filename}. For square maps, the resolution of one pixel must be given by the parameters \verb?'reso'?. The map can also be normalised to a certain RMS using the option \verb?'RMS'? or the height can be scaled by scalar with the option \verb?'scale'?. One can also rotate the map by a number of time 90 degrees with the option \verb?'rotate'?. The option \verb?'remove the tilt and focus'? can remove the tilt focus from the added map. The tilt/focus is removed over all the surface but with the optimal calculated only over a diameter.
+Add to the surface of the interface \textsl{I1} a square map loaded from the file \textsl{filename}. For square maps, the resolution of one pixel must be given by the parameters \verb?'reso'?. The map can also be normalised to a certain RMS using the option \verb?'RMS'? or the height can be scaled by scalar with the option \verb?'scale'?. One can also rotate the map by a number of time 90 degrees with the option \verb?'rotate'?. The option \verb?'remove the tilt and focus'? can remove the tilt focus from the added map. The tilt/focus is removed over all the surface but with the optimal fit calculated only over a diameter.
 
 Here some examples:
 \begin{itemize}
@@ -292,44 +295,44 @@ Here some examples:
          \verb? I1 = Add_map(I1,'map1.dat','reso',3.5E-4,'remove_tilt_focus',0.150) ?
 \end{itemize}
 
-Maps with cylindrical symmetry can be loaded as a 2 columns text file. First column is the radius and the second is the height in meter. In that case the resolution does not have to be specified. To supress the output, the option \verb?'verbose',false? can be used. A new experimental argument is \verb?'centering'? to offset the map if this region of interest is not at the center.
+Maps with cylindrical symmetry can be loaded as a 2 columns text file. First column is the radius and the second is the height in meter. In that case the resolution does not have to be specified. To suppress the output, the option \verb?'verbose',false? can be used. A new argument is possible to offset the map \verb?'centering'? if the region of interest is not at the center of the map.
 \end{quote}
 
 
-\noindent \textbf{I2} = \textcolor{blue}{Add\_tilt}(\textbf{I1}, \textbf{tilt\_angle}, 'x')
+\noindent \textbf{I2} = \textcolor{blue}{Add\_Tilt}(\textbf{I1}, \textbf{tilt\_angle}, 'x')
 \vspace*{-0.2cm}
 \begin{quote}
 Tilt the whole surface of the interface \textsl{I1} by the amount \textsl{tilt\_angle} in radian. It is possible to specify the direction of the tilt by setting the third argument \textsl{'x'} or \textsl{'y'}. By default the tilt is in the vertical direction (recommended solution).
 \end{quote}
 
 
-\noindent \textbf{I2} = \textcolor{blue}{Cut\_frequency\_Interface}(\textbf{I1},\textbf{Option},\textbf{f\_cut})
+\noindent \textbf{I2} = \textcolor{blue}{Cut\_Frequency\_Interface}(\textbf{I1},\textbf{Option},\textbf{f\_cut})
 \vspace*{-0.2cm}
 \begin{quote}
-Remove given spatial frequency within a given interface object. The argument \textsl{Option} is a string \verb?'LP'?, \verb?'HP'? or \verb?'BP'? for respectively low pass, high pass or band pass filter. \textsl{f\_cut} is the cutting spatial frequency in m$^{-1}$, for band pass filtering \textsl{f\_cut} is vector of two frequencies.\\
-The implementation for the filtering is done in a straight forward manner (see the simple code), so as a result artefact may appear in the resulting object \textsl{I2}.
+Remove certain spatial frequencies within a given interface object. The argument \textsl{Option} is a string \verb?'LP'?, \verb?'HP'? or \verb?'BP'? for respectively low pass, high pass or band pass filter. \textsl{f\_cut} is the corner spatial frequency in m$^{-1}$, for band pass filtering \textsl{f\_cut} is vector of two frequencies.\\
+The implementation for the filtering is done in a straight forward manner (see the simple code), so as a result artefact may appear in the resulting object \textsl{I2} and so this function must be used with cautious.
 \end{quote}
 
 
 \noindent I2 = \textcolor{blue}{Expand\_Zernike}(\textbf{I1},options)
 \vspace*{-0.2cm}
 \begin{quote}
-Expand in Zernike polynomials the interface \textsl{I1}. Two options are available: 'Z\_order', an integer which represents the maximum order of the Zernike polynomials to take in to account in the calculations and 'diam', the diameter where the Zernike polynomials are defined. This function returns the interface \textsl{I2}, which is the interface reconstructed by the Zernike polynomials. Example:
+Expand in Zernike polynomials the interface \textsl{I1}. Two options are available: 'Z\_order', an integer which represents the maximum order of the Zernike polynomials to take into account in the calculations and 'diam', the diameter where the Zernike polynomials are defined. This function returns the interface \textsl{I2}, which is the interface reconstructed by the Zernike polynomials. Example:
 \verb? I2 = Expand_Zernike(I1,'Z_order',10,'diam',0.2) ?
 \end{quote}
 
 
-\noindent \textcolor{blue}{I\_plot}(\textbf{I1})
+\noindent \textcolor{blue}{I\_Plot}(\textbf{I1})
 \vspace*{-0.2cm}
 \begin{quote}
-Plot the surface of the interface \textsl{I1}. The color scale is in meter. \verb? I_plot(I1,'diam',0.160)? will only plot the surface over a diameter of 160mm.
+Plot the surface of the interface \textsl{I1}. The color scale is in meter. \verb? I_plot(I1,'diam',0.160)? will only plot the surface over a diameter of 160mm. With optional arguments, one can change the scale of the vertical axis and also zoom in the central part.
 \end{quote}
 
 
 \noindent \noindent [\textbf{PSD\_1D} \textbf{freq}] = \textcolor{blue}{Plot\_PSD}(\textbf{I1}, options)
 \vspace*{-0.2cm}
 \begin{quote}
-Function used to calculate the one dimension Power Spectral Density (PSD) of a surface. The two output arguments are the vector of the PSD and the vector of the frequency. By default before calculating the PSD 2D, a Hanning window is applied to the data and the PSD is calculated summing all the frequencies over one direction to pass from 2D to 1D. A detailed explanation of the different ways to calculate the PSD can be found in a Hiro LIGO note \cite{Hiro_PSD}.
+Function used to calculate the one dimension Power Spectral Density (PSD) of a surface. The two output arguments are the vector of the PSD and the vector of the frequency. By default, before calculating the PSD 2D, a Hanning window is applied to the data and the PSD is calculated summing all the frequencies over one direction to pass from 2D to 1D. A detailed explanation of the different ways to calculate the PSD can be found in a Hiro Yamamoto's LIGO note \cite{Hiro_PSD}.
 
 An example for the possible options can be found below, combination of the different options is allowed:
 \begin{itemize}
@@ -345,28 +348,28 @@ An example for the possible options can be found below, combination of the diffe
 \end{quote}
 
 
-\noindent RMS = \textcolor{blue}{Weighted\_RMS}(\textbf{I1,Ein})
+\noindent RMS = \textcolor{blue}{Weighted\_RMS}(\textbf{I1},'E',\textbf{Ein})
 \vspace*{-0.2cm}
 \begin{quote}
 Calculate the RMS of the surface \textsl{I1} weighted by the intensity of the field \textsl{Ein}. A diameter can also be given as the second argument. Beware the curvature is not subtracted before the calculation, so a perfectly curved spherical mirror will have a non zero RMS.
 \begin{itemize}
   \item Calculate the weighted RoC \\
-        \verb? RMS = Weighted_RMS(I1,E_Field(G1,'w',0.05)) ?
+        \verb? RMS = Weighted_RMS(I1,'E',E_Field(G1,'w',0.05)) ?
   \item Display directly the calculated RMS \\
-        \verb? Weighted_RMS(I1,0.2) ?
+        \verb? Weighted_RMS(I1,'diam',0.2) ?
 \end{itemize}
 \end{quote}
 
 
-\noindent RoC\_fitted = \textcolor{blue}{Weighted\_RoC}(\textbf{I1,Ein})
+\noindent RoC\_fitted = \textcolor{blue}{Weighted\_RoC}(\textbf{I1},'E',\textbf{Ein})
 \vspace*{-0.2cm}
 \begin{quote}
 Calculate the radius of curvature of the surface \textsl{I1} weighted by the intensity of the field \textsl{Ein}. This calculation is useful to fit non perfectly spherical surface. A diameter can also be given as the second argument.
 \begin{itemize}
   \item Calculate the weighted RoC \\
-        \verb? RoC = Weighted_RoC(I1,E_Field(G1,'w',0.05)) ?
+        \verb? RoC = Weighted_RoC(I1,'E',E_Field(G1,'w',0.05)) ?
   \item Display directly the radius of curvature \\
-        \verb? Weighted_RoC(I1,0.2) ?
+        \verb? Weighted_RoC(I1,'diam',0.2) ?
 \end{itemize}
 \end{quote}
 
@@ -391,7 +394,7 @@ Two similar procedures can be used with the class \textsl{Mirror}. The procedure
 Calculate the transmitted and reflected fields (\textsl{E\_trans} and \textsl{E\_ref} respectively) by an object \textsl{M1} of the class Mirror. The input beam is \textsl{E1}. The first interface to consider, indicating the direction of the incoming beam can be either the HR or AR surfaces according to the last argument 'HR' or 'AR' .
 \end{quote}
 
-A new function \textcolor{blue}{Transmit\_Reflect\_Optic} has also been created which can be used by either Interface object or Mirror object. Internally, this function calls the function \textcolor{blue}{Transmit\_Reflect\_Interface} or \textcolor{blue}{Transmit\_Reflect\_Mirror} depending on the input parameters.
+A new wrapper function \textcolor{blue}{Transmit\_Reflect\_Optic} has also been created which can be used by either Interface object or Mirror object. Internally, this function calls the function \textcolor{blue}{Transmit\_Reflect\_Interface} or \textcolor{blue}{Transmit\_Reflect\_Mirror} depending on the input parameters.
 
 \subsection{The class Cavity1}
 \textbf{C1} = \textcolor{blue}{Cavity1}( \textbf{I1}, \textbf{I2}, \textbf{Cavity\_length}, \textbf{E1})

@@ -1,4 +1,4 @@
-function Eout = Remove_00_part(Ein,varargin)
+function Eout = Remove_00_Part(Ein,varargin)
 %Remove_00_part Remove the fundamental Gaussian part from an E_Field
 %   Return a E_Field where the fundamental Gaussian part has been
 %   substracted. Very useful to highligh the distortion of a beam

@@ -56,7 +56,7 @@ for ii=1:Num_iter
     [Beam_rad,Beam_RofC] = Fit_TEM00(Field_Circ);    
     fprintf('Before the end mirror,   beam radius [m]: %7.4f \t wavefront RofC [m]: %5.2e \n',Beam_rad,Beam_RofC)     
     
-    Field_Circ = Reflect_mirror(Field_Circ,Cin.I_end);
+    Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_end);
     [Beam_rad,Beam_RofC] = Fit_TEM00(Field_Circ);    
     fprintf('After the end mirror,    beam radius [m]: %7.4f \t wavefront RofC [m]: %5.2e \n',Beam_rad,Beam_RofC) 
   
@@ -64,7 +64,7 @@ for ii=1:Num_iter
     [Beam_rad,Beam_RofC] = Fit_TEM00(Field_Circ);    
     fprintf('Before the input mirror, beam radius [m]: %7.4f \t wavefront RofC [m]: %5.2e \n',Beam_rad,Beam_RofC)
     
-    Field_Circ = Reflect_mirror(Field_Circ,Cin.I_input);   
+    Field_Circ = Reflect_Mirror(Field_Circ,Cin.I_input);   
 end
 
 end
