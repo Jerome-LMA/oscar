@@ -22,6 +22,8 @@ imagesc(Map_loaded); axis square % the raw map
 % Add the loaded map to the flat mirror, could be used in the simulations
 % of a cavity.
 Dummy = Add_Map(Dummy,Map_loaded,'reso',dx,'remove_tilt_focus',0.250);
+%Dummy = Add_Map(Dummy,Map_loaded,'reso',dx,'remove_tilt_focus',0.250,'shift',[-0.02,0.01]);
+
 
 % Plot the map over a diameter of 25cm
 figure(2)

@@ -123,8 +123,8 @@ if (m==n)     % The matrix is square
         error('Add_map(): for the centering option, a vector of 2 values must be given, for example[0.005 -0.02]')
     end
       
-    map.offset_X = round(p.Results.centering(1)/map.res);
-    map.offset_Y = round(p.Results.centering(2)/map.res);
+    map.offset_X = round(p.Results.shift(1)/map.res);
+    map.offset_Y = round(p.Results.shift(2)/map.res);
     
     map.loaded = circshift(map.loaded,[-map.offset_Y map.offset_X]);
     % just shift by an integer number of pixel.     
