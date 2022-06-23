@@ -4,7 +4,7 @@
 
 \chapter{The big changes}
 
-Since the version 3.0, the code has been totally rewritten using the Oriented Object capability of Matlab. The code is now more user friendly and less prone to errors. Moreover some new functions has been added and the higher order optical modes are supported from the start.
+Since the version 3.0, the code has been totally rewritten using the Object-Oriented capability of Matlab. The code is now user-friendlier and less error-prone. Moreover, some new functions have been added and the higher order optical modes are supported from the start.
 
 The principle of the FFT code and the method to derive the results are still unchanged, so for people not familiar with the inner working of FFT code, it is strongly recommended to read the first part of this manual.
 
@@ -12,54 +12,54 @@ The principle of the FFT code and the method to derive the results are still unc
 
 \section{Motivation and goals}
 
- First, the curious reader may wonder why there is no version 2.0 of OSCAR. Such a version exists, it is OSCAR classic with the implementation of a power recycled Michelson with Fabry-Perot arm cavities. This version was developed to simulated LIGO-Virgo type of interferometers but was never officially distributed.
+ First, the curious reader may wonder why there is no version 2.0 of OSCAR. Such a version exists, it is OSCAR classic with the implementation of a power recycled Michelson with Fabry-Perot arm cavities. This version was developed to simulate LIGO-Virgo-type interferometers but was never officially distributed.
 
- The code of version 2.0 was becoming messy since OSCAR was not intended to be so advanced (remember, it was only supposed to simulate the test cavity at Gingin in Australia). To include all the code developed for the version 2.0, it was decided to write a full new version of OSCAR taking also into account all what I learned as a OSCAR user.
+ The code of version 2.0 was becoming messy since OSCAR was not intended to be so advanced (remember, it was only supposed to simulate the test cavity at Gingin in Australia). To include all the code developed for the version 2.0, it was decided to write a full new version of OSCAR taking also into account everything I learned as a OSCAR user.
 
- Doing a new version allowed some radical changes: no more global variables, add change of refractive index, sidebands field managed automatically at the same time as the carrier, manage higher order modes and much more\dots In the long term OSCAR should be able to simulate Advanced gravitational wave detectors with realistic optics and that in a very (relatively) simple script.
+ Writing a new version allowed some radical changes: no more global variables, possible change of refractive index, sideband field managed automatically at the same time as the carrier, higher order modes and much more. In the long term, OSCAR should be able to simulate Advanced gravitational wave detectors with realistic optics, and that in a (relatively) very simple script.
 
  The new code should also take into account the computing progress made in recent years. For example, the version 3.0 has been written with parallel processing in mind, for example the North and West arms could be computed in parallel on different cores of the CPU (the Parallel Processing Toolbox is then required) or a cavity scan can take advantage of multicore CPU. Since version 3.30, calculations on the GPU are enabled.
 
- The new code can also use separate grid size in the same simulation. That could be used to simulate non degenerated recycling cavities, where the laser beam has to be strongly focused and could change size by a factor 10.
+ The new code can also use separate grid sizes in the same simulation. That could be used to simulate non-degenerate recycling cavities, where the laser beam has to be strongly focused and could change size by a factor 10.
 
 \section{The new objects and how to use them}
 
-The main change of this version for the user is the implementation of Oriented Object programming for OSCAR. A laser field or a mirror are no longer complex 2D matrices but are objects with different attributes. Each object is part of a class, for example the laser beam is an instance of the class \textsl{E\_field}, a mirror surface is an object from the class \textsl{Interface}. Functions are defined to work on specific class and not on any random 2D data.
+The main change of this version for the user is the implementation of Object-Oriented programming for OSCAR. A laser field or a mirror are no longer complex 2D matrices but are objects with different attributes. Each object is part of a class, for example the laser beam is an instance of the class \textsl{E\_field}, a mirror surface is an object from the class \textsl{Interface}. Functions are defined to work on specific classes and not on any random 2D data.
 
-The definition of the classes and their associated functions are presented in the following subsections. In the description of the function call, argument and output variables in \textbf{bold} are mandatory. For more detailed descriptions of the functions and the associated syntax, the help of Matlab can be used (help followed by the name of the function).
+The definition of the classes and their associated functions are presented in the following subsections. In the description of the function call, argument and output variables in \textbf{bold} are mandatory. For more detailed descriptions of the functions and the associated syntax, the help of Matlab can be used (type "help" followed by the name of the function).
 
 \subsection{The class Grid}
 
 \textbf{G1} = \textcolor{blue}{Grid}(Nb\_points\_grid,Size\_grid)
 by default: Nb\_points\_grid~=~256 and Size\_grid~=~1 \\
 
-The class \textsl{Grid} is used to represent the discretisation of the space and all the associated variables (see \ref{App3:grid} for the details). It was formerly known as the global variable \textsl{Grid} in OSCAR classic. One \textsl{Grid} object is the first object to be defined in a OSCAR script. To define an instance of the class \textsl{Grid}, 2 parameters are necessary: the number of pixels used (typically 128 or 256) and the size of the grid in meter. For example:
+The class \textsl{Grid} is used to represent the discretization of space and all the associated variables (see \ref{App3:grid} for the details). It was formerly known as the global variable \textsl{Grid} in OSCAR classic. One \textsl{Grid} object is the first object to be defined in a OSCAR script. To define an instance of the class \textsl{Grid}, 2 parameters are necessary: the number of pixels used (typically 128 or 256) and the size of the grid in meters. For example:
 
 \begin{verbatim}
 G1 = Grid(128,0.40);
 \end{verbatim}
 
-Define the object \textsl{G1} of the class \textsl{Grid}, then later all the objects for the simulations will be defined on a grid of $128 \times 128$ with a side length of 40~cm.
+Defines the object \textsl{G1} of the class \textsl{Grid}, then later all the objects for the simulations will be defined on a grid of $128 \times 128$ with a side length of 40~cm.
 
-Only two functions are associated with the class \textsl{Grid}, it is \textcolor{blue}{What\_is\_possible} and \textcolor{blue}{Do\_Virtual\_Map}.
+Only two functions are associated with the class \textsl{Grid} : \textcolor{blue}{What\_is\_possible} and \textcolor{blue}{Do\_Virtual\_Map}.
 
-\textcolor{blue}{What\_Is\_Possible}(\textbf{G1}) returns for the grid \textsl{G1} what is the approximative maximum curvature or tilt for a mirror. By default the mirror diameter is 80\% of the size of the grid and the wavelength is set to 1064~nm.
+\textcolor{blue}{What\_Is\_Possible}(\textbf{G1}) returns for the grid \textsl{G1} what is the approximate maximum curvature or tilt for a mirror. By default the mirror diameter is 80\% of the size of the grid and the wavelength is set to 1064~nm.
 
 It is possible to change manually the diameter of the mirror and the wavelength of the laser by using the optional arguments \emph{'Diam'} and \emph{'Wavelength'}: \verb? What_is_possible(G1,'Diam',0.2,'Wavelength',633E-9) ?
 
 \noindent \textbf{map2D} = \textcolor{blue}{Do\_Virtual\_Map}(\textbf{G}, \textbf{Power\_law})
 \vspace*{-0.2cm}
 \begin{quote}
-Function to create a synthetic map from a given PSD. The PSD is parameterized as a (or several) power law. The function return a 2D height map of the surface which can then after be applied to a Interface object. See the example \textcolor{blue}{Example\_Display\_Create\_maps.m} for a practical implementation.
+Creates a synthetic map from a given PSD. The PSD is parameterized as a (or several) power law. The function return a 2D height map of the surface which can then after be applied to a Interface object. See the example \textcolor{blue}{Example\_Display\_Create\_maps.m} for a practical implementation.
 \end{quote}
 
 
 \subsection{The class E\_field}
 \textbf{E1} = \textcolor{blue}{E\_field}( \textbf{Grid\_name} , \emph{options}) by default the laser beam is in the fundamental mode.
 
-Instances of the class \textsl{E\_field} are laser beams, represented as electric field in a complex 2D matrix. The objects \textsl{E\_field} contain a wavelength (1064 nm by default) and also the refractive index of the medium where the laser beam is. If sidebands are present, they are also implemented in the object at the same time as the carrier. All the variables and parameters of objects \textsl{E\_field} are detailed in \ref{App3:E_field}.
+Instances of the class \textsl{E\_field} are laser beams, represented as electric fields in a complex 2D matrix. The objects \textsl{E\_field} contain a wavelength (1064 nm by default) and also the refractive index of the medium where the laser beam is. If sidebands are present, they are also implemented in the object at the same time as the carrier. All the variables and parameters of objects \textsl{E\_field} are detailed in \ref{App3:E_field}.
 
-Since OSCAR version 3.05, there is now different ways to define a laser beam:
+Since OSCAR version 3.05, there are now different ways to define a laser beam:
 \begin{itemize}
   \item with the waist: \\
         \verb? E_input = E_Field(G1,'w0',0.02) ?
@@ -72,79 +72,79 @@ Since OSCAR version 3.05, there is now different ways to define a laser beam:
   \item the optical mode can also be specified, for example for a helicoidal mode LG 3 3:
         \verb? E_input = E_Field(G1,'w0',0.02,'mode','LG_HELI 3 3') ?
         To define the mode basis, 3 options are possible: 'HG n m', 'LG\_HELI n m' or 'LG\_SIN n m'
-  \item one can also specified the wavelength (in meter):\\
+  \item one can also specify the wavelength (in meters):\\
         \verb? E_input = E_Field(G1,'w0',0.02,'Wavelength',532E-9) ?
 \end{itemize}
-A non distributed function exist also to create astigmatic beam. Most of OSCAR's functions are applied to objects of this class. The essential functions are described below:\\
+A non distributed function also exists to create astigmatic beams. Most of OSCAR's functions are applied to objects of this class. The essential functions are described below:\\
 
 \noindent \textbf{E2} = \textcolor{blue}{Add\_HOM}(\textbf{E1}, \textbf{max\_mode\_order})
 \vspace*{-0.2cm}
 \begin{quote}
-Add some higher order optical modes to a fundamental mode. It is possible to choose the power distribution of the higher order modes.
+Adds some higher order optical modes to a fundamental mode. It is possible to choose the power distribution of the higher order modes.
 \end{quote}
 
 \noindent \textbf{E2} = \textcolor{blue}{Add\_Sidebands}(\textbf{E1},'Mod\_freq',\textbf{mod freq},'Mod\_depth',\textbf{mod index})
 \vspace*{-0.2cm}
 \begin{quote}
-Create two frequency shifted sidebands fields from a carrier E\_Field \textsl{E1} as the phase modulator would do in the optic lab. The separation frequency between the carrier and the sideband is given by \textsl{mod freq}, and the modulation index by \textsl{mod index}. At present in OSCAR, no sidebands of sidebands is allowed however an arbitrary number of sidebands could be created since the version 3.30.
+Creates two frequency-shifted sideband fields from a carrier E\_Field \textsl{E1} as the phase modulator would do in the optic lab. The separation frequency between the carrier and the sideband is given by \textsl{mod freq}, and the modulation index by \textsl{mod index}. At present in OSCAR, no sidebands of sidebands are allowed but an arbitrary number of sidebands can be created, since the version 3.30.
 \end{quote}
 
 \noindent \textbf{E2} = \textcolor{blue}{ Add\_Tilt}(\textbf{E1},\textbf{angle\_tilt})
 \vspace*{-0.2cm}
 \begin{quote}
-Tilt the wavefront of the field \textbf{E1} by the angle \textbf{angle\_tilt} given in radian. The maximum tilt allowed depends on the pixel size but it is usually a small number (order of the milliradian or less).
+Tilts the wavefront of the field \textbf{E1} by the angle \textbf{angle\_tilt} given in radian. The maximum tilt allowed depends on the pixel size but it is usually a small number (order of the milliradian or less).
 \end{quote}
 
 \noindent overlap = \textcolor{blue}{Calculate\_Overlap}(\textbf{E1,E2})
 \vspace*{-0.2cm}
 \begin{quote}
-Calculate the overlap integral between 2 E\_field. The function returns the complex normalised overlap between the 2 fields. Without any output argument, the function returns in the command window the power coupling (i.e. square of the absolute value of the overlap integral) between the field E1 and E2.
-If only one E\_field is given, it will calculate the overlap between the carrier and of the sidebands pair. The sideband number is selected with the argument 'SB\_num'.
+Calculates the overlap integral between 2 E\_field. The function returns the complex normalized overlap between the 2 fields. Without any output argument, the function returns in the command window the power coupling (i.e. square of the absolute value of the overlap integral) between the field E1 and E2.
+If only one E\_field is given, it will calculate the overlap between the carrier and of the sideband pair. The sideband number is selected with the argument 'SB\_num'.
 \end{quote}
 
 \noindent power = \textcolor{blue}{Calculate\_Power}(\textbf{E1},'include','carrier'|'all'|'SB')
 \vspace*{-0.2cm}
 \begin{quote}
-Calculate the total power of the E\_Field \textsl{E1}. The function can either return a number or display the value in the Matlab command line if no output variable is used. With the same function, one can also calculate the power of the sidebands field:
+Calculates the total power of the E\_Field \textsl{E1}. The function can either return a number or display the value in the Matlab command line if no output variable is used. With the same function, one can also calculate the power of the sideband fields:
 \textcolor{blue}{Calculate\_power}(E1,'include','SB','SB\_num',1)
 \end{quote}
 
 \noindent \textbf{E2} = \textcolor{blue}{Change\_E\_n}(\textbf{E1},\textbf{n})
 \vspace*{-0.2cm}
 \begin{quote}
-Change the refractive index where the laser beam is. Could be used to pass through a flat interface from a vacuum to a mirror substrate for example.
+Changes the refractive index where the laser beam is. Could be used to pass through a flat interface from a vacuum to a mirror substrate for example.
 \end{quote}
 
 \noindent return\_param = \textcolor{blue}{Check\_Pos\_Tilt}(\textbf{E1})
 \vspace*{-0.2cm}
 \begin{quote}
-Use as a diagnostic tool to check the centroid position of the beam on the grid as well as its tilt, function in both directions at the same time.
+Uses as a diagnostic tool to check the centroid position of the beam on the grid as well as its tilt, function in both directions at the same time.
 \end{quote}
 
 \noindent [\textbf{sig\_p sig\_q}] = \textcolor{blue}{Demodulate\_SB}(\textbf{E1},'SB\_num',1,'phase',0)
 \vspace*{-0.2cm}
 \begin{quote}
-Demodulate the field \textsl{E1} with the choosen pair of sidebands. By default, the in phase \textsl{sig\_p} and in quadrature \textsl{sig\_q} signals are returned. This function could be used to derive a Pound Drever Hall error signal as shown in \ref{ch4:ex_PDH}. As optional, a demodulation phase could be given.
+Demodulates the field \textsl{E1} with the chosen pair of sidebands. By default, the in phase \textsl{sig\_p} and in quadrature \textsl{sig\_q} signals are returned. This function could be used to derive a Pound-Drever-Hall error signal as shown in \ref{ch4:ex_PDH}. Optionally, a demodulation phase could be given.
 \end{quote}
 
 \noindent \textcolor{blue}{E\_Plot}(\textbf{E1})
 \vspace*{-0.2cm}
 \begin{quote}
-Display a 2D plot of the field amplitude in a new Matlab figure window. Function can also be used as \textsl{E1}.E\_plot(). We can also display the amplitude in log scale \verb?E_plot(E1,'space','log')? or the propagating angle of the beam \verb?E_plot(E1,'angle')?. To create illustrative picture of the beam without all the axis, one can use the option \verb?'no_axis',true?.
+Displays a 2D plot of the field amplitude in a new Matlab figure window. Function can also be used as \textsl{E1}.E\_plot(). We can also display the amplitude in log scale \verb?E_plot(E1,'space','log')? or the propagation angle of the beam \verb?E_plot(E1,'angle')?. To create illustrative picture of the beam without all the axis, one can use the option \verb?'no_axis',true?.
 
-The same function could be used to the display the 2 sidebands with \textcolor{blue}{E\_Plot}(E1,'display','SB','SB\_num',1). The same options as for the carrier are also possible.
+The same function could be used to display the 2 sidebands with \textcolor{blue}{E\_Plot}(E1,'display','SB','SB\_num',1). The same options as for the carrier are also possible.
 \end{quote}
 
 
 \noindent Mat\_scattered = \textcolor{blue}{Expand\_HOM}(\textbf{E1},\textbf{max\_mode\_order})
 \vspace*{-0.2cm}
 \begin{quote}
-Expand the beam \textsl{E1} into the Hermitte Gauss basis defined by \textsl{E1} (\textsl{E1} must be close to a fundamental mode). The result is given as the normalised power content in the different optical modes. If not output is asked a plot is made. Several options are possible:
+Expands the beam \textsl{E1} into the Hermite-Gauss basis defined by \textsl{E1} (\textsl{E1} must be close to a fundamental mode). The result is given as the normalized power content in the different optical modes. If not output is asked a plot is made. Several options are possible:
 \end{quote}
 \begin{itemize}
-  \item to output all the power content into the different higher order modes up to the order 10 \\
+  \item output all the power content in the different higher order modes up to the order 10 \\
         \verb? Expand_HOM(E1,10,'display','pyramid') ?
-  \item to define a different basis for the calculation given as beam radius and complex wavefront curvature in meter\\
+  \item define a different basis for the calculation given as beam radius and complex wavefront curvature in meters\\
         \verb? Expand_HOM(E1,10,'basis',[0.05 -1400]) ?
 \end{itemize}
 
@@ -161,7 +161,7 @@ For the fit of an astigmatic fundamental mode, it is recommended to use the func
 \vspace*{-0.2cm}
 \begin{quote}
 With this function, one can now simulate mirrors with small radius of curvature to simulate strongly focused beam. The method has been inspired by the work done J.Y. Vinet \cite{Virgo_PB} and H. Yamamoto \cite{Hiro1}.
-This function can dynamically adapt the size of the grid and so the focused beam could be defined on a new grid. This function is used to simulate the focusing mode matching telescope at the input or output of the interferometer.
+This function can dynamically adapt the size of the grid and so the focused beam could be defined on a new grid. This function is used to simulate the focusing mode-matching telescope at the input or output of the interferometer.
 The input argument is the input field and a vector with the focal length of the equivalent mirror/lens and the separation between the optical elements in meters. A telescope with several lenses can be simulated with only one call to the function.
 See the provided example for more details.
 It has also the possibility to add maps and finite aperture of the optics of the telescope.
@@ -170,13 +170,13 @@ It has also the possibility to add maps and finite aperture of the optics of the
 \noindent \textbf{E2} = \textcolor{blue}{Normalise\_E}(\textbf{E1},power)
 \vspace*{-0.2cm}
 \begin{quote}
-Normalise the E\_field \textsl{E1} to 1~W if no \textsl{power} argument is specified. Only the carrier is affected by this function and not the sidebands.
+Normalizes the E\_field \textsl{E1} to 1~W if no \textsl{power} argument is specified. Only the carrier is affected by this function and not the sidebands.
 \end{quote}
 
 \noindent \textbf{E2} = \textcolor{blue}{Propagate\_E}(\textbf{E1},\textbf{dist})
 \vspace*{-0.2cm}
 \begin{quote}
-Propagate the field \textsl{E1} over a distance \textsl{dist} in meter. If sidebands are present, the sidebands are automatically propagated at the same time, with of course the adequate phase shift.
+Propagates the field \textsl{E1} over a distance \textsl{dist} in meters. If sidebands are present, the sidebands are automatically propagated at the same time, with of course the adequate phase shift.
 \end{quote}
 
 \noindent \textbf{E2} = \textcolor{blue}{Reflect\_Mirror}(\textbf{E1},\textbf{I1})
@@ -191,32 +191,32 @@ Reflections inside the substrates are allowed since the index of refraction is t
 \noindent E3 = \textcolor{blue}{ Remove\_00\_Part}(\textbf{E1},E2)
 \vspace*{-0.2cm}
 \begin{quote}
-Remove the fundamental Gaussian part from a field \textbf{E1}. That is useful to see which higher order modes are superposed with the fundamental mode following some cavities simulations. Can also be used to subtract 2 fields E1 and E2 as in the case of destructive interferences.
+Removes the fundamental Gaussian part from a field \textbf{E1}. That is useful to see which higher order modes are superposed with the fundamental mode following some cavities simulations. Can also be used to subtract 2 fields E1 and E2 as in the case of destructive interference.
 \end{quote}
 
 
 \noindent \textbf{E2} = \textcolor{blue}{Transmit\_Aperture}(\textbf{E1},\textbf{size}, 'circle' $\mid$ 'square')
 \vspace*{-0.2cm}
 \begin{quote}
-Transmit the field \textsl{E1} through an aperture of diameter \textsl{size}. The aperture could be round or square, if not specified it is round. Custom aperture can also be defined see the function help for example.
+Transmits the field \textsl{E1} through an aperture of diameter \textsl{size}. The aperture could be round or square, if not specified it is round. Custom aperture can also be defined (see the function help for examples).
 \end{quote}
 
 \noindent \textbf{E2} = \textcolor{blue}{Transmit\_Lens}(\textbf{E1},\textbf{focal length})
 \vspace*{-0.2cm}
 \begin{quote}
-Transmit the field \textsl{E1} through a lens of a given focal length.
+Transmits the field \textsl{E1} through a lens of a given focal length.
 \end{quote}
 
 \noindent [\textbf{E\_trans} E\_ref]= \textcolor{blue}{Transmit\_Reflect\_Interface}(\textbf{E1},\textbf{I1})
 \vspace*{-0.2cm}
 \begin{quote}
-Transmit and reflect the field \textsl{E1} through an interface \textsl{I1}. The orientation of the interface is given by the refractive index of the incoming field \textsl{E1}.
+Transmits and reflects the field \textsl{E1} through an interface \textsl{I1}. The orientation of the interface is given by the refractive index of the incoming field \textsl{E1}.
 \end{quote}
 
 \noindent [\textbf{E\_trans} E\_ref]= \textcolor{blue}{Transmit\_Reflect\_Mirror}(\textbf{E1},\textbf{M1},\textbf{HR/AR})
 \vspace*{-0.2cm}
 \begin{quote}
-Transmit and reflect the field \textsl{E1} through a mirror \textsl{M1}. One must select which side of the mirror is first met for the propagation, either we enter by the AR or HR side.
+Transmits and reflects the field \textsl{E1} through a mirror \textsl{M1}. One must select which side of the mirror is first met for the propagation, either we enter by the AR or HR side.
 \end{quote}
 
 For convenience, the operators +,- and * have also been overloaded to work with any object \textsl{E\_field}.
@@ -226,7 +226,7 @@ For convenience, the operators +,- and * have also been overloaded to work with 
 
 \subsection{The class Prop\_operator}
 \label{Sec:DI}
-This is an internal class which must be almost invisible for the user. The objects of this class allows to speed up the propagation of electrical field \textsl{E\_Field} thanks to the pre-calculation of the propagation matrix. A \textsl{Prop\_operator} is automatically created when a cavity is created. It represents the propagation operator over one cavity length.
+This is an internal class which must be almost invisible for the user. The objects of this class allow to speed up the propagation of electrical field \textsl{E\_Field} thanks to the pre-calculation of the propagation matrix. A \textsl{Prop\_operator} is automatically created when a cavity is created. It represents the propagation operator over one cavity length.
 
 Since OSCAR 3.10, a new method of propagation has been implemented based on the method of digital integration \cite{DI_paper}. This method is slower, however it eliminates the light leaking out from the simulation grid. With the direct implementation, a minimal distance of propagation is essential for the validity of this technique. The distance depends on the size of the grid and can be checked with the function \textcolor{blue}{What\_is\_possible}.
 
@@ -243,7 +243,7 @@ The creator for this class is:
 
 \vspace*{-0.2cm}
 \begin{quote}
-The variable \textsl{Length} represents the propagation length in meter. One can also specify an optional parameter \textsl{n}, the refractive index of the media, that way, thick substrate can also be implemented.
+The variable \textsl{Length} represents the propagation length in meters. One can also specify in an optional parameter \textsl{n} the refractive index of the media, so that thick substrate can also be implemented.
 \end{quote}
 To propagate a laser beam (and its sidebands) one can simply use:
 
@@ -252,19 +252,19 @@ To propagate a laser beam (and its sidebands) one can simply use:
 \subsection{The class Interface}
 \textbf{I1} = \textcolor{blue}{Interface}(\textbf{Grid\_name},options)
 
-The class \textsl{Interface} is used to represent a surface which separates two media of refractive index. Objects of this class are used to represent mirrors, lenses or curved interfaces between air and glass. The structure of the class \textsl{Interface} is described in \ref{App3:Inter}.
+The class \textsl{Interface} is used to represent a surface which separates two media of different refractive index. Objects of this class are used to represent mirrors, lenses or curved interfaces between air and glass. The structure of the class \textsl{Interface} is described in \ref{App3:Inter}.
 
-To define a concave mirror for a laser beam, the radius of curvature must be positive. Internally in OSCAR, the sagitta of the surface view from the medium n1 toward n2 will be negative by convention. The surface is stored in the variable \textsl{I1.surface}.
+To define a concave mirror for a laser beam, the radius of curvature must be positive. Internally in OSCAR, the sagitta of the surface viewed from the medium $n1$ toward $n2$ will be negative by convention. The surface is stored in the variable \textsl{I1.surface}.
 
 Below are some ways to define an interface:
 \begin{itemize}
-  \item Interface to define a curved surface of radius 1000~m between the refractive 1 and 1.45 \\
+  \item Interface to define a curved surface of radius 1000~m between the refractive indices 1 and 1.45 \\
         \verb?  Interface(Grid,'RoC',1E3,'n1',1,'n2',1.45) ?
-  \item a mirror with an aperture of 20~cm of diameter \\
+  \item Mirror with 20~cm diameter aperture\\
       \verb?  Interface(Grid,'RoC',1E3,'CA',0.2) ?
-   \item a mirror with an aperture of 20~cm of diameter and angle of incidence of 3 degrees \\
+   \item Mirror with 20~cm diameter aperture and 3 degrees angle of incidence \\
       \verb?  Interface(Grid,'RoC',1E3,'CA',0.2,'AoI',3) ?
-  \item add the transmission of 1\% and loss of 50 ppm\\
+  \item Add a 1\% transmission and 50 ppm loss\\
         \verb?  Interface(Grid,'RoC',1E3,'CA',0.2.'T',0.01,'L',50E-6) ?
 \end{itemize}
 The optional parameters can be defined in any order. To define flat mirrors, a \verb?'RoC'? of \verb?0 or Inf? can be used. Check the file \verb?@Interface/Interface.m? to see the default parameters such as refractive indexes.
@@ -274,50 +274,50 @@ The list of methods associated with the objects of the class \textsl{Interface} 
 \noindent \textbf{I2} = \textcolor{blue}{Add\_Astigmatism}(\textbf{I1}, \textbf{Zernike amplitude}, \textbf{Diameter})
 \vspace*{-0.2cm}
 \begin{quote}
-Add to the surface of the interface \textsl{I1} the Zernike polynomial 2,2 (which represents the astigmatism) with an amplitude of \textsl{Zernike amplitude} and over a diameter \textsl{Diameter}.
+Adds to the surface of the interface \textsl{I1} the Zernike polynomial 2,2 (which represents the astigmatism) with an amplitude of \textsl{Zernike amplitude} and over a diameter \textsl{Diameter}.
 \end{quote}
 
 
 \noindent \textbf{I2} = \textcolor{blue}{Add\_Map}(\textbf{I1}, \textbf{filename}, options)
 \vspace*{-0.2cm}
 \begin{quote}
-Add to the surface of the interface \textsl{I1} a square map loaded from the file \textsl{filename}. For square maps, the resolution of one pixel must be given by the parameters \verb?'reso'?. The map can also be normalised to a certain RMS using the option \verb?'RMS'? or the height can be scaled by scalar with the option \verb?'scale'?. One can also rotate the map by a number of time 90 degrees with the option \verb?'rotate'?. The option \verb?'remove the tilt and focus'? can remove the tilt focus from the added map. The tilt/focus is removed over all the surface but with the optimal fit calculated only over a diameter.
+Adds to the surface of the interface \textsl{I1} a square map loaded from the file \textsl{filename}. For square maps, the resolution of one pixel must be given by the parameters \verb?'reso'?. The map can also be normalized to a certain RMS using the option \verb?'RMS'? or the height can be scaled by scalar with the option \verb?'scale'?. One can also rotate the map by a number of times 90 degrees with the option \verb?'rotate'?. The option \verb?'remove the tilt and focus'? can remove the tilt and focus from the added map. The tilt/focus is removed over all the surface but with the optimal fit calculated only over a diameter.
 
 Here some examples:
 \begin{itemize}
-  \item load the file map1.dat \\
+  \item Load the file map1.dat \\
         \verb? I1 = Add_map(I1,'map1.dat','reso',3.5E-4) ?
-  \item load the map and scale it to 1 nm RMS \\
+  \item Load the map and scale it to 1 nm RMS \\
         \verb? I1 = Add_map(I1,'map1.dat','reso',3.5E-4,'RMS',1E-9) ?
-  \item rotate the map by 90 degree \\
+  \item Rotate the map by 90 degree \\
         \verb? I1 = Add_map(I1,'map1.dat','reso',3.5E-4,'rotate',1) ?
-  \item remove the tilt and focus \\
+  \item Remove the tilt and focus \\
          \verb? I1 = Add_map(I1,'map1.dat','reso',3.5E-4,'remove_tilt_focus',0.150) ?
 \end{itemize}
 
-Maps with cylindrical symmetry can be loaded as a 2 columns text file. First column is the radius and the second is the height in meter. In that case the resolution does not have to be specified. To suppress the output, the option \verb?'verbose',false? can be used. A new argument is possible to offset the map \verb?'centering'? if the region of interest is not at the center of the map.
+Maps with cylindrical symmetry can be loaded as a 2-column text files. First column is the radius and the second is the height in meters. In that case the resolution does not have to be specified. To suppress the output, the option \verb?'verbose',false? can be used. A new argument is possible to offset the map \verb?'centering'? if the region of interest is not at the center of the map.
 \end{quote}
 
 
 \noindent \textbf{I2} = \textcolor{blue}{Add\_Tilt}(\textbf{I1}, \textbf{tilt\_angle}, 'x')
 \vspace*{-0.2cm}
 \begin{quote}
-Tilt the whole surface of the interface \textsl{I1} by the amount \textsl{tilt\_angle} in radian. It is possible to specify the direction of the tilt by setting the third argument \textsl{'x'} or \textsl{'y'}. By default the tilt is in the vertical direction (recommended solution).
+Tilts the whole surface of the interface \textsl{I1} by the amount \textsl{tilt\_angle} in radian. It is possible to specify the direction of the tilt by setting the third argument \textsl{'x'} or \textsl{'y'}. By default the tilt is in the vertical direction (recommended solution).
 \end{quote}
 
 
 \noindent \textbf{I2} = \textcolor{blue}{Cut\_Frequency\_Interface}(\textbf{I1},\textbf{Option},\textbf{f\_cut})
 \vspace*{-0.2cm}
 \begin{quote}
-Remove certain spatial frequencies within a given interface object. The argument \textsl{Option} is a string \verb?'LP'?, \verb?'HP'? or \verb?'BP'? for respectively low pass, high pass or band pass filter. \textsl{f\_cut} is the corner spatial frequency in m$^{-1}$, for band pass filtering \textsl{f\_cut} is vector of two frequencies.\\
-The implementation for the filtering is done in a straight forward manner (see the simple code), so as a result artefact may appear in the resulting object \textsl{I2} and so this function must be used with cautious.
+Removes certain spatial frequencies within a given interface object. The argument \textsl{Option} is a string \verb?'LP'?, \verb?'HP'? or \verb?'BP'? for respectively low pass, high pass or band pass filter. \textsl{f\_cut} is the corner spatial frequency in m$^{-1}$, for band pass filtering \textsl{f\_cut} is vector of two frequencies.\\
+The implementation for the filtering is done in a straightforward manner (see the simple code), so that artifacts may appear in the resulting object \textsl{I2} and that this function should be used with caution.
 \end{quote}
 
 
 \noindent I2 = \textcolor{blue}{Expand\_Zernike}(\textbf{I1},options)
 \vspace*{-0.2cm}
 \begin{quote}
-Expand in Zernike polynomials the interface \textsl{I1}. Two options are available: 'Z\_order', an integer which represents the maximum order of the Zernike polynomials to take into account in the calculations and 'diam', the diameter where the Zernike polynomials are defined. This function returns the interface \textsl{I2}, which is the interface reconstructed by the Zernike polynomials. Example:
+Expands in Zernike polynomials the interface \textsl{I1}. Two options are available: 'Z\_order', an integer which represents the maximum order of the Zernike polynomials to take into account in the calculations and 'diam', the diameter where the Zernike polynomials are defined. This function returns the interface \textsl{I2}, which is the interface reconstructed by the Zernike polynomials. Example:
 \verb? I2 = Expand_Zernike(I1,'Z_order',10,'diam',0.2) ?
 \end{quote}
 
@@ -325,7 +325,7 @@ Expand in Zernike polynomials the interface \textsl{I1}. Two options are availab
 \noindent \textcolor{blue}{I\_Plot}(\textbf{I1})
 \vspace*{-0.2cm}
 \begin{quote}
-Plot the surface of the interface \textsl{I1}. The color scale is in meter. \verb? I_plot(I1,'diam',0.160)? will only plot the surface over a diameter of 160mm. With optional arguments, one can change the scale of the vertical axis and also zoom in the central part.
+Plots the surface of the interface \textsl{I1}. The color scale is in meters. \verb? I_plot(I1,'diam',0.160)? will only plot the surface over a diameter of 160mm. With optional arguments, one can change the scale of the vertical axis and also zoom in the central part.
 \end{quote}
 
 
@@ -336,11 +336,11 @@ Function used to calculate the one dimension Power Spectral Density (PSD) of a s
 
 An example for the possible options can be found below, combination of the different options is allowed:
 \begin{itemize}
-  \item Calculate the PSD over a given diameter, given in meter \\
+  \item Calculate the PSD over a given diameter, given in meters \\
         \verb? [PSD_1 freq] = Plot_PSD(I1,'diam',0.150) ?
   \item Calculate the PSD by summing radial frequencies \\
         \verb? [PSD_1 freq] = Plot_PSD(I1,'rect_1D',false) ?
-  \item Use a Gaussian weighting to calculate the PSD, must input the Gaussian beam radius (in meter) \\
+  \item Use a Gaussian weighting to calculate the PSD, must input the Gaussian beam radius (in meters) \\
         \verb? [PSD_1 freq] = Plot_PSD(I1,'window_Gaussian',0.05) ?
   \item Plot directly the PSD in the current window \\
         \verb? [PSD_1 freq] = Plot_PSD(I1,'display',true) ?
@@ -351,7 +351,7 @@ An example for the possible options can be found below, combination of the diffe
 \noindent RMS = \textcolor{blue}{Weighted\_RMS}(\textbf{I1},'E',\textbf{Ein})
 \vspace*{-0.2cm}
 \begin{quote}
-Calculate the RMS of the surface \textsl{I1} weighted by the intensity of the field \textsl{Ein}. A diameter can also be given as the second argument. Beware the curvature is not subtracted before the calculation, so a perfectly curved spherical mirror will have a non zero RMS.
+Calculate the RMS of the surface \textsl{I1} weighted by the intensity of the field \textsl{Ein}. A diameter can also be given as the second argument. Beware that the curvature is not subtracted before the calculation, so that a perfectly curved spherical mirror will have a non zero RMS.
 \begin{itemize}
   \item Calculate the weighted RoC \\
         \verb? RMS = Weighted_RMS(I1,'E',E_Field(G1,'w',0.05)) ?
@@ -364,7 +364,7 @@ Calculate the RMS of the surface \textsl{I1} weighted by the intensity of the fi
 \noindent RoC\_fitted = \textcolor{blue}{Weighted\_RoC}(\textbf{I1},'E',\textbf{Ein})
 \vspace*{-0.2cm}
 \begin{quote}
-Calculate the radius of curvature of the surface \textsl{I1} weighted by the intensity of the field \textsl{Ein}. This calculation is useful to fit non perfectly spherical surface. A diameter can also be given as the second argument.
+Calculate the radius of curvature of the surface \textsl{I1} weighted by the intensity of the field \textsl{Ein}. This calculation is useful to fit non perfectly spherical surfaces. A diameter can also be given as the second argument.
 \begin{itemize}
   \item Calculate the weighted RoC \\
         \verb? RoC = Weighted_RoC(I1,'E',E_Field(G1,'w',0.05)) ?
@@ -373,16 +373,16 @@ Calculate the radius of curvature of the surface \textsl{I1} weighted by the int
 \end{itemize}
 \end{quote}
 
-The operators \verb?+?,\verb?-? have also been overloaded to be used with object of the class \textit{Interface}.
+The operators \verb?+?,\verb?-? have also been overloaded to be used with objects of the class \textit{Interface}.
 
 \subsection{The class Mirror}
 \textbf{M} = \textcolor{blue}{Mirror}( \textbf{I\_HR}, \textbf{I\_AR}, \textbf{Substrate\_length})
 
 This class can simulate thick substrates. The substrate can be part of a cavity as an input mirror for example. If the substrate is part of the cavity, the surface \textsl{I\_HR} is supposed to be the HR coating (and hence inside the cavity).
 
-\textsl{I\_HR} and \textsl{I\_AR} are 2 objects of the class \textsl{Interface}. The 2 interfaces must share the same refractive index superior to 1. \textsl{Substrate\_length} is a scalar used to represent the thickness of the substrate in meter.
+\textsl{I\_HR} and \textsl{I\_AR} are 2 objects of the class \textsl{Interface}. The 2 interfaces must share the same refractive index superior to 1. \textsl{Substrate\_length} is a scalar used to represent the thickness of the substrate in meters.
 
-The mirror object can also be used to simulate the etalon effect. Indeed if the AR surface is imperfect (R\_AR $>$ 0), light can be bounced several times within the substrate before exiting. The number of round trip is hard-coded but can be changed using the line (by default it is 1):
+The mirror object can also be used to simulate the etalon effect. Indeed if the AR surface is imperfect (R\_AR $>$ 0), light can be bounced several times within the substrate before exiting. The number of round-trips is hard-coded but can be changed using the line (by default it is 1):
 
  \verb? M.RT_inside=3 ?
 
@@ -391,7 +391,7 @@ Two similar procedures can be used with the class \textsl{Mirror}. The procedure
 \noindent [\textbf{E\_trans} E\_ref]= \textcolor{blue}{Transmit\_Reflect\_Mirror}(\textbf{E1},\textbf{M1},'AR')
 \vspace*{-0.2cm}
 \begin{quote}
-Calculate the transmitted and reflected fields (\textsl{E\_trans} and \textsl{E\_ref} respectively) by an object \textsl{M1} of the class Mirror. The input beam is \textsl{E1}. The first interface to consider, indicating the direction of the incoming beam can be either the HR or AR surfaces according to the last argument 'HR' or 'AR' .
+Calculates the transmitted and reflected fields (\textsl{E\_trans} and \textsl{E\_ref} respectively) by an object \textsl{M1} of the class Mirror. The input beam is \textsl{E1}. The first interface to consider, indicating the direction of the incoming beam can be either the HR or AR surfaces according to the last argument 'HR' or 'AR' .
 \end{quote}
 
 A new wrapper function \textcolor{blue}{Transmit\_Reflect\_Optic} has also been created which can be used by either Interface object or Mirror object. Internally, this function calls the function \textcolor{blue}{Transmit\_Reflect\_Interface} or \textcolor{blue}{Transmit\_Reflect\_Mirror} depending on the input parameters.
@@ -413,66 +413,66 @@ Variables of instances of the class \textsl{Cavity1} are listed in {App3:Cavity}
 \noindent \textbf{Cout} = \textcolor{blue}{Calculate\_fields}(\textbf{Cin})
 \vspace*{-0.2cm}
 \begin{quote}
-\textcolor{blue}{Calculate\_fields} calculates the fields on resonance inside the cavity and stored them for future use. Compared to \textcolor{blue}{Get\_info} this function also calculates the reflected field, so the input laser beam has can not be defined inside the cavity. The results can be displayed using \textcolor{blue}{Display\_results}(Cout).
-Before the finding the steady state fields inside the cavity, the cavity working point (i.e the resonance condition) has to be set, for example using the function \textcolor{blue}{Cavity\_resonance\_phase}.
+\textcolor{blue}{Calculate\_fields} calculates the fields on resonance inside the cavity and stores them for future use. Compared to \textcolor{blue}{Get\_info} this function also calculates the reflected field, so the input laser beam cannot be defined inside the cavity. The results can be displayed using \textcolor{blue}{Display\_results}(Cout).
+Before finding the steady state fields inside the cavity, the cavity working point (i.e the resonance condition) has to be set, for example using the function \textcolor{blue}{Cavity\_resonance\_phase}.
 With the option argument \verb?'iter'? or \verb?'accuracy'?, one can set the level of accuracy (and hence the computational time) for the simulation.
 \end{quote}
 
 \noindent \textbf{Cout} = \textcolor{blue}{Calculate\_fields\_AC}(\textbf{Cin})
 \vspace*{-0.2cm}
 \begin{quote}
-\textcolor{blue}{Calculate\_fields\_AC} is similar to the function \textcolor{blue}{Calculate\_fields} except it used the accelerated convergence scheme \cite{Saha:97,DAY_AC} to find the steady state fields inside the cavity. The gain in speed could be important if the cavity is close to a perfect cavity, so the steady field is near a perfect fundamental mode.
-This function works for the carrier and for the sideband fields, if present. Also for a better convergence it is recommended to use the digital integration method for the propagation of the field (see \ref{Sec:DI}).
-A second function \textcolor{blue}{Calculate\_fields\_AC2} using another more advanced convergence scheme which can give more accurate results.
+\textcolor{blue}{Calculate\_fields\_AC} is similar to the function \textcolor{blue}{Calculate\_fields} except that it uses the accelerated convergence scheme \cite{Saha:97,DAY_AC} to find the steady state fields inside the cavity. The gain in speed could be important if the cavity is close to a perfect cavity, so the steady field is near a perfect fundamental mode.
+This function works for the carrier and for the sideband fields, if present. For a better convergence, it is also recommended to use the digital integration method for the propagation of the field (see \ref{Sec:DI}).
+A second function \textcolor{blue}{Calculate\_fields\_AC2} uses another more advanced convergence scheme which can give more accurate results.
 \end{quote}
 
 \noindent \textbf{Cout} = \textcolor{blue}{Calculate\_RT\_mat}(\textbf{Cin})
 \vspace*{-0.2cm}
 \begin{quote}
-Calculate the round trip kernel of the cavity for the electrical field. This is later use to calculate the cavity eigenmodes and eigen values. The kernel itself is a 2D complex matrix of size \textsl{Nb\_points}$^2$ $\times$ \textsl{Nb\_points}$^2$, so the kernel can real take out a lot of memory. On a desktop, one might want to limit textsl{Nb\_points} to 64, while on a powerful desktop one can go up to 128.
+Calculates the round-trip kernel of the cavity for the electrical field. This is later use to calculate the cavity eigenmodes and eigenvalues. The kernel itself is a 2D complex matrix of size \textsl{Nb\_points}$^2$ $\times$ \textsl{Nb\_points}$^2$, so the kernel can really occupy a lot of memory. On a desktop, one might want to limit \textsl{Nb\_points} to 64, while on a powerful desktop one can go up to 128.
 
-To calculate the kernel, the digital integration technique has to be used for the beam propagation. This technique to be valid required a minimum propagation distance which depends on the size of the grid. If this is a problem, the kernel can be calculated on a different grid (contact the author for more details on this topic).
+To calculate the kernel, the digital integration technique has to be used for the beam propagation. To be valid, this technique requires a minimum propagation distance which depends on the size of the grid. If this is a problem, the kernel can be calculated on a different grid (contact the author for more details on this topic).
 \end{quote}
 
 \noindent \textbf{Cout} = \textcolor{blue}{Cavity\_lock\_PDH}(\textbf{Cin})
 \vspace*{-0.2cm}
 \begin{quote}
-Adjust the resonance condition to minimise the error signal derived from a Pound Drever Hall locking scheme \cite{black:79}. To calculate the error signal a pair of sidebands must be present and the function \textcolor{blue}{Cavity\_resonance\_phase} must first be run.
+Adjusts the resonance condition to minimize the error signal derived from a Pound-Drever-Hall locking scheme \cite{black:79}. To calculate the error signal a pair of sidebands must be present and the function \textcolor{blue}{Cavity\_resonance\_phase} must first be run.
 \end{quote}
 
 \noindent \textcolor{blue}{Check\_stability}(\textbf{Cin})
 \vspace*{-0.2cm}
 \begin{quote}
-Calculate the radius of curvature of the input and end mirrors and then check the stability and gain of the cavity. Function useful when mirror maps with curvature are used. An optional second argument could be given to specify the diameter on which the mirror radius of curvature is calculated. For example to calculate the stability of the cavity only taking into account the central 6 cm diameter of the mirror, one can use:
+Calculates the radius of curvature of the input and end mirrors and then check the stability and gain of the cavity. It is a useful function when mirror maps with curvature are used. An optional second argument could be given to specify the diameter on which the mirror radius of curvature is calculated. For example to calculate the stability of the cavity only taking into account the central 6 cm diameter of the mirror, one can use:
 \verb? Check_stability(C1,'diam',0.06) ?
-The function also return the input beam parameters of the fundamental mode for a perfect mode matching.
+The function also returns the input beam parameters of the fundamental mode for a perfect mode-matching.
 
 \end{quote}
 
 \noindent \textcolor{blue}{Check\_matching}(\textbf{Cin},nb\_RT)
 \vspace*{-0.2cm}
 \begin{quote}
-Propagate the input beam back and forth between the cavity input and end mirrors and check the beam size before each reflection. The mode matching is good if during multiple round trips the beam size on the mirror does not fluctuate (but could be different of course on the input and end mirror). The optional argument \textsl{nb\_RT} can set the number of round trip to be done.
+Propagates the input beam back and forth between the cavity input and end mirrors and checks the beam size before each reflection. The mode-matching is good if during multiple round-trips the beam size on the mirror does not fluctuate (but could be different of course on the input and end mirror). The optional argument \textsl{nb\_RT} can set the number of round-trips to be done.
 \end{quote}
 
 \noindent \textbf{Cout} = \textcolor{blue}{Cavity\_resonance\_phase}(\textbf{Cin})
 \vspace*{-0.2cm}
 \begin{quote}
-Calculate the macroscopic length tuning to bring the cavity on resonance for the input field. The cavity resonance has to be found before any calculations on the cavity (circulating fields, loss calculations,\dots) are launched. The input and output arguments are usually the same.
-A second function \textcolor{blue}{Cavity\_resonance\_phase2} is also present, this function gives more accurate results when the cavity is degenerated.
+Calculates the macroscopic length tuning to bring the cavity on resonance for the input field. The cavity resonance has to be found before any calculations on the cavity (circulating fields, loss calculations,\dots) are launched. The input and output arguments are usually the same.
+A second function \textcolor{blue}{Cavity\_resonance\_phase2} is also present, this function gives more accurate results when the cavity is degenerate.
 \end{quote}
 
 \noindent \textbf{Cout} = \textcolor{blue}{Cavity\_scan}(\textbf{Cin})
 \vspace*{-0.2cm}
 \begin{quote}
-Scan the cavity over one free spectral range and then set the cavity resonance to maximise the circulating power. This procedure is much slower than \textcolor{blue}{Cavity\_resonance\_phase} but can still be useful to check if some higher order modes are excited since after the FSR scan can be displayed.
+Scans the cavity over one free spectral range and then sets the cavity resonance to maximize the circulating power. This procedure is much slower than \textcolor{blue}{Cavity\_resonance\_phase} but can still be useful to check if some higher order modes are excited, since afterwards the FSR scan can be displayed.
 The presence of sidebands in the input beam of the cavity can also be implemented. First the sidebands have to be defined and then the option \verb? 'With_SB',true? must be added in the command.
 \end{quote}
 
 \noindent \textcolor{blue}{Display\_cavity\_modes}(\textbf{Cin},'N',10,'Airy',1)
 \vspace*{-0.2cm}
 \begin{quote}
-Display the cavity eigen modes. The function \textcolor{blue}{Calculate\_RT\_mat} must first has been run, so the cavity kernel has been calculated. With this function one can display an arbitrary number of modes (by default the first 20) and also draw the Airy peak of the cavity with the command:
+Displays the cavity eigenmodes. The function \textcolor{blue}{Calculate\_RT\_mat} must be run first to calculate the cavity kernel. With this function one can display an arbitrary number of modes (by default the first 20) and also draw the Airy peak of the cavity with the command:
 
   \verb? Display\_cavity\_modes(C1,'N',30,'Airy',1) ?
 
@@ -482,13 +482,13 @@ An example of how to use the function \textcolor{blue}{Display\_cavity\_modes} i
 \noindent \textcolor{blue}{Display\_scan}(\textbf{Cin})
 \vspace*{-0.2cm}
 \begin{quote}
-Display the scan from a cavity after the procedure \textcolor{blue}{Cavity\_scan} was run. By moving the cursor on the upper plot (circulating power vs tuning), the profile of the optical modes can be checked in the lower right plot.
+Displays the scan from a cavity after the procedure \textcolor{blue}{Cavity\_scan} was run. By moving the cursor on the upper plot (circulating power vs tuning), the profile of the optical modes can be checked in the lower right plot.
 \end{quote}
 
 \noindent \textcolor{blue}{Get\_info}(\textbf{Cin})
 \vspace*{-0.2cm}
 \begin{quote}
-\textcolor{blue}{Get\_info} calculates the fields on resonance inside the cavity. The function is also use to calculate the diffraction loss due to the mirror finite size.
+\textcolor{blue}{Get\_info} calculates the fields on resonance inside the cavity. The function is also used to calculate the diffraction loss due to the mirror finite size.
 \end{quote}
 
 
@@ -497,12 +497,12 @@ Display the scan from a cavity after the procedure \textcolor{blue}{Cavity\_scan
 
 \textbf{CN} = \textcolor{blue}{CavityN}( \textbf{I}, \textbf{D}, \textbf{E1})
 
-This class introduces linear cavity with arbitrary number of mirrors. \textsl{I} represents a vector of object Interfaces, \textsl{D} is a vector of distances and finally \textsl{E1} is the input laser field.
+This class introduces linear cavities with arbitrary number of mirrors. \textsl{I} represents a vector of object Interfaces, \textsl{D} is a vector of distances and finally \textsl{E1} is the input laser field.
 
 Two kinds of cavity could be defined:
 \begin{itemize}
-  \item A ring cavity where the laser beam is reflected on each mirror only once during one round trip (3 or 4 mirrors mode cleaner cavity falls in this category). In that case, the length of the vector \textsl{I} is the same as the one of \textsl{D}.
-  \item A folded cavity, where during one round trip the laser beam is reflected twice by the intermediate mirrors (think recycling folded cavity of LIGO). In that case, it has one more interface \textsl{I} than length \textsl{D}.
+  \item A ring cavity where the laser beam is reflected on each mirror only once during one round-trip (3- or 4-mirror mode-cleaner cavities fall in this category). In that case, the length of the vector \textsl{I} is the same as the one of \textsl{D}.
+  \item A folded cavity, where during one round-trip the laser beam is reflected twice by the intermediate mirrors (think recycling folded cavity of LIGO). In that case, it has one more interface \textsl{I} than length \textsl{D}.
 \end{itemize}
 
 
@@ -512,9 +512,9 @@ An example of how to use the class \textsl{CavityN} is shown in the script \text
 
 \subsection{The class Mirror}
 
-This class is used to simulate optics with thick substrates. So a mirror is defined as 2 surfaces separated by a distance with a certain refractive index. Typically, one surface is coated with an anti-reflective coating while the second surface has a high reflectivity coating.
+This class is used to simulate optics with thick substrates. A mirror is thus defined as 2 surfaces separated by a distance with a certain refractive index. Typically, one surface is coated with an anti-reflective coating while the second surface has a high reflectivity coating.
 
-Similar to a cavity, the light can do several round trip within the substrate if the anti-reflection is not perfect. So the Mirror object can be used to simulate the etalon effect within a substrate. It is not possible to set the resonance condition in the substrate but one can scan the substrate length over wavelength to check this effect.
+Similar to a cavity, the light can do several round-trips within the substrate if the anti-reflection is not perfect. So the Mirror object can be used to simulate the etalon effect within a substrate. It is not possible to set the resonance condition in the substrate but one can scan the substrate length over wavelength to check this effect.
 
 Mirror object can be used with the class \textsl{Cavity1} to form a cavity between the 2 high reflectivity surfaces.
 
@@ -531,7 +531,7 @@ Two main new features have already been implemented but not released:
    \item \textbf{GPU portability.} Use of Nvidia graphic card to speed up the calculation.
 \end{itemize}
 
-If need urgently some new functions and can not wait for future versions, you can contact directly the author.
+If new functions are needed urgently and cannot wait for future versions, you can contact directly the author.
 
 %-----------------------------------------------------------------------------------
 
@@ -541,7 +541,7 @@ After the formal previous chapter, here is the most interesting part: the concre
 
 \section{Beam parameters after a thick lens}
 
-Before learning how to define cavities, we can already see how to propagate a laser beam through a custom made thick lens. The lens is bi-convex, made of fused silica (n=1.45) and is 4\,cm thick . The first surface has a radius of 1\,km and the second 2\,km. At the exit of the lens, we propagate the beam further by 200\,m and then measure its parameter. The commented script is called \textcolor{blue}{Example\_Thick\_lens.m} and can be found in the OSCAR folder.\\
+Before learning how to define cavities, we can already see how to propagate a laser beam through a custom-made thick lens. The lens is bi-convex, made of fused silica (n=1.45) and is 4\,cm thick . The first surface has a radius of 1\,km and the second 2\,km. At the exit of the lens, we propagate the beam further by 200\,m and then measure its parameter. The commented script is called \textcolor{blue}{Example\_Thick\_lens.m} and can be found in the OSCAR folder.\\
 
 The first surface is defined in OSCAR by the line:
 
@@ -549,7 +549,7 @@ The first surface is defined in OSCAR by the line:
 
 To transmit the laser beam \verb|E1| through the interface, the command is simply \verb|E2 = Transmit_Reflect_Interface(E1,L1)|. Then the beam is propagated along 4\,cm with the command \verb|E2 = Propagate_E(E2,0.04)| and finally passes through the second interface.
 
-At the end of the script, the laser beam parameter are displayed using the command \verb|Fit_TEM00(E3)|. The condensed script for the transmission of the thick lens is shown in the listing \ref{lis4:ex_Thick_lens}.\\
+At the end of the script, the laser beam parameter is displayed using the command \verb|Fit_TEM00(E3)|. The condensed script for the transmission of the thick lens is shown in the listing \ref{lis4:ex_Thick_lens}.\\
 
 \begin{lstlisting}[float=htp,caption=Example of OSCAR script to simulate a thick lens\label{lis4:ex_Thick_lens},frame=lines]
 G1 = Grid(256,0.3);
@@ -576,7 +576,7 @@ In this example, we will calculate the circulating power in a Fabry Perot cavity
 
 The Fabry Perot cavity is 1\,km long and the input and end mirrors have a radius of curvature of 2500~\,m. Both mirrors have a transmission of 2\% and no loss. The diameter of the mirror is set to 10~cm. The incident beam has a beam radius of 2\,cm and a radius wavefront curvature of 2500\,m.\\
 
-The 7 lines of the script to define and the cavity and do the calculations can be found in the listing \ref{lis4:cav_circ}. This script with additional commented lines can be found in the OSCAR3.0 folder under the name \textcolor{blue}{Example\_Pcirc.m}.
+The 7 lines of the script to define the cavity and do the calculations can be found in the listing \ref{lis4:cav_circ}. This script with additional commented lines can be found in the OSCAR3.0 folder under the name \textcolor{blue}{Example\_Pcirc.m}.
 
 \begin{lstlisting}[float=htp,caption=Example of OSCAR script to calculate the circulating power\label{lis4:cav_circ},frame=lines]
 G1 = Grid(128,0.3);
@@ -590,7 +590,7 @@ C1 = Cavity_resonance_phase(C1);
 Get_info(C1);
 \end{lstlisting}
 
-The script takes less than 10s to run on a modern laptop. At the end, \emph{Get\_info(C1)} returns a detailed list of information regarding the cavity with a plot of the circulating power and the power buildup. Return of \emph{Get\_info(C1)} in the Matlab command line:
+The script takes less than 10s to run on a modern laptop. At the end, \emph{Get\_info(C1)} returns a detailed list of information regarding the cavity with a plot of the circulating power and the power buildup. Return of \emph{Get\_info(C1)} in the Matlab console:
 
 \newpage
 
@@ -623,7 +623,7 @@ C1 =  Cavity_scan(C1);
 Display_scan(C1);
 \end{lstlisting}
 
-The script takes around 2 minutes to run. The output is the Matlab figure shown in the figure \ref{fig4:scan}. The top plot is a cavity scan over one free spectral range. We can notice 3 peaks, from left to right the first peak is a LG$_{10}$ due to imperfect mode matching, the second is the mode HG$_{10}$ and the third one, the highest is the fundamental mode.
+The script takes around 2 minutes to run. The output is the Matlab figure shown in the figure \ref{fig4:scan}. The top plot is a cavity scan over one free spectral range. We can notice 3 peaks : from left to right the first peak is a LG$_{10}$ due to imperfect mode-matching, the second is the mode HG$_{10}$ and the third and highest one is the fundamental mode.
 
 \begin{figure}
 \begin{center}
@@ -634,7 +634,7 @@ The script takes around 2 minutes to run. The output is the Matlab figure shown 
 
 \section{Mirror maps and higher order modes}
 
-In this example, we will demonstrate how to use higher order optical modes in conjunction with mirror maps. The mirror maps are stored in text files under the form of a matrix which represents the mirror height fluctuations in meter. In the maps given, the mirror curvature is not included (but it could be done). The RMS of the mirror maps is around 2~nm, typical of very good large mirrors.
+In this example, we will demonstrate how to use higher order optical modes in conjunction with mirror maps. The mirror maps are stored in text files under the form of a matrix which represents the mirror height fluctuations in meters. In the maps given, the mirror curvature is not included (but it could be done). The RMS of the mirror maps is around 2~nm, typical of very good large mirrors.
 
 The laser beam is now defined outside the cavity, so the cavity reflected field can also be calculated. The script for this example is called \textcolor{blue}{Example\_HOM\_with\_maps.m} and is shown in the listing \ref{lis4:cav_HOM} without any comments.\\
 
@@ -657,10 +657,10 @@ C1 = Calculate_fields(C1);
 Display_results(C1);
 \end{lstlisting}
 
-The line \verb|IM = Add_map(IM,'Map1.txt',1.5E-3)| is used to add the custom 2D map to the surface \verb|IM|. The map does not have to have the same size of the grid since internally an interpolation is done. The third argument \verb|1.5E-3| is the step size of the map in meter. The map can be normalise to a certain RMS by including a fourth argument such as: \verb|IM = Add_map(IM,'Map1.txt',1.5E-3,1E-9)|. In that case the map is automatically normalise to have a RMS of 1~nm.
+The line \verb|IM = Add_map(IM,'Map1.txt',1.5E-3)| is used to add the custom 2D map to the surface \verb|IM|. The map does not have to have the same size as the grid, since internally an interpolation is done. The third argument \verb|1.5E-3| is the step size of the map in meters. The map can be normalized to a certain RMS by including a fourth argument such as: \verb|IM = Add_map(IM,'Map1.txt',1.5E-3,1E-9)|. In that case the map is automatically normalized to have a RMS of 1~nm.
 Regarding the sign convention, positive values in the mirror maps reduce the length of the cavity.\\
 
-After the definition of the cavity and the calculation of the resonance length, the command \verb|C1 = Calculate_fields(C1)| is used to calculate the circulating, reflected and transmitted fields from the cavity. The fields are then stored in the instance \verb|C1| where they could be access later. To display the result graphically the command \verb|Display_results(C1)| is then used. An example of the output screen is shown in figure \ref{fig5:LG33}
+After the definition of the cavity and the calculation of the resonance length, the command \verb|C1 = Calculate_fields(C1)| is used to calculate the circulating, reflected and transmitted fields from the cavity. The fields are then stored in the instance \verb|C1| where they could be accessed later. To display the result graphically the command \verb|Display_results(C1)| is then used. An example of the output screen is shown in figure \ref{fig5:LG33}
 
 \begin{figure}
 \begin{center}
@@ -670,9 +670,9 @@ After the definition of the cavity and the calculation of the resonance length, 
 \end{figure}
 
 \clearpage
-\section{Plotting Pound Drever Hall error signal} \label{ch4:ex_PDH}
+\section{Plotting a Pound-Drever-Hall error signal} \label{ch4:ex_PDH}
 
-In this example, we will learn how to create sidebands and derive a Pound Drever Hall locking signal in reflection. After the input laser \verb|E1| is defined, a virtual phase modulator creates a pair of sidebands with the command: \verb|E_input = Add_sidebands(E_input,6.7234E6,0.3)| (sideband frequency: 6.7234\,MHz and modulation depth: 0.3\,. Then the fields inside the cavity are computed for a given resonance phase.\\
+In this example, we will learn how to create sidebands and derive a Pound-Drever-Hall locking signal in reflection. After the input laser \verb|E1| is defined, a virtual phase modulator creates a pair of sidebands with the command: \verb|E_input = Add_sidebands(E_input,6.7234E6,0.3)| (sideband frequency: 6.7234\,MHz and modulation depth: 0.3\,. Then the fields inside the cavity are computed for a given resonance phase.\\
 
 To draw the PDH error signals, the reflected field from the cavity is demodulated to get the in phase and in quadrature signals. The simulation is relatively long since for the cavity scan 200 points are taken. That takes around 12 minutes on my laptop. A plot of the circulating power and the reflected PDH error signal is shown in figure \ref{fig5:PDH}.
 
@@ -684,15 +684,15 @@ To draw the PDH error signals, the reflected field from the cavity is demodulate
 \caption{\label{fig5:PDH} Circulating power inside the cavity (left) and error signals in reflection (right).}
 \end{figure}
 
-\section{4 mirrors linear cavity} \label{ch4:ex_OMC}
+\section{4-mirror linear cavity} \label{ch4:ex_OMC}
 
-This example, introduces with OSCAR 3.05, shows how to simulate a 4 mirrors cavity. The parameters to define the cavity are taken from the GEO600 output mode cleaner. The script file is called \textcolor{blue}{Example\_4mirrors.m} and is rather self-explanatory for the regular user.
+This example, introduced with OSCAR 3.05, shows how to simulate a 4 mirrors cavity. The parameters to define the cavity are taken from the GEO600 output mode-cleaner. The script file is called \textcolor{blue}{Example\_4mirrors.m} and is rather self-explanatory for the regular user.
 
-\section{Calculating the eigen modes of a Fabry-Perot cavity} \label{ch4:ex_OMC}
+\section{Calculating the eigenmodes of a Fabry-Perot cavity} \label{ch4:ex_OMC}
 
-Since OSCAR V3.10, it is possible to calculate the eigens mode of a Fabry Perot or any linear cavity such as a mode cleaner. This particularly useful to check the degeneracy of a cavity or the clipping loss of higher order modes. The example file is called \textcolor{blue}{Example\_cavity\_eigenmodes.m}.
+Since OSCAR V3.10, it is possible to calculate the eigenmodes of a Fabry-Perot or any linear cavity such as a mode-cleaner. This particularly useful to check the degeneracy of a cavity or the clipping loss of higher order modes. The example file is called \textcolor{blue}{Example\_cavity\_eigenmodes.m}.
 
-A typical display of the calculation of the cavity eigen modes is shown in figure \ref{fig5:cav_EM}.  Also, in this example file, at the end, it is shown how to display the Airy peak of the different higher order modes of the cavity.
+A typical display of the calculation of the cavity eigenmodes is shown in figure \ref{fig5:cav_EM}.  In this example file is also shown in the end how to display the Airy peak of the different higher order modes of the cavity.
 
 \begin{figure}
 \begin{center}

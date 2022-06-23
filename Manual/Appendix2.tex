@@ -41,7 +41,7 @@ retrace off
 
 
 \chapter{Details of OSCAR 3.0 classes}
-The properties (i.e. parameters included in an object of a class) of the different class are described in following sections. Properties are not protected, so they can be accessed and changed using: object\_name.properties (at your own risk).
+The properties (i.e. parameters included in an object of a class) of the different classes are described in following sections. Properties are not protected, so they can be accessed and changed using: object\_name.properties (at your own risk).
 
 The name of the properties are usually self-explanatory and derived directly from OSCAR classic.
 
@@ -148,8 +148,8 @@ The name of the properties are usually self-explanatory and derived directly fro
 {\Large\strut} I\_HR &  Interface & First surface \\
 {\Large\strut} I\_AR &  Interface & Second surface \\
 {\Large\strut} length\_substrate & scalar & Length of the substrate \\
-{\Large\strut} RT\_inside &  integer & Number of round trip \\
-{\Large\strut} n\_substrate &  scalar &  refractive index of the substrate\\
+{\Large\strut} RT\_inside &  integer & Number of round-trips \\
+{\Large\strut} n\_substrate &  scalar &  Refractive index of the substrate\\
 {\Large\strut} r &  scalar & Reflectivity \\
 \hline
 \end{tabular}
@@ -170,12 +170,12 @@ The name of the properties are usually self-explanatory and derived directly fro
 {\Large\strut} Laser\_in &  E\_Field & Input laser beam \\
 {\Large\strut} Laser\_start\_on\_input &  logical  & Define where the input beam is given \\
 {\Large\strut} Resonance\_phase &  complex scalar &  Phase adjustment to bring the cavity on resonance \\
-{\Large\strut} Cavity\_scan\_all\_field & vector of E\_Field  &  Store all the E\_field after each round trip \\
+{\Large\strut} Cavity\_scan\_all\_field & vector of E\_Field  &  Store all the E\_field after each round-trip \\
 {\Large\strut} Cavity\_scan\_param &  vector &  3 values to define how to scan the cavity \\
-{\Large\strut} Cavity\_phase\_param &  scalar & Number of round trip used to find the resonance \\
+{\Large\strut} Cavity\_phase\_param &  scalar & Number of round-trips used to find the resonance \\
 {\Large\strut} Cavity\_scan\_R &  vector  & Cavity circulating power scan over one FSR \\
 {\Large\strut} Cavity\_scan\_RZ &  vector &  Zoom of the scan around the cavity resonance \\
-{\Large\strut} Cavity\_EM\_mat &  2D complex matrix &  Cavity round trip kernel \\
+{\Large\strut} Cavity\_EM\_mat &  2D complex matrix &  Cavity round-trip kernel \\
 {\Large\strut} Propagation\_mat & Prop\_operator & Pre-computed propagation matrix \\
 {\Large\strut} Field\_circ &  E\_Field &  Cavity circulating field \\
 {\Large\strut} Field\_ref &  E\_Field & Cavity reflected field  \\
@@ -199,12 +199,12 @@ The name of the properties are usually self-explanatory and derived directly fro
 {\Large\strut} Laser\_in &  E\_Field & Input laser beam \\
 {\Large\strut} Laser\_start\_on\_input &  logical  & Define where the input beam is given \\
 {\Large\strut} Resonance\_phase &  complex scalar &  Resonance cavity tuning \\
-{\Large\strut} Cavity\_scan\_all\_field & vector of E\_Field  &  Store all the E\_field after each round trip \\
+{\Large\strut} Cavity\_scan\_all\_field & vector of E\_Field  &  Store all the E\_field after each round-trip \\
 {\Large\strut} Cavity\_scan\_param &  vector &  3 values to define how to scan the cavity \\
-{\Large\strut} Cavity\_phase\_param &  scalar & Nb of round trip used to find the resonance \\
+{\Large\strut} Cavity\_phase\_param &  scalar & Nb of round-trips used to find the resonance \\
 {\Large\strut} Cavity\_scan\_R &  vector  & Store the FSR scan  \\
 {\Large\strut} Cavity\_scan\_RZ &  vector &  Zoom of the scan around the cavity resonance \\
-{\Large\strut} Cavity\_E\_mat &  2D complex matrix &  Cavity round trip kernel \\
+{\Large\strut} Cavity\_E\_mat &  2D complex matrix &  Cavity round-trip kernel \\
 {\Large\strut} Propagation\_mat\_array; & Vector of array & Pre-computed propagation matrices \\
 {\Large\strut} Field\_circ &  E\_Field &  Cavity circulating field \\
 {\Large\strut} Field\_ref &  E\_Field & Cavity reflected field  \\

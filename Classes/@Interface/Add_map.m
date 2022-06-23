@@ -119,15 +119,15 @@ if (m==n)     % The matrix is square
     map.Grid_r = sqrt(map.Grid_X.^2 + map.Grid_Y.^2);
     
     % recentering the map by a round number of pixel
-%     if  length(p.Results.centering) ~= 2
-%         error('Add_map(): for the centering option, a vector of 2 values must be given, for example[0.005 -0.02]')
-%     end
-%       
-%     map.offset_X = round(p.Results.centering(1)/map.res);
-%     map.offset_Y = round(p.Results.centering(2)/map.res);
-%     
-%     map.loaded = circshift(map.loaded,[-map.offset_Y map.offset_X]);
+    if  length(p.Results.shift) ~= 2
+        error('Add_map(): for the centering option, a vector of 2 values must be given, for example[0.005 -0.02]')
+    end
+      
+    map.offset_X = round(p.Results.shift(1)/map.res);
+    map.offset_Y = round(p.Results.shift(2)/map.res);
     
+    map.loaded = circshift(map.loaded,[-map.offset_Y map.offset_X]);
+    % just shift by an integer number of pixel.     
     %figure(1); imagesc(map.Grid_axis,map.Grid_axis,map.loaded); axis square
     
     % If desired, remove the tilt

@@ -1,6 +1,6 @@
 \chapter{Analytical formulation of the Gaussian beam propagation using Fourier transform}
 
-In this appendix, we will see how it is possible to rediscover all the formulas related to the laser beam propagation just by using the Fourier technique explained in chapter 1. Basically, we will do by hand the three steps which are numerically done in Matlab to propagate a Gaussian beam: first, 2D Fourier transform of the laser beam, then add the phase shift in the frequency domain and finally, inverse Fourier transform.
+In this appendix, we will see how it is possible to rediscover all the formulae related to the laser beam propagation just by using the Fourier technique explained in chapter 1. Basically, we will do by hand the three steps which are numerically done in Matlab to propagate a Gaussian beam: first, do a 2D Fourier transform of the laser beam, then add the phase shift in the frequency domain and finally, take the inverse Fourier transform.
 
 To facilitate the mathematical calculation, we will extensively use the following formula:
 
@@ -10,15 +10,15 @@ To facilitate the mathematical calculation, we will extensively use the followin
 \end{equation}
 
 
-Let's consider a Gaussian beam $E(x,y,z)$ of amplitude $A$. For simplification we suppose the waist $w_0$ of the beam to be located at $z = 0$. The beam can be written:
+Let us consider a Gaussian beam $E(x,y,z)$ of amplitude $A$. For simplification we suppose the waist $w_0$ of the beam to be located at $z = 0$. The beam can be written:
 
 \begin{equation}
     E(x,y,0) = A \exp\left(-\frac{x^2+y^2}{w_0^2}\right)
 \end{equation}
 
-We will now propagate the Gaussian beam along the $z$ axis over a distance $d$. To not complicate the calculation, we will just consider one transverse dimension at first, for example the dimension along $x$ since all the following equations can be decoupled in the $x/y$ dimension.
+We will now propagate the Gaussian beam along the $z$ axis over a distance $d$. To not complicate the calculation, we will just consider one transverse dimension at first, for example the dimension along $x$ since all the following equations can be decoupled in the $x/y$ dimensions.
 
-So the first step is to calculate the Fourier transform $\widetilde{E}(\nu_x,0)$ of the field $E(x,0)$:
+The first step is then to calculate the Fourier transform $\widetilde{E}(\nu_x,0)$ of the field $E(x,0)$:
 
 \begin{equation}
     \widetilde{E}(\nu_x,0) = \int^{+\infty}_{\infty} A \exp\left(-\frac{x^2}{w_0^2}\right) \exp(j2\pi \nu_x x) dx
@@ -37,7 +37,7 @@ To simulate the propagation the electric field over a distance $d$, the proper p
 \label{A1:4}
 \end{equation}
 
-Finally, we take the inverse Fourier transform of the equation \ref{A1:4} to go back to the familiar x space coordinate system:
+Finally, we take the inverse Fourier transform of the equation \ref{A1:4} to go back to the familiar $x$ space coordinate system:
 
 \begin{equation}
 \begin{split}
@@ -56,14 +56,14 @@ We can now define the usual Raleigh range $z_r$ as:
 \label{A1:7}
 \end{equation}
 
-By inserting the Raleigh range $z_r$ into \ref{A1:6} and by adding the similar result from the other $y$ transverse dimension, we obtain:
+By inserting the Raleigh range $z_r$ into \ref{A1:6} and by adding the similar result on the other $y$ transverse dimension, we obtain:
 
 \begin{equation}
    E(x,y,d) = A \frac{1}{1 - j \frac{d}{z_r}} \exp(-jkd) \exp\left(- \frac{x^2 +  y^2}{w_0^2 \left(\frac{1}{1 - j \frac{d}{z_r}} \right) } \right)\\
 \label{A1:8}
 \end{equation}
 
-Let's analyze now the two main constituent of equation \ref{A1:8}, the exponential and the complex factor in front of it. The complex number in the exponential can be separated between its real and imaginary parts:
+Let us analyze now the two main constituents of equation \ref{A1:8}, the exponential and the complex factor in front of it. The complex number in the exponential can be separated in its real and imaginary parts:
 
 \begin{equation}
 \begin{split}
@@ -97,4 +97,4 @@ R(d) & = d\left(1 + \frac{z_r^2}{d^2}\right)
 \label{A1:234}
 \end{equation}
 
-I found remarkable that by using the simple FFT steps to propagate the beam we can rediscover all the usual equations: the normalisation factor, the evolution of the beam radius and the wavefront radius of curvature as well as the Gouy phase shift. The courageous readers can also do the calculations presented here for the higher order modes in the Hermite Gauss base.
+I found remarkable that by using the simple FFT steps to propagate the beam we can rediscover all the usual equations: the normalisation factor, the evolution of the beam radius and the wavefront radius of curvature as well as the Gouy phase shift. The courageous readers can also do the calculations presented here for the higher order modes in the Hermite-Gauss base.
