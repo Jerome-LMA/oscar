@@ -25,7 +25,7 @@ p.parse(Ein,varargin{:})
 if strcmp(p.Results.for,'SB_upper')
     Ein.Field = Ein.SB(p.Results.SB_num).Field_upper;
 elseif strcmp(p.Results.for,'SB_lower')
-    Ein.Field = Ein.SB(p.Results.SB_num).Field_lower;    
+    Ein.Field = Ein.SB(p.Results.SB_num).Field_lower;
 end
 
 
@@ -94,6 +94,12 @@ c0 = [max(max(E.Field)) beam_radius_fit];
 [Map.fit_para,~,~,~,~] = lsqcurvefit(func_gauss,c0,tmp_grid,tmp_amp,[],[],options);
 Beam_RofC = real(Map.fit_para(2));
 
+q = 1/ (1/Beam_RofC -1i*1064e-9/pi/Beam_rad^2);
+
+Beam_z2 = real(q);
+Beam_zR = imag(q);
+Beam_w0 = sqrt(Beam_zR*E.Wavelength/pi);
+
 switch nargout
     case 0
         fprintf('Beam radius [m]: %g  \t \t Wavefront curvature [m]: %g  \n',Beam_rad,Beam_RofC)
@@ -102,6 +108,15 @@ switch nargout
     case 2
         varargout{1} = Beam_rad;
         varargout{2} = Beam_RofC;
+    case 3
+        varargout{1} = Beam_rad;
+        varargout{2} = Beam_RofC;
+        varargout{3} = Beam_w0;
+    case 3
+        varargout{1} = Beam_rad;
+        varargout{2} = Beam_RofC;
+        varargout{3} = Beam_w0;
+        varargout{4} = Beam_z2;
     otherwise
         error('Fit_TEM00(): Too many output argument')
 end
