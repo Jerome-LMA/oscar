@@ -7,7 +7,7 @@ disp('  ')
 
 
 % Define the grid for the simulation: 256 X 256, 40 cm X 40 cm
-G1 = Grid(256,0.4);
+G1 = Grid(512,0.4);
 
 % Define the incoming beam outside the cavity (beam radius 4.3 cm,
 % wavefront curvature 1034 m, mode Laguerre Gauss 3,3)

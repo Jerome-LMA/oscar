@@ -25,7 +25,7 @@ function Iout = Add_Map(Iin,map_loaded,varargin)
 %     Remove the tilt / piston from the map. The argument after is the
 %     diameter over which it is removed.
 %
-%     Iout = Add_map(Iin,filename,'reso',1E-3,'remove_tilt',0.150,'centering',[0.05 0.01])
+%     Iout = Add_map(Iin,filename,'reso',1E-3,'remove_tilt',0.150,'shift',[0.05 0.01])
 %     Center the map at the coordinates given (in m). The tilt/focus is
 %     removed on this new center. Rotation will happen after this
 %     centering.
@@ -149,7 +149,7 @@ if (m==n)     % The matrix is square
         
         c0 = [0 0 0];
         
-        [map.fit_para,~,~,~,output] = lsqcurvefit(func_curv,c0,map.fit_grid,map.funcv,[],[],options);
+        [map.fit_para,~,~,~,~] = lsqcurvefit(func_curv,c0,map.fit_grid,map.funcv,[],[],options);
         
         if p.Results.verbose
             fprintf('Substracted horizontal tilt [nrad]: %g \n',map.fit_para(1)*1E9)
@@ -184,7 +184,7 @@ if (m==n)     % The matrix is square
         
         c0 = [0 0 0 1/2000];
         
-        [map.fit_para,~,~,~,output] = lsqcurvefit(func_curv,c0,map.fit_grid,map.funcv,[],[],options);
+        [map.fit_para,~,~,~,~] = lsqcurvefit(func_curv,c0,map.fit_grid,map.funcv,[],[],options);
         
         if p.Results.verbose
             fprintf('Substracted radius of curvature [m]: %g \n',1/(2*map.fit_para(4)))

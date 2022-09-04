@@ -295,7 +295,7 @@ Here some examples:
          \verb? I1 = Add_map(I1,'map1.dat','reso',3.5E-4,'remove_tilt_focus',0.150) ?
 \end{itemize}
 
-Maps with cylindrical symmetry can be loaded as a 2-column text files. First column is the radius and the second is the height in meters. In that case the resolution does not have to be specified. To suppress the output, the option \verb?'verbose',false? can be used. A new argument is possible to offset the map \verb?'centering'? if the region of interest is not at the center of the map.
+Maps with cylindrical symmetry can be loaded as a 2-column text files. First column is the radius and the second is the height in meters. In that case the resolution does not have to be specified. To suppress the output, the option \verb?'verbose',false? can be used. A new argument is possible to offset the map \verb?'shift'? if the region of interest is not at the center of the map.
 \end{quote}
 
 
@@ -410,7 +410,7 @@ Variables of instances of the class \textsl{Cavity1} are listed in {App3:Cavity}
 
 \noindent Several functions are associated with the class \textsl{Cavity1}:
 
-\noindent \textbf{Cout} = \textcolor{blue}{Calculate\_fields}(\textbf{Cin})
+\noindent \textbf{Cout} = \textcolor{blue}{Calculate\_Fields}(\textbf{Cin})
 \vspace*{-0.2cm}
 \begin{quote}
 \textcolor{blue}{Calculate\_fields} calculates the fields on resonance inside the cavity and stores them for future use. Compared to \textcolor{blue}{Get\_info} this function also calculates the reflected field, so the input laser beam cannot be defined inside the cavity. The results can be displayed using \textcolor{blue}{Display\_results}(Cout).
@@ -418,7 +418,7 @@ Before finding the steady state fields inside the cavity, the cavity working poi
 With the option argument \verb?'iter'? or \verb?'accuracy'?, one can set the level of accuracy (and hence the computational time) for the simulation.
 \end{quote}
 
-\noindent \textbf{Cout} = \textcolor{blue}{Calculate\_fields\_AC}(\textbf{Cin})
+\noindent \textbf{Cout} = \textcolor{blue}{Calculate\_Fields\_AC}(\textbf{Cin})
 \vspace*{-0.2cm}
 \begin{quote}
 \textcolor{blue}{Calculate\_fields\_AC} is similar to the function \textcolor{blue}{Calculate\_fields} except that it uses the accelerated convergence scheme \cite{Saha:97,DAY_AC} to find the steady state fields inside the cavity. The gain in speed could be important if the cavity is close to a perfect cavity, so the steady field is near a perfect fundamental mode.
@@ -449,27 +449,29 @@ The function also returns the input beam parameters of the fundamental mode for 
 
 \end{quote}
 
-\noindent \textcolor{blue}{Check\_matching}(\textbf{Cin},nb\_RT)
+\noindent \textcolor{blue}{Check\_Matching}(\textbf{Cin},nb\_RT)
 \vspace*{-0.2cm}
 \begin{quote}
 Propagates the input beam back and forth between the cavity input and end mirrors and checks the beam size before each reflection. The mode-matching is good if during multiple round-trips the beam size on the mirror does not fluctuate (but could be different of course on the input and end mirror). The optional argument \textsl{nb\_RT} can set the number of round-trips to be done.
 \end{quote}
 
-\noindent \textbf{Cout} = \textcolor{blue}{Cavity\_resonance\_phase}(\textbf{Cin})
+\noindent \textbf{Cout} = \textcolor{blue}{Cavity\_Resonance\_Phase}(\textbf{Cin})
 \vspace*{-0.2cm}
 \begin{quote}
 Calculates the macroscopic length tuning to bring the cavity on resonance for the input field. The cavity resonance has to be found before any calculations on the cavity (circulating fields, loss calculations,\dots) are launched. The input and output arguments are usually the same.
 A second function \textcolor{blue}{Cavity\_resonance\_phase2} is also present, this function gives more accurate results when the cavity is degenerate.
 \end{quote}
 
-\noindent \textbf{Cout} = \textcolor{blue}{Cavity\_scan}(\textbf{Cin})
+\noindent \textbf{Cout} = \textcolor{blue}{Cavity\_Scan}(\textbf{Cin})
 \vspace*{-0.2cm}
 \begin{quote}
-Scans the cavity over one free spectral range and then sets the cavity resonance to maximize the circulating power. This procedure is much slower than \textcolor{blue}{Cavity\_resonance\_phase} but can still be useful to check if some higher order modes are excited, since afterwards the FSR scan can be displayed.
-The presence of sidebands in the input beam of the cavity can also be implemented. First the sidebands have to be defined and then the option \verb? 'With_SB',true? must be added in the command.
+Scans the cavity over one free spectral range and then sets the cavity resonance to maximize the circulating power. This procedure is much slower than \textcolor{blue}{Cavity\_Resonance\_Phase} but can still be useful to check if some higher order modes are excited, since afterwards the FSR scan can be displayed.
+The presence of sidebands in the input beam of the cavity can also be implemented. First the sidebands have to be defined and then the option \verb? 'With_SB',true? must be added in the options.
+
+
 \end{quote}
 
-\noindent \textcolor{blue}{Display\_cavity\_modes}(\textbf{Cin},'N',10,'Airy',1)
+\noindent \textcolor{blue}{Display\_Cavity\_Modes}(\textbf{Cin},'N',10,'Airy',1)
 \vspace*{-0.2cm}
 \begin{quote}
 Displays the cavity eigenmodes. The function \textcolor{blue}{Calculate\_RT\_mat} must be run first to calculate the cavity kernel. With this function one can display an arbitrary number of modes (by default the first 20) and also draw the Airy peak of the cavity with the command:
@@ -479,16 +481,16 @@ Displays the cavity eigenmodes. The function \textcolor{blue}{Calculate\_RT\_mat
 An example of how to use the function \textcolor{blue}{Display\_cavity\_modes} is shown in the script \textcolor{blue}{Example\_cavity\_eigenmodes.m}
 \end{quote}
 
-\noindent \textcolor{blue}{Display\_scan}(\textbf{Cin})
+\noindent \textcolor{blue}{Display\_Scan}(\textbf{Cin})
 \vspace*{-0.2cm}
 \begin{quote}
 Displays the scan from a cavity after the procedure \textcolor{blue}{Cavity\_scan} was run. By moving the cursor on the upper plot (circulating power vs tuning), the profile of the optical modes can be checked in the lower right plot.
 \end{quote}
 
-\noindent \textcolor{blue}{Get\_info}(\textbf{Cin})
+\noindent \textcolor{blue}{Get\_Info}(\textbf{Cin})
 \vspace*{-0.2cm}
 \begin{quote}
-\textcolor{blue}{Get\_info} calculates the fields on resonance inside the cavity. The function is also used to calculate the diffraction loss due to the mirror finite size.
+\textcolor{blue}{Get\_info} calculates the fields on resonance inside the cavity. The function is also used to calculate the diffraction loss due to the mirror finite size. Legacy function, it is recommended to use the function \textcolor{blue}{Calculate\_Fields\_AC}.
 \end{quote}
 
 
@@ -527,8 +529,8 @@ Two main new features have already been implemented but not released:
 
 \begin{itemize}
   \item \textbf{Use of rectangular grid.} It is possible to use grid with different size and number of points in the horizontal and vertical directions. That is useful to simulate tilted beams with large angle along one direction since in that case a fine resolution is required. A special version of OSCAR in 1D has also been made but may never get released.
-  \item \textbf{Simulation of a dual recycled Michelson interferometer.} A new class has been defined to simulate a dual recycled Michelson interferometer. That is done for marginally stable cavity but not yet released due to a lack of comprehensive documentation.
-   \item \textbf{GPU portability.} Use of Nvidia graphic card to speed up the calculation.
+  \item \textbf{Simulation of a dual recycled Michelson interferometer.} A new class has been defined to simulate a dual recycled Michelson interferometer. That is done for marginally stable cavity but not yet released due to a lack of comprehensive documentation. Available for people within the Virgo collaboration.
+   \item \textbf{Simulation birefringence.}. To include 2D maps of birefringence measured in transmission.
 \end{itemize}
 
 If new functions are needed urgently and cannot wait for future versions, you can contact directly the author.
@@ -537,11 +539,11 @@ If new functions are needed urgently and cannot wait for future versions, you ca
 
 \chapter{New examples of simulations}\label{ch4:ex}
 
-After the formal previous chapter, here is the most interesting part: the concrete examples. In this part we will see how easy it is to create simulations with the new OSCAR, few lines of code are usually enough to get a result.
+After the formal previous chapter, here is the most interesting part: the concrete examples. In this part we will see how easy it is to create simulations with the new OSCAR, few lines of code are usually enough to get a result. The examples are in the folder \textsl{Examples}.
 
 \section{Beam parameters after a thick lens}
 
-Before learning how to define cavities, we can already see how to propagate a laser beam through a custom-made thick lens. The lens is bi-convex, made of fused silica (n=1.45) and is 4\,cm thick . The first surface has a radius of 1\,km and the second 2\,km. At the exit of the lens, we propagate the beam further by 200\,m and then measure its parameter. The commented script is called \textcolor{blue}{Example\_Thick\_lens.m} and can be found in the OSCAR folder.\\
+Before learning how to define cavities, we can already see how to propagate a laser beam through a custom-made thick lens. The lens is bi-convex, made of fused silica (n=1.45) and is 4\,cm thick . The first surface has a radius of 1\,km and the second 2\,km. At the exit of the lens, we propagate the beam further by 200\,m and then measure its parameter. The commented script is called \textcolor{blue}{Example\_thick\_lens.m} and can be found in the OSCAR folder.\\
 
 The first surface is defined in OSCAR by the line:
 
@@ -580,31 +582,32 @@ The 7 lines of the script to define the cavity and do the calculations can be fo
 
 \begin{lstlisting}[float=htp,caption=Example of OSCAR script to calculate the circulating power\label{lis4:cav_circ},frame=lines]
 G1 = Grid(128,0.3);
-E_input = E_Field(G1,0.02,-2500);
+E_input = E_Field(G1,'w',0.02,'R',-2500);
 
-IM = Interface(G1,2500,0.10,0.02,0);
-EM = Interface(G1,2500,0.10,0.02,0);
+IM = Interface(G1,'RoC',2500,'CA',0.1,'T',0.02);
+EM = Interface(G1,'RoC',2500,'CA',0.1,'T',0.02);
 
 C1 = Cavity1(IM,EM,1000,E_input);
-C1 = Cavity_resonance_phase(C1);
-Get_info(C1);
+C1 = Cavity_Resonance_Phase(C1);
+C1 = Calculate_Fields_AC(C1);
+
+Display_Results(C1);
 \end{lstlisting}
 
-The script takes less than 10s to run on a modern laptop. At the end, \emph{Get\_info(C1)} returns a detailed list of information regarding the cavity with a plot of the circulating power and the power buildup. Return of \emph{Get\_info(C1)} in the Matlab console:
+The script takes less than 10s to run on a modern laptop. After the calculation, the script \emph{Display\_Results(C1)} will return in the Matlab console:
 
 \newpage
 
 \begin{verbatim}
- ---- Display results for cavity C1 -----
- Round trip diffraction loss: 35.6127 [ppm]
- Circulating power: 49.8224 [W]
- Size of the beam on the end mirror: 0.0205821 [m]
- Size of the beam on the input mirror: 0.020576 [m]
- Size of the cavity waist: 0.0183982 [m]
- Distance of the cavity waist from the input mirror: -500.471 [m]
+Found the phase for resonance in cavity: C1
+  Power in the input beam: 	      1 	 [W]
+  Circulating power: 		    49.2824 	 [W]
+  Transmitted power: 		    0.98563 	 [W]
+  Reflected power: 			  0.0125915 	 [W]
+  Round trip losses: 		    36.3807 	 [ppm] 
 \end{verbatim}
 
-To speed up the calculation of the steady state field, it is possible to use the function \emph{C1 = Calculate\_fields\_AC(C1)} in conjunction with \emph{C1.Display\_Results}.
+
 
 \section{Scan of a misaligned cavity}
 
@@ -612,18 +615,18 @@ Using the same cavity parameters as in the previous example, we will now tilt th
 
 \begin{lstlisting}[float=htp,caption=Example of OSCAR script to scan a cavity \label{lis4:cav_scan},frame=lines]
 G1 = Grid(128,0.3);
-E_input = E_Field(G1,0.02,-2500);
+E_input = E_Field(G1,'w',0.02,'R',-2500);
 
-IM = Interface(G1,2500,0.10,0.02,0);
-EM = Interface(G1,2500,0.10,0.02,0);
-EM = Add_tilt(EM,1E-6,'y');
+IM = Interface(G1,'RoC',2500,'CA',0.1,'T',0.02);
+EM = Interface(G1,'RoC',2500,'CA',0.1,'T',0.02);
+EM = Add_Tilt(EM,1E-6,'y');
 
 C1 = Cavity1(IM,EM,1000,E_input);
-C1 =  Cavity_scan(C1);
-Display_scan(C1);
+C1 =  Cavity_Scan(C1);
+Display_Scan(C1);
 \end{lstlisting}
 
-The script takes around 2 minutes to run. The output is the Matlab figure shown in the figure \ref{fig4:scan}. The top plot is a cavity scan over one free spectral range. We can notice 3 peaks : from left to right the first peak is a LG$_{10}$ due to imperfect mode-matching, the second is the mode HG$_{10}$ and the third and highest one is the fundamental mode.
+The script takes around 2 minutes to run. The output is the Matlab figure shown in the figure \ref{fig4:scan}. The top plot is a cavity scan over one free spectral range. We can notice 3 peaks : from left to right the first peak is a LG$_{10}$ due to imperfect mode-matching, the second is the mode HG$_{10}$ and the third and highest one is the fundamental mode. It is possible to move the cursor to see the shape of the circulating field for a particular detuning.
 
 \begin{figure}
 \begin{center}
@@ -640,27 +643,30 @@ The laser beam is now defined outside the cavity, so the cavity reflected field 
 
 \begin{lstlisting}[float=htp,caption=Example of OSCAR script to calculate the reflected field from a cavity with maps \label{lis4:cav_HOM},frame=lines]
 G1 = Grid(512,0.4);
-E_input = E_Field(G1,0.043,-1034,'LG',3,3);
+E_input = E_Field(G1,'w',0.043,'R',-1034,'mode','LG 3 3');
 
-IM = Interface(G1,1500,0.35,0.02,0);
-EM = Interface(G1,1700,0.35,0.02,0);
+IM = Interface(G1,'RoC',1500,'CA',0.4,'T',0.02);
+EM = Interface(G1,'RoC',1700,'CA',0.4,'T',2E-6);
 
-IM = Add_map(IM,'Map1.txt',1.5E-3);
-EM = Add_map(EM,'Map2.txt',1.5E-3);
+param_PSD = [0.02 -1.4];
+Virtual_map_IM = Do_Virtual_Map(G1,param_PSD);
+Virtual_map_EM = Do_Virtual_Map(G1,param_PSD);
+
+IM = Add_Map(IM,Virtual_map_IM,'reso',G1.Step,'remove_tilt_focus',0.150,'RMS',1E-9,'verbose',false);
+EM = Add_Map(EM,Virtual_map_EM,'reso',G1.Step,'remove_tilt_focus',0.150,'RMS',1E-9,'verbose',false);
 
 C1 = Cavity1(IM,EM,3000,E_input);
-C1.Laser_start_on_input = false ;
+C1.Propagation_mat.Use_DI = true;
 
-C1 = Cavity_resonance_phase(C1);
-
-C1 = Calculate_fields(C1);
-Display_results(C1);
+C1 = Cavity_Resonance_Phase(C1);
+C1 = Calculate_Fields_AC(C1);
+Display_Results(C1);
 \end{lstlisting}
 
-The line \verb|IM = Add_map(IM,'Map1.txt',1.5E-3)| is used to add the custom 2D map to the surface \verb|IM|. The map does not have to have the same size as the grid, since internally an interpolation is done. The third argument \verb|1.5E-3| is the step size of the map in meters. The map can be normalized to a certain RMS by including a fourth argument such as: \verb|IM = Add_map(IM,'Map1.txt',1.5E-3,1E-9)|. In that case the map is automatically normalized to have a RMS of 1~nm.
-Regarding the sign convention, positive values in the mirror maps reduce the length of the cavity.\\
+The line \verb|Virtual_map_IM = Do\_Virtual\_Map(G1,param_PSD);| is used to create a custom 2D height map to be later applied to the surface \verb|IM|. The map does not have to have the same size as the grid, since internally an interpolation is done with  \verb| Add_Map()|. In that case the map is automatically normalized to have a RMS of 1~nm.
+Regarding the sign convention, positive values in the mirror maps reduce the length of the cavity (so equivalent to a bump on the surface).\\
 
-After the definition of the cavity and the calculation of the resonance length, the command \verb|C1 = Calculate_fields(C1)| is used to calculate the circulating, reflected and transmitted fields from the cavity. The fields are then stored in the instance \verb|C1| where they could be accessed later. To display the result graphically the command \verb|Display_results(C1)| is then used. An example of the output screen is shown in figure \ref{fig5:LG33}
+After the definition of the cavity and the calculation of the resonance length, the command \verb|C1 = Calculate_Fields_AC(C1)| is used to calculate the circulating, reflected and transmitted fields from the cavity. The fields are then stored in the instance \verb|C1| where they could be accessed later. To display the result graphically the command \verb|Display_Results(C1)| is then used. An example of the output screen is shown in figure \ref{fig5:LG33}
 
 \begin{figure}
 \begin{center}
@@ -672,7 +678,7 @@ After the definition of the cavity and the calculation of the resonance length, 
 \clearpage
 \section{Plotting a Pound-Drever-Hall error signal} \label{ch4:ex_PDH}
 
-In this example, we will learn how to create sidebands and derive a Pound-Drever-Hall locking signal in reflection. After the input laser \verb|E1| is defined, a virtual phase modulator creates a pair of sidebands with the command: \verb|E_input = Add_sidebands(E_input,6.7234E6,0.3)| (sideband frequency: 6.7234\,MHz and modulation depth: 0.3\,. Then the fields inside the cavity are computed for a given resonance phase.\\
+In this example, we will learn how to create sidebands and derive a Pound-Drever-Hall locking signal in reflection. After the input laser \verb|E1| is defined, a virtual phase modulator creates a pair of sidebands with the command: \verb|E_input = Add_Sidebands(E_input,'Mod_freq',6.7234E6,'Mod_depth',0.3)| (sideband frequency: 6.7234\,MHz and modulation depth: 0.3\,. Then the fields inside the cavity are computed for a given resonance phase.\\
 
 To draw the PDH error signals, the reflected field from the cavity is demodulated to get the in phase and in quadrature signals. The simulation is relatively long since for the cavity scan 200 points are taken. That takes around 12 minutes on my laptop. A plot of the circulating power and the reflected PDH error signal is shown in figure \ref{fig5:PDH}.
 
@@ -686,7 +692,7 @@ To draw the PDH error signals, the reflected field from the cavity is demodulate
 
 \section{4-mirror linear cavity} \label{ch4:ex_OMC}
 
-This example, introduced with OSCAR 3.05, shows how to simulate a 4 mirrors cavity. The parameters to define the cavity are taken from the GEO600 output mode-cleaner. The script file is called \textcolor{blue}{Example\_4mirrors.m} and is rather self-explanatory for the regular user.
+This example, introduced with OSCAR 3.05, shows how to simulate a 4 mirrors cavity. The parameters to define the cavity are taken from the GEO600 output mode-cleaner. The script file is called \textcolor{blue}{Example\_4\_mirrors.m} and is rather self-explanatory for the regular user.
 
 \section{Calculating the eigenmodes of a Fabry-Perot cavity} \label{ch4:ex_OMC}
 
