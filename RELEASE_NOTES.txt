@@ -1,5 +1,17 @@
 OSCAR release notes 
 
+
+--------------------------- Version 3.30 --------------------------- 
+
+Major update with name changes of functions to be consistent
+
+Possibility to calculate on GPU for speed improvement
+
+Option for automatically have an optimal mode matching for
+the input beam
+
+Several functions with additional options and bug fixes
+
 --------------------------- Version 3.20 --------------------------- 
 
 New kind of cavity implemented: several mirror linear cavity 
