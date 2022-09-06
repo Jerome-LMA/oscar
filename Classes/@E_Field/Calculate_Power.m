@@ -45,8 +45,8 @@ elseif strcmp(p.Results.include,'all')
     power_temp_Car = sum(abs(Ein.Field(:).^2))* (Ein.Grid.Step)^2;
     if Ein.Nb_Pair_SB
         for ii = 1:Ein.Nb_Pair_SB
-            power_temp_SB_lower = power_temp_SB_lower + sum(abs(Ein.SB(SB_number).Field_lower(:)).^2)* (Ein.Grid.Step)^2;
-            power_temp_SB_upper = power_temp_SB_upper + sum(abs(Ein.SB(SB_number).Field_upper(:)).^2)* (Ein.Grid.Step)^2;
+            power_temp_SB_lower = power_temp_SB_lower + sum(abs(Ein.SB(ii).Field_lower(:)).^2)* (Ein.Grid.Step)^2;
+            power_temp_SB_upper = power_temp_SB_upper + sum(abs(Ein.SB(ii).Field_upper(:)).^2)* (Ein.Grid.Step)^2;
         end
         
     end
