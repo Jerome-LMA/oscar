@@ -65,6 +65,9 @@ classdef Cavity1
                 % Check if the input laser is optimally mode matched    
                 if  C.Laser_in.Optimal_mode_matching
                     Beam_paramater = Check_Stability(C,'Display',false);
+                    if isempty(Beam_paramater)
+                         error('Cavity1(): please check that the cavity is stable to find the optimal input beam parameters')
+                    end
                     New_input_field =  E_Field(Grid(C),'w',Beam_paramater(1),'R',Beam_paramater(2),'mode',C.Laser_in.Mode_name);
                     % add the sidebands as it used to be
                     for ii = 1:C.Laser_in.Nb_Pair_SB
