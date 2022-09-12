@@ -170,10 +170,10 @@ if (g_factor_cavity > 0) && (g_factor_cavity < 1)
         Field_in =  Change_E_n(Field_in,Cin.I_input.n1);
     end
     
-    disp('Mode matched input beam parameters:')
     [wb, rb] = Fit_TEM00(Field_in);
     
     if Display
+        disp('Mode matched input beam parameters:')
         fprintf('Beam radius [m]: %g  \t \t Wavefront curvature [m]: %g  \n',wb,-rb)
     end
     
