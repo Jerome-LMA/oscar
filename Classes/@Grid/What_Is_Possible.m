@@ -8,10 +8,10 @@ p.FunctionName = 'Check what you can do with a certain grid size';
 p.addRequired('Gin', @(x)isa(x, 'Grid'));
 
 % Check if the resolution of the grid if given
-p.addParameter('Diam',[],@(x)isnumeric(x) && x>0);
+p.addParameter('diam',[],@(x)isnumeric(x) && x>0);
 
 % Check if the resolution of the grid if given
-p.addParameter('Wavelength',[],@(x)isnumeric(x) && x>0);
+p.addParameter('wavelength',[],@(x)isnumeric(x) && x>0);
 
 p.parse(Gin,varargin{:})
 
