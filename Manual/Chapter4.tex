@@ -471,6 +471,16 @@ The presence of sidebands in the input beam of the cavity can also be implemente
 
 \end{quote}
 
+\noindent \textbf{Cout} = \textcolor{blue}{Declare\_on\_GPU}(\textbf{Cin})
+\vspace*{-0.2cm}
+\begin{quote}
+Load all the pertinent variables regarding the cavity on the GPU. In that way, the most intensive calculations will be done on the GPU with some potential gain in calculation time, especially for large grids.
+
+The most gain in time is for the cavity FSR scans and the implementation is detailed in a dedicated paper \cite{Nils_GPU}.
+
+\end{quote}
+
+
 \noindent \textcolor{blue}{Display\_Cavity\_Modes}(\textbf{Cin},'N',10,'Airy',1)
 \vspace*{-0.2cm}
 \begin{quote}
@@ -604,7 +614,7 @@ Found the phase for resonance in cavity: C1
   Circulating power: 		    49.2824 	 [W]
   Transmitted power: 		    0.98563 	 [W]
   Reflected power: 			  0.0125915 	 [W]
-  Round trip losses: 		    36.3807 	 [ppm] 
+  Round trip losses: 		    36.3807 	 [ppm]
 \end{verbatim}
 
 
