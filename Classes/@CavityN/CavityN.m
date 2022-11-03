@@ -1,7 +1,7 @@
 classdef CavityN
     %CavityN the class used to define a cavity with an arbitrary number of
     %mirrors
-    % C1 = Cavity1(Iarray,darray,E1) with C1 the cavity defined, Iarray an
+    % C1 = CavityN(Iarray,darray,E1) with C1 the cavity defined, Iarray an
     % array of interfaces, darray an array of the distance between the
     % interfaces.
     % interfaces to represent the mirrors of the cavity and E1 the input field (an instance of
