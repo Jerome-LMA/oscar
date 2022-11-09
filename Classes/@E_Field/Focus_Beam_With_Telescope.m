@@ -75,7 +75,7 @@ if isempty(p.Results.magnification)
         % Add the map there
         if ~isempty(Map_list)
             % First rescale the map on the calculation grid
-            I_temp = Resize_interface(Map_list(pp),Ein.Grid);
+            I_temp = Resize_Interface(Map_list(pp),Ein.Grid);
             Ein = Ein .* (exp(1i * Ein.k_prop * I_temp.surface) .* I_temp.mask);
         end
         
@@ -178,7 +178,7 @@ else
         % Add the map there
         if ~isempty(Map_list)
             % First rescale the map on the calculation grid
-            I_temp = Resize_interface(Map_list(pp),Ein.Grid);
+            I_temp = Resize_Interface(Map_list(pp),Ein.Grid);
             Ein = Ein .* (exp(1i * Ein.k_prop * I_temp.surface) .* I_temp.mask);
         end
         %figure(1); E_plot(Ein); figure(2); I_plot(I_temp); pause()

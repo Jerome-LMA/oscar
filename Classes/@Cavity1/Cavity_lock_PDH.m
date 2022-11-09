@@ -9,7 +9,7 @@ if Cin.Laser_start_on_input
     error(['Cavity_lock_PDH(' inputname(1) '): to calculate the PDH error signal, the beam must be defined outside the cavity, set Laser_start_on_input = false'])
 end
 
-if isempty(Cin.Laser_in.Field_SBl)
+if ~Cin.Laser_in.Nb_Pair_SB
     error(['Cavity_lock_PDH(' inputname(1) '): to calculate the PDH error signal, a SB field must be present'])
 end
 
@@ -20,11 +20,11 @@ Scan.span = 0.001; % in rad around the resonance which maximise the circulating 
 
 Scan_reso =  linspace(-Scan.span,Scan.span,Scan.Nb_points);
 Scan_reso2 = Cin.Resonance_phase .* exp(1i*Scan_reso);
-disp('PDF locking:       ')
+disp('PDH locking:       ')
 
 for jj = 1:Scan.Nb_points
     Cin.Resonance_phase = Scan_reso2(jj);
-    Cout_tmp = Calculate_fields(Cin,'accuracy',0.01);    
+    Cout_tmp = Calculate_Fields(Cin,'accuracy',0.01);    
     Sig.p(jj) = Demodulate_SB(Cout_tmp.Field_ref);
     fprintf('\b\b\b\b\b\b %3.0d %%',round(jj /Scan.Nb_points * 100))
 end
@@ -43,6 +43,6 @@ p = polyfit(Scan_reso,Sig.p,1);
 Offset = - p(2)/p(1);
 
 Cout.Resonance_phase = Cout.Resonance_phase * exp(1i*Offset);
-fprintf('PDH locking added phase offset [Rad]: %g \n',Offset)
+fprintf('PDH locking added phase offset [rad]: %g \n',Offset)
 
 end
