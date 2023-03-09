@@ -17,6 +17,7 @@ p.addOptional('include','carrier', @(x)strcmpi(x,'carrier') | strcmpi(x,'all') )
 p.parse(Ein,varargin{:})
 
 if p.Results.power == 0
+    Eout = Ein;
     Eout.Field = complex(zeros(Ein.Grid.Num_point,Ein.Grid.Num_point));
     if  Ein.Nb_Pair_SB
         for ii=1:Ein.Nb_Pair_SB
