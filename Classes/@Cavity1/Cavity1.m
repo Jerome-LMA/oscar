@@ -68,7 +68,7 @@ classdef Cavity1
                     if isempty(Beam_paramater)
                          error('Cavity1(): please check that the cavity is stable to find the optimal input beam parameters')
                     end
-                    New_input_field =  E_Field(Grid(C),'w',Beam_paramater(1),'R',Beam_paramater(2),'mode',C.Laser_in.Mode_name);
+                    New_input_field =  E_Field(Grid(C),'w',Beam_paramater(1),'R',Beam_paramater(2),'mode',C.Laser_in.Mode_name,'Wavelength',C.Laser_in.Wavelength);
                     % add the sidebands as it used to be
                     for ii = 1:C.Laser_in.Nb_Pair_SB
                         New_input_field = Add_Sidebands(New_input_field,'Mod_freq',C.Laser_in.SB(ii).Frequency_Offset,'Mod_depth',C.Laser_in.SB(ii).Input_Mod_index);
