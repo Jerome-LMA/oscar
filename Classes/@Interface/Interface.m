@@ -95,8 +95,13 @@ classdef Interface
             I.T = p.Results.T;
             I.L = p.Results.L;
             
-            I.t = 1i*sqrt(I.T);
-            I.r = sqrt(1-(I.T + I.L));
+            if I.T + I.L >= 1
+                I.t = 1i*sqrt(I.T-I.L);
+                I.r = 0;
+            else               
+                I.t = 1i*sqrt(I.T);
+                I.r = sqrt(1-(I.T + I.L));
+            end
             
             %Mirror mask
             if isempty(p.Results.AoI)
