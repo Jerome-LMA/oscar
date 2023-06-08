@@ -130,7 +130,7 @@ switch nargout
         varargout{1} = Beam_rad;
         varargout{2} = Beam_RofC;
         varargout{3} = Beam_w0;
-    case 3
+    case 4
         varargout{1} = Beam_rad;
         varargout{2} = Beam_RofC;
         varargout{3} = Beam_w0;
