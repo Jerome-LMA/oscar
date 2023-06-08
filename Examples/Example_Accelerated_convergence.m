@@ -13,7 +13,7 @@ G1 = Grid(256,0.15);
 % the waist
 
 E_input = E_Field(G1,'w0',0.022);
-%E_input = Add_Sidebands(E_input,3.4E6,0.2);
+%E_input = Add_Sidebands(E_input,'Mod_freq',3.4E6,'Mod_depth',0.2);
 
 % Imperfect mode matching and the beam will be also be slightly clipped on
 % the end mirror (diffraction loss of 1700 ppm)
