@@ -20,6 +20,12 @@ p.addOptional('for','carrier', @(x)strcmpi(x,'carrier') | strcmpi(x,'SB_upper') 
 % Check the number of the sidebands we want to deal with
 p.addParameter('SB_num',1, @(x) isnumeric(x)  && (x>0) && (mod(x,1) == 0)); % check if the number of the SB pair is positive and integer
 
+% Check what to ouput to display Beam radius and RoC, waist and position of
+% the waist, all
+p.addParameter('Output','B_R', @(x)strcmpi(x,'B_R') | ...
+    strcmpi(x,'all') | strcmpi(x,'W_P') );
+
+
 p.parse(Ein,varargin{:})
 
 if strcmp(p.Results.for,'SB_upper')
@@ -94,7 +100,7 @@ c0 = [max(max(E.Field)) beam_radius_fit];
 [Map.fit_para,~,~,~,~] = lsqcurvefit(func_gauss,c0,tmp_grid,tmp_amp,[],[],options);
 Beam_RofC = real(Map.fit_para(2));
 
-q = 1/ (1/Beam_RofC -1i*1064e-9/pi/Beam_rad^2);
+q = 1/ (1/Beam_RofC -1i*E.Wavelength/pi/Beam_rad^2);
 
 Beam_z2 = real(q);
 Beam_zR = imag(q);
@@ -102,7 +108,19 @@ Beam_w0 = sqrt(Beam_zR*E.Wavelength/pi);
 
 switch nargout
     case 0
-        fprintf('Beam radius [m]: %g  \t \t Wavefront curvature [m]: %g  \n',Beam_rad,Beam_RofC)
+        if strcmp(p.Results.Output,'B_R')
+            fprintf('Beam radius [m]: %g  \t \t Wavefront curvature [m]: %g  \n',Beam_rad,Beam_RofC)
+        end
+        
+        if strcmp(p.Results.Output,'W_P')
+            fprintf('Beam waist [m]: %g  \t \t Position of the waist [m]: %g  \n',Beam_w0,Beam_z2)
+        end
+        
+        if strcmp(p.Results.Output,'all')
+            fprintf('Beam radius [m]: %g  \t \t Wavefront curvature [m]: %g  \n',Beam_rad,Beam_RofC)
+            fprintf('Beam waist [m]: %g  \t \t Position of the waist [m]: %g  \n',Beam_w0,Beam_z2)
+        end
+              
     case 1
         varargout{1} = Beam_rad;
     case 2
