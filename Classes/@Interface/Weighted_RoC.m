@@ -69,17 +69,17 @@ elseif ~isempty(p.Results.E)
     RoC_fitted = 1/(2*Map.fit_para2(1));
     
 else
-    error('Weighted_RMS(): something went wrong, check the second argument')
+    error('Weighted_RoC(): something went wrong, check the second argument')
 end
 
 
 switch nargout
     case 0
-        fprintf('Calculated RoC [m]: %g \n',RoC_fitted);
+        fprintf('Calculated RoC [m]: %g \n',-RoC_fitted);
     case 1
-        varargout{1} = RoC_fitted;
+        varargout{1} = -RoC_fitted;
     otherwise
-        error('Weighted_RMS(): Too many output argument')
+        error('Weighted_RoC(): Too many output argument')
 end
 
 end
