@@ -10,7 +10,7 @@ Logbook for tips and tricks: https://logbooks.ifosim.org/oscar/
 
 ## Try the latest version of OSCAR with Matlab Online
 
-Just click on the following button and run OSCAR and its examples in your web browser:
+Just click on the following button and run OSCAR and its examples in your web browser without any installation:
 
 [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=Jerome-LMA/oscar)
 
