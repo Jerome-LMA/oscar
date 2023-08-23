@@ -6,6 +6,12 @@
 
 OSCAR is an optical FFT code used to calculate the steady state optical field circulating in Fabry-Perot cavities. The code can integrate non-sperical mirrors and any arbitrary input fields. Recent applications for OSCAR have been: calculation of thermal lensing effect, estimation of diffraction loss and cavity eigen modes for non sperical mirrors. One great advantage of OSCAR is the simplicity and flexibility of the code, everyone with only minimal knowledge of Matlab can easily modified OSCAR code to suit specific purposes.
 
-Logbook in preparation: https://logbooks.ifosim.org/oscar/
+Logbook for tips and tricks: https://logbooks.ifosim.org/oscar/
 
-[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=Jerome-LMA/oscar&file=https://github.com/Jerome-LMA/oscar/blob/master/Run_OSCAR.m)
+## Try the latest version of OSCAR with Matlab Online
+
+Just click on the following button and run OSCAR and its examples in your web browser:
+
+[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=Jerome-LMA/oscar)
+
+(you have first to  be registered to Mathworks and own a valid license, see [here](https://www.mathworks.com/products/matlab-online.html))
