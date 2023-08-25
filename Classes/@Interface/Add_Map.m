@@ -225,7 +225,7 @@ end
 
 % Fix the RMS
 if  ~isempty(p.Results.RMS)
-    map.resampled = map.resampled/std(map.resampled(map.central_ind)) * p.Results.RMS;
+    map.resampled = map.resampled/std(map.resampled(Iin.Grid.D2_r < diam/2)) * p.Results.RMS;
 end
 
 map.resampled = rot90(map.resampled,round(p.Results.rotate));
