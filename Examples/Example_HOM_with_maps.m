@@ -30,10 +30,6 @@ Virtual_map_EM = Do_Virtual_Map(G1,param_PSD);
 IM = Add_Map(IM,Virtual_map_IM,'reso',G1.Step,'remove_tilt_focus',0.150,'RMS',1E-9,'verbose',false);
 EM = Add_Map(EM,Virtual_map_EM,'reso',G1.Step,'remove_tilt_focus',0.150,'RMS',1E-9,'verbose',false);
 
-
-% To normalise the maps for example to 1 nm RMS use:
-% IM = Add_map(IM,'Map1.txt',1.5E-3,1E-9);
-
 % Use the 2 previous Interfaces and the input beam to defing a cavity 3000
 % meter long
 C1 = Cavity1(IM,EM,3000,E_input);
