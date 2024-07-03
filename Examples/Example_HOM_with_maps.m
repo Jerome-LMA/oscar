@@ -22,7 +22,7 @@ IM = Interface(G1,'RoC',1500,'CA',0.4,'T',0.02);
 EM = Interface(G1,'RoC',1700,'CA',0.4,'T',2E-6);
 
 % Load the mirror maps
-param_PSD = [0.02 -1.4];
+param_PSD = [4000 1000 2.4 12];
 Virtual_map_IM = Do_Virtual_Map(G1,param_PSD);
 Virtual_map_EM = Do_Virtual_Map(G1,param_PSD);
 
