@@ -23,7 +23,9 @@ classdef Grid < handle
         D2_square
         D2_r
         D2_FFT_X
-        D2_FFT_Y
+        D2_FFT_Y      
+        D2_FFT_square
+        D2_FFT_r
     end
     
     methods
@@ -55,6 +57,8 @@ classdef Grid < handle
             G1.D2_r   = sqrt(G1.D2_square);
             
             [G1.D2_FFT_X,G1.D2_FFT_Y] = meshgrid(G1.Axis_FFT);
+            G1.D2_FFT_square = G1.D2_FFT_X.^2 + G1.D2_FFT_Y.^2;
+            G1.D2_FFT_r   = sqrt(G1.D2_FFT_square);
             
         end
     end
