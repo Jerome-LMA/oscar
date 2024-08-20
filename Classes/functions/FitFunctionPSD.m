@@ -11,7 +11,8 @@ function PSD_reconstructed = FitFunctionPSD(P,fdata)
 % segment power law
 % for freq < P(2)  PSD = P(1) * 1 / f^(-P(3)),
 % for freq > P(2)  PSD = Amp * 1 / f^(-P(4)) with of course the continuity in the PSD
-% P(1) = P(1)*1E-16; % for the fit to be easier, ensure that the fitting coefficient are in the same range
+
+P(1) = P(1)*1E-16; % for the fit to be easier, ensure that the fitting coefficient are in the same range
 % and so on, for an arbitrary number of segment
 
 if(rem(length(P),2) ~= 0)
