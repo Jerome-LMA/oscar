@@ -19,7 +19,11 @@ p.addParameter('scale',[],@(x)isnumeric(x) && x>0);
 
 p.parse(Iin,varargin{:})
 
-Title_fig = ['Surface profile: ' strrep(inputname(1),'_','\_')];
+if ~isempty(Iin.name)
+    Title_fig = ['Surface profile: ' Iin.name];
+else
+    Title_fig = ['Surface profile: ' strrep(inputname(1),'_','\_')];
+end
 
 if ~isempty(p.Results.scale)
     Iin.surface = Iin.surface * p.Results.scale;

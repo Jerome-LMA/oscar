@@ -33,12 +33,14 @@ classdef Interface
         L
         n1
         n2
-
+        
         WP_n1_GPU
         WP_n2_GPU
         
         t
         r
+        
+        name
     end
     
     methods
@@ -51,25 +53,28 @@ classdef Interface
             p.addRequired('Grid_in', @(x)isa(x, 'Grid'));
             
             % enter the radius of curvature of the mirror
-            p.addParamValue('RoC',1E99,@(x)isnumeric(x) );
+            p.addParameter('RoC',1E99,@(x)isnumeric(x) );
             
             % enter the clear aperture, i.e. diameter of the optic
-            p.addParamValue('CA',1E99,  @(x)isnumeric(x) && x>0);
+            p.addParameter('CA',1E99,  @(x)isnumeric(x) && x>0);
             
             % enter the transmission in power
-            p.addParamValue('T',0.1,  @(x)isnumeric(x) && x>=0 && x<=1);
+            p.addParameter('T',0.1,  @(x)isnumeric(x) && x>=0 && x<=1);
             
             % enter the loss in power
-            p.addParamValue('L', 0, @(x)isnumeric(x) && x>=0 && x<=1);
+            p.addParameter('L', 0, @(x)isnumeric(x) && x>=0 && x<=1);
             
             % enter the refractive index of the first media
-            p.addParamValue('n1',1,  @(x)isnumeric(x) && x>=1);
+            p.addParameter('n1',1,  @(x)isnumeric(x) && x>=1);
             
             % enter the refractive index of the first media
-            p.addParamValue('n2',1.45,  @(x)isnumeric(x) && x>=1);
+            p.addParameter('n2',1.45,  @(x)isnumeric(x) && x>=1);
             
             % enter the angle of incidence (in degree)
-            p.addParamValue('AoI',[],  @(x)isnumeric(x) && x>=0);
+            p.addParameter('AoI',[],  @(x)isnumeric(x) && x>=0);
+            
+            % enter the name of the surface (as a string)
+            p.addParameter('Name',[],  @(x)isnumeric(x) && x>=0);
             
             
             p.parse(Grid_in,varargin{:});
@@ -98,7 +103,7 @@ classdef Interface
             if I.T + I.L >= 1
                 I.t = 1i*sqrt(I.T-I.L);
                 I.r = 0;
-            else               
+            else
                 I.t = 1i*sqrt(I.T);
                 I.r = sqrt(1-(I.T + I.L));
             end
@@ -118,11 +123,13 @@ classdef Interface
                 I.mask(mask_index) = 1;
             end
             
+            if ~isempty(p.Results.Name)
+                I.name = p.Results.Name;
+            end
+            
+            
         end
         
         
     end
-    
-    
-end
-
+end   
