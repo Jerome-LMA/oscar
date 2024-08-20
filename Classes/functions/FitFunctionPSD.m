@@ -1,4 +1,4 @@
-function y = FitFunctionPSD(P,xdata)
+function PSD_reconstructed = FitFunctionPSD(P,fdata)
 % Return the parameterised PSD 1D function with several segments
 % using the set of parameters P and the frequency axis xdata
 
@@ -9,12 +9,10 @@ function y = FitFunctionPSD(P,xdata)
 % if 4 coefficient: P(1) is the amplitude, P(2) the cutting frequency
 % between the 2 segments, P(3) the first segment power law, P(4) the second
 % segment power law
-% for freq < P(2)  PSD = P(1) * 1 / f^(-P(3)), 
-for freq > P(2)  PSD = Amp * 1 / f^(-P(4)) with of course the continuity in the PSD
-
-P(1) = P(1)*1E-16; % for the fit to be easier, ensure that the fitting coefficient are in the same range
-
-and so on, for an arbitrary number of segment
+% for freq < P(2)  PSD = P(1) * 1 / f^(-P(3)),
+% for freq > P(2)  PSD = Amp * 1 / f^(-P(4)) with of course the continuity in the PSD
+% P(1) = P(1)*1E-16; % for the fit to be easier, ensure that the fitting coefficient are in the same range
+% and so on, for an arbitrary number of segment
 
 if(rem(length(P),2) ~= 0)
     warning('P has to be an even number of parameters')
@@ -60,7 +58,7 @@ else
         
         while fdata(jj) <=  P(ii+1)
             PSD_reconstructed(jj) = Amp(ii) * fdata(jj).^(-P(Nb_segment+ii));
-            jj = jj + 1;           
+            jj = jj + 1;
         end
     end
     
@@ -68,27 +66,11 @@ else
     Amp(ii+1) = PSD_reconstructed(jj-1) * P(Nb_segment).^(P(end));
     
     for jj = jj:length(fdata)
-        PSD_reconstructed(jj) = Amp(ii+1) * fdata(jj).^(-P(end));     
+        PSD_reconstructed(jj) = Amp(ii+1) * fdata(jj).^(-P(end));
     end
     
 end
 
 PSD_reconstructed = PSD_reconstructed';  % to match the arrangement during the fitting
 
-end
-y = zeros(1,length(xdata))';
-
-% ---- First segment ---- %
-index_vec = (xdata<Frequency_x(2));
-y(index_vec) = A(1)*power(xdata(index_vec),-x(1));
-
-% ---- Intermediate segments ---- %
-for j = 2:Half-1
-    index_vec = ((xdata>=Frequency_x(j))&(xdata<Frequency_x(j+1)));
-    y(index_vec) = A(j)*(power(xdata(index_vec),-x(j)));
-end
-
-% ---- Last segment ---- %
-index_vec = (xdata>=Frequency_x(end));
-y(index_vec) = A(end)*(power(xdata(index_vec),-x(end)));
 end
