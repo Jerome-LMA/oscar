@@ -26,19 +26,19 @@ p.parse(G,Power_law,varargin{:})
 
 debug = false;
 
-if ~isnumeric(p.Results.Power_law)
-    if strcmp(p.Results.Power_law,'IBF')
-        Power_law = [60.13,2.22e+02,2.44,3.24,0.73,2.61]; 
-    elseif strcmp(p.Results.Power_law,'Mechanical')
-        Power_law = [82.26,3.26e+02,2.49,2.65,1.35,3.54];
-    elseif strcmp(p.Results.Power_law,'Coated')
-        Power_law = [65.46,3.22e+02,8.90,2.84,0.51,3.70]; 
 
+if ~isnumeric(Power_law)
+    if strcmp(Power_law,'IBF')
+        Power_law_num = [8E5 20 385 5.8 0.9 4.4]; 
+    elseif strcmp(Power_law,'Standard')
+        Power_law_num = [1300 110 1.8 4.4];
+    elseif strcmp(Power_law,'Coated')
+        Power_law_num = [65.46,3.22e+02,8.90,2.84,0.51,3.70]; !! will be completed later with the right phase, do not use
     else
-        Power_law = p.Results.Power_law;
+        error('Do_Virtual_Map(): name of the PSD not accepted')
     end
 else
-    Power_law = p.Results.Power_law;
+    Power_law_num = Power_law;
 end
 
 if ~isempty(p.Results.phase)
@@ -55,7 +55,8 @@ end
 FFT_Radius_Axis = G.Axis_FFT(G.Half_num_point+1:end); % will take the radius along the diagonal
 
 % ---- Draw the PSD 1D on the new frequency vector ---- %
-PSD_1D  = FitFunctionPSD(Power_law,FFT_Radius_Axis);
+
+PSD_1D  = FitFunctionPSD(FFT_Radius_Axis,Power_law_num);
 PSD_1D(1) = PSD_1D(2);
 
 % ---- Reconstruct PSD 2D assuming radial symmetry ---- %

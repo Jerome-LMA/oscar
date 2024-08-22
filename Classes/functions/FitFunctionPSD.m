@@ -1,4 +1,4 @@
-function PSD_reconstructed = FitFunctionPSD(P,fdata)
+function PSD_reconstructed = FitFunctionPSD(freq_data, power_law)
 % Return the parameterised PSD 1D function with several segments
 % using the set of parameters P and the frequency axis xdata
 
@@ -11,63 +11,86 @@ function PSD_reconstructed = FitFunctionPSD(P,fdata)
 % segment power law
 % for freq < P(2)  PSD = P(1) * 1 / f^(-P(3)),
 % for freq > P(2)  PSD = Amp * 1 / f^(-P(4)) with of course the continuity in the PSD
+%and so on, for an arbitrary number of segment
 
-P(1) = P(1)*1E-16; % for the fit to be easier, ensure that the fitting coefficient are in the same range
-% and so on, for an arbitrary number of segment
+% The frequency must be ordered in increasing value
 
-if(rem(length(P),2) ~= 0)
+power_law(1) = power_law(1)*1E-16; % for the fit to be easier, ensure that the fitting coefficient are in the same range
+
+
+if(rem(length(power_law),2) ~= 0)
     warning('P has to be an even number of parameters')
 end
 
-Nb_segment = length(P)/2;
+Nb_segment = length(power_law)/2;
 
-PSD_reconstructed = zeros(1,length(fdata));
+Freq_cut1 = power_law(1);
+Freq_cut_last = power_law(Nb_segment);
+
+% if Freq_cut1 < freq_data(1)
+%    Freq_cut1
+%    freq_data(1)
+%     error('FitFunctionPSD(): very unlikely error: contact the developer')
+% end
+
+if Freq_cut_last > freq_data(end)
+    warning('FitFunctionPSD(): the power law of the PSD covers a wider spatial range that what is allowed by the grid size and resolution')
+end
+
+
+PSD_reconstructed = zeros(1,length(freq_data));
 %PSD_reconstructed = 1E-30*ones(1,length(fdata));
 
-
-
 if Nb_segment == 1
-    PSD_reconstructed = P(1) * fdata.^(-P(2));
+    PSD_reconstructed = power_law(1) * freq_data.^(-power_law(2));
     
 elseif Nb_segment == 2
     
     jj = 1; % index to scan the frequency vector
     
-    while fdata(jj) <=  P(2)
-        PSD_reconstructed(jj) = P(1) * fdata(jj).^(-P(3));
+    while freq_data(jj) <=  power_law(2)
+        PSD_reconstructed(jj) = power_law(1) * freq_data(jj).^(-power_law(3));
         jj = jj + 1;
+        if jj > length(freq_data)
+            return
+        end
     end
     
-    Amp_2 = P(1) * P(2).^(P(4) - P(3)); % Calculate the starting amplitude of the second segment to have the continuity
+    Amp_2 = power_law(1) * power_law(2).^(power_law(4) - power_law(3)); % Calculate the starting amplitude of the second segment to have the continuity
     
-    for jj = jj:length(fdata)
-        PSD_reconstructed(jj) = Amp_2 * fdata(jj).^(-P(4));
-        
+    for jj = jj:length(freq_data)
+        PSD_reconstructed(jj) = Amp_2 * freq_data(jj).^(-power_law(4));
     end
     
 else
     jj = 1; % index to scan the frequency vector
     
-    while fdata(jj) <=  P(2)
-        PSD_reconstructed(jj) = P(1) * fdata(jj).^(-P(Nb_segment+1));
+    while freq_data(jj) <=  power_law(2)
+        PSD_reconstructed(jj) = power_law(1) * freq_data(jj).^(-power_law(Nb_segment+1));
         jj = jj + 1;
+        if jj > length(freq_data)
+            return
+        end
     end
     
     
     for ii = 2:Nb_segment-1
-        Amp(ii) = PSD_reconstructed(jj-1) * P(ii).^(P(Nb_segment+ii));
+        Amp(ii) = PSD_reconstructed(jj-1) * power_law(ii).^(power_law(Nb_segment+ii));
         
-        while fdata(jj) <=  P(ii+1)
-            PSD_reconstructed(jj) = Amp(ii) * fdata(jj).^(-P(Nb_segment+ii));
+        while freq_data(jj) <=  power_law(ii+1)
+            PSD_reconstructed(jj) = Amp(ii) * freq_data(jj).^(-power_law(Nb_segment+ii));
             jj = jj + 1;
+            if jj > length(freq_data)
+                return
+            end
         end
     end
     
     % for the last segment
-    Amp(ii+1) = PSD_reconstructed(jj-1) * P(Nb_segment).^(P(end));
+    Amp(ii+1) = PSD_reconstructed(jj-1) * power_law(Nb_segment).^(power_law(end));
     
-    for jj = jj:length(fdata)
-        PSD_reconstructed(jj) = Amp(ii+1) * fdata(jj).^(-P(end));
+    for jj = jj:length(freq_data)
+        PSD_reconstructed(jj) = Amp(ii+1) * freq_data(jj).^(-power_law(end));
     end
     
 end
