@@ -1,7 +1,10 @@
 function [Map] = Do_Virtual_Map(G,Power_law,varargin)
-%Do_Virtual_map() Create a synthetic map according to a parametrised PSD
+%    Do_Virtual_map() Create a synthetic map according to a parametrised PSD
 %   Grid is the Grid object for the calculations
-%   Power_law is a vector of length 8 with the power law, see the function
+%   Power_law is a vector describing the PSD power law (see the function
+%   FitFunctionPSD for the description)
+%   Possibility to use a pre-defined PSD for example:
+%   map = Do_Virtual_Map(G1,'IBF')
 %   2024 version from M. Lejean and J. Degallaix
 
 p = inputParser;
@@ -15,12 +18,6 @@ addRequired(p,'Power_law',@(x)isnumeric(x) || ischar(x))
 
 % Check if the phase is given
 p.addParameter('phase',[],@(x)isnumeric(x));
-
-% Check if the frequency interval for the PSD_1D generation is given
-p.addParameter('bandwidth',[],@(x)isnumeric(x));
-
-% Check if the frequency interval for the PSD_1D generation is given
-p.addParameter('porte',false,@(x)islogical(x));
 
 p.parse(G,Power_law,varargin{:})
 
