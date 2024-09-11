@@ -22,9 +22,9 @@ debug = false;
 
 if ~isnumeric(Power_law)
     if strcmp(Power_law, 'IBF')
-        Power_law_num = [1.100, 4.728, 43.542, 3.391e+02, 1.636, 3.333, 0.622, 4.016];
+        Power_law_num = [8000, 15, 380, 6,1.2,4];
     elseif strcmp(Power_law, 'Standard')
-        Power_law_num = [11.025, 28.826, 1.445e+02, 2.121, 1.066, 4.641];
+        Power_law_num = [2.33, 120, 608, 1.5, 4.7, 1.9]; 
     elseif strcmp(Power_law, 'Coated')
         Power_law_num = [99.833, 7.890, 24.510, 3.254e+02, 1.776, 7.165, 1.476, 5.807];
     else
