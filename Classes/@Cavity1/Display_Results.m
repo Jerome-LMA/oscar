@@ -32,10 +32,10 @@ fprintf('  Round trip losses: \t\t %10.6g \t [ppm] \n\n',Cin.Loss_RTL *1E6)
 
 for ii=1:Cin.Laser_in.Nb_Pair_SB
     
-    [Pin1, Pin2] = Calculate_Power(Cin.Laser_in,'include','SB','SB_num',ii);
-    [Pcirc1, Pcirc2] = Calculate_Power(Cin.Field_circ,'include','SB','SB_num',ii);
-    [Ptrans1, Ptrans2] = Calculate_Power(Cin.Field_trans,'include','SB','SB_num',ii);
-    [Pref1, Pref2] = Calculate_Power(Cin.Field_ref,'include','SB','SB_num',ii);
+    [Pin1, Pin2] = Calculate_Power(Cin.Laser_in,'field','SB','SB_num',ii);
+    [Pcirc1, Pcirc2] = Calculate_Power(Cin.Field_circ,'field','SB','SB_num',ii);
+    [Ptrans1, Ptrans2] = Calculate_Power(Cin.Field_trans,'field','SB','SB_num',ii);
+    [Pref1, Pref2] = Calculate_Power(Cin.Field_ref,'field','SB','SB_num',ii);
     
     fprintf('---------- For the sidebands %i, frequency: %5.4g [MHz] ---------------\n',ii,Cin.Laser_in.SB(ii).Frequency_Offset/1E6)
     fprintf(' for the lower and upper sidebands respectively \n')
