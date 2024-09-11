@@ -214,8 +214,8 @@ else
                 D2.SB(ii).Field_lower = E2.SB(ii).Field_lower - ( c(1)*(E1.SB(ii).Field_lower - D1.SB(ii).Field_lower)...
                     + c(2)*E_SR_2_circ.SB(ii).Field_lower);
                 
-                [pow_diff,~] = Calculate_Power(E2 - E1,'include','SB','SB_num',ii);
-                [pow_E1,~] = Calculate_Power(E1,'include','SB','SB_num',ii);
+                [pow_diff,~] = Calculate_Power(E2 - E1,'field','SB','SB_num',ii);
+                [pow_E1,~] = Calculate_Power(E1,'field','SB','SB_num',ii);
                 
                 error_P_LSB(ii) = pow_diff / pow_E1;
                 
@@ -244,8 +244,8 @@ else
                 % Calculate D2 now
                 D2.SB(ii).Field_upper = E2.SB(ii).Field_upper - ( c(1)*(E1.SB(ii).Field_upper - D1.SB(ii).Field_upper) + c(2)*E_SR_2_circ.SB(ii).Field_upper);
                 
-                [~,pow_diff] = Calculate_Power(E2 - E1,'include','SB','SB_num',ii);
-                [~,pow_E1] = Calculate_Power(E1,'include','SB','SB_num',ii);
+                [~,pow_diff] = Calculate_Power(E2 - E1,'field','SB','SB_num',ii);
+                [~,pow_E1] = Calculate_Power(E1,'field','SB','SB_num',ii);
                 
                 error_P_USB(ii) = pow_diff / pow_E1;
                 

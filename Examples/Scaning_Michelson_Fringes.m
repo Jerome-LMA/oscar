@@ -40,7 +40,6 @@ for ii = 1:length(Vec_phase)
     % Propagate back and then interfere   
     Eout = E_north*exp(1i*Vec_phase(ii)) + E_east;
     
-    E_Plot(Eout,'display','intensity');caxis([0 300]);colormap(hot);pause(0.05);
+    E_Plot(Eout,'display','intensity');caxis([0 3E5]);colormap(hot);pause(0.05);
 end
-
 

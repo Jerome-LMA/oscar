@@ -22,9 +22,8 @@ IM = Interface(G1,'RoC',1500,'CA',0.4,'T',0.02);
 EM = Interface(G1,'RoC',1700,'CA',0.4,'T',2E-6);
 
 % Load the mirror maps
-param_PSD = [4000 1000 2.4 12];
-Virtual_map_IM = Do_Virtual_Map(G1,param_PSD);
-Virtual_map_EM = Do_Virtual_Map(G1,param_PSD);
+Virtual_map_IM = Do_Virtual_Map(G1,'Standard');
+Virtual_map_EM = Do_Virtual_Map(G1,'Standard');
 
 % Add with 1 nm RMS on the central part
 IM = Add_Map(IM,Virtual_map_IM,'reso',G1.Step,'remove_tilt_focus',0.150,'RMS',1E-9,'verbose',false);
