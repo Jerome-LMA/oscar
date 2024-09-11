@@ -9,7 +9,7 @@ p  = inputParser;
 p.addRequired('Ein', @(x)isa(x, 'E_Field'));
 
 % Check what are we want calculate
-p.addOptional('include','carrier', @(x)strcmpi(x,'carrier') | ...
+p.addOptional('field','carrier', @(x)strcmpi(x,'carrier') | ...
     strcmpi(x,'all') | strcmpi(x,'SB') );
 
 % Check the number of the sidebands we want to deal with
@@ -36,7 +36,7 @@ else
     Run_on_GPU = false;
 end
 
-if strcmp(p.Results.include,'carrier')
+if strcmp(p.Results.field,'carrier')
     if Run_on_GPU
         power_temp_Car = sum(abs(arrayfun(@times,Ein.Field,Ein.Field) ),'all');
     else
@@ -46,7 +46,7 @@ if strcmp(p.Results.include,'carrier')
     power_temp_Car = Cte_conversion * power_temp_Car * Ein.Grid.Step_sq;
     power_temp_SB = 0;
     
-elseif strcmp(p.Results.include,'all')
+elseif strcmp(p.Results.field,'all')
     power_temp_Car = sum(abs(Ein.Field(:).^2))* (Ein.Grid.Step)^2;
     if Ein.Nb_Pair_SB
         for ii = 1:Ein.Nb_Pair_SB
@@ -56,7 +56,7 @@ elseif strcmp(p.Results.include,'all')
         
     end
     
-elseif strcmp(p.Results.include,'SB')
+elseif strcmp(p.Results.field,'SB')
     if Ein.Nb_Pair_SB
         if SB_number > Ein.Nb_Pair_SB
             error('Calculate_Power(): SB number invalid')
@@ -70,19 +70,19 @@ end
 switch nargout
     case 0
         str = ['Power in the field(s): ' inputname(1) ' [W]:   %g  \n'];
-        if strcmp(p.Results.include,'carrier')
+        if strcmp(p.Results.field,'carrier')
             fprintf(str,power_temp_Car)
-        elseif strcmp(p.Results.include,'all')
+        elseif strcmp(p.Results.field,'all')
             fprintf(str,power_temp_Car+power_temp_SB_lower+power_temp_SB_upper)
-        elseif strcmp(p.Results.include,'SB')
+        elseif strcmp(p.Results.field,'SB')
             fprintf(str,power_temp_SB_lower+power_temp_SB_upper)
         end
     case 1
-        if strcmp(p.Results.include,'carrier')
+        if strcmp(p.Results.field,'carrier')
             varargout{1} = power_temp_Car;
-        elseif strcmp(p.Results.include,'all')
+        elseif strcmp(p.Results.field,'all')
             varargout{1} = power_temp_Car+power_temp_SB_lower+power_temp_SB_upper;
-        elseif strcmp(p.Results.include,'SB')
+        elseif strcmp(p.Results.field,'SB')
             varargout{1} = power_temp_SB_lower+power_temp_SB_upper;
         end
     case 2
