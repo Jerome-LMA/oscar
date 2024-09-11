@@ -33,17 +33,17 @@ fprintf(' Reflected power %g [W] \n\n',Calculate_Power(Cin.Field_ref))
 
 for ii=1:Cin.Laser_in.Nb_Pair_SB
     
-    [Pin1, Pin2] = Calculate_Power(Cin.Laser_in,'include','SB','SB_num',ii);
-    [Pcirc1, Pcirc2] = Calculate_Power(Cin.Field_circ,'include','SB','SB_num',ii);
+    [Pin1, Pin2] = Calculate_Power(Cin.Laser_in,'field','SB','SB_num',ii);
+    [Pcirc1, Pcirc2] = Calculate_Power(Cin.Field_circ,'field','SB','SB_num',ii);
     
     Ptrans1 = 0; Ptrans2 = 0;
     for pp=2:Cin.Nb_mirror
-        [tmp_power_lsb,tmp_power_usb] = Calculate_Power(Cin.Field_trans(pp),'include','SB','SB_num',ii);
+        [tmp_power_lsb,tmp_power_usb] = Calculate_Power(Cin.Field_trans(pp),'field','SB','SB_num',ii);
         Ptrans1 = tmp_power_lsb + Ptrans1;
         Ptrans2 = tmp_power_usb + Ptrans2;
     end
     
-    [Pref1, Pref2] = Calculate_Power(Cin.Field_ref,'include','SB','SB_num',ii);
+    [Pref1, Pref2] = Calculate_Power(Cin.Field_ref,'field','SB','SB_num',ii);
     
     fprintf('---------- For the sidebands %i ---------------\n',ii)
     fprintf(' for the lower and upper sidebands respectively \n')
