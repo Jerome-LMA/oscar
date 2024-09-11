@@ -15,7 +15,7 @@ function PSD_reconstructed = FitFunctionPSD(freq_data, power_law)
 
 % The frequency must be ordered in increasing value
 
-power_law(1) = power_law(1)*1E-16; % for the fit to be easier, ensure that the fitting coefficient are in the same range
+power_law(1) = power_law(1)*1E-21; % for the fit to be easier, ensure that the fitting coefficient are in the same range
 
 
 if(rem(length(power_law),2) ~= 0)
