@@ -8,7 +8,7 @@ clearvars; close all;
 addpath(genpath([pwd filesep '..' filesep 'Classes']));
 
 disp('---------------------------------------------------------------------------')
-disp('                  OSCAR V3.30  - The cavities with thick mirror       ')
+disp('                  OSCAR V3.31  - The cavities with thick mirror       ')
 disp('  ')
 
 G1 = Grid(128,0.5);
