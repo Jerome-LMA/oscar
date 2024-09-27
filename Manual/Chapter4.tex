@@ -50,7 +50,7 @@ It is possible to change manually the diameter of the mirror and the wavelength 
 \noindent \textbf{map2D} = \textcolor{blue}{Do\_Virtual\_Map}(\textbf{G}, \textbf{Power\_law})
 \vspace*{-0.2cm}
 \begin{quote}
-Creates a synthetic map from a given PSD. The PSD is parameterized as a (or several) power law. The function return a 2D height map of the surface which can then after be applied to a Interface object. See the example \textcolor{blue}{Example\_Display\_Create\_maps.m} for a practical implementation.
+Creates a synthetic map from a given PSD. The PSD is parameterized as a (or several) power law. The function return a 2D height map of the surface which can then after be applied to a Interface object. See the example \textcolor{blue}{Example\_calculate\_PSD\_and\_create\_maps.m} for a practical implementation.
 \end{quote}
 
 
@@ -102,11 +102,11 @@ Calculates the overlap integral between 2 E\_field. The function returns the com
 If only one E\_field is given, it will calculate the overlap between the carrier and of the sideband pair. The sideband number is selected with the argument 'SB\_num'.
 \end{quote}
 
-\noindent power = \textcolor{blue}{Calculate\_Power}(\textbf{E1},'include','carrier'|'all'|'SB')
+\noindent power = \textcolor{blue}{Calculate\_Power}(\textbf{E1},'field','carrier'|'all'|'SB')
 \vspace*{-0.2cm}
 \begin{quote}
 Calculates the total power of the E\_Field \textsl{E1}. The function can either return a number or display the value in the Matlab command line if no output variable is used. With the same function, one can also calculate the power of the sideband fields:
-\textcolor{blue}{Calculate\_power}(E1,'include','SB','SB\_num',1)
+\textcolor{blue}{Calculate\_power}(E1,'field','SB','SB\_num',1)
 \end{quote}
 
 \noindent \textbf{E2} = \textcolor{blue}{Change\_E\_n}(\textbf{E1},\textbf{n})
@@ -121,7 +121,7 @@ Changes the refractive index where the laser beam is. Could be used to pass thro
 Uses as a diagnostic tool to check the centroid position of the beam on the grid as well as its tilt, function in both directions at the same time.
 \end{quote}
 
-\noindent [\textbf{sig\_p sig\_q}] = \textcolor{blue}{Demodulate\_SB}(\textbf{E1},'SB\_num',1,'phase',0)
+\noindent [\textbf{sig\_p,sig\_q}] = \textcolor{blue}{Demodulate\_SB}(\textbf{E1},'SB\_num',1,'phase',0)
 \vspace*{-0.2cm}
 \begin{quote}
 Demodulates the field \textsl{E1} with the chosen pair of sidebands. By default, the in phase \textsl{sig\_p} and in quadrature \textsl{sig\_q} signals are returned. This function could be used to derive a Pound-Drever-Hall error signal as shown in \ref{ch4:ex_PDH}. Optionally, a demodulation phase could be given.
@@ -132,7 +132,7 @@ Demodulates the field \textsl{E1} with the chosen pair of sidebands. By default,
 \begin{quote}
 Displays a 2D plot of the field amplitude in a new Matlab figure window. Function can also be used as \textsl{E1}.E\_plot(). We can also display the amplitude in log scale \verb?E_plot(E1,'space','log')? or the propagation angle of the beam \verb?E_plot(E1,'angle')?. To create illustrative picture of the beam without all the axis, one can use the option \verb?'no_axis',true?.
 
-The same function could be used to display the 2 sidebands with \textcolor{blue}{E\_Plot}(E1,'display','SB','SB\_num',1). The same options as for the carrier are also possible.
+The same function could be used to display the 2 sidebands with \textcolor{blue}{E\_Plot}(E1,'field','SB','SB\_num',1). The same options as for the carrier are also possible.
 \end{quote}
 
 
@@ -207,21 +207,19 @@ Transmits the field \textsl{E1} through an aperture of diameter \textsl{size}. T
 Transmits the field \textsl{E1} through a lens of a given focal length.
 \end{quote}
 
-\noindent [\textbf{E\_trans} E\_ref]= \textcolor{blue}{Transmit\_Reflect\_Interface}(\textbf{E1},\textbf{I1})
+\noindent [\textbf{E\_trans}, E\_ref]= \textcolor{blue}{Transmit\_Reflect\_Interface}(\textbf{E1},\textbf{I1})
 \vspace*{-0.2cm}
 \begin{quote}
 Transmits and reflects the field \textsl{E1} through an interface \textsl{I1}. The orientation of the interface is given by the refractive index of the incoming field \textsl{E1}.
 \end{quote}
 
-\noindent [\textbf{E\_trans} E\_ref]= \textcolor{blue}{Transmit\_Reflect\_Mirror}(\textbf{E1},\textbf{M1},\textbf{HR/AR})
+\noindent [\textbf{E\_trans}, E\_ref]= \textcolor{blue}{Transmit\_Reflect\_Mirror}(\textbf{E1},\textbf{M1},\textbf{HR/AR})
 \vspace*{-0.2cm}
 \begin{quote}
 Transmits and reflects the field \textsl{E1} through a mirror \textsl{M1}. One must select which side of the mirror is first met for the propagation, either we enter by the AR or HR side.
 \end{quote}
 
 For convenience, the operators +,- and * have also been overloaded to work with any object \textsl{E\_field}.
-
-
 
 
 \subsection{The class Prop\_operator}
@@ -401,10 +399,12 @@ A new wrapper function \textcolor{blue}{Transmit\_Reflect\_Optic} has also been 
 
 This class is used to simulate Fabry Perot cavities. Objects of the class \textsl{Cavity1} are cavities constituted by two Interface objects \textsl{I1, I2} separated by a distance \textsl{Cavity\_length}. An input field \textsl{E1} must also be given. \textsl{I1} is considered as the input surface where the input beam is defined, whereas \textsl{I2} is the end mirror.
 
-The input field can be defined either inside the cavity on the surface \textsl{I1} or outside the cavity. In the later case, the input beam will first be transmitted through \textsl{I1} which can act as a lens. By default the input beam is defined inside the cavity, if it is not the case the user can add in his script:
+The input field can be defined either inside the cavity on the surface \textsl{I1} or outside the cavity. In the later case, the input beam will first be transmitted through \textsl{I1} which can act as a lens. By default the input beam is defined outside the cavity, if it is not the case the user can add in his script:
 \begin{verbatim}
-C1.Laser_start_on_input = false ;
+C1.Laser_start_on_input = true ;
 \end{verbatim}
+However by passing the input mirror transmission is not recommended as the reflected field could not be computed in that case.
+
 
 Variables of instances of the class \textsl{Cavity1} are listed in {App3:Cavity}.
 
