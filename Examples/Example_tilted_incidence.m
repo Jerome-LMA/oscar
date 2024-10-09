@@ -1,5 +1,5 @@
 clearvars; close all;
-addpath(genpath('Classes'));
+addpath(genpath([pwd filesep '..' filesep 'Classes']));
 
 
 disp('---------------------------------------------------------------------------')
@@ -17,7 +17,7 @@ E_input = E_Field(G1,'w0',0.05);
 E_2 = Propagate_E(E_input,100);
 
 AoI = 10; % Angle of incidence in degree
-RoC = 1E3;
+RoC = 320;
 
 I1 = Interface(G1,'CA',0.4,'T',0,'RoC',RoC,'AoI',AoI);
 [~,E_3] = Transmit_Reflect_Interface(E_2,I1);
@@ -72,7 +72,12 @@ g_2D = sqrt( (cos(theta))^2 - 2* G1.D2_X * sin(theta) / RoC  - G1.D2_square / Ro
 s_2D = f_2D - ( G1.D2_X * sin(2*theta) - f_2D * cos(2*theta) ) ./ ( 2* sin(2*theta)*(sin(theta+ G1.D2_X/RoC)) .* g_2D - cos(2*theta)*(1 - 2*g_2D.^2) );
 % formule 29 from the article
 
-I2.surface = -0.5*s_2D; % pass from wavefront to surface
+%I2.surface = -0.5*s_2D; % pass from wavefront to surface
+% !! The surface also contains the tilt of the mirror !!
+% !! it should be removed depending of the simulations !!
+% !! to remove it, use Add_Map()
+
+I2 = Add_Map(I2,s_2D,'reso',G1.Step,'scale',0.5,'remove_tilt',G1.Length);
 
 % figure(4)
 % imagesc(I1.surface ./ I2.surface)
