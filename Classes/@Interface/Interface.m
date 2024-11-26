@@ -37,10 +37,18 @@ classdef Interface
         WP_n1_GPU
         WP_n2_GPU
         
+        RoC_nominal               % positive for concave, if used as HR surface
+        
         t
         r
         
-        name
+        ABCD_ref_from_n1              % used for reflection
+        ABCD_ref_from_n2              % Reflection from the n2 side, usually inside the substrate, assume normal incidence
+        
+        ABCD_trans_from_n1         % passing from n1 to n2
+        ABCD_trans_from_n2         % passing from n2 to n1
+        
+        
     end
     
     methods
@@ -73,10 +81,6 @@ classdef Interface
             % enter the angle of incidence (in degree)
             p.addParameter('AoI',[],  @(x)isnumeric(x) && x>=0);
             
-            % enter the name of the surface (as a string)
-            p.addParameter('Name',[],  @(x)isnumeric(x) && x>=0);
-            
-            
             p.parse(Grid_in,varargin{:});
             
             % Create the interface
@@ -87,6 +91,8 @@ classdef Interface
             else
                 RoC = p.Results.RoC;
             end
+            
+            I.RoC_nominal = RoC;
             
             if isempty(p.Results.AoI) % if we arrive normal to the mirror
                 I.surface =  -(RoC - sign(RoC)*sqrt(RoC^2 - I.Grid.D2_square));
@@ -100,13 +106,12 @@ classdef Interface
             I.T = p.Results.T;
             I.L = p.Results.L;
             
-            if I.T + I.L >= 1
-                I.t = 1i*sqrt(I.T-I.L);
-                I.r = 0;
-            else
-                I.t = 1i*sqrt(I.T);
-                I.r = sqrt(1-(I.T + I.L));
+            if (I.T + I.L) > 1
+                error('Interface(): inconsistent definition of transmission and loss T + L > 1')
             end
+            
+            I.t = 1i*sqrt(I.T);
+            I.r = sqrt(1-(I.T + I.L));
             
             %Mirror mask
             if isempty(p.Results.AoI)
@@ -123,13 +128,19 @@ classdef Interface
                 I.mask(mask_index) = 1;
             end
             
-            if ~isempty(p.Results.Name)
-                I.name = p.Results.Name;
-            end
+            % ABCD matrix calculation
             
+            I.ABCD_ref_from_n1 = [1 0;-2/I.RoC_nominal 1];
+            I.ABCD_ref_from_n2 = [1 0;2/I.RoC_nominal 1];
+            
+            I.ABCD_trans_from_n1 = [1 0; (I.n1 - I.n2)/(I.RoC_nominal*I.n2) I.n1/I.n2];
+            I.ABCD_trans_from_n2 = [1 0; (I.n2 - I.n1)/(I.RoC_nominal*I.n1) I.n2/I.n1];
             
         end
         
         
     end
-end   
+    
+    
+end
+

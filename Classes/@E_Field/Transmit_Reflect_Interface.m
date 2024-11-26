@@ -30,13 +30,14 @@ switch nargout
         
         if (E.Refractive_index==Inter.n1)
             PF_Mirror = exp(1i * Eout.k_prop * ((Inter.n2 - Inter.n1)/ Inter.n1) * Inter.surface) .* Inter.mask .* Inter.t;
+            Eout.ABCD_q = Inter.ABCD_trans_from_n1 * E.ABCD_q;
             Eout = Change_E_n(Eout,Inter.n2);
         else
             % !!! Minus sign on the surface definition
             PF_Mirror = exp(-1i * Eout.k_prop * ((Inter.n1 - Inter.n2)/ Inter.n2) * fliplr(Inter.surface)) .*  fliplr(Inter.mask) .*  Inter.t;
+            Eout.ABCD_q = Inter.ABCD_trans_from_n2 * E.ABCD_q;
             Eout = Change_E_n(Eout,Inter.n1);
         end
-        
         Eout = Eout .*PF_Mirror;
         varargout = {};
         
@@ -50,20 +51,26 @@ switch nargout
         Eref = E;
         if (E.Refractive_index==Inter.n1)
             PF_Mirror_trans =  exp(1i * Eout.k_prop * ((Inter.n2 - Inter.n1)/ Inter.n1) * Inter.surface)  .* Inter.mask .* Inter.t;
+            Eout.ABCD_q = Inter.ABCD_trans_from_n1 * E.ABCD_q;
             Eout = Change_E_n(Eout,Inter.n2);
             
             PF_Mirror_ref = exp(-1i * Eref.k_prop * Inter.surface *2) .* Inter.mask .* Inter.r;
+            ABCD_ref = Inter.ABCD_ref_from_n1;
         else
             PF_Mirror_trans =  exp(-1i * Eout.k_prop * ((Inter.n1 - Inter.n2)/ Inter.n2) * fliplr(Inter.surface))  .* fliplr(Inter.mask) .* Inter.t;
+            Eout.ABCD_q = Inter.ABCD_trans_from_n2 * E.ABCD_q;
             Eout = Change_E_n(Eout,Inter.n1);
             
             PF_Mirror_ref = exp(1i * Eref.k_prop * fliplr(Inter.surface) *2)  .* fliplr(Inter.mask) .* Inter.r;
+            ABCD_ref = Inter.ABCD_ref_from_n2;
         end
         
         Eout = Eout .* PF_Mirror_trans;
         
         Eref = Eref .* PF_Mirror_ref;
         Eref.Field = fliplr(Eref.Field);
+        
+        Eref.ABCD_q = ABCD_ref * E.ABCD_q;
         
         if E.Nb_Pair_SB  % if sidebands are present
             for ii=1:E.Nb_Pair_SB
@@ -72,7 +79,7 @@ switch nargout
             end
         end
         
-        varargout = {Eref};     
+        varargout = {Eref};
 end
 
 end

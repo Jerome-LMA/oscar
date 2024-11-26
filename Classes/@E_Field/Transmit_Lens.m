@@ -25,6 +25,8 @@ if isreal(f_L)
     PF_lens = exp(1i * WF_lens*Ein.k_prop);
     
     Eout = Ein .* PF_lens;
+    Eout.ABCD_q = [1 0;-1/ f_L 1] * Ein.ABCD_q;
+
     
 else
     % consider the surface as a thin lens, one surface flat and
@@ -32,6 +34,7 @@ else
     
     Eout = Transmit_Reflect_Interface(Ein,f_L);  
     Eout = Change_E_n(Eout,Ein.Refractive_index);
+    
 end
 
 

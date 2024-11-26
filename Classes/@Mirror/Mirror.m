@@ -9,7 +9,9 @@ classdef Mirror
         
         RT_inside = 1;             % Number of round trip when the thick mirror is dealt as a cavity
         n_substrate
-		Propagation_mat_sub
+        
+        ABCD_trans
+        ABCD_ref_HR_coming_from_AR  % ABCD matrix of the reflection of the HR side coming from the AR side, so include the substrate thickness
     end
     
     properties (Dependent)
@@ -20,6 +22,7 @@ classdef Mirror
         mask
         Grid
         surface
+        ABCD_ref_from_n1  % will assume it from the HR surface
     end
     
     methods
@@ -56,6 +59,10 @@ classdef Mirror
                     M.length_substrate =  varargin{3};
                     M.n_substrate = max(varargin{1}.n1,varargin{1}.n2);
                     
+                    
+                    M.ABCD_trans = M.I_AR.ABCD_trans_from_n2 * [1 M.length_substrate; 0 1] * M.I_HR.ABCD_trans_from_n1;
+                    M.ABCD_ref_HR_coming_from_AR = M.I_AR.ABCD_trans_from_n2 * [1 M.length_substrate; 0 1] * M.I_HR.ABCD_ref_from_n2 * [1 M.length_substrate; 0 1] * M.I_AR.ABCD_trans_from_n1;
+                    
                 otherwise
                     disp('Mirror(): invalid number of input arguments, the mirror is not created')
                     return
@@ -91,7 +98,9 @@ classdef Mirror
             value = obj.I_HR.surface;
         end
         
-        
+        function value = get.ABCD_ref_from_n1(obj)
+            value = obj.I_HR.ABCD_ref_from_n1;
+        end
     end
     
 end

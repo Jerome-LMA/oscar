@@ -14,6 +14,8 @@ classdef Prop_operator
         
         Use_GPU                    % Boolean to use the calculation on the GPU, by default not
         
+        ABCD_mat                   % propagation matrix from the ABCD method
+        
     end
     
     methods
@@ -55,6 +57,8 @@ classdef Prop_operator
             
             Prop.mat = exp(1i*(-E_in.k_prop*dist + ...
                 pi*(E_in.Wavelength/Prop.n)*( E_in.Grid.D2_FFT_X.^2 + E_in.Grid.D2_FFT_Y.^2)*dist));
+            
+            Prop.ABCD_mat = [1 Prop.dist/Prop.n; 0 1]; % include the interface to the refractive index m 
             
             % also add the propagation matrix for FFT-DI
             

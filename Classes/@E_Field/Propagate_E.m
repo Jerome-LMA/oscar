@@ -30,6 +30,8 @@ if isscalar(dist) && isreal(dist) % the user input a distance
     Length_propa = dist;
     Use_DI = false;
     
+    mat_ABCD = [1 dist;0 1];
+    
     %imagesc(angle(Propa_mat)); axis square
     
 else
@@ -37,6 +39,7 @@ else
     Length_propa = dist.dist;
     Use_DI = dist.Use_DI;
     n_media = dist.n;
+    mat_ABCD = dist.ABCD_mat;
     
     if E.Refractive_index ~= n_media
         error('Propagate_E(): the refractive index from the E_Field does not match the one from the propagation operator')
@@ -44,6 +47,7 @@ else
     
 end
 
+Eout.ABCD_q = mat_ABCD * Ein.ABCD_q;
 
 if ~Use_DI
     Wave_fft = fftshift(fft2(E.Field));

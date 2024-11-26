@@ -9,9 +9,9 @@ classdef E_Field
     % we are are 60m from the waist, so the beam propagates toward the waist
     % E = E_Field(Grid_name , 'q',-100 + 425*1i)    Create a fundamental
     % mode defined with the complex q parameter
-    %  E = E_Field(Grid_name , 'w0', 0.1,'mode','HG m n') Create a mode Hermitte Gauss of order m,n
-    %  E = E_Field(Grid_name , 'w0', 0.1,'mode','LG p l')  Create a mode Laguerre Gauss helicoidal d'ordre
-    % p,l, can choose betwenn sinusoidal or helicoidal mode: 'LG_HELI 0 3' or  'LG_SIN 3 3'
+    %  E = E_Field(Grid_name , 'w0', 0.1,'mode','LG m n') Create a mode Hermitte Gauss of order m,n
+    %  E = E_Field(Grid_name , 'w0', 0.1,'mode','LG m n')  Create a mode Laguerre Gauss helicoidal d'ordre
+    % p,l
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     properties
         Grid
@@ -22,6 +22,8 @@ classdef E_Field
         Wavelength = 1064E-9;
         Mode_name
         Optimal_mode_matching = false;
+        
+        ABCD_q
         
         Nb_Pair_SB = 0;
         k_prop
@@ -129,6 +131,9 @@ classdef E_Field
                 
                 E.Mode_name = p.Results.Mode;
                 E = Normalise_E(E,'Power',p.Results.Power);
+                
+                E.ABCD_q = q_start;
+                
             else
             end
         end
