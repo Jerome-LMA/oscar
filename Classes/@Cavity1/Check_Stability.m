@@ -170,12 +170,75 @@ if (g_factor_cavity > 0) && (g_factor_cavity < 1)
         Field_in =  Change_E_n(Field_in,Cin.I_input.n1);
     end
     
+    disp('Mode matched input beam parameters:')
     [wb, rb] = Fit_TEM00(Field_in);
     
     if Display
-        disp('Mode matched input beam parameters:')
         fprintf('Beam radius [m]: %g  \t \t Wavefront curvature [m]: %g  \n',wb,-rb)
     end
+    
+    % Display the evolution of the beam profile thanks to the ABCD matrix
+    Nb_step_propa = 3000;
+    step_propa = Cin.Length / Nb_step_propa;
+    
+    Propa_vector.beam_radius = zeros(1,Nb_step_propa);
+    Propa_vector.beam_WF_RoC = zeros(1,Nb_step_propa);
+    Gouy_phase_acc = zeros(1,Nb_step_propa);
+    ABCD_mat_acc = [1 0;0 1];
+    
+    
+    % find the q parameter on the input mirror (going toward the end mirror) with the ABCD matrix
+    A = Cin.ABCD_RT_mat(1,1);   B = Cin.ABCD_RT_mat(1,2);  C = Cin.ABCD_RT_mat(2,1);  D = Cin.ABCD_RT_mat(2,2);
+    inv_q_IM =  ( - (A - D) + sqrt( (A-D)^2 + 4 * B * C) ) / (2 * B) ; % from Optical Resonator Modes ECE 455 Optical Electronics
+    % Other expression also in LIGO-T1300189
+    
+    % Round trip Gouy phase according to the same note:
+    ABCD_RT_Gouy = sign(B) * acos(0.5*(A+D)) * 180 /pi;
+    ABCD_mode_sep = ABCD_RT_Gouy/360; % consistent with previos results
+    
+    % check we have the right solution and so the beam sizr is real
+    if isreal(sqrt( 1/(-imag(inv_q_IM)*pi/(Cin.Wavelength))))
+        % All ok
+    else
+        inv_q_IM =  ( - (A - D) - sqrt( (A-D)^2 + 4 * B * C) ) / (2 * B); % go for the other solution
+    end
+    
+    q_propa = 1/inv_q_IM;
+    q_propa_ini =  q_propa;
+    jj = 1;
+    while    jj < Nb_step_propa +1
+        mat_propa = [1 step_propa;0 1];
+        q_propa = (mat_propa(1,1)*q_propa + mat_propa(1,2))/(mat_propa(2,1)*q_propa + mat_propa(2,2));
+        
+        q_circ_inv = 1/(q_propa);
+        Propa_vector.beam_radius(jj) =  sqrt( 1/(-imag(q_circ_inv)*pi/(Cin.Wavelength)));
+        Propa_vector.beam_WF_RoC(jj) =  real(q_circ_inv);
+        
+        % Now for the Gouy phase calculation
+        ABCD_mat_acc = mat_propa * ABCD_mat_acc;
+        q_G = ABCD_mat_acc(1,1) +ABCD_mat_acc(1,2) / q_propa_ini;
+        %Gouy_phase_acc(jj) = atan( -1* imag(q_G) / real(q_G));
+        %Gouy_phase_acc(jj) = atan2(real(q_G), -1* imag(q_G));
+        Gouy_phase_acc(jj) = atan2(-1* imag(q_G),real(q_G));
+        
+        jj = jj + 1;
+    end
+    
+    figure(2);
+%    fontsize(fig, 14, "points")
+    subplot(2,1,1)
+    plot(linspace(step_propa,Cin.Length,Nb_step_propa),Propa_vector.beam_radius*1E3,'linewidth',3)
+    xlabel('Cavity length [m]','FontSize', 12)
+    ylabel('Beam size [mm]','FontSize', 12)
+    grid on; box on; set(gca,'FontSize',12)
+    
+    subplot(2,1,2)
+    plot(linspace(step_propa,Cin.Length,Nb_step_propa),Gouy_phase_acc*180/pi,'linewidth',3,'color','red') %unwrap(Gouy_phase_acc,pi)
+    xlabel('Cavity length [m]','FontSize', 12)
+    ylabel({'Accumulated one way'; 'Gouy phase [deg]'},'FontSize', 12)
+    grid on; box on; set(gca,'FontSize',12)
+    
+    
     
     if nargout == 1
         varargout{1} = [wb,-rb];
