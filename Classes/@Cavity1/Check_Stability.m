@@ -144,9 +144,9 @@ if (g_factor_cavity > 0) && (g_factor_cavity < 1)
         fprintf('distance with the ITM: %g \n',distITM_waist)
         fprintf('Consecutive optical mode separation [1/FSR]: %g \n',Mode_sep)
         fprintf('\nBeam radius on ITM: %g \n',W_onITM)
-        fprintf('Beam radius on ETM: %g \n',W_onETM)
-        fprintf('\n Cavity finesse: %g \n', cav_finesse)
-        fprintf(' Cavity gain: %g \n', abs(Cin.I_input.t)^2  /((1 - Cin.I_input.r * Cin.I_end.r))^2 )
+        fprintf('Beam radius on ETM: %g \n \n',W_onETM)
+        fprintf('Cavity finesse: %g \n', cav_finesse)
+        fprintf('Cavity gain: %g \n\n', abs(Cin.I_input.t)^2  /((1 - Cin.I_input.r * Cin.I_end.r))^2 )
     end
     %     % Calculate the parameters of the beam entering the cavity
     %     % Matrice ABCD of the propagation
@@ -237,9 +237,7 @@ if (g_factor_cavity > 0) && (g_factor_cavity < 1)
     xlabel('Cavity length [m]','FontSize', 12)
     ylabel({'Accumulated one way'; 'Gouy phase [deg]'},'FontSize', 12)
     grid on; box on; set(gca,'FontSize',12)
-    
-    
-    
+      
     if nargout == 1
         varargout{1} = [wb,-rb];
     end

@@ -20,6 +20,11 @@ p.parse(Ein,varargin{:})
 SB_number = p.Results.SB_num;
 E2 = p.Results.E2;
 
+% Proper normalisation for the beam power from the electric field
+% Power in W = 1/2 * c * epsilon 0 * E^2
+Cte_conversion = (1/2) * 3.00E8 * 8.85E-12;
+
+
 if exist('isgpuarray','file') % to be compatible with version < 2020b
     Run_on_GPU = isgpuarray(Ein.Field);
 else
@@ -64,6 +69,7 @@ else
         over_temp = sum(Ein.Field .* conj(E2.Field),'all') * Ein.Grid.Step_sq;
     end
     
+    over_temp = over_temp*Cte_conversion;
     
     switch nargout
         case 0

@@ -47,11 +47,11 @@ if strcmp(p.Results.field,'carrier')
     power_temp_SB = 0;
     
 elseif strcmp(p.Results.field,'all')
-    power_temp_Car = sum(abs(Ein.Field(:).^2))* (Ein.Grid.Step)^2;
+    power_temp_Car = sum(abs(Ein.Field(:).^2))* Ein.Grid.Step_sq*Cte_conversion;
     if Ein.Nb_Pair_SB
         for ii = 1:Ein.Nb_Pair_SB
-            power_temp_SB_lower = power_temp_SB_lower + sum(abs(Ein.SB(ii).Field_lower(:)).^2)* (Ein.Grid.Step)^2 *Cte_conversion;
-            power_temp_SB_upper = power_temp_SB_upper + sum(abs(Ein.SB(ii).Field_upper(:)).^2)* (Ein.Grid.Step)^2 *Cte_conversion;
+            power_temp_SB_lower = power_temp_SB_lower + sum(abs(Ein.SB(ii).Field_lower(:)).^2)* Ein.Grid.Step_sq *Cte_conversion;
+            power_temp_SB_upper = power_temp_SB_upper + sum(abs(Ein.SB(ii).Field_upper(:)).^2)* Ein.Grid.Step_sq *Cte_conversion;
         end
         
     end

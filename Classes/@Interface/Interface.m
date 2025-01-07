@@ -26,7 +26,7 @@ classdef Interface
     
     properties
         Grid
-        
+        name 
         surface
         mask
         T
