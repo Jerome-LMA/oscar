@@ -21,8 +21,6 @@ p.addRequired('f_cut',@(x)isnumeric(x) && x>0);
 
 p.parse(I_in,option,f_cut)
 
-p.Results
-
 f_cut = p.Results.f_cut;
 I_out = I_in;
 
