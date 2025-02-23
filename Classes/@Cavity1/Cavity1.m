@@ -67,6 +67,10 @@ classdef Cavity1
                     C.Laser_in = varargin{4};
 
                     C.Propagation_mat = Prop_operator(C.Laser_in,C.Length);
+                    
+                    % Calculate the ABCD round trip matrix starting from
+                    % the input mirror and going toward the end mirror
+                    C.ABCD_RT_mat = C.I_input.ABCD_ref_from_n1 * C.Propagation_mat.ABCD_mat * C.I_end.ABCD_ref_from_n1 * C.Propagation_mat.ABCD_mat;
 
                     % Check if the input laser is optimally mode matched
                     if  C.Laser_in.Optimal_mode_matching
@@ -74,17 +78,13 @@ classdef Cavity1
                         if isempty(Beam_paramater)
                             error('Cavity1(): please check that the cavity is stable to find the optimal input beam parameters')
                         end
-                        New_input_field =  E_Field(Grid(C),'w',Beam_paramater(1),'R',Beam_paramater(2),'mode',C.Laser_in.Mode_name,'Wavelength',C.Laser_in.Wavelength);
+                        New_input_field =  E_Field(C.Laser_in.Grid,'w',Beam_paramater(1),'R',Beam_paramater(2),'mode',C.Laser_in.Mode_name,'Wavelength',C.Laser_in.Wavelength);
                         % add the sidebands as it used to be
                         for ii = 1:C.Laser_in.Nb_Pair_SB
                             New_input_field = Add_Sidebands(New_input_field,'Mod_freq',C.Laser_in.SB(ii).Frequency_Offset,'Mod_depth',C.Laser_in.SB(ii).Input_Mod_index);
                         end
                         C.Laser_in = New_input_field;
                     end
-
-                    % Calculate the ABCD round trip matrix starting from
-                    % the input mirror and going toward the end mirror
-                    C.ABCD_RT_mat = C.I_input.ABCD_ref_from_n1 * C.Propagation_mat.ABCD_mat * C.I_end.ABCD_ref_from_n1 * C.Propagation_mat.ABCD_mat;
 
                 otherwise
                     disp('Cavity1(): invalid number of input arguments, cavity not created')
