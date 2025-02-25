@@ -41,9 +41,6 @@ elseif strcmp(p.Results.for,'SB_lower')
     Ein.Field = Ein.SB(p.Results.SB_num).Field_lower;
 end
 
-p.Results.With_ABCD
-~p.Results.Quick_fit
-
 if Calculate_Power(Ein)==0
     error('Fit_TEM00(): No power in the field')
 end
@@ -62,7 +59,7 @@ if p.Results.With_ABCD % return directly the values from the ABCD matrix
 
     q_circ_inv = 1/(E.ABCD_q);
     Beam_rad  =  sqrt( 1/(-imag(q_circ_inv)*pi/(E.Wavelength)));
-    Beam_RofC =  real(q_circ_inv);
+    Beam_RofC =  1/real(q_circ_inv);
 
 
 elseif ~p.Results.Quick_fit
