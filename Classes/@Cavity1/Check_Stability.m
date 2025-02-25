@@ -223,7 +223,8 @@ if (g_factor_cavity > 0) && (g_factor_cavity < 1)
         
         jj = jj + 1;
     end
-    
+
+if Display    
     figure(2);
 %    fontsize(fig, 14, "points")
     subplot(2,1,1)
@@ -237,7 +238,7 @@ if (g_factor_cavity > 0) && (g_factor_cavity < 1)
     xlabel('Cavity length [m]','FontSize', 12)
     ylabel({'Accumulated one way'; 'Gouy phase [deg]'},'FontSize', 12)
     grid on; box on; set(gca,'FontSize',12)
-      
+end      
     if nargout == 1
         varargout{1} = [wb,-rb];
     end
