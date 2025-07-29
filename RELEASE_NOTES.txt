@@ -1,5 +1,14 @@
 OSCAR release notes 
 
+--------------------------- Version 3.31 --------------------------- 
+
+Rewriting of the functions to calculate PSD and virtual maps
+
+First step to implement ABCD calculations in parrallel to FFT
+
+Updated examples
+
+Several functions with additional options and bug fixes
 
 --------------------------- Version 3.30 --------------------------- 
 
