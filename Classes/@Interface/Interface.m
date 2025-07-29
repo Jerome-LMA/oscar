@@ -133,8 +133,8 @@ classdef Interface
             I.ABCD_ref_from_n1 = [1 0;-2/I.RoC_nominal 1];
             I.ABCD_ref_from_n2 = [1 0;2/I.RoC_nominal 1];
             
-            I.ABCD_trans_from_n1 = [1 0; (I.n1 - I.n2)/(I.RoC_nominal*I.n2) I.n1/I.n2];
-            I.ABCD_trans_from_n2 = [1 0; (I.n2 - I.n1)/(I.RoC_nominal*I.n1) I.n2/I.n1];
+            I.ABCD_trans_from_n1 = [1 0; (I.n1 - I.n2)/(I.RoC_nominal*I.n1) 1]; % the change of refractive index is added later in the function Transmit_Reflect_Interface()
+            I.ABCD_trans_from_n2 = [1 0; (I.n2 - I.n1)/(I.RoC_nominal*I.n2) 1]; % see above
             
         end
         

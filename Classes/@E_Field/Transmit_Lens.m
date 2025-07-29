@@ -25,7 +25,7 @@ if isreal(f_L)
     PF_lens = exp(1i * WF_lens*Ein.k_prop);
     
     Eout = Ein .* PF_lens;
-    Eout.ABCD_q = [1 0;-1/ f_L 1] * Ein.ABCD_q;
+    Eout.ABCD_q = q_param_transform_ABCD([1 0;-1/ f_L 1],Ein.ABCD_q);
 
     
 else

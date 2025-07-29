@@ -47,7 +47,8 @@ else
     
 end
 
-Eout.ABCD_q = mat_ABCD * Ein.ABCD_q;
+Eout.ABCD_q = q_param_transform_ABCD(mat_ABCD,Ein.ABCD_q);
+
 
 if ~Use_DI
     Wave_fft = fftshift(fft2(E.Field));
