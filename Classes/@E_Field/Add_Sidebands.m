@@ -1,7 +1,7 @@
 function Eout = Add_Sidebands(Ein,varargin)
-% Eout = Add_sidebands(Ein,mod_freq,mod_index)
+% Eout = Add_sidebands(Ein,'Mod_freq',mod_freq,'Mod_depth',mod_index)
 % Add a pair of sidebands of frequency: Mod_freq with modulating index: Mod_index
-% This function simulates a phase modulator
+% This function simulates a phase modulator (EOM)
 
 p  = inputParser;
 p.FunctionName = 'Add sidebands to a field';
