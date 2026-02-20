@@ -15,7 +15,7 @@ classdef E_Field
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     properties
         Grid
-        Field
+        Field = cell(1, 2);
         SB
         
         Refractive_index = 1;
@@ -104,36 +104,40 @@ classdef E_Field
                 
                 if strcmp(family,'HG')
                     
-                    E.Field = exp(-1i*E.k_prop*E.Grid.D2_square/(2*q_start));
+                    E.Field{1} = exp(-1i*E.k_prop*E.Grid.D2_square/(2*q_start));
                     
-                    E.Field =  E.Field  .* HermitePolynomial(m, sqrt(2)/beam_radius * E.Grid.D2_X) .*...
+                    E.Field{1} =  E.Field{1}  .* HermitePolynomial(m, sqrt(2)/beam_radius * E.Grid.D2_X) .*...
                         HermitePolynomial(n, sqrt(2)/beam_radius * E.Grid.D2_Y);
                     
                 elseif strcmp(family,'LG_HELI') % the one before V3.17
                     
-                    E.Field = exp(-1i*E.k_prop*E.Grid.D2_square/(2*q_start));
+                    E.Field{1} = exp(-1i*E.k_prop*E.Grid.D2_square/(2*q_start));
                     
-                    E.Field =  E.Field  .* (2* E.Grid.D2_square / beam_radius^2) .^ (abs(n)/2);
-                    E.Field =  E.Field  .* LaguerrePolynomial(m, abs(n), 2* E.Grid.D2_square / beam_radius^2);
-                    E.Field =  E.Field  .* exp(1i * n*atan2(E.Grid.D2_Y,E.Grid.D2_X));
+                    E.Field{1} =  E.Field{1}  .* (2* E.Grid.D2_square / beam_radius^2) .^ (abs(n)/2);
+                    E.Field{1} =  E.Field{1}  .* LaguerrePolynomial(m, abs(n), 2* E.Grid.D2_square / beam_radius^2);
+                    E.Field{1} =  E.Field{1}  .* exp(1i * n*atan2(E.Grid.D2_Y,E.Grid.D2_X));
                     
                 elseif strcmp(family,'LG_SIN')
                     
-                    E.Field = exp(-1i*E.k_prop*E.Grid.D2_square/(2*q_start));
+                    E.Field{1} = exp(-1i*E.k_prop*E.Grid.D2_square/(2*q_start));
                     
-                    E.Field =  E.Field  .* (2* E.Grid.D2_square / beam_radius^2) .^ (abs(n)/2);
-                    E.Field =  E.Field  .* LaguerrePolynomial(m, abs(n), 2* E.Grid.D2_square / beam_radius^2);
-                    E.Field =  E.Field  .* exp(1i * n*atan2(E.Grid.D2_Y,E.Grid.D2_X)) + E.Field  .* exp(-1i * n*atan2(E.Grid.D2_Y,E.Grid.D2_X));
+                    E.Field{1} =  E.Field{1}  .* (2* E.Grid.D2_square / beam_radius^2) .^ (abs(n)/2);
+                    E.Field{1} =  E.Field{1}  .* LaguerrePolynomial(m, abs(n), 2* E.Grid.D2_square / beam_radius^2);
+                    E.Field{1} =  E.Field{1}  .* exp(1i * n*atan2(E.Grid.D2_Y,E.Grid.D2_X)) + E.Field  .* exp(-1i * n*atan2(E.Grid.D2_Y,E.Grid.D2_X));
                     
                 else
                     error('E_Field():the mode name must be HG or LG_HELI or LG_SIN')
                 end
                 
+                % Initiate the second polarisation at 0
+                E.Field{2} = complex(zeros(E.Grid.Num_point));
+
                 E.Mode_name = p.Results.Mode;
                 E = Normalise_E(E,'Power',p.Results.Power);
                 
                 E.ABCD_q = q_start;
                 
+
             else
             end
         end

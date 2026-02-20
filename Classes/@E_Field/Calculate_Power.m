@@ -40,7 +40,8 @@ if strcmp(p.Results.field,'carrier')
     if Run_on_GPU
         power_temp_Car = sum(abs(arrayfun(@times,Ein.Field,Ein.Field) ),'all');
     else
-        power_temp_Car = sum(abs(Ein.Field(:)).^2);
+        power_temp_Car = sum(abs(Ein.Field{1}(:)).^2);
+        power_temp_Car = power_temp_Car + sum(abs(Ein.Field{2}(:)).^2);
     end
     
     power_temp_Car = Cte_conversion * power_temp_Car * Ein.Grid.Step_sq;

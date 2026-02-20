@@ -18,7 +18,9 @@ p.parse(Ein,varargin{:})
 
 if p.Results.power == 0
     Eout = Ein;
-    Eout.Field = complex(zeros(Ein.Grid.Num_point,Ein.Grid.Num_point));
+    Eout.Field{1} = complex(zeros(Ein.Grid.Num_point,Ein.Grid.Num_point));
+    Eout.Field{2} = complex(zeros(Ein.Grid.Num_point,Ein.Grid.Num_point));
+
     if  Ein.Nb_Pair_SB
         for ii=1:Ein.Nb_Pair_SB
             Eout.SB(ii).Field_lower = Eout.Field;
@@ -30,8 +32,12 @@ end
 
 if strcmp(p.Results.include,'carrier')
     Eout = Ein;
-    Eout.Field = Eout.Field / sqrt(Calculate_Power(Ein));
-    Eout.Field = Eout.Field * sqrt(p.Results.power);
+    Eout.Field{1} = Eout.Field{1} / sqrt(Calculate_Power(Ein));
+    Eout.Field{2} = Eout.Field{2} / sqrt(Calculate_Power(Ein));
+  
+    Eout.Field{1} = Eout.Field{1} * sqrt(p.Results.power);
+    Eout.Field{2} = Eout.Field{2} * sqrt(p.Results.power);
+
 elseif strcmp(p.Results.include,'all')
     Eout = Ein;
     P_tot = Calculate_Power(Ein, 'include', 'all');
