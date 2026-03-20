@@ -13,6 +13,6 @@ G1 = Grid(256,0.4);
 
 % Define the input beam, instead of giving some beam parameters, just
 % assume perfect mode matching wih the cavity
-E_input = E_Field(G1,'w0',5E-2);
+E_input = E_Field(G1,'w0',5E-2,'Include_Birefringence',true);
 
 

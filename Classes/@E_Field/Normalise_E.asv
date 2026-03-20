@@ -65,13 +65,15 @@ else % birefringence must be taken into account, we have now 2 E_field
         return;
     end
 
-    if strcmp(p.Results.include,'carrier') % put arbitrary the 2 fields at the same value
+    if strcmp(p.Results.include,'carrier')
         Eout = Ein;
         Eout.Field{1} = Eout.Field{1} / sqrt(Calculate_Power(Ein));
         Eout.Field{2} = Eout.Field{2} / sqrt(Calculate_Power(Ein));
 
         Eout.Field{1} = Eout.Field{1} * sqrt(p.Results.power);
         Eout.Field{2} = Eout.Field{2} * sqrt(p.Results.power);
+
+
     end
 
 end

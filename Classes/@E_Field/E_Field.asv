@@ -137,9 +137,9 @@ classdef E_Field
                 if p.Results.Include_Birefringence
 
                     E.Include_Birefringence = true;
-                    tmp_field = E.Field;
-                    E.Field = [];
-                    E.Field{1} = tmp_field;
+tmp_field
+
+                    E.Field{1} = E.Field;
                     % Initiate the second polarisation state at 0
                     E.Field{2} = complex(zeros(E.Grid.Num_point));
 

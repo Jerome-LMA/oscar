@@ -40,13 +40,17 @@ if strcmp(p.Results.field,'carrier')
     if Run_on_GPU
         power_temp_Car = sum(abs(arrayfun(@times,Ein.Field,Ein.Field) ),'all');
     else
-        power_temp_Car = sum(abs(Ein.Field{1}(:)).^2);
-        power_temp_Car = power_temp_Car + sum(abs(Ein.Field{2}(:)).^2);
+        if ~Ein.Include_Birefringence             % no birefringence
+            power_temp_Car = sum(abs(Ein.Field(:)).^2);
+        else                                      % if 2 polarisation, do the sum of both
+            power_temp_Car = sum(abs(Ein.Field{1}(:)).^2);
+            power_temp_Car = power_temp_Car + sum(abs(Ein.Field{2}(:)).^2);
+        end
     end
-    
+
     power_temp_Car = Cte_conversion * power_temp_Car * Ein.Grid.Step_sq;
     power_temp_SB = 0;
-    
+
 elseif strcmp(p.Results.field,'all')
     power_temp_Car = sum(abs(Ein.Field(:).^2))* Ein.Grid.Step_sq*Cte_conversion;
     if Ein.Nb_Pair_SB
@@ -54,9 +58,9 @@ elseif strcmp(p.Results.field,'all')
             power_temp_SB_lower = power_temp_SB_lower + sum(abs(Ein.SB(ii).Field_lower(:)).^2)* Ein.Grid.Step_sq *Cte_conversion;
             power_temp_SB_upper = power_temp_SB_upper + sum(abs(Ein.SB(ii).Field_upper(:)).^2)* Ein.Grid.Step_sq *Cte_conversion;
         end
-        
+
     end
-    
+
 elseif strcmp(p.Results.field,'SB')
     if Ein.Nb_Pair_SB
         if SB_number > Ein.Nb_Pair_SB
