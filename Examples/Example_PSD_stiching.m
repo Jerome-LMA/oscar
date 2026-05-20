@@ -13,7 +13,7 @@ GL = Grid(4096,0.4);
 map = Do_Virtual_Map(GL,'Standard');
 I1 = Interface(GL,'RoC',inf);
 I1 =  Add_Map(I1,map,'reso',GL.Step);
-%E_Plot(I1)
+%I_Plot(I1)
 
 % Resample the map with a lower resolution
 G1 = Grid(512,0.4);
