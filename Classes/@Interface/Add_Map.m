@@ -208,9 +208,20 @@ if (m==n)     % The matrix is square
     map.resampled = interp2(map.Grid_X+p.Results.shift(1),map.Grid_Y-p.Results.shift(2),map.loaded,Iin.Grid.D2_X,Iin.Grid.D2_Y,'linear',edge_value);
     
 elseif (n==2)    % The matrix is a 2 vector column, first column radius, second column sagitta change
-    map.resampled = interp1(map.loaded(:,1),map.loaded(:,2),sqrt(Iin.Grid.D2_X.^2 + Iin.Grid.D2_Y.^2),'linear',0);
-    map.resampled = map.resampled - map.loaded(1,2);
+    map.resampled = interp1(map.loaded(:,1),map.loaded(:,2),Iin.Grid.D2_r,'linear',0);
+   % map.resampled = map.resampled - map.loaded(1,2);
+   % imagesc(map.resampled)
+
+    % shifting the mao
+    if  length(p.Results.shift) ~= 2
+        error('Add_map(): for the centering option, a vector of 2 values must be given, for example[0.005 -0.02]')
+    end
+      
+    map.offset_X = round(p.Results.shift(1)/Iin.Grid.Step);
+    map.offset_Y = round(p.Results.shift(2)/Iin.Grid.Step);
     
+    map.resampled = circshift(map.resampled,[-map.offset_Y map.offset_X]);
+
     % Rescale
     if  ~isempty(p.Results.scale)
         map.resampled = map.resampled * p.Results.scale;
